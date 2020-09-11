@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html style="overflow: hidden;">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Starmap</title>
+	<style>
+		@font-face {
+			font-family: 'Telegrama';
+			src: url('./assets/telegrama/telegrama-webfont.woff') format('woff2'),
+				url('./assets/telegrama/telegrama-webfont.woff2') format('woff');
+			font-weight: normal;
+			font-style: normal;
+		}
+	</style>
+	<link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Roboto&display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	<link rel="stylesheet" href="/css/master.css" />
+	<script src="https://cdn.jsdelivr.net/npm/opentype.js@latest/dist/opentype.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="js/packages/info-dropdown.js" charset="utf-8"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.120.0/build/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.120.0/examples/js/controls/OrbitControls.min.js"></script>
+	<script src="js/packages/jwt-decode.js"></script>
+	<script>
+		// Dont ask me why this is here, I dont know either
+		function hoverHandler() {
+			const elm = document.getElementsByClassName('more-info-tooltip')[0];
+			elm.style.left = `-${elm.clientWidth / 2 - 12}px`;
+		}
+	</script>
+	<script src="js/main.js" type="module"></script>
+</head>
+
+<body>
+	<div class="sidenav">
+		<button id="login">
+			<img srcset="assets/Discord-Logo-White.svg" />
+			<span class="login-text">
+				Login
+			</span>
+		</button>
+		<button id="logout" style="display: none;">Logout</button>
+		<button id="settingsBtn">Settings</button>
+		<button id="sortToggle">Sort by name</button>
+		<input id="find" type="text" placeholder="Find a point">
+		<span id="points-title">
+			Points
+		</span>
+		<div id="sidebar">
+			<div id="layers" style="display:block"></div>
+			<div id="points" style="display:none"></div>
+		</div>
+		<div class="sidenav-bottom">
+			<form id="filterForm">
+				<div id="filterFormTypes"></div>
+				<div id="filterFormLayers"></div>
+			</form>
+			<button id="new-point" style="display: none;">
+				<span class="material-icons">add_box</span>
+				<span>Add Point</span>
+			</button>
+		</div>
+	</div>
+	<div class="main" id="main">
+		<!-- Create the new point popup -->
+		<div id="settingsWindow" class="settings">
+			<span class="settings-close material-icons">
+				close
+			</span>
+			<br>
+			<p style="display: inline;">Mouse pan button</p>
+			<select id="panSelect">
+				<option value="0">left</option>
+				<option value="1">middle</option>
+				<option value="2">right</option>
+			</select>
+			<br>
+			<p style="display: inline;">Rotate view button</p>
+			<select id="rotSelect">
+				<option value="0">left</option>
+				<option value="1">middle</option>
+				<option value="2">right</option>
+			</select>
+			<!-- <br>
+			<p style="display: inline;">Move camera vertically button</p>
+			<select id="vertSelect">
+				<option value="0">left</option>
+				<option value="1">middle</option>
+				<option value="2">right</option>
+			</select> -->
+			<br>
+			<p style="display: inline;">Camera damping factor</p>
+			<input id="dampFact" type="range" min="0" max="0.5" step="0.01" name="dampFact">
+			<br>
+			<p style="display: inline;">Zoom speed</p>
+			<input id="zoomSpeed" type="range" min="0.5" max="5" step="0.01" name="zoomSpeed">
+			<br>
+			<input id="eosDisp" type="checkbox" name="eosDisp">
+			<p style="display: inline;">Display Eos</p>
+			<br>
+			<input id="cloudDisp" type="checkbox" name="cloudDisp">
+			<p style="display: inline;">Display Clouds</p>
+			<br>
+			<input id="beltDisp" type="checkbox" name="beltDisp">
+			<p style="display: inline;">Display Belt</p>
+			<br>
+			<input id="isanRangeDisp" type="checkbox" name="isanRangeDisp">
+			<p style="display: inline;">Display ISAN range</p>
+			<br>
+			<input id="nameOnHover" type="checkbox" name="nameOnHover">
+			<p style="display: inline;">Only display name on hover</p>
+
+			<br>
+			<input id="showNames" type="checkbox" name="nameOnHover">
+			<p style="display: inline;">Show names</p>
+			<br>
+			<input id="showLines" type="checkbox" name="nameOnHover">
+			<p style="display: inline;">Show marker line</p>
+			<br>
+			<input id="showMarkers" type="checkbox" name="nameOnHover">
+			<p style="display: inline;">Show marker icon</p>
+			<br>
+			<input id="showRings" type="checkbox" name="nameOnHover">
+			<p style="display: inline;">Show base ring</p>
+
+		</div>
+		<div class="add-point">
+			<span class="material-icons close">
+				close
+			</span>
+			<form id="addPointForm">
+				<legend id="formLegend">Create Point</legend>
+				<input required type="text" name="point-name" placeholder="Name" id="formName" minlength="3"
+					maxlength="16" />
+				<input type="text" name="point-description" placeholder="Description" id="formDesc" maxlength="256" />
+				<select name="Type" id="type-select" form="addPointForm"></select>
+				<select name="Layer" id="group-select" form="addPointForm"></select>
+				<select name="Color" id="color-select" form="addPointForm"></select>
+				<fieldset class="coordinates">
+					<legend>Coodinates</legend>
+					<lable>X: </lable><input required type="number" name="pos-x" placeholder="X pos" id="formXPos" />
+					<lable>Y: </lable><input required type="number" name="pos-y" placeholder="Y pos" id="formYPos" />
+					<lable>Z: </lable><input required type="number" name="pos-z" placeholder="Z pos" id="formZPos" />
+				</fieldset>
+				<input type="submit" name="submit-new-point" id="add-point-submit" value="Create" />
+			</form>
+		</div>
+		<div class="popup" id="popup">
+			<div class="popup-content">
+				<h2>Welcome to ISAN Starmap! </h2>
+				<p>
+					This is a free 3d space map for <a href="https://www.starbasegame.com/">Starbase</a>! You can use these
+					coordinates in-game by <a
+						href="https://docs.google.com/document/d/1UZWv5UM_DUMQZnlsFbLcuyjbu__Bs0yltIHsXP88qvk/">
+						installing
+						ISAN
+					</a> on your ship.
+					<br><br>
+					Bug reports and feedback should be sent on discord to <b>Strikeeaglechase#0001</b>
+					(<@272143648114606083>)
+						<br><br>
+						This website uses cookies for functional and analytical purposes. Press "Accept" to continue.
+				</p>
+				<button id="acceptCookies">Accept</button>
+			</div>
+		</div>
+		<div class="info-container">
+			<svg id="dropdown-minimize" height="16" width="16">
+				<path d="M16 2 L8 14 L0 2 Z" fill="#333333" />
+			</svg>
+			<div class="info" id="infoWindow"></div>
+		</div>
+		<div id="topBanner" class="topPopupBanner" style="display: none;">
+			<p id="bannerMsg">Banner message</p>
+		</div>
+	</div>
+</body>
+
+</html>
