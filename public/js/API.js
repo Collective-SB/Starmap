@@ -191,4 +191,19 @@ export default class API {
 			this.app.setLoggedIn(true);
 		}
 	}
+	async getJWTFromCode(code) {
+		const res = await fetch(API_URL + "auth/jwt", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				"jwt-lookup-code": code,
+			},
+		});
+		try {
+			const jsonRes = await res.json();
+			return jsonRes.jwt;
+		} catch (e) {
+			return;
+		}
+	}
 }

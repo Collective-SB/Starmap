@@ -10,8 +10,8 @@ local - localhost:443/auth/callback
 prod - isan.to:443/auth/callback
 beta - beta.isan.to/auth/callback
 */
-export const ENV = "remoteDev";
-export const AUTH_REDIR = "beta";
+export const ENV = "local";
+export const AUTH_REDIR = "local";
 export const ENABLE_SBOX = true;
 
 export const URLS = {
