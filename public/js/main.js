@@ -184,25 +184,17 @@ class App {
 	async init() {
 		this.initScene();
 		this.UISetup();
-		//See if we got a jwt cookie, if so lets grab it and store it in session storage
-		// let cookies = Object.fromEntries(
-		// 	document.cookie.split("; ").map((c) => {
-		// 		const [key, ...v] = c.split("=");
-		// 		return [key, v.join("=")];
-		// 	})
-		// );
-		const jwtCookie = getCookie("jwt");
-		if (jwtCookie) {
-			this.storage.setItem("jwt", jwtCookie);
-			eraseCookie("jwt");
+		//See if we just completed OAuth2
+		if (window.location.search.includes("code")) {
+			const code = window.location.search.substring("?code=".length);
+			const jwt = await this.api.getJWTFromCode(code);
+			if (jwt) this.storage.setItem("jwt", jwt);
 		}
 		//Lets ensure the jwt is still valid (if we have one)
 		const jwt = this.storage.getItem("jwt");
 		if (jwt) {
 			await this.api.confirmJWT(jwt);
 		}
-
-		setCookie("authRedirect", AUTH_REDIR, 1);
 	}
 	//Updates what points should be displayed
 	initFilters() {
@@ -494,7 +486,9 @@ class App {
 
 		document.getElementById("login").onclick = function () {
 			self.storage.removeItem("jwt"); // Remove old jwt
-			window.location.href = URLS.api[ENV] + "auth/login";
+
+			// setCookie("authRedirect", AUTH_REDIR, 1);
+			window.location.href = `${URLS.api[ENV]}auth/login?redir=${AUTH_REDIR}`;
 		};
 		document.getElementById("logout").onclick = function () {
 			self.storage.removeItem("jwt");
