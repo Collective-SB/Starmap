@@ -1,17 +1,7 @@
-/* ENV Options
-ENV controls what sort of server it will expect, 
-local - Assumes you are running the backend on your current machine, will use localhost:80/443
-prod - Assumes is production, will use isan.to:80/443
-remoteDev - Connects to the current beta version of starmap
-*/
-/* AUTH_REDIR Options
-AUTH_REDIR Controls where the user is sent after completing discord OAuth2
-local - localhost:443/auth/callback
-prod - isan.to:443/auth/callback
-beta - beta.isan.to/auth/callback
-*/
-export const ENV = "remoteDev";
-export const AUTH_REDIR = "beta";
+import { ENV_FROM_ENVJS, AUTH_REDIR_FROM_ENVJS } from "./env.js";
+
+export const ENV = ENV_FROM_ENVJS; //"remoteDev";
+export const AUTH_REDIR = AUTH_REDIR_FROM_ENVJS; //"beta";
 export const ENABLE_SBOX = true;
 
 export const URLS = {
