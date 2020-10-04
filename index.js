@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 const fs = require("fs");
 require("dotenv").config();
 const app = express();
-const POINT_INFO_API = "http://localhost:8000/front/getPointInfo/";
+const POINT_INFO_API = "https://api-beta.isan.to/front/getPointInfo/";
 const IMGS = {
 	ship:
 		"https://cdn.discordapp.com/attachments/762209257738207252/762209368925929472/ship.png",
@@ -32,6 +32,10 @@ app.get(["/:pointId", "/"], async (req, res) => {
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="${URL}" />
 	`;
+	const defaultSiteTags = `
+		<meta property="og:description" content="A dynamic live time map for Starbase\nCreated by Strikeeaglechase" />
+		<meta property="og:image" content="${IMGS.ico}" />
+	`;
 	if (req.params.pointId) {
 		const apiRes = await fetch(POINT_INFO_API + req.params.pointId, {
 			method: "GET",
@@ -44,11 +48,10 @@ app.get(["/:pointId", "/"], async (req, res) => {
 				<meta property="og:image" content="${IMGS[data.type]}" />
 			`;
 		} else {
-			openGraphStyles += `
-				<meta property="og:description" content="A dynamic live time map created by Strikeeaglechase for Starbase" />
-				<meta property="og:image" content="${IMGS.ico}" />
-			`;
+			openGraphStyles += defaultSiteTags;
 		}
+	} else {
+		openGraphStyles += defaultSiteTags;
 	}
 	let file = fs.readFileSync("./public/index.html", "utf8");
 	file = file.replace("%OGP%", openGraphStyles);
