@@ -4,17 +4,13 @@ const fs = require("fs");
 require("dotenv").config();
 const app = express();
 const POINT_INFO_API = "https://api-beta.isan.to/front/getPointInfo/";
+// const POINT_INFO_API = "http://localhost:8000/front/getPointInfo/"
 const IMGS = {
-	ship:
-		"https://cdn.discordapp.com/attachments/762209257738207252/762209368925929472/ship.png",
-	ore:
-		"https://cdn.discordapp.com/attachments/762209257738207252/762209362332090378/ore.png",
-	station:
-		"https://cdn.discordapp.com/attachments/762209257738207252/762209374071947284/station.png",
-	other:
-		"https://cdn.discordapp.com/attachments/762209257738207252/762209367386488852/random-done.png",
-	ico:
-		"https://cdn.discordapp.com/attachments/762209257738207252/762219304694972447/eh5Artboard_1.png",
+	ship: "https://cdn.discordapp.com/attachments/762209257738207252/762209368925929472/ship.png",
+	ore: "https://cdn.discordapp.com/attachments/762209257738207252/762209362332090378/ore.png",
+	station: "https://cdn.discordapp.com/attachments/762209257738207252/762209374071947284/station.png",
+	other: "https://cdn.discordapp.com/attachments/762209257738207252/762209367386488852/random-done.png",
+	ico: "https://cdn.discordapp.com/attachments/762209257738207252/762219304694972447/eh5Artboard_1.png",
 };
 app.get("/favicon.ico", (req, res) => {
 	res.sendFile("./public/favicon.ico", {
