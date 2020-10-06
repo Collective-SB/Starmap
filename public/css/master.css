@@ -27,7 +27,43 @@ select:focus {
 	outline: none;
 }
 
+/* Universal */
+
+/* Color scheme:
+77878B - Grey
+1C1D21 - black
+96031A = red
+Whitesmoke
+#333;
+#111;
+*/
+
+button {
+	background-color: whitesmoke;
+	color: #333;
+	border: none;
+
+	padding-top: 2px;
+	padding-bottom: 2px;
+
+	transition: color 0.25s;
+}
+
+button:hover {
+	background-color: #333;
+	color: whitesmoke;
+
+	transition: color 0.25s;
+}
+
 /* Side Nav */
+
+#find {
+	background-color: whitesmoke;
+	color: 333;
+	border: none;
+	margin-top: 2px;
+}
 
 .nopadding {
 	padding: unset !important;
@@ -99,7 +135,7 @@ select:focus {
 
 .sidenav-point:hover {
 	color: whitesmoke;
-	background-color: #212121;
+	background-color: #333;
 }
 
 .sidenav-bottom {
@@ -116,11 +152,9 @@ select:focus {
 #points-title {
 	color: whitesmoke;
 	text-align: center;
-	padding: 16px 0;
-	text-decoration: underline;
+	padding: 8px 0;
+	font-weight: bold;
 	font-size: 1.5em;
-	font-family: Quicksand;
-	background-color: #333;
 	display: none;
 	user-select: none;
 }
@@ -533,11 +567,11 @@ select:focus {
 /* Groups page */
 
 h1 {
-	color: white;
+	color: whitesmoke;
 }
 
 p {
-	color: white;
+	color: whitesmoke;
 }
 
 .back-index {
@@ -571,6 +605,11 @@ p {
 	cursor: pointer;
 	text-align: left;
 	user-select: none;
+}
+
+.filter-view-option:hover {
+	color: whitesmoke;
+	background-color: #333;
 }
 
 .filter-view-option .filter-view-option-tooltip {
