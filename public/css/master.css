@@ -386,6 +386,22 @@ button:hover {
 
 .add-point input[type="number"] {
 	max-width: 80px;
+	border-radius: 4px;
+}
+
+.dropdown-select {
+	border-radius: 2px;
+	border: none;
+	margin-top: 1px;
+	margin-bottom: 1px;
+}
+
+.add-point input[type="text"] {
+	background-color: whitesmoke;
+	color: #111;
+	outline: none;
+	border: none;
+	border-radius: 2px;
 }
 
 .add-point input[type="submit"] {
@@ -394,11 +410,14 @@ button:hover {
 	background-color: whitesmoke;
 	color: #333;
 	border: solid 1px whitesmoke;
+	transition: color 0.5s;
+	border-radius: 4px;
 }
 
 .add-point input[type="submit"]:hover {
 	background-color: #333;
 	color: whitesmoke;
+	transition: color 0.5s;
 }
 
 .add-point .close {
@@ -416,7 +435,8 @@ button:hover {
 }
 
 .add-point legend {
-	text-decoration: underline;
+	font-weight: bold;
+	font-size: 20px;
 	text-align: center;
 	margin: 5px;
 	user-select: none;
