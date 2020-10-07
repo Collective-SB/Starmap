@@ -386,11 +386,9 @@ button:hover {
 
 .add-point input[type="number"] {
 	max-width: 80px;
-	border-radius: 4px;
 }
 
 .dropdown-select {
-	border-radius: 2px;
 	border: none;
 	margin-top: 1px;
 	margin-bottom: 1px;
@@ -401,7 +399,6 @@ button:hover {
 	color: #111;
 	outline: none;
 	border: none;
-	border-radius: 2px;
 }
 
 .add-point input[type="submit"] {
@@ -411,7 +408,6 @@ button:hover {
 	color: #333;
 	border: solid 1px whitesmoke;
 	transition: color 0.5s;
-	border-radius: 4px;
 }
 
 .add-point input[type="submit"]:hover {
