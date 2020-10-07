@@ -205,7 +205,7 @@ class Point {
 			defaultOpen = !sidebar.children[0].classList.contains("nopadding");
 		}
 		if (defaultOpen) {
-			sidebarElm.style.maxHeight = sidebarElm.scrollHeight + "px";
+			sidebarElm.style.maxHeight = "fit-content";
 		} else {
 			sidebarElm.classList.add("nopadding");
 		}
