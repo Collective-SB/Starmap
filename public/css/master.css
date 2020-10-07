@@ -41,7 +41,8 @@ Whitesmoke
 button {
 	background-color: whitesmoke;
 	color: #333;
-	border: none;
+	border-width: 1px;
+	border-color: #333;
 
 	padding-top: 2px;
 	padding-bottom: 2px;
