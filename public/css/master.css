@@ -152,11 +152,17 @@ button:hover {
 	cursor: pointer;
 	text-align: center;
 	user-select: none;
+
+	transition: color 0.2s;
+	transition: background-color 0.2s;
 }
 
 .sidenav-point:hover {
 	color: whitesmoke;
 	background-color: #333;
+
+	transition: color 0.2s;
+	transition: background-color 0.2s;
 }
 
 .sidenav-bottom {
@@ -642,11 +648,17 @@ p {
 	cursor: pointer;
 	text-align: left;
 	user-select: none;
+	
+	transition: color 0.2s;
+	transition: background-color 0.2s;
 }
 
 .filter-view-option:hover {
 	color: whitesmoke;
 	background-color: #333;
+
+	transition: color 0.2s;
+	transition: background-color 0.2s;
 }
 
 .filter-view-option .filter-view-option-tooltip {
