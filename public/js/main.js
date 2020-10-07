@@ -99,14 +99,7 @@ import {
 	ENV,
 } from "./config.js";
 
-import {
-	constrain,
-	map,
-	copyToClipboard,
-	eraseCookie,
-	getCookie,
-	setCookie,
-} from "./functions.js";
+import { constrain, map, copyToClipboard } from "./functions.js";
 
 import PointManager from "./PointManager.js";
 import API from "./API.js";
@@ -466,6 +459,14 @@ class App {
 				showPrev: false,
 			};
 			$(this).parent().hide();
+			if (
+				group.isPublicRead &&
+				!confirm(
+					"This will create a point on a PUBLIC layer, make sure this is correct"
+				)
+			) {
+				return;
+			}
 			const submitType = e.originalEvent.submitter.value;
 			if (submitType == "Create") {
 				const res = await self.api.createPoint(data);
