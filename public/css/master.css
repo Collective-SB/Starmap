@@ -56,6 +56,27 @@ button:hover {
 	transition: color 0.25s;
 }
 
+.checkbox-option {
+	margin: 0;
+	text-decoration: none;
+	font-size: 15px;
+	color: #818181;
+	display: block;
+	cursor: pointer;
+	user-select: none;
+
+	transition: color 0.2s;
+	transition: background-color 0.2s;
+}
+
+.checkbox-option:hover {
+	color: whitesmoke;
+	background-color: #111;
+
+	transition: color 0.2s;
+	transition: background-color 0.2s;
+}
+
 /* Side Nav */
 
 #find {
