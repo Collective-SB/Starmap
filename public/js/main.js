@@ -99,14 +99,7 @@ import {
 	ENV,
 } from "./config.js";
 
-import {
-	constrain,
-	map,
-	copyToClipboard,
-	eraseCookie,
-	getCookie,
-	setCookie,
-} from "./functions.js";
+import { constrain, map, copyToClipboard } from "./functions.js";
 
 import PointManager from "./PointManager.js";
 import API from "./API.js";
