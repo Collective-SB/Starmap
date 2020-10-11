@@ -12,7 +12,12 @@ import {
 	MAX_MOTION_TRAILS,
 } from "./config.js";
 
-import { lerp, hexToRgb, map, constrain } from "./functions.js";
+import {
+	lerp,
+	hexToRgb,
+	map,
+	constrain
+} from "./functions.js";
 
 function sortDiv(divId) {
 	var i, shouldSwitch;
@@ -36,10 +41,13 @@ function sortDiv(divId) {
 }
 
 function hide(elm) {
+	if (!elm) return;
 	elm.style.visibility = "hidden";
 	elm.style.position = "absolute";
 }
+
 function unhide(elm) {
+	if (!elm) return;
 	elm.style.position = "";
 	elm.style.visibility = "";
 }
