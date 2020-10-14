@@ -156,6 +156,7 @@ button:hover {
 
 	transition: color 0.2s;
 	transition: background-color 0.2s;
+	transition: max-height 0.2s ease-out;
 }
 
 .sidenav-point:hover {
@@ -164,6 +165,7 @@ button:hover {
 
 	transition: color 0.2s;
 	transition: background-color 0.2s;
+	transition: max-height 0.2s ease-out;
 }
 
 .sidenav-bottom {
@@ -466,7 +468,7 @@ button:hover {
 	user-select: none;
 }
 
-/* Settings pannel */
+/* Settings panel */
 .settings {
 	display: none;
 
