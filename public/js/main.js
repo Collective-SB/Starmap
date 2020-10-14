@@ -827,6 +827,10 @@ class App {
 					const checkBox = e.target.parentElement.children[0];
 					checkBox.checked = !checkBox.checked;
 					form.onchange();
+				} else if (e.target.nodeName == "DIV") {
+					const checkBox = e.target.children[0];
+					checkBox.checked = !checkBox.checked;
+					form.onchange();
 				}
 			});
 		});
