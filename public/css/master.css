@@ -27,7 +27,65 @@ select:focus {
 	outline: none;
 }
 
+/* Universal */
+
+/* Color scheme:
+77878B - Grey
+1C1D21 - black
+96031A = red
+Whitesmoke
+#333;
+#111;
+*/
+
+button {
+	background-color: whitesmoke;
+	color: #333;
+	border-width: 1px;
+	border-color: #333;
+
+	padding-top: 2px;
+	padding-bottom: 2px;
+
+	transition: color 0.25s;
+}
+
+button:hover {
+	background-color: #333;
+	color: whitesmoke;
+
+	transition: color 0.25s;
+}
+
+.checkbox-option {
+	margin: 0;
+	text-decoration: none;
+	font-size: 15px;
+	color: #818181;
+	display: block;
+	cursor: pointer;
+	user-select: none;
+
+	transition: color 0.2s;
+	transition: background-color 0.2s;
+}
+
+.checkbox-option:hover {
+	color: whitesmoke;
+	background-color: #111;
+
+	transition: color 0.2s;
+	transition: background-color 0.2s;
+}
+
 /* Side Nav */
+
+#find {
+	background-color: whitesmoke;
+	color: 333;
+	border: none;
+	margin-top: 2px;
+}
 
 .nopadding {
 	padding: unset !important;
@@ -95,11 +153,17 @@ select:focus {
 	cursor: pointer;
 	text-align: center;
 	user-select: none;
+
+	transition: color 0.2s;
+	transition: background-color 0.2s;
 }
 
 .sidenav-point:hover {
 	color: whitesmoke;
-	background-color: #212121;
+	background-color: #333;
+
+	transition: color 0.2s;
+	transition: background-color 0.2s;
 }
 
 .sidenav-bottom {
@@ -116,11 +180,9 @@ select:focus {
 #points-title {
 	color: whitesmoke;
 	text-align: center;
-	padding: 16px 0;
-	text-decoration: underline;
+	padding: 8px 0;
+	font-weight: bold;
 	font-size: 1.5em;
-	font-family: Quicksand;
-	background-color: #333;
 	display: none;
 	user-select: none;
 }
@@ -354,17 +416,32 @@ select:focus {
 	max-width: 80px;
 }
 
+.dropdown-select {
+	border: none;
+	margin-top: 1px;
+	margin-bottom: 1px;
+}
+
+.add-point input[type="text"] {
+	background-color: whitesmoke;
+	color: #111;
+	outline: none;
+	border: none;
+}
+
 .add-point input[type="submit"] {
 	cursor: pointer;
 	outline: none;
 	background-color: whitesmoke;
 	color: #333;
 	border: solid 1px whitesmoke;
+	transition: color 0.5s;
 }
 
 .add-point input[type="submit"]:hover {
 	background-color: #333;
 	color: whitesmoke;
+	transition: color 0.5s;
 }
 
 .add-point .close {
@@ -382,7 +459,8 @@ select:focus {
 }
 
 .add-point legend {
-	text-decoration: underline;
+	font-weight: bold;
+	font-size: 20px;
 	text-align: center;
 	margin: 5px;
 	user-select: none;
@@ -533,11 +611,11 @@ select:focus {
 /* Groups page */
 
 h1 {
-	color: white;
+	color: whitesmoke;
 }
 
 p {
-	color: white;
+	color: whitesmoke;
 }
 
 .back-index {
@@ -571,6 +649,17 @@ p {
 	cursor: pointer;
 	text-align: left;
 	user-select: none;
+	
+	transition: color 0.2s;
+	transition: background-color 0.2s;
+}
+
+.filter-view-option:hover {
+	color: whitesmoke;
+	background-color: #333;
+
+	transition: color 0.2s;
+	transition: background-color 0.2s;
 }
 
 .filter-view-option .filter-view-option-tooltip {
