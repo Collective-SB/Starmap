@@ -35,6 +35,33 @@
 </head>
 
 <body>
+	<!-- ---------------- Custom Shader Code ------------------------ -->
+	<script id="vertexShader" type="x-shader/x-vertex">
+	uniform vec3 viewVector;
+	uniform float c;
+	uniform float p;
+	varying float intensity;
+	void main() 
+	{
+	    vec3 vNormal = normalize( normalMatrix * normal );
+		vec3 vNormel = normalize( normalMatrix * viewVector );
+		intensity = pow( c - dot(vNormal, vNormel), p );
+		
+	    gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+	}
+	</script>
+
+	<!-- fragment shader a.k.a. pixel shader -->
+	<script id="fragmentShader" type="x-shader/x-vertex">
+	uniform vec3 glowColor;
+	varying float intensity;
+	void main() 
+	{
+		vec3 glow = glowColor * intensity;
+	    gl_FragColor = vec4( glow, 1.0 );
+	}
+	</script>
+	<!-- ----------------------------------------------------------- -->
 	<div class="sidenav">
 		<button id="login">
 			<img srcset="assets/Discord-Logo-White.svg" />
@@ -98,51 +125,51 @@
 			<p style="display: inline;">Zoom speed</p>
 			<input id="zoomSpeed" type="range" min="0.5" max="5" step="0.01" name="zoomSpeed">
 			<br>
-		
-            <div class="checkbox-option">
-                <input id="eosDisp" type="checkbox" name="eosDisp">
-                <p style="display: inline;">Display Eos</p>
-            </div>
-
-            <div class="checkbox-option">
-                <input id="cloudDisp" type="checkbox" name="cloudDisp">
-                <p style="display: inline;">Display Clouds</p>
-            </div>
-            
-            <div class="checkbox-option">
-                <input id="beltDisp" type="checkbox" name="beltDisp">
-                <p style="display: inline;">Display Belt</p>
-            </div>
-
-            <div class="checkbox-option">
-                <input id="isanRangeDisp" type="checkbox" name="isanRangeDisp">
-                <p style="display: inline;">Display ISAN range</p>
-            </div>
-
-            <div class="checkbox-option">
-                <input id="nameOnHover" type="checkbox" name="nameOnHover">
-                <p style="display: inline;">Only display name on hover</p>
-            </div>
 
 			<div class="checkbox-option">
-                <input id="showNames" type="checkbox" name="nameOnHover">
-                <p style="display: inline;">Show names</p>
-            </div>
-            
-            <div class="checkbox-option">
-                <input id="showLines" type="checkbox" name="nameOnHover">
-                <p style="display: inline;">Show marker line</p>
-            </div>
-            
-            <div class="checkbox-option">
-                <input id="showMarkers" type="checkbox" name="nameOnHover">
-                <p style="display: inline;">Show marker icon</p>
-            </div>
+				<input id="eosDisp" type="checkbox" name="eosDisp">
+				<p style="display: inline;">Display Eos</p>
+			</div>
 
-            <div class="checkbox-option">
-                <input id="showRings" type="checkbox" name="nameOnHover">
-                <p style="display: inline;">Show base ring</p>
-            </div>
+			<div class="checkbox-option">
+				<input id="cloudDisp" type="checkbox" name="cloudDisp">
+				<p style="display: inline;">Display Clouds</p>
+			</div>
+
+			<div class="checkbox-option">
+				<input id="beltDisp" type="checkbox" name="beltDisp">
+				<p style="display: inline;">Display Belt</p>
+			</div>
+
+			<div class="checkbox-option">
+				<input id="isanRangeDisp" type="checkbox" name="isanRangeDisp">
+				<p style="display: inline;">Display ISAN range</p>
+			</div>
+
+			<div class="checkbox-option">
+				<input id="nameOnHover" type="checkbox" name="nameOnHover">
+				<p style="display: inline;">Only display name on hover</p>
+			</div>
+
+			<div class="checkbox-option">
+				<input id="showNames" type="checkbox" name="nameOnHover">
+				<p style="display: inline;">Show names</p>
+			</div>
+
+			<div class="checkbox-option">
+				<input id="showLines" type="checkbox" name="nameOnHover">
+				<p style="display: inline;">Show marker line</p>
+			</div>
+
+			<div class="checkbox-option">
+				<input id="showMarkers" type="checkbox" name="nameOnHover">
+				<p style="display: inline;">Show marker icon</p>
+			</div>
+
+			<div class="checkbox-option">
+				<input id="showRings" type="checkbox" name="nameOnHover">
+				<p style="display: inline;">Show base ring</p>
+			</div>
 
 		</div>
 		<div class="add-point">
@@ -163,7 +190,7 @@
 					<lable>Y: </lable><input required type="number" name="pos-y" placeholder="Y pos" id="formYPos" />
 					<lable>Z: </lable><input required type="number" name="pos-z" placeholder="Z pos" id="formZPos" />
 				</fieldset>
-				<input type="submit" name="submit-new-point" id="add-point-submit" value="Create" class="genericbutton"/>
+				<input type="submit" name="submit-new-point" id="add-point-submit" value="Create" class="genericbutton" />
 			</form>
 		</div>
 		<div class="popup" id="popup">

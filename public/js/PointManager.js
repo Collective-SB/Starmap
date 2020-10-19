@@ -12,12 +12,7 @@ import {
 	MAX_MOTION_TRAILS,
 } from "./config.js";
 
-import {
-	lerp,
-	hexToRgb,
-	map,
-	constrain
-} from "./functions.js";
+import { lerp, hexToRgb, map, constrain } from "./functions.js";
 
 function sortDiv(divId) {
 	var i, shouldSwitch;
@@ -443,10 +438,106 @@ class Point {
 		}
 	}
 }
+class Zone {
+	constructor(app) {
+		this.app = app;
+		this.position = {
+			x: 0,
+			y: 0,
+			z: 0,
+		};
+		this.mapData = {
+			position: {
+				//This is the ISAN cord
+				x: 0,
+				y: 0,
+				z: 0,
+			},
+			name: "",
+			desc: "",
+			type: "",
+			color: "",
+		};
+		this.shape = {
+			type: "", // Shape types: "box", "sphere", "oval"
+			dims: {
+				//Dims could change a bit depending on type... box and oval has (w,h,l) sphere only has w (basically radius)
+				width: 0,
+				height: 0,
+				length: 0,
+			},
+		};
+		this.mapElm;
+		this.sidebarSorted;
+		this.sidebarUnsorted;
+	}
+	create(data) {
+		this.setAttrs(data);
+		// const shapeMaterial = new THREE.MeshBasicMaterial({
+		// 	color: this.mapData.color,
+		// });
+		const shapeMaterial = new THREE.ShaderMaterial({
+			uniforms: {
+				c: { type: "f", value: 1.0 },
+				p: { type: "f", value: 1.4 },
+				glowColor: { type: "c", value: new THREE.Color(0xffff00) },
+				viewVector: {
+					type: "v3",
+					value: this.app.sceneObjs.camera.position,
+				},
+			},
+			vertexShader: document.getElementById("vertexShader").textContent,
+			fragmentShader: document.getElementById("fragmentShader").textContent,
+			side: THREE.DoubleSide,
+			blending: THREE.AdditiveBlending,
+			transparent: true,
+		});
+		// shapeMaterial.depthTest = false;
+		let shapeGeometry;
+		switch (this.shape.type) {
+			case "sphere":
+				shapeGeometry = new THREE.SphereGeometry(
+					this.shape.dims.width,
+					32,
+					32
+				);
+				break;
+
+			default:
+				console.log(`Unknown shape type ${this.shape.type}`);
+				return;
+		}
+		var sphere = new THREE.Mesh(shapeGeometry, shapeMaterial);
+		sphere.position.set(this.position.x, this.position.y, this.position.z);
+		sphere.renderOrder = -1;
+		console.log(sphere);
+		this.app.sceneObjs.scene.add(sphere);
+	}
+	update(data) {}
+	//Copys data from API to the correct format in this object
+	setAttrs(data) {
+		const position = fromGamePos(data.pos);
+		this.position.x = position.x;
+		this.position.y = position.y;
+		this.position.z = position.z;
+		this.shape.type = data.shape.type;
+		this.shape.dims.width = data.shape.dims.width;
+		this.shape.dims.height = data.shape.dims.height;
+		this.shape.dims.length = data.shape.dims.length;
+		this.mapData.position.x = data.pos.x;
+		this.mapData.position.x = data.pos.y;
+		this.mapData.position.x = data.pos.z;
+		this.mapData.name = data.name;
+		this.mapData.desc = data.desc;
+		this.mapData.type = data.type;
+		this.mapData.color = data.color;
+	}
+}
 export default class PointManager {
 	constructor(app) {
 		this.app = app;
 		this.points = [];
+		this.zones = [];
 		this.pointTextures = {};
 		this.motionTrails = [];
 		this.connectorLine;
@@ -464,6 +555,26 @@ export default class PointManager {
 		for (var t in TYPES) {
 			this.pointTextures[t] = loader.load(TYPES[t].icons.map);
 		}
+	}
+	test() {
+		const zone = new Zone(this.app);
+		zone.create({
+			pos: {
+				x: 0,
+				y: 10000,
+				z: 0,
+			},
+			shape: {
+				type: "sphere",
+				dims: {
+					width: 10000,
+				},
+			},
+			name: "Test Zone!",
+			desc: "I am a test",
+			type: "ISAN",
+			color: "#ff00ff",
+		});
 	}
 	checkSort() {
 		sortDiv("points");
