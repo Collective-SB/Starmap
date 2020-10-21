@@ -801,6 +801,7 @@ class App {
 			point.marker.rotation.set(rot.x, rot.y, rot.z);
 		});
 		this.pointManager.runScales(markerScale);
+		this.pointManager.runZones();
 		this.cameraController.update();
 		this.sceneObjs.renderer.render(
 			this.sceneObjs.scene,

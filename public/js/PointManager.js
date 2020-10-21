@@ -1,4 +1,5 @@
 /*global THREE*/
+//Possible refactor for THREEjs, rather than push everything onto scene push to logical groupings for points and zones
 //Class to hold all the map data after getting it from the api
 import {
 	MARKER_SIZE,
@@ -10,9 +11,12 @@ import {
 	FADE_MIN_DIST,
 	FADE_MAX_DIST,
 	MAX_MOTION_TRAILS,
+	ZONE_WIRE_CUTOFF,
+	ZONE_OUTLINE_POINTS,
+	ZONE_INTERACTION_SIZE,
 } from "./config.js";
 
-import { lerp, hexToRgb, map, constrain } from "./functions.js";
+import { lerp, hexToRgb, map, constrain, tubeLine } from "./functions.js";
 
 function sortDiv(divId) {
 	var i, shouldSwitch;
@@ -460,6 +464,7 @@ class Zone {
 		};
 		this.shape = {
 			type: "", // Shape types: "box", "sphere", "oval"
+			avgSize: 0, //Rough aprox of shape size (avg of dims)
 			dims: {
 				//Dims could change a bit depending on type... box and oval has (w,h,l) sphere only has w (basically radius)
 				width: 0,
@@ -467,53 +472,124 @@ class Zone {
 				length: 0,
 			},
 		};
-		this.mapElm;
+		this.mapElms = {
+			inner: null,
+			outer: null,
+			interaction: null,
+		};
 		this.sidebarSorted;
 		this.sidebarUnsorted;
 	}
 	create(data) {
 		this.setAttrs(data);
-		// const shapeMaterial = new THREE.MeshBasicMaterial({
-		// 	color: this.mapData.color,
-		// });
-		const shapeMaterial = new THREE.ShaderMaterial({
-			uniforms: {
-				c: { type: "f", value: 1.0 },
-				p: { type: "f", value: 1.4 },
-				glowColor: { type: "c", value: new THREE.Color(0xffff00) },
-				viewVector: {
-					type: "v3",
-					value: this.app.sceneObjs.camera.position,
-				},
-			},
-			vertexShader: document.getElementById("vertexShader").textContent,
-			fragmentShader: document.getElementById("fragmentShader").textContent,
-			side: THREE.DoubleSide,
-			blending: THREE.AdditiveBlending,
+		this.calcAvg();
+		const shapeMaterialOuter = new THREE.MeshBasicMaterial({
+			color: this.mapData.color,
+			wireframe: true,
+		});
+		const shapeMaterialInner = new THREE.MeshBasicMaterial({
+			color: this.mapData.color,
 			transparent: true,
+			opacity: 0.4, //0.4,
+			side: THREE.DoubleSide,
 		});
 		// shapeMaterial.depthTest = false;
-		let shapeGeometry;
+		const shapeGeometry = this.createZoneGeometry();
+		const interactionParts = this.createInteraction();
+
+		const meshOuter = new THREE.Mesh(
+			shapeGeometry.clone(),
+			shapeMaterialOuter
+		);
+		const meshInner = new THREE.Mesh(
+			shapeGeometry.clone(),
+			shapeMaterialInner
+		);
+		const interaction = new THREE.Group();
+		interactionParts.forEach((mesh) => {
+			interaction.add(mesh.getObject3D());
+		});
+
+		meshOuter.position.set(this.position.x, this.position.y, this.position.z);
+		meshInner.position.set(this.position.x, this.position.y, this.position.z);
+		interaction.position.set(
+			this.position.x,
+			this.position.y,
+			this.position.z
+		);
+		interaction.rotation.set(Math.PI / 2, 0, 0);
+
+		this.app.sceneObjs.scene.add(interaction);
+		this.app.sceneObjs.scene.add(meshOuter);
+		this.app.sceneObjs.scene.add(meshInner);
+
+		this.mapElms.outer = meshOuter;
+		this.mapElms.inner = meshInner;
+		this.mapElms.interaction = interaction;
+	}
+	update(data) {}
+	createZoneGeometry() {
+		let geometry;
 		switch (this.shape.type) {
 			case "sphere":
-				shapeGeometry = new THREE.SphereGeometry(
-					this.shape.dims.width,
-					32,
-					32
-				);
+				geometry = new THREE.SphereGeometry(this.shape.dims.width, 32, 32);
 				break;
 
 			default:
 				console.log(`Unknown shape type ${this.shape.type}`);
 				return;
 		}
-		var sphere = new THREE.Mesh(shapeGeometry, shapeMaterial);
-		sphere.position.set(this.position.x, this.position.y, this.position.z);
-		sphere.renderOrder = -1;
-		console.log(sphere);
-		this.app.sceneObjs.scene.add(sphere);
+		return geometry;
 	}
-	update(data) {}
+	createInteraction() {
+		const points = [];
+		switch (this.shape.type) {
+			case "sphere":
+				for (
+					let i = 0;
+					i < Math.PI * 2;
+					i += (Math.PI * 2) / ZONE_OUTLINE_POINTS
+				) {
+					points.push(
+						// new THREE.Vector3(
+						[
+							Math.cos(i) * this.shape.dims.width,
+							Math.sin(i) * this.shape.dims.width,
+							0,
+						]
+						// )
+					);
+				}
+				break;
+		}
+		const tubes = points.map((point, idx) => {
+			if (idx == 0) return;
+			return new tubeLine(
+				point,
+				points[idx - 1],
+				ZONE_INTERACTION_SIZE,
+				this.mapData.color
+			);
+		});
+		tubes.shift();
+		return tubes;
+	}
+	calcAvg() {
+		let total = 0;
+		let numDims = 0;
+		for (var dim in this.shape.dims) {
+			const val = this.shape.dims[dim];
+			if (val) {
+				total += val;
+				numDims++;
+			}
+		}
+		this.shape.avgSize = total / numDims;
+	}
+	runVisualUpdate(camera) {
+		const dist = camera.position.distanceTo(this.mapElms.outer.position);
+		this.mapElms.outer.visible = dist < this.shape.avgSize + ZONE_WIRE_CUTOFF;
+	}
 	//Copys data from API to the correct format in this object
 	setAttrs(data) {
 		const position = fromGamePos(data.pos);
@@ -567,7 +643,7 @@ export default class PointManager {
 			shape: {
 				type: "sphere",
 				dims: {
-					width: 10000,
+					width: 1000000,
 				},
 			},
 			name: "Test Zone!",
@@ -575,6 +651,7 @@ export default class PointManager {
 			type: "ISAN",
 			color: "#ff00ff",
 		});
+		this.zones.push(zone);
 	}
 	checkSort() {
 		sortDiv("points");
@@ -651,6 +728,11 @@ export default class PointManager {
 	runScales(scale) {
 		this.points.forEach((point) => {
 			point.runScale(scale);
+		});
+	}
+	runZones() {
+		this.zones.forEach((zone) => {
+			zone.runVisualUpdate(this.app.sceneObjs.camera);
 		});
 	}
 	updateLayers() {
