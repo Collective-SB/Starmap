@@ -15,7 +15,7 @@ const redirs = [
 		link: "https://github.com/Collective-SB/ISAN",
 	},
 	{
-		names: ["discord", "server"],
+		names: ["discord", "server", "collective", "support", "help"],
 		link: "https://discord.gg/VnU8apR",
 	},
 ];
