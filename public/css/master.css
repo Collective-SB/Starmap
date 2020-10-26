@@ -498,7 +498,7 @@ button:hover {
 
 .more-info {
 	width: fit-content;
-	right: 10%;
+	right: 30px;
 	position: absolute;
 	top: 4px;
 }
@@ -550,6 +550,7 @@ button:hover {
 	margin-top: 10px;
 	max-width: fit-content;
 	min-width: 100%;
+	word-break: break-word;
 }
 
 .infoDiv {
@@ -649,7 +650,7 @@ p {
 	cursor: pointer;
 	text-align: left;
 	user-select: none;
-	
+
 	transition: color 0.2s;
 	transition: background-color 0.2s;
 }
