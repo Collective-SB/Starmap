@@ -34,6 +34,9 @@ export const HOVER_CHANGE_RATE = 0.35;
 export const FADE_MIN_DIST = 0;
 export const FADE_MAX_DIST = 2500;
 export const ZOOM_INTO_DIST = 10000;
+export const ZONE_WIRE_CUTOFF = 80000;
+export const ZONE_OUTLINE_POINTS = 100;
+export const ZONE_INTERACTION_SIZE = 1000;
 export const ISAN_RANGE = 1000000;
 export const safePos = {
 	x: EOS_SIZE + DIST_TO_BELT - SOLONS_OFFSET,
