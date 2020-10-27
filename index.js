@@ -43,7 +43,7 @@ app.get("/favicon.ico", (req, res) => {
 		root: __dirname,
 	});
 });
-app.get("/collectiveTemp3", (req, res) => {
+app.get("/collectiveTemp4", (req, res) => {
 	res.sendFile("./collectiveInvite.html", {
 		root: __dirname,
 	});
