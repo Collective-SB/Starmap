@@ -61,6 +61,7 @@ function fromGamePos(position) {
 class Point {
 	constructor(pointData, app) {
 		this.app = app;
+		this.urlID = pointData.urlID;
 		this.shown = true;
 		this.marker;
 		this.linePart;
@@ -668,7 +669,7 @@ export default class PointManager {
 		this.points.push(newPoint);
 		if (!this.hasInitFocus && this.initFocusOn) {
 			if (
-				pointData.id == this.initFocusOn ||
+				pointData.urlID == this.initFocusOn ||
 				pointData.vanity == this.initFocusOn
 			) {
 				this.app.handleObjectClick(newPoint);

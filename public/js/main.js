@@ -99,11 +99,7 @@ import {
 	ENV,
 } from "./config.js";
 
-import {
-	constrain,
-	map,
-	copyToClipboard
-} from "./functions.js";
+import { constrain, map, copyToClipboard } from "./functions.js";
 
 import PointManager from "./PointManager.js";
 import API from "./API.js";
@@ -414,7 +410,8 @@ class App {
 			stop: function () {
 				$(this).css({
 					left: "",
-					right: $(window).width() -
+					right:
+						$(window).width() -
 						($(this).offset().left + $(this).outerWidth()),
 				});
 			},
@@ -567,8 +564,8 @@ class App {
 				);
 				if (
 					point.info.name
-					.toLowerCase()
-					.includes(searchbar.value.toLowerCase())
+						.toLowerCase()
+						.includes(searchbar.value.toLowerCase())
 				) {
 					points.children[i].classList.remove("search-hide");
 				} else {
@@ -688,9 +685,9 @@ class App {
 		//Creates the info in the top right window
 		const self = this;
 		//Allow threejs object OR my point data object
-		const poiData = object.uuid ?
-			this.pointManager.getByThreeId(object.uuid) :
-			object;
+		const poiData = object.uuid
+			? this.pointManager.getByThreeId(object.uuid)
+			: object;
 		this.pointManager.focusedPOI = poiData;
 
 		// Toggle flip effect on Button
@@ -757,7 +754,7 @@ class App {
 		//Sharable link
 		const getLink = document.getElementById("linksharable");
 		getLink.onclick = function () {
-			const identifier = poiData.vanity ? poiData.vanity : poiData.id;
+			const identifier = poiData.vanity ? poiData.vanity : poiData.urlID;
 			const link = window.location.origin + "/" + identifier;
 			copyToClipboard(link);
 		};
