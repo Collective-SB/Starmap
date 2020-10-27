@@ -43,7 +43,11 @@ app.get("/favicon.ico", (req, res) => {
 		root: __dirname,
 	});
 });
-
+app.get("/collectiveTemp", (req, res) => {
+	res.sendFile("./collectiveInvite.html", {
+		root: __dirname,
+	});
+});
 app.get(["/:pointId", "/"], async (req, res) => {
 	const URL = req.protocol + "://" + req.get("host") + req.originalUrl;
 	let openGraphStyles = `
