@@ -205,6 +205,7 @@ class App {
 		});
 		this.viewFilters = filters;
 		this.pointManager.updateDisplayed(this.viewFilters);
+		this.updateFilters();
 	}
 	updateFilters() {
 		for (var t in TYPES) {
