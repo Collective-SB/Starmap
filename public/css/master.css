@@ -467,7 +467,22 @@ button:hover {
 	margin: 5px;
 	user-select: none;
 }
-
+/* Calculator panel */
+.calc-title {
+	font-weight: bold;
+	font-size: 20px;
+	text-align: center;
+	margin: 5px;
+	user-select: none;
+}
+.calculator .close {
+	position: absolute;
+	color: var(--red);
+	top: 3px;
+	right: 3px;
+	user-select: none;
+	z-index: 2;
+}
 /* Settings panel */
 .settings {
 	display: none;

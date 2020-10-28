@@ -44,6 +44,7 @@
 		</button>
 		<button id="logout" style="display: none;">Logout</button>
 		<button id="settingsBtn">Settings</button>
+		<!-- <button id="calcBtn">Calculator</button> -->
 		<button id="sortToggle">Sort by name</button>
 		<input id="find" type="text" placeholder="Find a point">
 		<span id="points-title">
@@ -144,6 +145,15 @@
 				<p style="display: inline;">Show base ring</p>
 			</div>
 
+		</div>
+		<div id="calculator" class="settings calculator">
+			<span class="calc-close material-icons">
+				close
+			</span>
+			<p class="calc-title">Distance/Time Calculator WIP</p>
+			<p style="display: inline;">Enter ship speed: </p>
+			<input id="shipSpeedSlider" type="range" min="1" max="150" step="1" name="shipSpeed">
+			<input id="shipSpeedDirect" type="number" min="1" max="150" name="shipSpeed">
 		</div>
 		<div class="add-point">
 			<span class="material-icons close">

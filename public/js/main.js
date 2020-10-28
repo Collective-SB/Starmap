@@ -105,6 +105,7 @@ import PointManager from "./PointManager.js";
 import API from "./API.js";
 import CamController from "./CamController.js";
 import SettingsManager from "./SettingsManager.js";
+import Calculator from "./calculator.js";
 
 import Stats from "./packages/Stats.js";
 
@@ -157,6 +158,7 @@ class App {
 		}
 		this.pointManager = new PointManager(this);
 		this.settings = new SettingsManager(this);
+		this.calculator = new Calculator(this);
 		this.isLoggedIn = false;
 		this.updatePointId;
 		this.textFont;
@@ -419,6 +421,9 @@ class App {
 		});
 		// Settings popup
 		this.settings.init();
+
+		// Calculator popup
+		this.calculator.init();
 
 		// New point popup
 		$(".add-point").draggable({
