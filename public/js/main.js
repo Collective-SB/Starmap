@@ -105,6 +105,7 @@ import PointManager from "./PointManager.js";
 import API from "./API.js";
 import CamController from "./CamController.js";
 import SettingsManager from "./SettingsManager.js";
+import Calculator from "./calculator.js";
 
 import Stats from "./packages/Stats.js";
 
@@ -157,6 +158,7 @@ class App {
 		}
 		this.pointManager = new PointManager(this);
 		this.settings = new SettingsManager(this);
+		this.calculator = new Calculator(this);
 		this.isLoggedIn = false;
 		this.updatePointId;
 		this.textFont;
@@ -205,6 +207,7 @@ class App {
 		});
 		this.viewFilters = filters;
 		this.pointManager.updateDisplayed(this.viewFilters);
+		this.updateFilters();
 	}
 	updateFilters() {
 		for (var t in TYPES) {
@@ -419,6 +422,9 @@ class App {
 		// Settings popup
 		this.settings.init();
 
+		// Calculator popup
+		this.calculator.init();
+
 		// New point popup
 		$(".add-point").draggable({
 			containment: "document",
@@ -481,7 +487,17 @@ class App {
 					self.banner("The point could not be created", ERROR);
 				}
 			} else {
-				self.api.updatePoint(self.updatePointId, data);
+				const res = await self.api.updatePoint(self.updatePointId, data);
+				if (res == 200) {
+					if (group.hasReview) {
+						self.banner(
+							"The point update has been submitted for review",
+							SUCCESS
+						);
+					}
+				} else {
+					self.banner("The point could not be created", ERROR);
+				}
 			}
 		});
 
@@ -744,7 +760,7 @@ class App {
 		//Sharable link
 		const getLink = document.getElementById("linksharable");
 		getLink.onclick = function () {
-			const identifier = poiData.vanity ? poiData.vanity : poiData.id;
+			const identifier = poiData.vanity ? poiData.vanity : poiData.urlID;
 			const link = window.location.origin + "/" + identifier;
 			copyToClipboard(link);
 		};
@@ -788,6 +804,13 @@ class App {
 			MARKER_SIZE_MIN,
 			MARKER_SIZE_MAX
 		);
+		//Lets see if the scrollbar is visible on the sidenav, if it is we want to expand the sidenav a bit
+		const sidenav = document.getElementsByClassName("sidenav")[0];
+		sidenav.style.width =
+			parseInt(sidenav.style.width) + (160 - sidenav.scrollWidth) + "px";
+		// if (sidenav.scrollHeight > sidenav.clientHeight) {
+		// } else {
+		// }
 		//Check hovers
 		const hovers = this.castRay(mouseX, mouseY);
 		this.pointManager.points.forEach((p) => p.updateHoverMain(false));
@@ -801,6 +824,7 @@ class App {
 			point.marker.rotation.set(rot.x, rot.y, rot.z);
 		});
 		this.pointManager.runScales(markerScale);
+		this.pointManager.runZones();
 		this.cameraController.update();
 		this.sceneObjs.renderer.render(
 			this.sceneObjs.scene,

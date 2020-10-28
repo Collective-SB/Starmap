@@ -35,7 +35,7 @@
 </head>
 
 <body>
-	<div class="sidenav">
+	<div class="sidenav" style="width: 160px;">
 		<button id="login">
 			<img srcset="assets/Discord-Logo-White.svg" />
 			<span class="login-text">
@@ -44,6 +44,7 @@
 		</button>
 		<button id="logout" style="display: none;">Logout</button>
 		<button id="settingsBtn">Settings</button>
+		<!-- <button id="calcBtn">Calculator</button> -->
 		<button id="sortToggle">Sort by name</button>
 		<input id="find" type="text" placeholder="Find a point">
 		<span id="points-title">
@@ -98,52 +99,61 @@
 			<p style="display: inline;">Zoom speed</p>
 			<input id="zoomSpeed" type="range" min="0.5" max="5" step="0.01" name="zoomSpeed">
 			<br>
-		
-            <div class="checkbox-option">
-                <input id="eosDisp" type="checkbox" name="eosDisp">
-                <p style="display: inline;">Display Eos</p>
-            </div>
-
-            <div class="checkbox-option">
-                <input id="cloudDisp" type="checkbox" name="cloudDisp">
-                <p style="display: inline;">Display Clouds</p>
-            </div>
-            
-            <div class="checkbox-option">
-                <input id="beltDisp" type="checkbox" name="beltDisp">
-                <p style="display: inline;">Display Belt</p>
-            </div>
-
-            <div class="checkbox-option">
-                <input id="isanRangeDisp" type="checkbox" name="isanRangeDisp">
-                <p style="display: inline;">Display ISAN range</p>
-            </div>
-
-            <div class="checkbox-option">
-                <input id="nameOnHover" type="checkbox" name="nameOnHover">
-                <p style="display: inline;">Only display name on hover</p>
-            </div>
 
 			<div class="checkbox-option">
-                <input id="showNames" type="checkbox" name="nameOnHover">
-                <p style="display: inline;">Show names</p>
-            </div>
-            
-            <div class="checkbox-option">
-                <input id="showLines" type="checkbox" name="nameOnHover">
-                <p style="display: inline;">Show marker line</p>
-            </div>
-            
-            <div class="checkbox-option">
-                <input id="showMarkers" type="checkbox" name="nameOnHover">
-                <p style="display: inline;">Show marker icon</p>
-            </div>
+				<input id="eosDisp" type="checkbox" name="eosDisp">
+				<p style="display: inline;">Display Eos</p>
+			</div>
 
-            <div class="checkbox-option">
-                <input id="showRings" type="checkbox" name="nameOnHover">
-                <p style="display: inline;">Show base ring</p>
-            </div>
+			<div class="checkbox-option">
+				<input id="cloudDisp" type="checkbox" name="cloudDisp">
+				<p style="display: inline;">Display Clouds</p>
+			</div>
 
+			<div class="checkbox-option">
+				<input id="beltDisp" type="checkbox" name="beltDisp">
+				<p style="display: inline;">Display Belt</p>
+			</div>
+
+			<div class="checkbox-option">
+				<input id="isanRangeDisp" type="checkbox" name="isanRangeDisp">
+				<p style="display: inline;">Display ISAN range</p>
+			</div>
+
+			<div class="checkbox-option">
+				<input id="nameOnHover" type="checkbox" name="nameOnHover">
+				<p style="display: inline;">Only display name on hover</p>
+			</div>
+
+			<div class="checkbox-option">
+				<input id="showNames" type="checkbox" name="nameOnHover">
+				<p style="display: inline;">Show names</p>
+			</div>
+
+			<div class="checkbox-option">
+				<input id="showLines" type="checkbox" name="nameOnHover">
+				<p style="display: inline;">Show marker line</p>
+			</div>
+
+			<div class="checkbox-option">
+				<input id="showMarkers" type="checkbox" name="nameOnHover">
+				<p style="display: inline;">Show marker icon</p>
+			</div>
+
+			<div class="checkbox-option">
+				<input id="showRings" type="checkbox" name="nameOnHover">
+				<p style="display: inline;">Show base ring</p>
+			</div>
+
+		</div>
+		<div id="calculator" class="settings calculator">
+			<span class="calc-close material-icons">
+				close
+			</span>
+			<p class="calc-title">Distance/Time Calculator WIP</p>
+			<p style="display: inline;">Enter ship speed: </p>
+			<input id="shipSpeedSlider" type="range" min="1" max="150" step="1" name="shipSpeed">
+			<input id="shipSpeedDirect" type="number" min="1" max="150" name="shipSpeed">
 		</div>
 		<div class="add-point">
 			<span class="material-icons close">
@@ -163,24 +173,28 @@
 					<lable>Y: </lable><input required type="number" name="pos-y" placeholder="Y pos" id="formYPos" />
 					<lable>Z: </lable><input required type="number" name="pos-z" placeholder="Z pos" id="formZPos" />
 				</fieldset>
-				<input type="submit" name="submit-new-point" id="add-point-submit" value="Create" class="genericbutton"/>
+				<input type="submit" name="submit-new-point" id="add-point-submit" value="Create" class="genericbutton" />
 			</form>
 		</div>
 		<div class="popup" id="popup">
 			<div class="popup-content">
-				<h2>Welcome to ISAN Starmap! </h2>
+				<h2>Welcome to Starmap!</h2>
 				<p>
-					This is a free 3d space map for <a href="https://www.starbasegame.com/">Starbase</a>! You can use these
+					Starmap is a free ISAN-based 3D map for the game <a href="https://www.starbasegame.com/">Starbase</a>!
+					You can use these
 					coordinates in-game by <a
 						href="https://docs.google.com/document/d/1UZWv5UM_DUMQZnlsFbLcuyjbu__Bs0yltIHsXP88qvk/">
 						installing
 						ISAN
 					</a> on your ship.
 					<br><br>
-					Bug reports and feedback should be sent on discord to <b>Strikeeaglechase#0001</b>
-					(<@272143648114606083>)
-						<br><br>
-						This website uses cookies for functional and analytical purposes. Press "Accept" to continue.
+					For any feedback, or bugs please create a support ticket <a href="https://discord.gg/VnU8apR">here</a>
+					<br>
+					Private layers are a premium feature. If you want to acquire one for your faction, please open a
+					diplomatic ticket in
+					the #contact_us channel of the <a href="https://discord.gg/VnU8apR">Collective Discord</a>
+					<br><br>
+					This website uses cookies for functional and analytical purposes. Press "Accept" to continue.
 				</p>
 				<button id="acceptCookies">Accept</button>
 			</div>
