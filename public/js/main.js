@@ -799,6 +799,13 @@ class App {
 			MARKER_SIZE_MIN,
 			MARKER_SIZE_MAX
 		);
+		//Lets see if the scrollbar is visible on the sidenav, if it is we want to expand the sidenav a bit
+		const sidenav = document.getElementsByClassName("sidenav")[0];
+		sidenav.style.width =
+			parseInt(sidenav.style.width) + (160 - sidenav.scrollWidth) + "px";
+		// if (sidenav.scrollHeight > sidenav.clientHeight) {
+		// } else {
+		// }
 		//Check hovers
 		const hovers = this.castRay(mouseX, mouseY);
 		this.pointManager.points.forEach((p) => p.updateHoverMain(false));
