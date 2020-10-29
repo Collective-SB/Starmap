@@ -467,6 +467,7 @@ button:hover {
 	margin: 5px;
 	user-select: none;
 }
+
 /* Calculator panel */
 .calc-title {
 	font-weight: bold;
@@ -475,6 +476,7 @@ button:hover {
 	margin: 5px;
 	user-select: none;
 }
+
 .calculator .close {
 	position: absolute;
 	color: var(--red);
@@ -483,6 +485,7 @@ button:hover {
 	user-select: none;
 	z-index: 2;
 }
+
 /* Settings panel */
 .settings {
 	display: none;
@@ -565,7 +568,7 @@ button:hover {
 .desc {
 	border: 1px solid gray;
 	margin-top: 10px;
-	max-width: fit-content;
+	max-width: min-content;
 	min-width: 100%;
 	word-break: break-word;
 }
