@@ -477,13 +477,23 @@ button:hover {
 	user-select: none;
 }
 
-.calculator .close {
+.calculator .calc-close {
 	position: absolute;
 	color: var(--red);
 	top: 3px;
 	right: 3px;
 	user-select: none;
 	z-index: 2;
+}
+
+.calculator .calc-close:hover {
+	cursor: pointer;
+	transform: scale(1.2);
+}
+
+.sel-point {
+	margin-top: 5px;
+	text-align: center;
 }
 
 /* Settings panel */
