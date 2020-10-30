@@ -537,11 +537,11 @@ class App {
 			if (pointsMode.style.display == "block") {
 				pointsMode.style.display = "none";
 				layersMode.style.display = "block";
-				sortToggle.innerText = "Sort by name";
+				sortToggle.children[0].src = "assets/buttons/sort-none.png";
 			} else {
 				pointsMode.style.display = "block";
 				layersMode.style.display = "none";
-				sortToggle.innerText = "Sort by layers";
+				sortToggle.children[0].src = "assets/buttons/sort-layers.png";
 			}
 		};
 
@@ -806,11 +806,14 @@ class App {
 		);
 		//Lets see if the scrollbar is visible on the sidenav, if it is we want to expand the sidenav a bit
 		const sidenav = document.getElementsByClassName("sidenav")[0];
-		sidenav.style.width =
-			parseInt(sidenav.style.width) + (160 - sidenav.scrollWidth) + "px";
-		// if (sidenav.scrollHeight > sidenav.clientHeight) {
-		// } else {
-		// }
+		// sidenav.style.width =
+		// 	parseInt(sidenav.style.width) + (160 - sidenav.scrollWidth) + "px";
+		//TODO: Make this not bad. Setting style like this is *very* bad practice, and not reliable
+		if (sidenav.scrollHeight > sidenav.clientHeight) {
+			sidenav.style.width = "175px";
+		} else {
+			sidenav.style.width = "160px";
+		}
 		//Check hovers
 		const hovers = this.castRay(mouseX, mouseY);
 		this.pointManager.points.forEach((p) => p.updateHoverMain(false));
@@ -899,17 +902,17 @@ class App {
 	setLoggedIn(newState) {
 		this.isLoggedIn = newState;
 		let loginBtn = document.getElementById("login");
-		let logoutBtn = document.getElementById("logout");
+		// let logoutBtn = document.getElementById("logout");
 		let addPointBtn = document.getElementById("new-point");
 
 		let pointsTitle = document.getElementById("points-title");
-		if (!loginBtn) {
-			return;
-		}
+		// if (!loginBtn) {
+		// 	return;
+		// }
 		//This sets if the buttion is visable or not
 		if (newState) {
 			loginBtn.style.display = "none";
-			logoutBtn.style.display = "block";
+			// logoutBtn.style.display = "block";
 			pointsTitle.style.display = "block";
 			addPointBtn.style.display = "block";
 			if (!this.lastLoginState) {
@@ -918,7 +921,7 @@ class App {
 			this.lastLoginState = true;
 		} else {
 			loginBtn.style.display = "block";
-			logoutBtn.style.display = "none";
+			// logoutBtn.style.display = "none";
 			pointsTitle.style.display = "none";
 			addPointBtn.style.display = "none";
 			if (this.lastLoginState) {

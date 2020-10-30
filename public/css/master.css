@@ -78,6 +78,32 @@ button:hover {
 	transition: background-color 0.2s;
 }
 
+/* UI Button grid */
+/* Note: There should be 2 rows, but for time only going with 1 for now */
+.button-grid {
+	width: 160px;
+	/* height: 100px; */
+	height: 50px;
+}
+.button-row {
+	width: 100%;
+	/* height: 50%; */
+	height: 100%;
+}
+.button-row button {
+	width: 33%;
+	height: 100%;
+	background-color: grey;
+}
+.button-row button:hover {
+	background-color: #333;
+	color: whitesmoke;
+	transition: color 0.25s;
+}
+.button-row img {
+	width: 100%;
+	height: 100%;
+}
 /* Side Nav */
 
 #find {
@@ -100,8 +126,8 @@ button:hover {
 .layerheader {
 	margin: 2px !important;
 	font-size: 17px !important;
-	border-bottom-style: solid !important;
-	border-bottom-color: brown !important;
+	border-top-style: solid !important;
+	border-top-color: brown !important;
 	font-weight: bold;
 }
 
