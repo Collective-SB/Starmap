@@ -12,7 +12,7 @@ const redirs = [
 	},
 	{
 		names: ["git", "github"],
-		link: "https://github.com/Collective-SB/ISAN",
+		link: "https://github.com/Collective-SB/Starmap/",
 	},
 	{
 		names: ["discord", "server", "collective", "support", "help"],
