@@ -85,25 +85,44 @@ button:hover {
 	/* height: 100px; */
 	height: 50px;
 }
+
 .button-row {
 	width: 100%;
 	/* height: 50%; */
 	height: 100%;
+	display: flex;
+	justify-content: space-around;
 }
+
 .button-row button {
-	width: 33%;
-	height: 100%;
-	background-color: grey;
+	display: inline-flex;
+	justify-content: center;
+	background-color: whitesmoke;
+	color: #333;
+	flex-grow: 1;
+	cursor: pointer;
+	border-width: 1px 0;
 }
+
+.button-row button:last-child {
+	border-left-width: 1px;
+}
+
+.button-row button:first-child {
+	border-right-width: 1px;
+}
+
 .button-row button:hover {
 	background-color: #333;
 	color: whitesmoke;
 	transition: color 0.25s;
 }
-.button-row img {
-	width: 100%;
-	height: 100%;
+
+.button-row span {
+	font-size: 250%;
+	margin: auto;
 }
+
 /* Side Nav */
 
 #find {
@@ -318,16 +337,20 @@ button:hover {
 /* Login Button */
 
 #login {
-	border-radius: 5px;
+	background-color: whitesmoke;
+	color: #333;
+	/*border-radius: 5px;
+
+	background-color: #7289da;
+	color: whitesmoke; */
+	width: 100%;
+
 	border: none;
 	text-align: center;
 	overflow: hidden;
 	cursor: pointer;
 	outline: none;
 	height: 45px;
-	background-color: #7289da;
-	color: whitesmoke;
-	width: 100%;
 
 	display: flex;
 	flex-direction: row;
@@ -340,20 +363,27 @@ button:hover {
 }
 
 #login:hover {
-	filter: brightness(0.9);
+	background-color: #333;
+	color: whitesmoke;
 }
 
 #login img {
+	color: #333;
 	height: 80%;
 	padding-left: 5px;
 	flex-grow: 0;
+	filter: invert(15%) sepia(1%) saturate(0%) hue-rotate(87deg) brightness(95%) contrast(85%);
+}
+
+#login:hover img {
+	/* This is equivalent to switching from whitesmoke to #333, lets us change the color of an image without any JS */
+	filter: invert(99%) sepia(2%) saturate(309%) hue-rotate(189deg) brightness(114%) contrast(92%);
 }
 
 #login .login-text {
 	flex-grow: 1;
 	font-size: 24px;
 	font-family: Quicksand;
-	height: 100%;
 }
 
 /* One time popup */
@@ -701,6 +731,10 @@ p {
 	transition: background-color 0.2s;
 }
 
+.filter-view-option label,input {
+	cursor: pointer;
+}
+
 .filter-view-option:hover {
 	color: whitesmoke;
 	background-color: #333;
@@ -741,4 +775,8 @@ p {
 
 .filter-view-option:hover .filter-view-option-tooltip {
 	visibility: visible;
+}
+
+.filter-view-option .filter-view-option-tooltip:hover {
+	visibility: hidden;
 }
