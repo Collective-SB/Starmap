@@ -731,6 +731,10 @@ p {
 	transition: background-color 0.2s;
 }
 
+.filter-view-option label,input {
+	cursor: pointer;
+}
+
 .filter-view-option:hover {
 	color: whitesmoke;
 	background-color: #333;
@@ -771,4 +775,8 @@ p {
 
 .filter-view-option:hover .filter-view-option-tooltip {
 	visibility: visible;
+}
+
+.filter-view-option .filter-view-option-tooltip:hover {
+	visibility: hidden;
 }
