@@ -15,10 +15,17 @@
 |*************************************************************************;
 */
 
+/* Icon Imports */
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
+/* Asset Page */
+@import url("assets-page/base-page.css");
+
+/* Asset Interfaces */
 @import url("assets-interfaces/interface.css");
+
 @import url("css-sort/sort.css");
+
 
 /*
 |*************************************************************************;
@@ -30,6 +37,12 @@
 /* Font Imports */
 --main-font-VT323: "VT323", monospace;
 --main-font-Squada: 'Squada One', cursive;
+
+/* Font Color - Change - Default*/
+--main-font-color-01:#0074f0;
+--main-font-color-02:rgba(0,116,240,1);
+
+
 
 /* Cursor Setting */
 --main-cursor-default: default;
@@ -62,9 +75,9 @@
 --box-boxshadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 
 /* Red Box Shadow */
---webkit-boxshadow-blue: inset 0px -16px 17px -13px rgba(0,116,240,1);
---moz-boxshadow-blue: inset 0px -16px 17px -13px rgba(0,116,240,1);
---box-boxshadow-blue: inset 0px -16px 17px -13px rgba(0,116,240,1);
+--webkit-boxshadow-blue: inset 0px -16px 17px -13px var(--main-font-color-02);
+--moz-boxshadow-blue: inset 0px -16px 17px -13px var(--main-font-color-02);
+--box-boxshadow-blue: inset 0px -16px 17px -13px var(--main-font-color-02);
 
 /* Border Properties */
 --border-radius-none:0rem;
@@ -73,19 +86,60 @@
 
 /*
 |*************************************************************************;
-* Page Properties 
+* Input & Scroll Properties 
 |*************************************************************************;
 */
 
+/* Scroll Bar */
 ::-webkit-scrollbar {
 width: 7px;
 }
 ::-webkit-scrollbar-thumb {
 border-radius: 7px;
-background-color: rgb(0,116,240);
+background-color: var(--main-font-color-02);
 }
 ::-webkit-scrollbar-track {
 background-color: transparent;
 }
 
 
+/*Chrome*/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    input[type='range'] {
+      overflow: hidden;
+      width: 80px;
+      -webkit-appearance: none;
+      background-color: #fff;
+    }
+    
+    input[type='range']::-webkit-slider-runnable-track {
+      height: 10px;
+      -webkit-appearance: none;
+      color: #13bba4;
+      margin-top: -1px;
+    }
+    
+    input[type='range']::-webkit-slider-thumb {
+      width: 10px;
+      -webkit-appearance: none;
+      height: 10px;
+      cursor: ew-resize;
+      background: #434343;
+      box-shadow: -80px 0 0 80px var(--main-font-color-01);
+    }
+
+}
+/** FF*/
+input[type="range"]::-moz-range-progress {
+  background-color: #43e5f7; 
+}
+input[type="range"]::-moz-range-track {  
+  background-color: #9a905d;
+}
+/* IE*/
+input[type="range"]::-ms-fill-lower {
+  background-color: #43e5f7; 
+}
+input[type="range"]::-ms-fill-upper {  
+  background-color: #9a905d;
+}

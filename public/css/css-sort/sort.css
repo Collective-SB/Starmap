@@ -1,48 +1,23 @@
-
-
-body,
-html {
-	overflow: hidden;
-	margin: 0;
-	background-color: var(--background);
-	font-family: var(--main-font-Squada);
-}
-input, select {
-	font-family: var(--main-font-Squada);
-}
-canvas {
-	display: block;
-	position: absolute;
-	left: 0px;
-	right: 0px;
-}
-
-.main {
-	margin-left: 160px;
-	padding: 0px 0px;
-}
-
-select:focus {
-	outline: none;
-}
-
-/* Universal */
-
-/* Color scheme:
-77878B - Grey
-1C1D21 - black
-96031A = red
-Whitesmoke
-#333;
-#111;
+/*
+|*************************************************************************;
+* ScriptName    : Sort CSS Code
+* ScriptPath    : /css/css-sort/sort.css
+|*************************************************************************;
 */
 
+#dropdown-minimize path{
+fill: var(--main-font-color-01);
+}
 button {
-    font-family: var(--main-font-VT323);
-    background-color: #111111;
-    color: #0074f0;
+	font-family: var(--main-font-VT323);
+	color: var(--main-font-color-01);
+
+
+    
+	background-color: #111111;
+	
     border-width: 1px;
-    border-color: #0074f0;
+    border-color: var(--main-font-color-01);
     padding-top: 2px;
     padding-bottom: 2px;
     transition: color 0.25s;
@@ -51,7 +26,7 @@ button {
 }
 
 button:hover {
-	background-color: #0074f0;
+	background-color: var(--main-font-color-01);
 	color: #111111;
 
 	transition: color 0.25s;
@@ -97,7 +72,7 @@ button:hover {
 	display: inline-flex;
 	justify-content: center;
 	background-color: #111111;
-    color: #0074F0;
+    color: var(--main-font-color-01);
 	flex-grow: 1;
 	cursor: pointer;
 	border-width: 1px 0;
@@ -112,7 +87,7 @@ button:hover {
 }
 
 .button-row button:hover {
-	background-color: #0074F0;
+	background-color: var(--main-font-color-01);
     color: #111111;
 	transition: color 0.25s;
 }
@@ -203,7 +178,7 @@ box-shadow: var(--box-boxshadow-blue);
 	margin: 0;
 	text-decoration: none;
 	font-size: 15px;
-	color: #0074f0;
+	color: var(--main-font-color-01);
 	display: block;
 	cursor: pointer;
 	text-align: center;
@@ -249,7 +224,7 @@ box-shadow: var(--box-boxshadow-blue);
 	display: flex!important;
 	flex-direction: row;
 	justify-content: center;
-	border: 2px dashed #0074f0;
+	border: 2px dashed var(--main-font-color-01);
 	
 	outline: none;
 	background-color: #111;
@@ -261,7 +236,7 @@ box-shadow: var(--box-boxshadow-blue);
 	transition: color 0.25s;
 	transition: background 0.25s;
 
-	color: #0074f0;
+	color: var(--main-font-color-01);
 }
 
 #new-point span {
@@ -269,8 +244,8 @@ box-shadow: var(--box-boxshadow-blue);
 }
 
 #new-point:hover {
-	border: 2px dashed #0074f0;
-	background-color: #0074f0;
+	border: 2px dashed var(--main-font-color-01);
+	background-color: var(--main-font-color-01);
 	color: #111;
 }
 
@@ -350,7 +325,7 @@ box-shadow: var(--box-boxshadow-blue);
 #login {
 	
 	background-color: #111111;
-    color: #0074f0;
+    color: var(--main-font-color-01);
 	/*border-radius: 5px;
 
 	background-color: #7289da;
@@ -375,7 +350,7 @@ box-shadow: var(--box-boxshadow-blue);
 }
 
 #login:hover {
-	background-color: #0074f0;
+	background-color: var(--main-font-color-01);
 	color: #111;
 }
 
@@ -617,7 +592,7 @@ p {
 	margin: 0;
 	text-decoration: none;
 	/* font-size: 12px; */
-	color: #0074f0;
+	color: var(--main-font-color-01);
 	display: inline-block;
 	cursor: pointer;
 	text-align: left;
@@ -643,7 +618,7 @@ p {
 	visibility: hidden;
 	width: 120px;
 	background-color: #111;
-	border: #0074F0 2px solid;
+	border: 2px solid var(--main-font-color-01);
 	overflow: visible;
 	color: #fff;
 	text-align: center;
