@@ -22,6 +22,7 @@ export const DIST_TO_BELT = 3000000 + SOLONS_OFFSET;
 export const BELT_THICK = 2200000;
 export const SAFE_LEN = 1000000;
 export const SAFE_RAD = 100000 / 2;
+export const CAM_MAX_ZOOM = EOS_SIZE * 10;
 //Consts to control the marker scaling
 export const MARKER_SIZE_MIN = 0.1;
 export const MARKER_SIZE_MAX = 15;
