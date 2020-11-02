@@ -147,6 +147,9 @@ box-shadow: var(--box-boxshadow-blue);
 	top: 0;
 	/* Stay at the top */
 	left: 0;
+	background-image: var(--svg-background-static);
+	background-attachment: fixed;
+background-size: cover;
 	background-color: #111;
 	/* Black */
 	overflow-x: hidden;
@@ -486,6 +489,7 @@ box-shadow: var(--box-boxshadow-blue);
 }
 
 .isanDispalyDiv {
+
 	background-color: rgb(0, 10, 15);
 	width: fit-content;
 	display: inline-block;
@@ -508,8 +512,8 @@ box-shadow: var(--box-boxshadow-blue);
 }
 
 .isanDispalyVal {
-	font-family: var(--main-font-VT323);
-	font-size: 1.2em;
+	font-family: 'Telegrama';
+
 	color: rgb(30, 175, 180);
 
 	margin-block-start: 0;
