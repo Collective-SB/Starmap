@@ -537,11 +537,9 @@ class App {
 			if (pointsMode.style.display == "block") {
 				pointsMode.style.display = "none";
 				layersMode.style.display = "block";
-				sortToggle.children[0].src = "assets/buttons/sort-none.png";
 			} else {
 				pointsMode.style.display = "block";
 				layersMode.style.display = "none";
-				sortToggle.children[0].src = "assets/buttons/sort-layers.png";
 			}
 		};
 
@@ -563,7 +561,6 @@ class App {
 		searchbar.onkeyup = function () {
 			pointsMode.style.display = "block";
 			layersMode.style.display = "none";
-			sortToggle.innerText = "Sort by layers";
 			for (var i = 0; i < points.childElementCount; i++) {
 				const point = self.pointManager.getById(
 					points.children[i].id.substring("side-".length)
