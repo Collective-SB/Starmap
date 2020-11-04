@@ -16,7 +16,13 @@ import {
 	ZONE_INTERACTION_SIZE,
 } from "./config.js";
 
-import { lerp, hexToRgb, map, constrain, tubeLine } from "./functions.js";
+import {
+	lerp,
+	hexToRgb,
+	map,
+	constrain,
+	tubeLine
+} from "./functions.js";
 
 function sortDiv(divId) {
 	var i, shouldSwitch;
@@ -547,9 +553,7 @@ class Zone {
 		switch (this.shape.type) {
 			case "sphere":
 				for (
-					let i = 0;
-					i < Math.PI * 2;
-					i += (Math.PI * 2) / ZONE_OUTLINE_POINTS
+					let i = 0; i < Math.PI * 2; i += (Math.PI * 2) / ZONE_OUTLINE_POINTS
 				) {
 					points.push(
 						// new THREE.Vector3(
@@ -767,7 +771,9 @@ function createTextCanvas(string, parameters = {}) {
 	canvas.style.width = width + "px";
 	canvas.style.height = height + "px";
 
-	ctx.font = `${fontSize}px Roboto`;
+	// ctx.font = `${fontSize}px Roboto`;
+	const fontName = getComputedStyle(document.documentElement).getPropertyValue("--main-font-Squada");
+	ctx.font = `${fontSize}px ${fontName}`;
 	ctx.textAlign = parameters.align || "center";
 	ctx.textBaseline = parameters.baseline || "middle";
 	const rgb = hexToRgb(parameters.color);

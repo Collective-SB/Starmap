@@ -535,12 +535,14 @@ button:hover {
 }
 
 .infoDiv button {
-	width: 84px;
+	width: 100%;
 }
 
 .isanDispalyVal {
-	font-family: var(--main-font-VT323);
-	font-size: 1.2em;
+	/* font-family: var(--main-font-VT323); */
+	/* Specifically using the font used in game */
+	font-family: Telegrama;
+	/* font-size: 1.0em; */
 	color: rgb(30, 175, 180);
 
 	margin-block-start: 0;
