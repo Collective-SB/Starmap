@@ -61,7 +61,7 @@ export const TYPES = {
 			map: "../assets/icons/ship-done.png",
 			info: "../assets/icons/ship.png",
 		},
-		colorOpts: [
+		subtypes: [
 			{
 				name: "Default",
 				hex: "#f36a28",
@@ -76,7 +76,7 @@ export const TYPES = {
 			map: "../assets/icons/station-done.png",
 			info: "../assets/icons/station.png",
 		},
-		colorOpts: [
+		subtypes: [
 			{
 				name: "Default",
 				hex: "#3bbd4f",
@@ -103,7 +103,7 @@ export const TYPES = {
 			map: "../assets/icons/ore-done.png",
 			info: "../assets/icons/ore.png",
 		},
-		colorOpts: [
+		subtypes: [
 			{
 				name: "Default",
 				hex: "#8c63e8",
@@ -118,7 +118,7 @@ export const TYPES = {
 			map: "../assets/icons/random-done.png",
 			info: "../assets/icons/random.png",
 		},
-		colorOpts: [
+		subtypes: [
 			{
 				name: "Default",
 				hex: "#aaaaaa",
