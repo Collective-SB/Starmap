@@ -1,21 +1,10 @@
 <!DOCTYPE html>
-<html style="overflow: hidden;">
+<html>
 
 <head>
 	<meta charset="utf-8" />
 	<title>Starmap</title>
 	%OGP%
-	<style>
-		@font-face {
-			font-family: 'Telegrama';
-			src: url('./assets/telegrama/telegrama-webfont.woff') format('woff2'),
-				url('./assets/telegrama/telegrama-webfont.woff2') format('woff');
-			font-weight: normal;
-			font-style: normal;
-		}
-	</style>
-	<link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Roboto&display=swap" rel="stylesheet" />
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 	<link rel="stylesheet" href="/css/master.css" />
 	<script src="https://cdn.jsdelivr.net/npm/opentype.js@latest/dist/opentype.min.js"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -24,8 +13,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/three@0.120.0/build/three.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.120.0/examples/js/controls/OrbitControls.min.js"></script>
 	<script src="js/packages/jwt-decode.js"></script>
+
 	<script>
-		// Dont ask me why this is here, I dont know either
+		// Dont ask me why this is here, I dont know either   [I still want to ask? :) -Tim]
 		function hoverHandler() {
 			const elm = document.getElementsByClassName('more-info-tooltip')[0];
 			elm.style.left = `-${elm.clientWidth / 2 - 12}px`;
@@ -35,24 +25,44 @@
 </head>
 
 <body>
-	<div class="sidenav" style="width: 160px;">
+	<div class="sidenav">
 		<button id="login">
 			<img srcset="assets/Discord-Logo-White.svg" />
 			<span class="login-text">
 				Login
 			</span>
 		</button>
-		<button id="logout" style="display: none;">Logout</button>
-		<button id="settingsBtn">Settings</button>
-		<button id="calcBtn">Calculator</button>
-		<button id="sortToggle">Sort by name</button>
+		<!-- 4 action buttons -->
+		<div class="button-grid">
+			<div class="button-row">
+				<button id="logout" title="Logout">
+					<span class="material-icons">exit_to_app</span>
+					<!-- <img src="assets/buttons/logout.png"> -->
+				</button>
+				<button id="settingsBtn" title="Settings">
+					<span class="material-icons">settings</span>
+					<!-- <img src="assets/buttons/settings.png"> -->
+				</button>
+				<button id="sortToggle" title="Change sort mode">
+					<span class="material-icons">sort</span>
+					<!-- <img src="assets/buttons/sort-none.png"> -->
+				</button>
+			</div>
+			<!-- <div class="button-row">
+				<button id="calcBtn"><img src="assets/buttons/calculator.png"></button><button id="empty"></button><button
+					id="empty"></button>
+			</div> -->
+		</div>
+
 		<input id="find" type="text" placeholder="Find a point">
 		<span id="points-title">
 			Points
 		</span>
-		<div id="sidebar">
-			<div id="layers" style="display:block"></div>
-			<div id="points" style="display:none"></div>
+		<div class="wrapper-sidebar">
+			<div id="sidebar">
+				<div id="layers" style="display:block"></div>
+				<div id="points" style="display:none"></div>
+			</div>
 		</div>
 		<div class="sidenav-bottom">
 			<form id="filterForm">
@@ -94,7 +104,7 @@
 			</select> -->
 			<br>
 			<p style="display: inline;">Camera damping factor</p>
-			<input id="dampFact" type="range" min="0" max="0.5" step="0.01" name="dampFact">
+			<input id="dampFact" type="range" min="0.1" max="0.5" step="0.01" name="dampFact">
 			<br>
 			<p style="display: inline;">Zoom speed</p>
 			<input id="zoomSpeed" type="range" min="0.5" max="5" step="0.01" name="zoomSpeed">
@@ -211,7 +221,7 @@
 		</div>
 		<div class="info-container">
 			<svg id="dropdown-minimize" height="16" width="16">
-				<path d="M16 2 L8 14 L0 2 Z" fill="#333333" />
+				<path d="M16 2 L8 14 L0 2 Z" fill="#0074F0" />
 			</svg>
 			<div class="info" id="infoWindow"></div>
 		</div>

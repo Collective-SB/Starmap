@@ -12,7 +12,7 @@ const redirs = [
 	},
 	{
 		names: ["git", "github"],
-		link: "https://github.com/Collective-SB/ISAN",
+		link: "https://github.com/Collective-SB/Starmap/",
 	},
 	{
 		names: ["discord", "server", "collective", "support", "help"],
@@ -40,11 +40,6 @@ function getRedirect(path) {
 
 app.get("/favicon.ico", (req, res) => {
 	res.sendFile("./public/favicon.ico", {
-		root: __dirname,
-	});
-});
-app.get("/collectiveTemp4", (req, res) => {
-	res.sendFile("./collectiveInvite.html", {
 		root: __dirname,
 	});
 });
