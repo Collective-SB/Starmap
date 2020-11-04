@@ -117,11 +117,15 @@ button:hover {
 }
 
 .layerheader {
-	margin: 2px !important;
+	color: var(--color-highlight-01)!important;
+    border: 2px dashed var(--color-highlight-01);
+    margin-bottom: 10px !important;
 	font-size: 17px !important;
-	border-bottom-style: solid !important;
 	font-weight: bold;
 	text-transform: uppercase;
+}
+#layer-header-gkDCwwvKJHTTAPxU:hover {
+background-color: var(--color-background);
 }
 .wrapper-sidebar {
 	height: 100vh;
@@ -176,7 +180,7 @@ box-shadow: var(--box-boxshadow-blue);
 }
 
 .sidenav p {
-	padding: 0px 8px 6px 10px;
+	padding: 5px;
 	margin: 0;
 	text-decoration: none;
 	font-size: 15px;

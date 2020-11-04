@@ -102,7 +102,7 @@ border-radius: 7px;
 background-color: var(--color-highlight-01);
 }
 ::-webkit-scrollbar-track {
-background-color: transparent;
+  background-color: rgb(0 116 240 / 21%);
 }
 
 
