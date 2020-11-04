@@ -39,8 +39,9 @@
 --main-font-Squada: 'Squada One', cursive;
 
 /* Font Color - Change - Default*/
---main-font-color-01:#0074f0;
---main-font-color-02:rgba(0,116,240,1);
+--color-highlight-01:#0074f0;
+--color-highlight-02:rgba(0,116,240,1);
+--color-background:#111;
 
 
 
@@ -77,9 +78,9 @@
 --box-boxshadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 
 /* Red Box Shadow */
---webkit-boxshadow-blue: inset 0px -16px 17px -13px var(--main-font-color-02);
---moz-boxshadow-blue: inset 0px -16px 17px -13px var(--main-font-color-02);
---box-boxshadow-blue: inset 0px -16px 17px -13px var(--main-font-color-02);
+--webkit-boxshadow-blue: inset 0px -16px 17px -13px var(--color-highlight-02);
+--moz-boxshadow-blue: inset 0px -16px 17px -13px var(--color-highlight-02);
+--box-boxshadow-blue: inset 0px -16px 17px -13px var(--color-highlight-02);
 
 /* Border Properties */
 --border-radius-none:0rem;
@@ -98,7 +99,7 @@ width: 7px;
 }
 ::-webkit-scrollbar-thumb {
 border-radius: 7px;
-background-color: var(--main-font-color-02);
+background-color: var(--color-highlight-01);
 }
 ::-webkit-scrollbar-track {
 background-color: transparent;
@@ -127,7 +128,7 @@ background-color: transparent;
       height: 10px;
       cursor: ew-resize;
       background: #434343;
-      box-shadow: -80px 0 0 80px var(--main-font-color-01);
+      box-shadow: -80px 0 0 80px var(--color-highlight-01);
     }
 
 }
