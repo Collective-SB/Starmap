@@ -184,7 +184,6 @@ export default class API {
 		});
 		if (res.status == 200) {
 			const data = await res.json();
-			console.log(data);
 			this.app.storage.setItem("jwt", data.jwt);
 			this.app.user = jwt_decode(data.jwt);
 			this.app.onLogin();
@@ -203,6 +202,7 @@ export default class API {
 		if (!jsonRes || !jsonRes.valid) {
 			this.app.setLoggedIn(false);
 			this.app.user = null;
+			return false;
 		} else {
 			this.app.user = jwt_decode(jwt);
 			if (this.app.user.isPubToken) {
@@ -214,6 +214,7 @@ export default class API {
 			if (getExpInDays(this.app.user) < 2) {
 				this.getNewJWT();
 			}
+			return true;
 		}
 	}
 	async getJWTFromCode(code) {

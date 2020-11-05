@@ -189,8 +189,13 @@ class App {
 		}
 		//Lets ensure the jwt is still valid (if we have one)
 		const jwt = this.storage.getItem("jwt");
+		let needPubToken = true;
 		if (jwt) {
-			await this.api.confirmJWT(jwt);
+			const hasValidToken = await this.api.confirmJWT(jwt);
+			if (hasValidToken) needPubToken = false;
+		}
+		if (needPubToken) {
+			await this.api.getPubJWT();
 		}
 	}
 	//Updates what points should be displayed
