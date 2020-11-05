@@ -181,9 +181,11 @@ class App {
 		this.UISetup();
 		//See if we just completed OAuth2
 		if (window.location.search.includes("code")) {
-			const code = window.location.search.substring("?code=".length);
-			const jwt = await this.api.getJWTFromCode(code);
-			if (jwt) this.storage.setItem("jwt", jwt);
+			try {
+				const code = window.location.search.substring("?code=".length);
+				const jwt = await this.api.getJWTFromCode(code);
+				if (jwt) this.storage.setItem("jwt", jwt);
+			} catch (e) {}
 		}
 		//Lets ensure the jwt is still valid (if we have one)
 		const jwt = this.storage.getItem("jwt");
@@ -890,6 +892,11 @@ class App {
 		});
 		this.pointManager.updateLayers();
 		this.api.getPoints();
+
+		if (this.user.isPubToken) {
+			const addPointBtn = document.getElementById("new-point");
+			addPointBtn.style.display = "none";
+		}
 		//Load in the toggled filters (defer execution to ensure html elements get loaded)
 		setTimeout(this.initFilters.bind(this), 0);
 	}

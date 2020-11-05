@@ -98,7 +98,7 @@ button:hover {
 	display: inline-flex;
 	justify-content: center;
 	background-color: #111111;
-	color: #0074F0;
+	color: #0074f0;
 	flex-grow: 1;
 	cursor: pointer;
 	border-width: 1px 0;
@@ -113,7 +113,7 @@ button:hover {
 }
 
 .button-row button:hover {
-	background-color: #0074F0;
+	background-color: #0074f0;
 	color: #111111;
 	transition: color 0.25s;
 }
@@ -161,7 +161,6 @@ button:hover {
 	-webkit-box-shadow: var(--webkit-boxshadow);
 	-moz-box-shadow: var(--moz-boxshadow);
 	box-shadow: var(--box-boxshadow);
-
 
 	height: 100%;
 	/* Full-height: remove this if you want "auto" height */
@@ -230,11 +229,10 @@ button:hover {
 	flex-direction: column;
 
 	margin-top: auto;
-	max-height: 40%;
+	height: 50%;
 	overflow-y: auto;
 	overflow-x: hidden;
 }
-
 
 .sidenav-bottom * {
 	margin-top: 2px;
@@ -252,7 +250,7 @@ button:hover {
 
 #new-point {
 	font-family: var(--main-font-Squada);
-	display: flex !important;
+	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	border: 2px dashed #0074f0;
@@ -260,7 +258,6 @@ button:hover {
 	outline: none;
 	background-color: #111;
 	font-size: 16px;
-
 
 	min-height: 48px;
 	cursor: pointer;
@@ -298,7 +295,6 @@ button:hover {
 }
 
 #dropdown-minimize {
-
 	padding: 3px;
 
 	position: absolute;
@@ -354,7 +350,6 @@ button:hover {
 /* Login Button */
 
 #login {
-
 	background-color: #111111;
 	color: #0074f0;
 	/*border-radius: 5px;
@@ -386,17 +381,16 @@ button:hover {
 }
 
 #login img {
-
 	height: 80%;
 	padding-left: 5px;
 	flex-grow: 0;
-
 }
 
 #login:hover img {
 	color: #111;
 	/* This is equivalent to switching from whitesmoke to #333, lets us change the color of an image without any JS */
-	filter: invert(15%) sepia(1%) saturate(0%) hue-rotate(87deg) brightness(95%) contrast(85%);
+	filter: invert(15%) sepia(1%) saturate(0%) hue-rotate(87deg) brightness(95%)
+		contrast(85%);
 }
 
 #login .login-text {
@@ -451,8 +445,6 @@ button:hover {
 	text-align: center;
 }
 
-
-
 /* Calculator panel */
 .calc-title {
 	font-weight: bold;
@@ -471,8 +463,6 @@ button:hover {
 	z-index: 2;
 }
 
-
-
 .more-info {
 	width: fit-content;
 	right: 30px;
@@ -484,7 +474,7 @@ button:hover {
 	visibility: hidden;
 	width: max-content;
 	background-color: #111;
-	border: #0074F0 2px solid;
+	border: #0074f0 2px solid;
 	overflow: visible;
 	color: #fff;
 	text-align: center;
@@ -504,7 +494,7 @@ button:hover {
 	left: 50%;
 	margin-left: -5px;
 	background-color: #111;
-	border: #0074F0 2px solid;
+	border: #0074f0 2px solid;
 }
 
 .more-info:hover .more-info-tooltip {
@@ -652,7 +642,7 @@ input {
 	visibility: hidden;
 	width: 120px;
 	background-color: #111;
-	border: #0074F0 2px solid;
+	border: #0074f0 2px solid;
 	overflow: visible;
 	color: #fff;
 	text-align: center;
@@ -675,7 +665,7 @@ input {
 	left: 50%;
 	margin-left: -5px;
 	background-color: #111;
-	border: #0074F0 2px solid;
+	border: #0074f0 2px solid;
 }
 
 .filter-view-option:hover .filter-view-option-tooltip {

@@ -81,9 +81,9 @@ export default class API {
 	}
 	//Requests points from the server, then gives the data to the point manager
 	async getPoints() {
-		if (!this.app.isLoggedIn) {
-			return;
-		}
+		// if (!this.app.isLoggedIn) {
+		// 	return;
+		// }
 		const res = await fetch(API_URL + `points`, {
 			method: "GET",
 			headers: {
@@ -174,6 +174,22 @@ export default class API {
 		const res = await fetch(API_URL + "editPoint", request);
 		return res.status;
 	}
+	async getPubJWT() {
+		// app.onLogin();
+		const res = await fetch(API_URL + `publicJWT`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+		if (res.status == 200) {
+			const data = await res.json();
+			console.log(data);
+			this.app.storage.setItem("jwt", data.jwt);
+			this.app.user = jwt_decode(data.jwt);
+			this.app.onLogin();
+		}
+	}
 	//Asks the server if our JWT is valid
 	async confirmJWT(jwt) {
 		const res = await fetch(API_URL + "checkJWT", {
@@ -188,9 +204,13 @@ export default class API {
 			this.app.setLoggedIn(false);
 			this.app.user = null;
 		} else {
-			// this.app.storage.setItem("jwt", jsonRes.newJwt);
 			this.app.user = jwt_decode(jwt);
-			this.app.setLoggedIn(true);
+			if (this.app.user.isPubToken) {
+				this.app.setLoggedIn(false);
+				this.app.onLogin();
+			} else {
+				this.app.setLoggedIn(true);
+			}
 			if (getExpInDays(this.app.user) < 2) {
 				this.getNewJWT();
 			}
