@@ -7,7 +7,9 @@ const HEATRBEAT = JSON.stringify({
 import { ENV, URLS } from "./config.js";
 const API_URL = URLS.api[ENV];
 const WSS_URL = URLS.wss[ENV];
-
+function getExpInDays(user) {
+	return (user.exp - Date.now() / 1000) / (60 * 60 * 24);
+}
 export default class API {
 	constructor(pointManager, app) {
 		this.pointManager = pointManager;
@@ -186,9 +188,12 @@ export default class API {
 			this.app.setLoggedIn(false);
 			this.app.user = null;
 		} else {
-			this.app.storage.setItem("jwt", jsonRes.newJwt);
-			this.app.user = jwt_decode(jsonRes.newJwt);
+			// this.app.storage.setItem("jwt", jsonRes.newJwt);
+			this.app.user = jwt_decode(jwt);
 			this.app.setLoggedIn(true);
+			if (getExpInDays(this.app.user) < 2) {
+				this.getNewJWT();
+			}
 		}
 	}
 	async getJWTFromCode(code) {
