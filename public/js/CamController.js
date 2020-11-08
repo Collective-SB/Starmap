@@ -1,6 +1,6 @@
 //Something to handle moving the camera between POI's
 /*global THREE*/
-import { EOS_SIZE, ZOOM_INTO_DIST } from "./config.js";
+import { EOS_SIZE, ZOOM_INTO_DIST, CAM_MAX_ZOOM } from "./config.js";
 export default class CamController {
 	constructor(camera, domElm, app) {
 		this.camera = camera;
@@ -39,6 +39,8 @@ export default class CamController {
 			this.app.sceneObjs.Safe.position.z
 		);
 		this.orbitCtrl.enableDamping = true;
+		this.orbitCtrl.maxDistance = CAM_MAX_ZOOM;
+
 		this.camera.position.set(EOS_SIZE * 1.6, 100000, 100000);
 	}
 	//Called to move the camera to the target point

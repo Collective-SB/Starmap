@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8" />
 	<title>Starmap</title>
 	%OGP%
-	<link rel="stylesheet" href="/css/master.css" />
-	<script src="https://cdn.jsdelivr.net/npm/opentype.js@latest/dist/opentype.min.js"></script>
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="js/packages/info-dropdown.js" charset="utf-8"></script>
-	<script src="https://cdn.jsdelivr.net/npm/three@0.120.0/build/three.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/three@0.120.0/examples/js/controls/OrbitControls.min.js"></script>
-	<script src="js/packages/jwt-decode.js"></script>
 	<style>
 		@font-face {
 			font-family: 'Telegrama';
@@ -21,6 +14,15 @@
 			font-style: normal;
 		}
 	</style>
+	<link rel="stylesheet" href="/css/master.css" />
+	<script src="https://cdn.jsdelivr.net/npm/opentype.js@latest/dist/opentype.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="js/packages/info-dropdown.js" charset="utf-8"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.120.0/build/three.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/three@0.120.0/examples/js/controls/OrbitControls.min.js"></script>
+	<script src="js/packages/jwt-decode.js"></script>
+
 	<script>
 		// Dont ask me why this is here, I dont know either   [I still want to ask? :) -Tim]
 		function hoverHandler() {
@@ -111,7 +113,7 @@
 			</select> -->
 			<br>
 			<p style="display: inline;">Camera damping factor</p>
-			<input id="dampFact" type="range" min="0" max="0.5" step="0.01" name="dampFact">
+			<input id="dampFact" type="range" min="0.1" max="0.5" step="0.01" name="dampFact">
 			<br>
 			<p style="display: inline;">Zoom speed</p>
 			<input id="zoomSpeed" type="range" min="0.5" max="5" step="0.01" name="zoomSpeed">
@@ -171,6 +173,16 @@
 			<p style="display: inline;">Enter ship speed: </p>
 			<input id="shipSpeedSlider" type="range" min="1" max="150" step="1" name="shipSpeed">
 			<input id="shipSpeedDirect" type="number" min="1" max="150" name="shipSpeed">
+			<br>
+			<br>
+			<div style="float: left;">
+				<button id="selPoint0">Choose start point</button>
+				<p id="selectedPoint0" class="sel-point">None Selected</p>
+			</div>
+			<div style="float: left;">
+				<button id="selPoint1">Choose end point</button>
+				<p id="selectedPoint1" class="sel-point">None Selected</p>
+			</div>
 		</div>
 		<div class="add-point">
 			<span class="material-icons close">
@@ -183,7 +195,7 @@
 				<input type="text" name="point-description" placeholder="Description" id="formDesc" maxlength="256" />
 				<select class="dropdown-select" name="Type" id="type-select" form="addPointForm"></select>
 				<select class="dropdown-select" name="Layer" id="group-select" form="addPointForm"></select>
-				<select class="dropdown-select" name="Color" id="color-select" form="addPointForm"></select>
+				<select class="dropdown-select" name="Subtype" id="subtype-select" form="addPointForm"></select>
 				<fieldset class="coordinates">
 					<legend>Coordinates</legend>
 					<lable>X: </lable><input required type="number" name="pos-x" placeholder="X pos" id="formXPos" />

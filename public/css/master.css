@@ -15,17 +15,10 @@
 |*************************************************************************;
 */
 
-/* Icon Imports */
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
-/* Asset Page */
-@import url("assets-page/base-page.css");
-
-/* Asset Interfaces */
 @import url("assets-interfaces/interface.css");
-
 @import url("css-sort/sort.css");
-
 
 /*
 |*************************************************************************;
@@ -34,115 +27,65 @@
 */
 
 :root {
-/* Font Imports */
---main-font-VT323: "VT323", monospace;
---main-font-Squada: 'Squada One', cursive;
+	/* Font Imports */
+	--main-font-VT323: "VT323", monospace;
+	--main-font-Squada: 'Squada One', cursive;
 
-/* Font Color - Change - Default*/
---color-highlight-01:#0074f0;
---color-highlight-02:rgba(0,116,240,1);
---color-background:#111;
+	/* Cursor Setting */
+	--main-cursor-default: default;
+	--main-cursor-grab: grab;
+	--main-cursor-grabbing: grabbing;
+	--main-cursor-pointer: pointer;
+	--main-cursor-text: text;
 
+	/* Text Settings */
+	--main-text-shadow: 0px 0px 4px rgb(0, 0, 0);
 
+	/* Default Box Shadow */
+	--webkit-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+	--moz-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+	--box-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 
-/* Cursor Setting */
---main-cursor-default: default;
---main-cursor-grab: grab;
---main-cursor-grabbing: grabbing;
---main-cursor-pointer: pointer;
---main-cursor-text: text;
+	--background: #111;
+	--red: #f44336;
+	--red-hover: #b72015;
 
-/* Text Settings */
---main-text-shadow: 0px 0px 4px rgb(0, 0, 0);
-
-/* Default Box Shadow */
---webkit-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
---moz-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
---box-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-
---background: #111;
---red: #f44336;
---red-hover: #b72015;
-/* SVG Background */
---svg-background-static: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 400'%3E%3Cdefs%3E%3CradialGradient id='a' cx='396' cy='281' r='514' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23D18'/%3E%3Cstop offset='1' stop-color='%23330000'/%3E%3C/radialGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='400' y1='148' x2='400' y2='333'%3E%3Cstop offset='0' stop-color='%23FA3' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23FA3' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='800' height='400'/%3E%3Cg fill-opacity='0.4'%3E%3Ccircle fill='url(%23b)' cx='267.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='532.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='400' cy='30' r='300'/%3E%3C/g%3E%3C/svg%3E");
-
-/*
+	/*
 |*************************************************************************;
 * Box Properties 
 |*************************************************************************;
 */
 
-/* Default Box Shadow */
---webkit-boxshadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
---moz-boxshadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
---box-boxshadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	/* Default Box Shadow */
+	--webkit-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+	--moz-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+	--box-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 
-/* Red Box Shadow */
---webkit-boxshadow-blue: inset 0px -16px 17px -13px var(--color-highlight-02);
---moz-boxshadow-blue: inset 0px -16px 17px -13px var(--color-highlight-02);
---box-boxshadow-blue: inset 0px -16px 17px -13px var(--color-highlight-02);
+	/* Red Box Shadow */
+	--webkit-boxshadow-blue: inset 0px -16px 17px -13px rgba(0, 116, 240, 1);
+	--moz-boxshadow-blue: inset 0px -16px 17px -13px rgba(0, 116, 240, 1);
+	--box-boxshadow-blue: inset 0px -16px 17px -13px rgba(0, 116, 240, 1);
 
-/* Border Properties */
---border-radius-none:0rem;
---border-radius-3:3px;
+	/* Border Properties */
+	--border-radius-none: 0rem;
+	--border-radius-3: 3px;
 }
 
 /*
 |*************************************************************************;
-* Input & Scroll Properties 
+* Page Properties 
 |*************************************************************************;
 */
 
-/* Scroll Bar */
 ::-webkit-scrollbar {
-width: 7px;
+	width: 7px;
 }
+
 ::-webkit-scrollbar-thumb {
-border-radius: 7px;
-background-color: var(--color-highlight-01);
+	border-radius: 7px;
+	background-color: rgb(0, 116, 240);
 }
+
 ::-webkit-scrollbar-track {
-  background-color: rgb(0 116 240 / 21%);
-}
-
-
-/*Chrome*/
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-    input[type='range'] {
-      overflow: hidden;
-      width: 80px;
-      -webkit-appearance: none;
-      background-color: #fff;
-    }
-    
-    input[type='range']::-webkit-slider-runnable-track {
-      height: 10px;
-      -webkit-appearance: none;
-      color: #13bba4;
-      margin-top: -1px;
-    }
-    
-    input[type='range']::-webkit-slider-thumb {
-      width: 10px;
-      -webkit-appearance: none;
-      height: 10px;
-      cursor: ew-resize;
-      background: #434343;
-      box-shadow: -80px 0 0 80px var(--color-highlight-01);
-    }
-
-}
-/** FF*/
-input[type="range"]::-moz-range-progress {
-  background-color: #43e5f7; 
-}
-input[type="range"]::-moz-range-track {  
-  background-color: #9a905d;
-}
-/* IE*/
-input[type="range"]::-ms-fill-lower {
-  background-color: #43e5f7; 
-}
-input[type="range"]::-ms-fill-upper {  
-  background-color: #9a905d;
+	background-color: transparent;
 }

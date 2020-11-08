@@ -181,14 +181,21 @@ class App {
 		this.UISetup();
 		//See if we just completed OAuth2
 		if (window.location.search.includes("code")) {
-			const code = window.location.search.substring("?code=".length);
-			const jwt = await this.api.getJWTFromCode(code);
-			if (jwt) this.storage.setItem("jwt", jwt);
+			try {
+				const code = window.location.search.substring("?code=".length);
+				const jwt = await this.api.getJWTFromCode(code);
+				if (jwt) this.storage.setItem("jwt", jwt);
+			} catch (e) {}
 		}
 		//Lets ensure the jwt is still valid (if we have one)
 		const jwt = this.storage.getItem("jwt");
+		let needPubToken = true;
 		if (jwt) {
-			await this.api.confirmJWT(jwt);
+			const hasValidToken = await this.api.confirmJWT(jwt);
+			if (hasValidToken) needPubToken = false;
+		}
+		if (needPubToken) {
+			await this.api.getPubJWT();
 		}
 	}
 	//Updates what points should be displayed
@@ -437,12 +444,12 @@ class App {
 		$("#new-point").click(function () {
 			self.updateFormMode.call(self, "create");
 			const curType = document.getElementById("type-select").value;
-			self.updateColorOpts(curType);
+			self.updateSubtypes(curType);
 			$(".add-point").show();
 		});
 		const typeSelector = document.getElementById("type-select");
 		typeSelector.onchange = function (e) {
-			self.updateColorOpts(e.target.value);
+			self.updateSubtypes(e.target.value);
 		};
 
 		$(".add-point form").submit(async function (e) {
@@ -456,7 +463,7 @@ class App {
 				desc: serialized[1].value,
 				type: serialized[2].value,
 				groupID: group.id,
-				color: serialized[4].value,
+				subtype: serialized[4].value,
 				pos: {
 					x: parseInt(serialized[5].value),
 					y: parseInt(serialized[6].value),
@@ -508,6 +515,7 @@ class App {
 			window.location.href = `${URLS.api[ENV]}auth/login?redir=${AUTH_REDIR}`;
 		};
 		document.getElementById("logout").onclick = function () {
+			if (!confirm("Would you like to logout?")) return;
 			self.storage.removeItem("jwt");
 			self.setLoggedIn(false);
 		};
@@ -537,11 +545,9 @@ class App {
 			if (pointsMode.style.display == "block") {
 				pointsMode.style.display = "none";
 				layersMode.style.display = "block";
-				sortToggle.children[0].src = "assets/buttons/sort-none.png";
 			} else {
 				pointsMode.style.display = "block";
 				layersMode.style.display = "none";
-				sortToggle.children[0].src = "assets/buttons/sort-layers.png";
 			}
 		};
 
@@ -563,7 +569,6 @@ class App {
 		searchbar.onkeyup = function () {
 			pointsMode.style.display = "block";
 			layersMode.style.display = "none";
-			sortToggle.innerText = "Sort by layers";
 			for (var i = 0; i < points.childElementCount; i++) {
 				const point = self.pointManager.getById(
 					points.children[i].id.substring("side-".length)
@@ -600,18 +605,18 @@ class App {
 			mouseY = e.y;
 		};
 	}
-	updateColorOpts(newType, defaultTo) {
-		const dropDownColors = document.getElementById("color-select");
-		dropDownColors.innerHTML = "";
-		TYPES[newType].colorOpts.forEach((colOption) => {
+	updateSubtypes(newType, defaultTo) {
+		const dropDownSubtypes = document.getElementById("subtype-select");
+		dropDownSubtypes.innerHTML = "";
+		TYPES[newType].subtypes.forEach((colOption) => {
 			const option = document.createElement("option");
-			option.value = colOption.hex;
+			option.value = colOption.name;
 			option.innerText = colOption.name;
 			option.style.color = colOption.hex;
-			dropDownColors.appendChild(option);
+			dropDownSubtypes.appendChild(option);
 		});
 		if (defaultTo) {
-			dropDownColors.value = defaultTo;
+			dropDownSubtypes.value = defaultTo;
 		}
 	}
 	//Called whenever a user selects a new item from the drop down list, updates the calculated time of flight between them
@@ -753,7 +758,7 @@ class App {
 			self.updateFormMode.call(self, "update");
 			self.autoFillForm(poiData);
 			const curType = document.getElementById("type-select").value;
-			self.updateColorOpts(curType, poiData.color);
+			self.updateSubtypes(curType, poiData.subtype);
 			self.updatePointId = poiData.id;
 			$(".add-point").show();
 		});
@@ -892,6 +897,11 @@ class App {
 		});
 		this.pointManager.updateLayers();
 		this.api.getPoints();
+
+		if (this.user.isPubToken) {
+			const addPointBtn = document.getElementById("new-point");
+			addPointBtn.style.display = "none";
+		}
 		//Load in the toggled filters (defer execution to ensure html elements get loaded)
 		setTimeout(this.initFilters.bind(this), 0);
 	}
@@ -939,7 +949,7 @@ class App {
 		document.getElementById("formYPos").value = point.info.gamePos.y;
 		document.getElementById("formZPos").value = point.info.gamePos.z;
 		document.getElementById("group-select").value = point.groupID;
-		document.getElementById("color-select").value = point.color;
+		document.getElementById("subtype-select").value = point.subtype;
 	}
 	//We resue the same HTML elements for creating and updating a point, need to update a few things about it however
 	updateFormMode(mode) {

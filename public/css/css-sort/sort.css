@@ -1,32 +1,58 @@
-/*
-|*************************************************************************;
-* ScriptName    : Sort CSS Code
-* ScriptPath    : /css/css-sort/sort.css
-|*************************************************************************;
+body,
+html {
+	overflow: hidden;
+	margin: 0;
+	background-color: var(--background);
+	font-family: var(--main-font-Squada);
+}
+
+input,
+select {
+	font-family: var(--main-font-Squada);
+}
+
+canvas {
+	display: block;
+	position: absolute;
+	left: 0px;
+	right: 0px;
+}
+
+.main {
+	margin-left: 160px;
+	padding: 0px 0px;
+}
+
+select:focus {
+	outline: none;
+}
+
+/* Universal */
+
+/* Color scheme:
+77878B - Grey
+1C1D21 - black
+96031A = red
+Whitesmoke
+#333;
+#111;
 */
 
-#dropdown-minimize path{
-fill: var(--color-highlight-01);
-}
 button {
 	font-family: var(--main-font-VT323);
-	color: var(--color-highlight-01);
-
-
-    
 	background-color: #111111;
-	
-    border-width: 1px;
-    border-color: var(--color-highlight-01);
-    padding-top: 2px;
-    padding-bottom: 2px;
-    transition: color 0.25s;
-    font-weight: bold;
-    font-size: 1em;
+	color: #0074f0;
+	border-width: 1px;
+	border-color: #0074f0;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	transition: color 0.25s;
+	font-weight: bold;
+	font-size: 1em;
 }
 
 button:hover {
-	background-color: var(--color-highlight-01);
+	background-color: #0074f0;
 	color: #111111;
 
 	transition: color 0.25s;
@@ -72,7 +98,7 @@ button:hover {
 	display: inline-flex;
 	justify-content: center;
 	background-color: #111111;
-    color: var(--color-highlight-01);
+	color: #0074f0;
 	flex-grow: 1;
 	cursor: pointer;
 	border-width: 1px 0;
@@ -87,8 +113,8 @@ button:hover {
 }
 
 .button-row button:hover {
-	background-color: var(--color-highlight-01);
-    color: #111111;
+	background-color: #0074f0;
+	color: #111111;
 	transition: color 0.25s;
 }
 
@@ -117,22 +143,18 @@ button:hover {
 }
 
 .layerheader {
-	color: var(--color-highlight-01)!important;
-    border: 2px dashed var(--color-highlight-01);
-    margin-bottom: 10px !important;
+	margin: 2px !important;
 	font-size: 17px !important;
+	border-bottom-style: solid !important;
 	font-weight: bold;
-	text-transform: uppercase;
 }
-#layer-header-gkDCwwvKJHTTAPxU:hover {
-background-color: var(--color-background);
-}
+
 .wrapper-sidebar {
 	height: 100vh;
 	overflow: auto;
 	-webkit-box-shadow: var(--webkit-boxshadow-blue);
--moz-box-shadow: var(--moz-boxshadow-blue);
-box-shadow: var(--box-boxshadow-blue);
+	-moz-box-shadow: var(--moz-boxshadow-blue);
+	box-shadow: var(--box-boxshadow-blue);
 }
 
 .sidenav {
@@ -140,10 +162,9 @@ box-shadow: var(--box-boxshadow-blue);
 	-moz-box-shadow: var(--moz-boxshadow);
 	box-shadow: var(--box-boxshadow);
 
-	
 	height: 100%;
 	/* Full-height: remove this if you want "auto" height */
-	width: 175px!important;
+	width: 175px !important;
 	/* Set the width of the sidebar */
 	position: fixed;
 	/* Fixed Sidebar (stay in place on scroll) */
@@ -152,10 +173,9 @@ box-shadow: var(--box-boxshadow-blue);
 	top: 0;
 	/* Stay at the top */
 	left: 0;
-
 	background-color: #111;
 	/* Black */
-	overflow-x: hidden;
+	overflow: hidden;
 
 	display: flex;
 	flex-direction: column;
@@ -180,11 +200,11 @@ box-shadow: var(--box-boxshadow-blue);
 }
 
 .sidenav p {
-	padding: 5px;
+	padding: 0px 8px 6px 10px;
 	margin: 0;
 	text-decoration: none;
 	font-size: 15px;
-	color: var(--color-highlight-01);
+	color: #0074f0;
 	display: block;
 	cursor: pointer;
 	text-align: center;
@@ -207,8 +227,11 @@ box-shadow: var(--box-boxshadow-blue);
 .sidenav-bottom {
 	display: flex;
 	flex-direction: column;
+
 	margin-top: auto;
-	text-transform: uppercase;
+	height: 50%;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 .sidenav-bottom * {
@@ -227,22 +250,21 @@ box-shadow: var(--box-boxshadow-blue);
 
 #new-point {
 	font-family: var(--main-font-Squada);
-	display: flex!important;
+	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	border: 2px dashed var(--color-highlight-01);
-	
+	border: 2px dashed #0074f0;
+
 	outline: none;
 	background-color: #111;
 	font-size: 16px;
-	
 
 	min-height: 48px;
 	cursor: pointer;
 	transition: color 0.25s;
 	transition: background 0.25s;
 
-	color: var(--color-highlight-01);
+	color: #0074f0;
 }
 
 #new-point span {
@@ -250,8 +272,8 @@ box-shadow: var(--box-boxshadow-blue);
 }
 
 #new-point:hover {
-	border: 2px dashed var(--color-highlight-01);
-	background-color: var(--color-highlight-01);
+	border: 2px dashed #0074f0;
+	background-color: #0074f0;
 	color: #111;
 }
 
@@ -273,7 +295,6 @@ box-shadow: var(--box-boxshadow-blue);
 }
 
 #dropdown-minimize {
-	
 	padding: 3px;
 
 	position: absolute;
@@ -329,9 +350,8 @@ box-shadow: var(--box-boxshadow-blue);
 /* Login Button */
 
 #login {
-	
 	background-color: #111111;
-    color: var(--color-highlight-01);
+	color: #0074f0;
 	/*border-radius: 5px;
 
 	background-color: #7289da;
@@ -356,22 +376,21 @@ box-shadow: var(--box-boxshadow-blue);
 }
 
 #login:hover {
-	background-color: var(--color-highlight-01);
+	background-color: #0074f0;
 	color: #111;
 }
 
 #login img {
-	
 	height: 80%;
 	padding-left: 5px;
 	flex-grow: 0;
-	
 }
 
 #login:hover img {
 	color: #111;
 	/* This is equivalent to switching from whitesmoke to #333, lets us change the color of an image without any JS */
-	filter: invert(15%) sepia(1%) saturate(0%) hue-rotate(87deg) brightness(95%) contrast(85%);
+	filter: invert(15%) sepia(1%) saturate(0%) hue-rotate(87deg) brightness(95%)
+		contrast(85%);
 }
 
 #login .login-text {
@@ -426,8 +445,6 @@ box-shadow: var(--box-boxshadow-blue);
 	text-align: center;
 }
 
-
-
 /* Calculator panel */
 .calc-title {
 	font-weight: bold;
@@ -446,8 +463,6 @@ box-shadow: var(--box-boxshadow-blue);
 	z-index: 2;
 }
 
-
-
 .more-info {
 	width: fit-content;
 	right: 30px;
@@ -459,7 +474,7 @@ box-shadow: var(--box-boxshadow-blue);
 	visibility: hidden;
 	width: max-content;
 	background-color: #111;
-	border: #0074F0 2px solid;
+	border: #0074f0 2px solid;
 	overflow: visible;
 	color: #fff;
 	text-align: center;
@@ -479,7 +494,7 @@ box-shadow: var(--box-boxshadow-blue);
 	left: 50%;
 	margin-left: -5px;
 	background-color: #111;
-	border: #0074F0 2px solid;
+	border: #0074f0 2px solid;
 }
 
 .more-info:hover .more-info-tooltip {
@@ -492,7 +507,6 @@ box-shadow: var(--box-boxshadow-blue);
 }
 
 .isanDispalyDiv {
-
 	background-color: rgb(0, 10, 15);
 	width: fit-content;
 	display: inline-block;
@@ -511,12 +525,14 @@ box-shadow: var(--box-boxshadow-blue);
 }
 
 .infoDiv button {
-	width: 84px;
+	width: 100%;
 }
 
 .isanDispalyVal {
-	font-family: 'Telegrama';
-
+	/* font-family: var(--main-font-VT323); */
+	/* Specifically using the font used in game */
+	font-family: Telegrama;
+	/* font-size: 1.0em; */
 	color: rgb(30, 175, 180);
 
 	margin-block-start: 0;
@@ -599,7 +615,7 @@ p {
 	margin: 0;
 	text-decoration: none;
 	/* font-size: 12px; */
-	color: var(--color-highlight-01);
+	color: #0074f0;
 	display: inline-block;
 	cursor: pointer;
 	text-align: left;
@@ -609,7 +625,8 @@ p {
 	transition: background-color 0.2s;
 }
 
-.filter-view-option label,input {
+.filter-view-option label,
+input {
 	cursor: pointer;
 }
 
@@ -622,11 +639,10 @@ p {
 }
 
 .filter-view-option .filter-view-option-tooltip {
-	text-transform: none;
 	visibility: hidden;
 	width: 120px;
 	background-color: #111;
-	border: 2px solid var(--color-highlight-01);
+	border: #0074f0 2px solid;
 	overflow: visible;
 	color: #fff;
 	text-align: center;
@@ -649,7 +665,7 @@ p {
 	left: 50%;
 	margin-left: -5px;
 	background-color: #111;
-	border: #0074F0 2px solid;
+	border: #0074f0 2px solid;
 }
 
 .filter-view-option:hover .filter-view-option-tooltip {
@@ -659,5 +675,3 @@ p {
 .filter-view-option .filter-view-option-tooltip:hover {
 	visibility: hidden;
 }
-
-
