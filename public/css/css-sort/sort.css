@@ -1,6 +1,7 @@
 body,
 html {
 	overflow: hidden;
+	text-transform: capitalize;
 	margin: 0;
 	background-color: var(--background);
 	font-family: var(--main-font-Squada);
@@ -332,6 +333,7 @@ button:hover {
 	margin-bottom: 5px;
 	margin-top: 5px;
 	width: fit-content;
+text-transform: none;
 }
 
 .distance-fieldset {
@@ -633,7 +635,6 @@ input {
 .filter-view-option:hover {
 	color: whitesmoke;
 	background-color: #333;
-
 	transition: color 0.2s;
 	transition: background-color 0.2s;
 }
