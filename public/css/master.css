@@ -77,10 +77,15 @@
 --moz-boxshadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 --box-boxshadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 
-/* Red Box Shadow */
---webkit-boxshadow-blue: inset 0px -16px 17px -13px var(--color-highlight-02);
---moz-boxshadow-blue: inset 0px -16px 17px -13px var(--color-highlight-02);
---box-boxshadow-blue: inset 0px -16px 17px -13px var(--color-highlight-02);
+/* Blue Box Shadow -Up facing */
+--webkit-boxshadow-blue-up: inset 0px -16px 17px -13px var(--color-highlight-02);
+--moz-boxshadow-blue-up: inset 0px -16px 17px -13px var(--color-highlight-02);
+--box-boxshadow-blue-up: inset 0px -16px 17px -13px var(--color-highlight-02);
+
+/* Blue Box Shadow -Down facing */
+--webkit-boxshadow-blue-down: inset 0px 6px 5px 0px var(--color-highlight-02);
+--moz-boxshadow-blue-down: inset 0px 6px 5px 0px var(--color-highlight-02);
+--box-boxshadow-blue-down: inset 0px 6px 5px 0px var(--color-highlight-02);
 
 /* Border Properties */
 --border-radius-none:0rem;
@@ -104,6 +109,7 @@ background-color: var(--color-highlight-01);
 ::-webkit-scrollbar-track {
   background-color: rgb(0 116 240 / 21%);
 }
+
 
 
 /*Chrome*/

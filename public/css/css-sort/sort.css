@@ -100,11 +100,41 @@
 	/* Side Nav */
 	
 	#find {
-		background-color: whitesmoke;
-		color: 333;
+		text-align: center;
+		font-size: 1em;
+		background-color: #111111;
+		color: var(--color-highlight-01);
 		border: none;
-		margin-top: 2px;
+		height: 2em;
+		border-bottom: var(--color-highlight-01) solid 1px;
+		border-top: var(--color-highlight-01) solid 1px;
+		
 	}
+	.button-grid::after {
+		-webkit-box-shadow: var(--webkit-boxshadow-blue-down);
+		-moz-box-shadow: var(--moz-boxshadow-blue-down);
+		box-shadow: var(--box-boxshadow-blue-down);
+	}
+
+	textarea:focus, input:focus{
+		outline: 2px solid var(--color-highlight-01);
+		
+	}
+
+
+	  
+	  input[type=text]{ }
+	  ::-webkit-input-placeholder { /* Edge */
+		color: var(--color-highlight-01);
+	  }
+	  
+	  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+		color: var(--color-highlight-01);
+	  }
+	  
+	  ::placeholder {
+		color: var(--color-highlight-01);
+	  }
 	
 	.nopadding {
 		padding: unset !important;
@@ -124,21 +154,25 @@
 		font-weight: bold;
 		text-transform: uppercase;
 	}
+
 	#layer-header-gkDCwwvKJHTTAPxU:hover {
 	background-color: var(--color-background);
 	}
 	.wrapper-sidebar {
 		height: 100vh;
 		overflow: auto;
-		-webkit-box-shadow: var(--webkit-boxshadow-blue);
-	-moz-box-shadow: var(--moz-boxshadow-blue);
-	box-shadow: var(--box-boxshadow-blue);
+		-moz-box-shadow: 0 22px 22px -22px var(--color-highlight-02) inset, 0 -22px 22px -22px var(--color-highlight-02) inset;
+		-webkit-box-shadow: 0 22px 22px -22px var(--color-highlight-02) inset, 0 -22px 22px -22px var(--color-highlight-02) inset;
+		box-shadow: 0 22px 22px -22px var(--color-highlight-02) inset, 0 -22px 22px -22px var(--color-highlight-02) inset;
+		
 	}
-	
+
+
 	.sidenav {
 		-webkit-box-shadow: var(--webkit-boxshadow);
 		-moz-box-shadow: var(--moz-boxshadow);
 		box-shadow: var(--box-boxshadow);
+		overflow: hidden;
 	
 		
 		height: 100%;
@@ -160,7 +194,7 @@
 		display: flex;
 		flex-direction: column;
 	}
-	
+
 	.sidenav a {
 		text-align: center;
 		background-color: whitesmoke;
@@ -311,6 +345,7 @@
 		margin-bottom: 5px;
 		margin-top: 5px;
 		width: fit-content;
+		text-transform: none;
 	}
 	
 	.distance-fieldset {

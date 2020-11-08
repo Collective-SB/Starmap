@@ -1,9 +1,10 @@
 body,
 html {
-	overflow: hidden;
+    overflow: hidden;
 	margin: 0;
 	background-color: var(--background);
-	font-family: var(--main-font-Squada);
+    font-family: var(--main-font-Squada);
+    text-transform: capitalize;
 }
 input, select {
 	font-family: var(--main-font-Squada);
