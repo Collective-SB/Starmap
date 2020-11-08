@@ -1,678 +1,660 @@
-body,
-html {
-	overflow: hidden;
-	text-transform: capitalize;
-	margin: 0;
-	background-color: var(--background);
-	font-family: var(--main-font-Squada);
-}
-
-input,
-select {
-	font-family: var(--main-font-Squada);
-}
-
-canvas {
-	display: block;
-	position: absolute;
-	left: 0px;
-	right: 0px;
-}
-
-.main {
-	margin-left: 160px;
-	padding: 0px 0px;
-}
-
-select:focus {
-	outline: none;
-}
-
-/* Universal */
-
-/* Color scheme:
-77878B - Grey
-1C1D21 - black
-96031A = red
-Whitesmoke
-#333;
-#111;
+/*
+|*************************************************************************;
+* ScriptName    : Sort CSS Code
+* ScriptPath    : /css/css-sort/sort.css
+|*************************************************************************;
 */
 
-button {
-	font-family: var(--main-font-VT323);
-	background-color: #111111;
-	color: #0074f0;
-	border-width: 1px;
-	border-color: #0074f0;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	transition: color 0.25s;
-	font-weight: bold;
-	font-size: 1em;
-}
-
-button:hover {
-	background-color: #0074f0;
-	color: #111111;
-
-	transition: color 0.25s;
-}
-
-.checkbox-option {
-	margin: 0;
-	text-decoration: none;
-	font-size: 15px;
-	color: #818181;
-	display: block;
-	cursor: pointer;
-	user-select: none;
-
-	transition: color 0.2s;
-	transition: background-color 0.2s;
-}
-
-.checkbox-option:hover {
-	color: whitesmoke;
-	background-color: #111;
-
-	transition: color 0.2s;
-	transition: background-color 0.2s;
-}
-
-/* UI Button grid */
-/* Note: There should be 2 rows, but for time only going with 1 for now */
-.button-grid {
-	/* height: 100px; */
-	height: 50px;
-}
-
-.button-row {
-	width: 100%;
-	/* height: 50%; */
-	height: 100%;
-	display: flex;
-	justify-content: space-around;
-}
-
-.button-row button {
-	display: inline-flex;
-	justify-content: center;
-	background-color: #111111;
-	color: #0074f0;
-	flex-grow: 1;
-	cursor: pointer;
-	border-width: 1px 0;
-}
-
-.button-row button:last-child {
-	border-left-width: 1px;
-}
-
-.button-row button:first-child {
-	border-right-width: 1px;
-}
-
-.button-row button:hover {
-	background-color: #0074f0;
-	color: #111111;
-	transition: color 0.25s;
-}
-
-.button-row span {
-	font-size: 250%;
-	margin: auto;
-}
-
-/* Side Nav */
-
-#find {
-	background-color: whitesmoke;
-	color: 333;
-	border: none;
-	margin-top: 2px;
-}
-
-.nopadding {
-	padding: unset !important;
-}
-
-.colap-content {
-	max-height: 0;
-	overflow: hidden;
-	transition: max-height 0.2s ease-out;
-}
-
-.layerheader {
-	margin: 2px !important;
-	font-size: 17px !important;
-	border-bottom-style: solid !important;
-	font-weight: bold;
-}
-
-.wrapper-sidebar {
-	height: 100vh;
-	overflow: auto;
-	-webkit-box-shadow: var(--webkit-boxshadow-blue);
+#dropdown-minimize path{
+	fill: var(--color-highlight-01);
+	}
+	button {
+		font-family: var(--main-font-VT323);
+		color: var(--color-highlight-01);
+	
+	
+		
+		background-color: #111111;
+		
+		border-width: 1px;
+		border-color: var(--color-highlight-01);
+		padding-top: 2px;
+		padding-bottom: 2px;
+		transition: color 0.25s;
+		font-weight: bold;
+		font-size: 1em;
+	}
+	
+	button:hover {
+		background-color: var(--color-highlight-01);
+		color: #111111;
+	
+		transition: color 0.25s;
+	}
+	
+	.checkbox-option {
+		margin: 0;
+		text-decoration: none;
+		font-size: 15px;
+		color: #818181;
+		display: block;
+		cursor: pointer;
+		user-select: none;
+	
+		transition: color 0.2s;
+		transition: background-color 0.2s;
+	}
+	
+	.checkbox-option:hover {
+		color: whitesmoke;
+		background-color: #111;
+	
+		transition: color 0.2s;
+		transition: background-color 0.2s;
+	}
+	
+	/* UI Button grid */
+	/* Note: There should be 2 rows, but for time only going with 1 for now */
+	.button-grid {
+		/* height: 100px; */
+		height: 50px;
+	}
+	
+	.button-row {
+		width: 100%;
+		/* height: 50%; */
+		height: 100%;
+		display: flex;
+		justify-content: space-around;
+	}
+	
+	.button-row button {
+		display: inline-flex;
+		justify-content: center;
+		background-color: #111111;
+		color: var(--color-highlight-01);
+		flex-grow: 1;
+		cursor: pointer;
+		border-width: 1px 0;
+	}
+	
+	.button-row button:last-child {
+		border-left-width: 1px;
+	}
+	
+	.button-row button:first-child {
+		border-right-width: 1px;
+	}
+	
+	.button-row button:hover {
+		background-color: var(--color-highlight-01);
+		color: #111111;
+		transition: color 0.25s;
+	}
+	
+	.button-row span {
+		font-size: 250%;
+		margin: auto;
+	}
+	
+	/* Side Nav */
+	
+	#find {
+		background-color: whitesmoke;
+		color: 333;
+		border: none;
+		margin-top: 2px;
+	}
+	
+	.nopadding {
+		padding: unset !important;
+	}
+	
+	.colap-content {
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.2s ease-out;
+	}
+	
+	.layerheader {
+		color: var(--color-highlight-01)!important;
+		border: 2px dashed var(--color-highlight-01);
+		margin-bottom: 10px !important;
+		font-size: 17px !important;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+	#layer-header-gkDCwwvKJHTTAPxU:hover {
+	background-color: var(--color-background);
+	}
+	.wrapper-sidebar {
+		height: 100vh;
+		overflow: auto;
+		-webkit-box-shadow: var(--webkit-boxshadow-blue);
 	-moz-box-shadow: var(--moz-boxshadow-blue);
 	box-shadow: var(--box-boxshadow-blue);
-}
-
-.sidenav {
-	-webkit-box-shadow: var(--webkit-boxshadow);
-	-moz-box-shadow: var(--moz-boxshadow);
-	box-shadow: var(--box-boxshadow);
-
-	height: 100%;
-	/* Full-height: remove this if you want "auto" height */
-	width: 175px !important;
-	/* Set the width of the sidebar */
-	position: fixed;
-	/* Fixed Sidebar (stay in place on scroll) */
-	z-index: 1;
-	/* Stay on top */
-	top: 0;
-	/* Stay at the top */
-	left: 0;
-	background-color: #111;
-	/* Black */
-	overflow: hidden;
-
-	display: flex;
-	flex-direction: column;
-}
-
-.sidenav a {
-	text-align: center;
-	background-color: whitesmoke;
-	color: #333;
-
-	text-decoration: none;
-
-	padding: 0.75em 0;
-
-	transition: color 0.25s;
-	transition: background 0.25s;
-}
-
-.sidenav a:hover {
-	background-color: #333;
-	color: whitesmoke;
-}
-
-.sidenav p {
-	padding: 0px 8px 6px 10px;
-	margin: 0;
-	text-decoration: none;
-	font-size: 15px;
-	color: #0074f0;
-	display: block;
-	cursor: pointer;
-	text-align: center;
-	user-select: none;
-
-	transition: color 0.2s;
-	transition: background-color 0.2s;
-	transition: max-height 0.2s ease-out;
-}
-
-.sidenav-point:hover {
-	color: whitesmoke;
-	background-color: #333;
-
-	transition: color 0.2s;
-	transition: background-color 0.2s;
-	transition: max-height 0.2s ease-out;
-}
-
-.sidenav-bottom {
-	display: flex;
-	flex-direction: column;
-
-	margin-top: auto;
-	height: 50%;
-	overflow-y: auto;
-	overflow-x: hidden;
-}
-
-.sidenav-bottom * {
-	margin-top: 2px;
-}
-
-#points-title {
-	color: whitesmoke;
-	text-align: center;
-	padding: 8px 0;
-	font-weight: bold;
-	font-size: 1.5em;
-	display: none;
-	user-select: none;
-}
-
-#new-point {
-	font-family: var(--main-font-Squada);
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	border: 2px dashed #0074f0;
-
-	outline: none;
-	background-color: #111;
-	font-size: 16px;
-
-	min-height: 48px;
-	cursor: pointer;
-	transition: color 0.25s;
-	transition: background 0.25s;
-
-	color: #0074f0;
-}
-
-#new-point span {
-	margin: auto 5px;
-}
-
-#new-point:hover {
-	border: 2px dashed #0074f0;
-	background-color: #0074f0;
-	color: #111;
-}
-
-.search-hide {
-	display: none !important;
-}
-
-/* Info Window */
-
-.info-container {
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	min-width: 12px;
-	min-height: 12px;
-	padding: 10px;
-	z-index: 1;
-	color: whitesmoke;
-}
-
-#dropdown-minimize {
-	padding: 3px;
-
-	position: absolute;
-	top: 0;
-	right: 0;
-
-	margin: 5px;
-
-	transition: 0.5s transform;
-
-	cursor: pointer;
-
-	transform: scale(1);
-	z-index: 1;
-}
-
-.distance-to-selector {
-	outline: none;
-}
-
-.speed-input {
-	outline: none;
-}
-
-.info {
-	width: 100%;
-	height: 100%;
-
-	height: auto;
-}
-
-.infoText {
-	padding-left: 5px;
-	margin: 0;
-	margin-bottom: 5px;
-	margin-top: 5px;
-	width: fit-content;
-text-transform: none;
-}
-
-.distance-fieldset {
-	border-width: 2px 0 0 0;
-	text-align: center;
-}
-
-.distance-fieldset legend {
-	padding: 0 5px;
-}
-
-.distance-fieldset p {
-	margin: 0;
-}
-
-/* Login Button */
-
-#login {
-	background-color: #111111;
-	color: #0074f0;
-	/*border-radius: 5px;
-
-	background-color: #7289da;
-	color: whitesmoke; */
-	width: 100%;
-
-	border: none;
-	text-align: center;
-	overflow: hidden;
-	cursor: pointer;
-	outline: none;
-	height: 45px;
-
-	display: flex;
-	flex-direction: row;
-
-	align-items: center;
-	vertical-align: middle;
-
-	justify-content: space-between;
-	transition: filter 0.25s;
-}
-
-#login:hover {
-	background-color: #0074f0;
-	color: #111;
-}
-
-#login img {
-	height: 80%;
-	padding-left: 5px;
-	flex-grow: 0;
-}
-
-#login:hover img {
-	color: #111;
-	/* This is equivalent to switching from whitesmoke to #333, lets us change the color of an image without any JS */
-	filter: invert(15%) sepia(1%) saturate(0%) hue-rotate(87deg) brightness(95%)
-		contrast(85%);
-}
-
-#login .login-text {
-	flex-grow: 1;
-	font-size: 24px;
-	font-family: var(--main-font-Squada);
-}
-
-/* One time popup */
-
-.popup {
-	display: none;
-	position: fixed;
-	z-index: 1;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
-	background-color: rgb(0, 0, 0);
-	background-color: rgba(0, 0, 0, 0.4);
-}
-
-.popup-content {
-	background-color: #d6d6d6;
-	margin: 15% auto;
-	padding: 20px;
-	border: 1px solid #888;
-	width: 50%;
-}
-
-.popup-content h1 {
-	color: black;
-	text-align: center;
-}
-
-.popup-content p {
-	color: black;
-}
-
-.topPopupBanner {
-	position: absolute;
-	z-index: 1;
-	width: 40%;
-	left: 30%;
-	background-color: rgba(0, 128, 0, 0.8);
-	border-radius: 5px;
-	top: 15px;
-}
-
-.topPopupBanner p {
-	text-align: center;
-}
-
-/* Calculator panel */
-.calc-title {
-	font-weight: bold;
-	font-size: 20px;
-	text-align: center;
-	margin: 5px;
-	user-select: none;
-}
-
-.calculator .close {
-	position: absolute;
-	color: var(--red);
-	top: 3px;
-	right: 3px;
-	user-select: none;
-	z-index: 2;
-}
-
-.more-info {
-	width: fit-content;
-	right: 30px;
-	position: absolute;
-	top: 4px;
-}
-
-.more-info .more-info-tooltip {
-	visibility: hidden;
-	width: max-content;
-	background-color: #111;
-	border: #0074f0 2px solid;
-	overflow: visible;
-	color: #fff;
-	text-align: center;
-	padding: 5px 0;
-	border-radius: 6px;
-
-	position: absolute;
-	z-index: 1;
-	bottom: 100%;
-}
-
-.more-info .more-info-tooltip::after {
-	content: " ";
-	position: absolute;
-	top: 100%;
-	/* At the bottom of the tooltip */
-	left: 50%;
-	margin-left: -5px;
-	background-color: #111;
-	border: #0074f0 2px solid;
-}
-
-.more-info:hover .more-info-tooltip {
-	visibility: visible;
-}
-
-.infoMainBody {
-	display: flex;
-	flex-direction: row;
-}
-
-.isanDispalyDiv {
-	background-color: rgb(0, 10, 15);
-	width: fit-content;
-	display: inline-block;
-}
-
-.desc {
-	border: 1px solid gray;
-	margin-top: 10px;
-	max-width: min-content;
-	min-width: 100%;
-	word-break: break-word;
-}
-
-.infoDiv {
-	margin-left: 10px;
-}
-
-.infoDiv button {
-	width: 100%;
-}
-
-.isanDispalyVal {
-	/* font-family: var(--main-font-VT323); */
-	/* Specifically using the font used in game */
-	font-family: Telegrama;
-	/* font-size: 1.0em; */
-	color: rgb(30, 175, 180);
-
-	margin-block-start: 0;
-	margin-block-end: 0;
-	padding-bottom: 1px;
-	padding-top: 1px;
-	padding-right: 15px;
-	white-space: nowrap;
-}
-
-.info #delete-point {
-	margin: 5px 0;
-	background-color: var(--red);
-	color: whitesmoke;
-	outline: none;
-	border: solid 1px whitesmoke;
-	width: 100%;
-	height: 2em;
-	cursor: pointer;
-}
-
-.info #delete-point:hover {
-	background-color: var(--red-hover);
-	color: whitesmoke;
-}
-
-/* Update point Button */
-/* Volcano please change the color being identical, I dont know css */
-
-.info #update-point {
-	margin: 5px 0;
-	/* CSS has variables??? W H A T */
-	background-color: var(--red);
-	color: whitesmoke;
-	outline: none;
-	border: solid 1px whitesmoke;
-	width: 100%;
-	height: 2em;
-	cursor: pointer;
-}
-
-.info #update-point:hover {
-	background-color: var(--red-hover);
-	color: whitesmoke;
-}
-
-/* Groups page */
-
-h1 {
-	color: whitesmoke;
-}
-
-p {
-	color: whitesmoke;
-}
-
-.back-index {
-	background-color: whitesmoke;
-	color: #333;
-
-	text-decoration: none;
-
-	padding: 10px 20px;
-}
-
-.back-index:hover {
-	background-color: #333;
-	color: whitesmoke;
-}
-
-.back-index span {
-	vertical-align: middle;
-	padding-bottom: 3px;
-}
-
-.filter-view-option {
-	padding: 6px 8px 6px 10px;
-	width: 100%;
-	position: relative;
-	margin: 0;
-	text-decoration: none;
-	/* font-size: 12px; */
-	color: #0074f0;
-	display: inline-block;
-	cursor: pointer;
-	text-align: left;
-	user-select: none;
-
-	transition: color 0.2s;
-	transition: background-color 0.2s;
-}
-
-.filter-view-option label,
-input {
-	cursor: pointer;
-}
-
-.filter-view-option:hover {
-	color: whitesmoke;
-	background-color: #333;
-	transition: color 0.2s;
-	transition: background-color 0.2s;
-}
-
-.filter-view-option .filter-view-option-tooltip {
-	visibility: hidden;
-	width: 120px;
-	background-color: #111;
-	border: #0074f0 2px solid;
-	overflow: visible;
-	color: #fff;
-	text-align: center;
-	padding: 5px 0;
-	border-radius: 6px;
-
-	position: absolute;
-	z-index: 1;
-	width: 120px;
-	bottom: 100%;
-	left: 50%;
-	margin-left: -60px;
-}
-
-.filter-view-option .filter-view-option-tooltip::after {
-	content: " ";
-	position: absolute;
-	top: 100%;
-	/* At the bottom of the tooltip */
-	left: 50%;
-	margin-left: -5px;
-	background-color: #111;
-	border: #0074f0 2px solid;
-}
-
-.filter-view-option:hover .filter-view-option-tooltip {
-	visibility: visible;
-}
-
-.filter-view-option .filter-view-option-tooltip:hover {
-	visibility: hidden;
-}
+	}
+	
+	.sidenav {
+		-webkit-box-shadow: var(--webkit-boxshadow);
+		-moz-box-shadow: var(--moz-boxshadow);
+		box-shadow: var(--box-boxshadow);
+	
+		
+		height: 100%;
+		/* Full-height: remove this if you want "auto" height */
+		width: 175px!important;
+		/* Set the width of the sidebar */
+		position: fixed;
+		/* Fixed Sidebar (stay in place on scroll) */
+		z-index: 1;
+		/* Stay on top */
+		top: 0;
+		/* Stay at the top */
+		left: 0;
+	
+		background-color: #111;
+		/* Black */
+		overflow-x: hidden;
+	
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.sidenav a {
+		text-align: center;
+		background-color: whitesmoke;
+		color: #333;
+	
+		text-decoration: none;
+	
+		padding: 0.75em 0;
+	
+		transition: color 0.25s;
+		transition: background 0.25s;
+	}
+	
+	.sidenav a:hover {
+		background-color: #333;
+		color: whitesmoke;
+	}
+	
+	.sidenav p {
+		padding: 5px;
+		margin: 0;
+		text-decoration: none;
+		font-size: 15px;
+		color: var(--color-highlight-01);
+		display: block;
+		cursor: pointer;
+		text-align: center;
+		user-select: none;
+	
+		transition: color 0.2s;
+		transition: background-color 0.2s;
+		transition: max-height 0.2s ease-out;
+	}
+	
+	.sidenav-point:hover {
+		color: whitesmoke;
+		background-color: #333;
+	
+		transition: color 0.2s;
+		transition: background-color 0.2s;
+		transition: max-height 0.2s ease-out;
+	}
+	
+	.sidenav-bottom {
+		display: flex;
+		flex-direction: column;
+		margin-top: auto;
+		text-transform: uppercase;
+	}
+	
+	.sidenav-bottom * {
+		margin-top: 2px;
+	}
+	
+	#points-title {
+		color: whitesmoke;
+		text-align: center;
+		padding: 8px 0;
+		font-weight: bold;
+		font-size: 1.5em;
+		display: none;
+		user-select: none;
+	}
+	
+	#new-point {
+		font-family: var(--main-font-Squada);
+		display: flex!important;
+		flex-direction: row;
+		justify-content: center;
+		border: 2px dashed var(--color-highlight-01);
+		
+		outline: none;
+		background-color: #111;
+		font-size: 16px;
+		
+	
+		min-height: 48px;
+		cursor: pointer;
+		transition: color 0.25s;
+		transition: background 0.25s;
+	
+		color: var(--color-highlight-01);
+	}
+	
+	#new-point span {
+		margin: auto 5px;
+	}
+	
+	#new-point:hover {
+		border: 2px dashed var(--color-highlight-01);
+		background-color: var(--color-highlight-01);
+		color: #111;
+	}
+	
+	.search-hide {
+		display: none !important;
+	}
+	
+	/* Info Window */
+	
+	.info-container {
+		position: absolute;
+		right: 10px;
+		top: 10px;
+		min-width: 12px;
+		min-height: 12px;
+		padding: 10px;
+		z-index: 1;
+		color: whitesmoke;
+	}
+	
+	#dropdown-minimize {
+		
+		padding: 3px;
+	
+		position: absolute;
+		top: 0;
+		right: 0;
+	
+		margin: 5px;
+	
+		transition: 0.5s transform;
+	
+		cursor: pointer;
+	
+		transform: scale(1);
+		z-index: 1;
+	}
+	
+	.distance-to-selector {
+		outline: none;
+	}
+	
+	.speed-input {
+		outline: none;
+	}
+	
+	.info {
+		width: 100%;
+		height: 100%;
+	
+		height: auto;
+	}
+	
+	.infoText {
+		padding-left: 5px;
+		margin: 0;
+		margin-bottom: 5px;
+		margin-top: 5px;
+		width: fit-content;
+	}
+	
+	.distance-fieldset {
+		border-width: 2px 0 0 0;
+		text-align: center;
+	}
+	
+	.distance-fieldset legend {
+		padding: 0 5px;
+	}
+	
+	.distance-fieldset p {
+		margin: 0;
+	}
+	
+	/* Login Button */
+	
+	#login {
+		
+		background-color: #111111;
+		color: var(--color-highlight-01);
+		/*border-radius: 5px;
+		background-color: #7289da;
+		color: whitesmoke; */
+		width: 100%;
+	
+		border: none;
+		text-align: center;
+		overflow: hidden;
+		cursor: pointer;
+		outline: none;
+		height: 45px;
+	
+		display: flex;
+		flex-direction: row;
+	
+		align-items: center;
+		vertical-align: middle;
+	
+		justify-content: space-between;
+		transition: filter 0.25s;
+	}
+	
+	#login:hover {
+		background-color: var(--color-highlight-01);
+		color: #111;
+	}
+	
+	#login img {
+		
+		height: 80%;
+		padding-left: 5px;
+		flex-grow: 0;
+		
+	}
+	
+	#login:hover img {
+		color: #111;
+		/* This is equivalent to switching from whitesmoke to #333, lets us change the color of an image without any JS */
+		filter: invert(15%) sepia(1%) saturate(0%) hue-rotate(87deg) brightness(95%) contrast(85%);
+	}
+	
+	#login .login-text {
+		flex-grow: 1;
+		font-size: 24px;
+		font-family: var(--main-font-Squada);
+	}
+	
+	/* One time popup */
+	
+	.popup {
+		display: none;
+		position: fixed;
+		z-index: 1;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+		background-color: rgb(0, 0, 0);
+		background-color: rgba(0, 0, 0, 0.4);
+	}
+	
+	.popup-content {
+		background-color: #d6d6d6;
+		margin: 15% auto;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 50%;
+	}
+	
+	.popup-content h1 {
+		color: black;
+		text-align: center;
+	}
+	
+	.popup-content p {
+		color: black;
+	}
+	
+	.topPopupBanner {
+		position: absolute;
+		z-index: 1;
+		width: 40%;
+		left: 30%;
+		background-color: rgba(0, 128, 0, 0.8);
+		border-radius: 5px;
+		top: 15px;
+	}
+	
+	.topPopupBanner p {
+		text-align: center;
+	}
+	
+	
+	
+	/* Calculator panel */
+	.calc-title {
+		font-weight: bold;
+		font-size: 20px;
+		text-align: center;
+		margin: 5px;
+		user-select: none;
+	}
+	
+	.calculator .close {
+		position: absolute;
+		color: var(--red);
+		top: 3px;
+		right: 3px;
+		user-select: none;
+		z-index: 2;
+	}
+	
+	
+	
+	.more-info {
+		width: fit-content;
+		right: 30px;
+		position: absolute;
+		top: 4px;
+	}
+	
+	.more-info .more-info-tooltip {
+		visibility: hidden;
+		width: max-content;
+		background-color: #111;
+		border: #0074F0 2px solid;
+		overflow: visible;
+		color: #fff;
+		text-align: center;
+		padding: 5px 0;
+		border-radius: 6px;
+	
+		position: absolute;
+		z-index: 1;
+		bottom: 100%;
+	}
+	
+	.more-info .more-info-tooltip::after {
+		content: " ";
+		position: absolute;
+		top: 100%;
+		/* At the bottom of the tooltip */
+		left: 50%;
+		margin-left: -5px;
+		background-color: #111;
+		border: #0074F0 2px solid;
+	}
+	
+	.more-info:hover .more-info-tooltip {
+		visibility: visible;
+	}
+	
+	.infoMainBody {
+		display: flex;
+		flex-direction: row;
+	}
+	
+	.isanDispalyDiv {
+	
+		background-color: rgb(0, 10, 15);
+		width: fit-content;
+		display: inline-block;
+	}
+	
+	.desc {
+		border: 1px solid gray;
+		margin-top: 10px;
+		max-width: min-content;
+		min-width: 100%;
+		word-break: break-word;
+	}
+	
+	.infoDiv {
+		margin-left: 10px;
+	}
+	
+	.infoDiv button {
+		width: 84px;
+	}
+	
+	.isanDispalyVal {
+		font-family: 'Telegrama';
+	
+		color: rgb(30, 175, 180);
+	
+		margin-block-start: 0;
+		margin-block-end: 0;
+		padding-bottom: 1px;
+		padding-top: 1px;
+		padding-right: 15px;
+		white-space: nowrap;
+	}
+	
+	.info #delete-point {
+		margin: 5px 0;
+		background-color: var(--red);
+		color: whitesmoke;
+		outline: none;
+		border: solid 1px whitesmoke;
+		width: 100%;
+		height: 2em;
+		cursor: pointer;
+	}
+	
+	.info #delete-point:hover {
+		background-color: var(--red-hover);
+		color: whitesmoke;
+	}
+	
+	/* Update point Button */
+	/* Volcano please change the color being identical, I dont know css */
+	
+	.info #update-point {
+		margin: 5px 0;
+		/* CSS has variables??? W H A T */
+		background-color: var(--red);
+		color: whitesmoke;
+		outline: none;
+		border: solid 1px whitesmoke;
+		width: 100%;
+		height: 2em;
+		cursor: pointer;
+	}
+	
+	.info #update-point:hover {
+		background-color: var(--red-hover);
+		color: whitesmoke;
+	}
+	
+	/* Groups page */
+	
+	h1 {
+		color: whitesmoke;
+	}
+	
+	p {
+		color: whitesmoke;
+	}
+	
+	.back-index {
+		background-color: whitesmoke;
+		color: #333;
+	
+		text-decoration: none;
+	
+		padding: 10px 20px;
+	}
+	
+	.back-index:hover {
+		background-color: #333;
+		color: whitesmoke;
+	}
+	
+	.back-index span {
+		vertical-align: middle;
+		padding-bottom: 3px;
+	}
+	
+	.filter-view-option {
+		padding: 6px 8px 6px 10px;
+		width: 100%;
+		position: relative;
+		margin: 0;
+		text-decoration: none;
+		/* font-size: 12px; */
+		color: var(--color-highlight-01);
+		display: inline-block;
+		cursor: pointer;
+		text-align: left;
+		user-select: none;
+	
+		transition: color 0.2s;
+		transition: background-color 0.2s;
+	}
+	
+	.filter-view-option label,input {
+		cursor: pointer;
+	}
+	
+	.filter-view-option:hover {
+		color: whitesmoke;
+		background-color: #333;
+	
+		transition: color 0.2s;
+		transition: background-color 0.2s;
+	}
+	
+	.filter-view-option .filter-view-option-tooltip {
+		text-transform: none;
+		visibility: hidden;
+		width: 120px;
+		background-color: #111;
+		border: 2px solid var(--color-highlight-01);
+		overflow: visible;
+		color: #fff;
+		text-align: center;
+		padding: 5px 0;
+		border-radius: 6px;
+	
+		position: absolute;
+		z-index: 1;
+		width: 120px;
+		bottom: 100%;
+		left: 50%;
+		margin-left: -60px;
+	}
+	
+	.filter-view-option .filter-view-option-tooltip::after {
+		content: " ";
+		position: absolute;
+		top: 100%;
+		/* At the bottom of the tooltip */
+		left: 50%;
+		margin-left: -5px;
+		background-color: #111;
+		border: #0074F0 2px solid;
+	}
+	
+	.filter-view-option:hover .filter-view-option-tooltip {
+		visibility: visible;
+	}
+	
+	.filter-view-option .filter-view-option-tooltip:hover {
+		visibility: hidden;
+	}
