@@ -3,7 +3,7 @@
 //Class to hold all the map data after getting it from the api
 import {
 	MARKER_SIZE,
-	HOVER_SCALE_MAX,
+	HOVER_SCALE_BASE_MAX,
 	HOVER_CHANGE_RATE,
 	pointOffset,
 	TYPES,
@@ -14,6 +14,7 @@ import {
 	ZONE_WIRE_CUTOFF,
 	ZONE_OUTLINE_POINTS,
 	ZONE_INTERACTION_SIZE,
+	HOVER_CAM_DIST_FACTOR,
 } from "./config.js";
 
 import { lerp, hexToRgb, map, constrain, tubeLine } from "./functions.js";
@@ -405,10 +406,13 @@ class Point {
 	}
 	//Updates the scale of the point based off the global scale (due to current zoom) and the point scale (due to hover)
 	runScale(scale) {
+		const dist = this.marker.position.distanceTo(
+			this.app.sceneObjs.camera.position
+		);
 		if (this.isHovered || this.isHoveredSide) {
 			this.hoverEffect = lerp(
 				this.hoverEffect,
-				HOVER_SCALE_MAX,
+				HOVER_SCALE_BASE_MAX + dist / HOVER_CAM_DIST_FACTOR,
 				HOVER_CHANGE_RATE
 			);
 		} else {
@@ -419,9 +423,7 @@ class Point {
 		this.nameText.scale.set(newScale, newScale, newScale);
 		this.updateMarkerPosition(newScale);
 		this.updateNamePosition(newScale);
-		const dist = this.marker.position.distanceTo(
-			this.app.sceneObjs.camera.position
-		);
+
 		this.marker.material.opacity = constrain(
 			map(dist, FADE_MIN_DIST, FADE_MAX_DIST, 0, 1),
 			0,
