@@ -119,21 +119,6 @@ String.prototype.reverse = function () {
 	return this.split("").reverse().join("");
 };
 
-//Add commas into a string
-Number.prototype.format = function () {
-	const numChars = Math.floor(this).toString().split("").reverse();
-	let ret = "";
-	let lastCom = -1;
-	for (var i = 0; i < numChars.length; i++) {
-		ret = numChars[i] + ret;
-		if (i - lastCom > 2 && i != numChars.length - 1) {
-			lastCom = i;
-			ret = "," + ret;
-		}
-	}
-	return ret;
-};
-
 //Honestly I feel this should be broken into two classes, the main App and some form of "UI manager" class, perhaps a project for another day
 //Main map application
 class App {
@@ -401,7 +386,7 @@ class App {
 				const target = this.pointManager.getByThreeId(
 					intersects[0].object.uuid
 				);
-				this.updateDistTo(target);
+				this.calculator.setPoints(this.pointManager.focusedPOI, target);
 			} else {
 				this.handleObjectClick(intersects[0].object);
 			}
@@ -699,6 +684,7 @@ class App {
 		const poiData = object.uuid
 			? this.pointManager.getByThreeId(object.uuid)
 			: object;
+		this.calculator.handlePointClick(poiData);
 		this.pointManager.focusedPOI = poiData;
 
 		// Toggle flip effect on Button
@@ -770,7 +756,6 @@ class App {
 			copyToClipboard(link);
 		};
 
-		//Sharable link
 		const epiValsBtn = document.getElementById("epivals");
 		epiValsBtn.onclick = function () {
 			const str = `${poiData.info.gamePos.x} ${poiData.info.gamePos.y} ${poiData.info.gamePos.z}`;
@@ -784,7 +769,6 @@ class App {
 				if (confirm("Are you sure you want to delete this point?")) {
 					infoWindow.innerHTML = "";
 					self.api.deletePoint(poiData.id);
-					self.updateDistTo();
 				}
 			};
 		}
