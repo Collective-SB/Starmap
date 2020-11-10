@@ -55,19 +55,6 @@ const optionTemplate = `
 </option>
 `;
 
-const distanceInfoTemplate = `
-<div class="distance-info" id="distance-info">
-	<fieldset class="distance-fieldset">
-		<legend>Distance</legend>
-		<p>%DISTANCE%</p>
-	</fieldset>
-	<fieldset class="distance-fieldset">
-		<legend>Min flight time</legend>
-		<p>%FLIGHT_TIME%</p>
-	</fieldset>
-</div>
-`;
-
 const viewFilterTemplate = `
 <div class="filter-view-option">
 	<input id=%ID% type="checkbox" name="%NAME%" value="%NAME%" checked>
@@ -602,78 +589,6 @@ class App {
 		});
 		if (defaultTo) {
 			dropDownSubtypes.value = defaultTo;
-		}
-	}
-	//Called whenever a user selects a new item from the drop down list, updates the calculated time of flight between them
-	updateDistTo(object) {
-		const iWin = document.getElementById("infoWindow");
-		const existDiv = document.getElementById("distDiv");
-		if (existDiv) {
-			iWin.removeChild(existDiv);
-		}
-		if (!object) {
-			this.sceneObjs.scene.remove(this.pointManager.connectorLine);
-		} else {
-			var points = [];
-			points.push(new THREE.Vector3(0, 0, 0));
-			points.push(
-				new THREE.Vector3(
-					this.pointManager.focusedPOI.position.x - object.position.x,
-					this.pointManager.focusedPOI.position.y - object.position.y,
-					this.pointManager.focusedPOI.position.z - object.position.z
-				)
-			);
-			var geometry = new THREE.BufferGeometry().setFromPoints(points);
-			var material = new THREE.LineBasicMaterial({
-				color: 0xff0000,
-			});
-			var line = new THREE.Line(geometry, material);
-			line.position.set(
-				object.position.x,
-				object.position.y,
-				object.position.z
-			);
-			this.sceneObjs.scene.remove(this.pointManager.connectorLine);
-			this.pointManager.connectorLine = line;
-			this.sceneObjs.scene.add(line);
-
-			const p1 = new THREE.Vector3(
-				this.pointManager.focusedPOI.position.x,
-				this.pointManager.focusedPOI.position.y,
-				this.pointManager.focusedPOI.position.z
-			);
-			const p2 = new THREE.Vector3(
-				object.position.x,
-				object.position.y,
-				object.position.z
-			);
-			const d = p1.distanceTo(p2);
-
-			let speed = parseInt(document.getElementById("speed-input").value);
-			speed = speed ? speed : 150;
-			const t = d / speed;
-
-			const formatTime = (t) => {
-				if (t.length == 1) {
-					return "0" + t;
-				}
-				return t;
-			};
-			const hrs = formatTime(Math.floor(t / 3600).toString());
-			const mins = formatTime(Math.floor((t / 60) % 60).toString());
-			const secs = formatTime(Math.floor(t % 60).toString());
-
-			var template = distanceInfoTemplate;
-			template = template.replace("%DISTANCE%", d.format() + " m");
-			template = template.replace("%FLIGHT_TIME%", `${hrs}:${mins}:${secs}`);
-
-			var distanceDiv = document.getElementById("distance-info");
-			if (distanceDiv == undefined) {
-				distanceDiv = document.createElement("div");
-			}
-			distanceDiv.innerHTML = template;
-
-			iWin.appendChild(distanceDiv);
 		}
 	}
 	//Fills out the info pannel whenever a point is clicked on
