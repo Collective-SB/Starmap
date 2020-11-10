@@ -351,7 +351,7 @@ class App {
 		const mouse = new THREE.Vector2(x, y);
 		this.raycaster.setFromCamera(mouse, this.sceneObjs.camera);
 		var intersects = this.raycaster.intersectObjects(
-			this.pointManager.points.map((p) => p.marker),
+			this.pointManager.points.filter((p) => p.shown).map((p) => p.marker),
 			true
 		);
 		return intersects;
