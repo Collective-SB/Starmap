@@ -1,8 +1,9 @@
 /*global THREE*/
+//Possible refactor for THREEjs, rather than push everything onto scene push to logical groupings for points and zones
 //Class to hold all the map data after getting it from the api
 import {
 	MARKER_SIZE,
-	HOVER_SCALE_MAX,
+	HOVER_SCALE_BASE_MAX,
 	HOVER_CHANGE_RATE,
 	pointOffset,
 	TYPES,
@@ -10,9 +11,13 @@ import {
 	FADE_MIN_DIST,
 	FADE_MAX_DIST,
 	MAX_MOTION_TRAILS,
+	ZONE_WIRE_CUTOFF,
+	ZONE_OUTLINE_POINTS,
+	ZONE_INTERACTION_SIZE,
+	HOVER_CAM_DIST_FACTOR,
 } from "./config.js";
 
-import { lerp, hexToRgb, map, constrain } from "./functions.js";
+import { lerp, hexToRgb, map, constrain, tubeLine } from "./functions.js";
 
 function sortDiv(divId) {
 	var i, shouldSwitch;
@@ -36,10 +41,13 @@ function sortDiv(divId) {
 }
 
 function hide(elm) {
+	if (!elm) return;
 	elm.style.visibility = "hidden";
 	elm.style.position = "absolute";
 }
+
 function unhide(elm) {
+	if (!elm) return;
 	elm.style.position = "";
 	elm.style.visibility = "";
 }
@@ -54,6 +62,7 @@ function fromGamePos(position) {
 class Point {
 	constructor(pointData, app) {
 		this.app = app;
+		this.urlID = pointData.urlID;
 		this.shown = true;
 		this.marker;
 		this.linePart;
@@ -74,13 +83,16 @@ class Point {
 			gamePos: null,
 			desc: null,
 			type: null,
+			subtype: null,
 			createdBy: null,
 		};
 		this.init(pointData);
 	}
 	//Creates the Threejs elements, sidebar elements, and internal object for the point
 	init(data) {
-		const color = data.color || TYPES[data.type].color; //If no color is provided fall back to default
+		const color = TYPES[data.type].subtypes.find(
+			(stype) => stype.name == data.subtype
+		).hex;
 		const position = fromGamePos(data.pos);
 		//Line from the astroid belt up
 		var points = [];
@@ -165,6 +177,7 @@ class Point {
 			gamePos: data.pos,
 			desc: data.desc,
 			type: data.type,
+			subtype: data.subtype,
 			createdBy: data.createdBy,
 		};
 		this.updateNamePosition();
@@ -261,8 +274,8 @@ class Point {
 			pointData.desc == this.info.desc &&
 			pointData.type == this.info.type &&
 			pointData.name == this.info.name &&
+			pointData.subtype == this.info.subtype &&
 			pointData.groupID == this.groupID &&
-			pointData.color == this.color &&
 			pointData.vanity == this.vanity
 		);
 	}
@@ -273,7 +286,9 @@ class Point {
 			return;
 		}
 		const position = fromGamePos(pointData.pos);
-		const color = pointData.color;
+		const color = TYPES[pointData.type].subtypes.find(
+			(stype) => stype.name == pointData.subtype
+		).hex;
 		const noNameChange = this.info.name == pointData.name;
 		const noPosChange =
 			pointData.pos.x == this.info.gamePos.x &&
@@ -283,13 +298,14 @@ class Point {
 		this.info.name = pointData.name;
 		this.info.type = pointData.type;
 		this.info.gamePos = pointData.pos;
+		this.info.subtype = pointData.subtype;
 		this.groupID = pointData.groupID;
 		this.vanity = pointData.vanity;
 		this.group = pointData.group;
-		this.color = pointData.color;
-		this.marker.material.color.set(pointData.color);
-		this.nameText.material.color.set(pointData.color);
-		this.linePart.material.color.set(pointData.color);
+		this.color = color;
+		this.marker.material.color.set(color);
+		this.nameText.material.color.set(color);
+		this.linePart.material.color.set(color);
 		this.marker.material.alphaMap = this.app.pointManager.pointTextures[
 			pointData.type
 		];
@@ -390,10 +406,13 @@ class Point {
 	}
 	//Updates the scale of the point based off the global scale (due to current zoom) and the point scale (due to hover)
 	runScale(scale) {
+		const dist = this.marker.position.distanceTo(
+			this.app.sceneObjs.camera.position
+		);
 		if (this.isHovered || this.isHoveredSide) {
 			this.hoverEffect = lerp(
 				this.hoverEffect,
-				HOVER_SCALE_MAX,
+				HOVER_SCALE_BASE_MAX + dist / HOVER_CAM_DIST_FACTOR,
 				HOVER_CHANGE_RATE
 			);
 		} else {
@@ -404,9 +423,7 @@ class Point {
 		this.nameText.scale.set(newScale, newScale, newScale);
 		this.updateMarkerPosition(newScale);
 		this.updateNamePosition(newScale);
-		const dist = this.marker.position.distanceTo(
-			this.app.sceneObjs.camera.position
-		);
+
 		this.marker.material.opacity = constrain(
 			map(dist, FADE_MIN_DIST, FADE_MAX_DIST, 0, 1),
 			0,
@@ -435,10 +452,178 @@ class Point {
 		}
 	}
 }
+class Zone {
+	constructor(app) {
+		this.app = app;
+		this.position = {
+			x: 0,
+			y: 0,
+			z: 0,
+		};
+		this.mapData = {
+			position: {
+				//This is the ISAN cord
+				x: 0,
+				y: 0,
+				z: 0,
+			},
+			name: "",
+			desc: "",
+			type: "",
+			color: "",
+		};
+		this.shape = {
+			type: "", // Shape types: "box", "sphere", "oval"
+			avgSize: 0, //Rough aprox of shape size (avg of dims)
+			dims: {
+				//Dims could change a bit depending on type... box and oval has (w,h,l) sphere only has w (basically radius)
+				width: 0,
+				height: 0,
+				length: 0,
+			},
+		};
+		this.mapElms = {
+			inner: null,
+			outer: null,
+			interaction: null,
+		};
+		this.sidebarSorted;
+		this.sidebarUnsorted;
+	}
+	create(data) {
+		this.setAttrs(data);
+		this.calcAvg();
+		const shapeMaterialOuter = new THREE.MeshBasicMaterial({
+			color: this.mapData.color,
+			wireframe: true,
+		});
+		const shapeMaterialInner = new THREE.MeshBasicMaterial({
+			color: this.mapData.color,
+			transparent: true,
+			opacity: 0.4, //0.4,
+			side: THREE.DoubleSide,
+		});
+		// shapeMaterial.depthTest = false;
+		const shapeGeometry = this.createZoneGeometry();
+		const interactionParts = this.createInteraction();
+
+		const meshOuter = new THREE.Mesh(
+			shapeGeometry.clone(),
+			shapeMaterialOuter
+		);
+		const meshInner = new THREE.Mesh(
+			shapeGeometry.clone(),
+			shapeMaterialInner
+		);
+		const interaction = new THREE.Group();
+		interactionParts.forEach((mesh) => {
+			interaction.add(mesh.getObject3D());
+		});
+
+		meshOuter.position.set(this.position.x, this.position.y, this.position.z);
+		meshInner.position.set(this.position.x, this.position.y, this.position.z);
+		interaction.position.set(
+			this.position.x,
+			this.position.y,
+			this.position.z
+		);
+		interaction.rotation.set(Math.PI / 2, 0, 0);
+
+		this.app.sceneObjs.scene.add(interaction);
+		this.app.sceneObjs.scene.add(meshOuter);
+		this.app.sceneObjs.scene.add(meshInner);
+
+		this.mapElms.outer = meshOuter;
+		this.mapElms.inner = meshInner;
+		this.mapElms.interaction = interaction;
+	}
+	update(data) {}
+	createZoneGeometry() {
+		let geometry;
+		switch (this.shape.type) {
+			case "sphere":
+				geometry = new THREE.SphereGeometry(this.shape.dims.width, 32, 32);
+				break;
+
+			default:
+				console.log(`Unknown shape type ${this.shape.type}`);
+				return;
+		}
+		return geometry;
+	}
+	createInteraction() {
+		const points = [];
+		switch (this.shape.type) {
+			case "sphere":
+				for (
+					let i = 0;
+					i < Math.PI * 2;
+					i += (Math.PI * 2) / ZONE_OUTLINE_POINTS
+				) {
+					points.push(
+						// new THREE.Vector3(
+						[
+							Math.cos(i) * this.shape.dims.width,
+							Math.sin(i) * this.shape.dims.width,
+							0,
+						]
+						// )
+					);
+				}
+				break;
+		}
+		const tubes = points.map((point, idx) => {
+			if (idx == 0) return;
+			return new tubeLine(
+				point,
+				points[idx - 1],
+				ZONE_INTERACTION_SIZE,
+				this.mapData.color
+			);
+		});
+		tubes.shift();
+		return tubes;
+	}
+	calcAvg() {
+		let total = 0;
+		let numDims = 0;
+		for (var dim in this.shape.dims) {
+			const val = this.shape.dims[dim];
+			if (val) {
+				total += val;
+				numDims++;
+			}
+		}
+		this.shape.avgSize = total / numDims;
+	}
+	runVisualUpdate(camera) {
+		const dist = camera.position.distanceTo(this.mapElms.outer.position);
+		this.mapElms.outer.visible = dist < this.shape.avgSize + ZONE_WIRE_CUTOFF;
+	}
+	//Copys data from API to the correct format in this object
+	setAttrs(data) {
+		const position = fromGamePos(data.pos);
+		this.position.x = position.x;
+		this.position.y = position.y;
+		this.position.z = position.z;
+		this.shape.type = data.shape.type;
+		this.shape.dims.width = data.shape.dims.width;
+		this.shape.dims.height = data.shape.dims.height;
+		this.shape.dims.length = data.shape.dims.length;
+		this.mapData.position.x = data.pos.x;
+		this.mapData.position.x = data.pos.y;
+		this.mapData.position.x = data.pos.z;
+		this.mapData.name = data.name;
+		this.mapData.desc = data.desc;
+		this.mapData.type = data.type;
+		this.mapData.color = data.color;
+	}
+}
 export default class PointManager {
 	constructor(app) {
 		this.app = app;
 		this.points = [];
+		this.zones = [];
 		this.pointTextures = {};
 		this.motionTrails = [];
 		this.connectorLine;
@@ -457,6 +642,27 @@ export default class PointManager {
 			this.pointTextures[t] = loader.load(TYPES[t].icons.map);
 		}
 	}
+	test() {
+		const zone = new Zone(this.app);
+		zone.create({
+			pos: {
+				x: 0,
+				y: 10000,
+				z: 0,
+			},
+			shape: {
+				type: "sphere",
+				dims: {
+					width: 1000000,
+				},
+			},
+			name: "Test Zone!",
+			desc: "I am a test",
+			type: "ISAN",
+			color: "#ff00ff",
+		});
+		this.zones.push(zone);
+	}
 	checkSort() {
 		sortDiv("points");
 		const layers = document.getElementById("layers");
@@ -472,7 +678,7 @@ export default class PointManager {
 		this.points.push(newPoint);
 		if (!this.hasInitFocus && this.initFocusOn) {
 			if (
-				pointData.id == this.initFocusOn ||
+				pointData.urlID == this.initFocusOn ||
 				pointData.vanity == this.initFocusOn
 			) {
 				this.app.handleObjectClick(newPoint);
@@ -534,6 +740,11 @@ export default class PointManager {
 			point.runScale(scale);
 		});
 	}
+	runZones() {
+		this.zones.forEach((zone) => {
+			zone.runVisualUpdate(this.app.sceneObjs.camera);
+		});
+	}
 	updateLayers() {
 		this.points.forEach((point) => {
 			point.addLayerSortElm(point, point.marker);
@@ -565,7 +776,11 @@ function createTextCanvas(string, parameters = {}) {
 	canvas.style.width = width + "px";
 	canvas.style.height = height + "px";
 
-	ctx.font = `${fontSize}px Roboto`;
+	// ctx.font = `${fontSize}px Roboto`;
+	const fontName = getComputedStyle(document.documentElement).getPropertyValue(
+		"--main-font-Squada"
+	);
+	ctx.font = `${fontSize}px ${fontName}`;
 	ctx.textAlign = parameters.align || "center";
 	ctx.textBaseline = parameters.baseline || "middle";
 	const rgb = hexToRgb(parameters.color);

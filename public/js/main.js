@@ -105,6 +105,7 @@ import PointManager from "./PointManager.js";
 import API from "./API.js";
 import CamController from "./CamController.js";
 import SettingsManager from "./SettingsManager.js";
+import Calculator from "./calculator.js";
 
 import Stats from "./packages/Stats.js";
 
@@ -116,21 +117,6 @@ const SUCCESS = 1;
 
 String.prototype.reverse = function () {
 	return this.split("").reverse().join("");
-};
-
-//Add commas into a string
-Number.prototype.format = function () {
-	const numChars = Math.floor(this).toString().split("").reverse();
-	let ret = "";
-	let lastCom = -1;
-	for (var i = 0; i < numChars.length; i++) {
-		ret = numChars[i] + ret;
-		if (i - lastCom > 2 && i != numChars.length - 1) {
-			lastCom = i;
-			ret = "," + ret;
-		}
-	}
-	return ret;
 };
 
 //Honestly I feel this should be broken into two classes, the main App and some form of "UI manager" class, perhaps a project for another day
@@ -157,6 +143,7 @@ class App {
 		}
 		this.pointManager = new PointManager(this);
 		this.settings = new SettingsManager(this);
+		this.calculator = new Calculator(this);
 		this.isLoggedIn = false;
 		this.updatePointId;
 		this.textFont;
@@ -179,14 +166,21 @@ class App {
 		this.UISetup();
 		//See if we just completed OAuth2
 		if (window.location.search.includes("code")) {
-			const code = window.location.search.substring("?code=".length);
-			const jwt = await this.api.getJWTFromCode(code);
-			if (jwt) this.storage.setItem("jwt", jwt);
+			try {
+				const code = window.location.search.substring("?code=".length);
+				const jwt = await this.api.getJWTFromCode(code);
+				if (jwt) this.storage.setItem("jwt", jwt);
+			} catch (e) {}
 		}
 		//Lets ensure the jwt is still valid (if we have one)
 		const jwt = this.storage.getItem("jwt");
+		let needPubToken = true;
 		if (jwt) {
-			await this.api.confirmJWT(jwt);
+			const hasValidToken = await this.api.confirmJWT(jwt);
+			if (hasValidToken) needPubToken = false;
+		}
+		if (needPubToken) {
+			await this.api.getPubJWT();
 		}
 	}
 	//Updates what points should be displayed
@@ -205,6 +199,7 @@ class App {
 		});
 		this.viewFilters = filters;
 		this.pointManager.updateDisplayed(this.viewFilters);
+		this.updateFilters();
 	}
 	updateFilters() {
 		for (var t in TYPES) {
@@ -391,7 +386,7 @@ class App {
 				const target = this.pointManager.getByThreeId(
 					intersects[0].object.uuid
 				);
-				this.updateDistTo(target);
+				this.calculator.setPoints(this.pointManager.focusedPOI, target);
 			} else {
 				this.handleObjectClick(intersects[0].object);
 			}
@@ -419,6 +414,9 @@ class App {
 		// Settings popup
 		this.settings.init();
 
+		// Calculator popup
+		this.calculator.init();
+
 		// New point popup
 		$(".add-point").draggable({
 			containment: "document",
@@ -431,12 +429,12 @@ class App {
 		$("#new-point").click(function () {
 			self.updateFormMode.call(self, "create");
 			const curType = document.getElementById("type-select").value;
-			self.updateColorOpts(curType);
+			self.updateSubtypes(curType);
 			$(".add-point").show();
 		});
 		const typeSelector = document.getElementById("type-select");
 		typeSelector.onchange = function (e) {
-			self.updateColorOpts(e.target.value);
+			self.updateSubtypes(e.target.value);
 		};
 
 		$(".add-point form").submit(async function (e) {
@@ -450,7 +448,7 @@ class App {
 				desc: serialized[1].value,
 				type: serialized[2].value,
 				groupID: group.id,
-				color: serialized[4].value,
+				subtype: serialized[4].value,
 				pos: {
 					x: parseInt(serialized[5].value),
 					y: parseInt(serialized[6].value),
@@ -481,7 +479,17 @@ class App {
 					self.banner("The point could not be created", ERROR);
 				}
 			} else {
-				self.api.updatePoint(self.updatePointId, data);
+				const res = await self.api.updatePoint(self.updatePointId, data);
+				if (res == 200) {
+					if (group.hasReview) {
+						self.banner(
+							"The point update has been submitted for review",
+							SUCCESS
+						);
+					}
+				} else {
+					self.banner("The point could not be created", ERROR);
+				}
 			}
 		});
 
@@ -492,6 +500,7 @@ class App {
 			window.location.href = `${URLS.api[ENV]}auth/login?redir=${AUTH_REDIR}`;
 		};
 		document.getElementById("logout").onclick = function () {
+			if (!confirm("Would you like to logout?")) return;
 			self.storage.removeItem("jwt");
 			self.setLoggedIn(false);
 		};
@@ -521,11 +530,9 @@ class App {
 			if (pointsMode.style.display == "block") {
 				pointsMode.style.display = "none";
 				layersMode.style.display = "block";
-				sortToggle.innerText = "Sort by name";
 			} else {
 				pointsMode.style.display = "block";
 				layersMode.style.display = "none";
-				sortToggle.innerText = "Sort by layers";
 			}
 		};
 
@@ -547,7 +554,6 @@ class App {
 		searchbar.onkeyup = function () {
 			pointsMode.style.display = "block";
 			layersMode.style.display = "none";
-			sortToggle.innerText = "Sort by layers";
 			for (var i = 0; i < points.childElementCount; i++) {
 				const point = self.pointManager.getById(
 					points.children[i].id.substring("side-".length)
@@ -584,18 +590,18 @@ class App {
 			mouseY = e.y;
 		};
 	}
-	updateColorOpts(newType, defaultTo) {
-		const dropDownColors = document.getElementById("color-select");
-		dropDownColors.innerHTML = "";
-		TYPES[newType].colorOpts.forEach((colOption) => {
+	updateSubtypes(newType, defaultTo) {
+		const dropDownSubtypes = document.getElementById("subtype-select");
+		dropDownSubtypes.innerHTML = "";
+		TYPES[newType].subtypes.forEach((colOption) => {
 			const option = document.createElement("option");
-			option.value = colOption.hex;
+			option.value = colOption.name;
 			option.innerText = colOption.name;
 			option.style.color = colOption.hex;
-			dropDownColors.appendChild(option);
+			dropDownSubtypes.appendChild(option);
 		});
 		if (defaultTo) {
-			dropDownColors.value = defaultTo;
+			dropDownSubtypes.value = defaultTo;
 		}
 	}
 	//Called whenever a user selects a new item from the drop down list, updates the calculated time of flight between them
@@ -678,6 +684,7 @@ class App {
 		const poiData = object.uuid
 			? this.pointManager.getByThreeId(object.uuid)
 			: object;
+		this.calculator.handlePointClick(poiData);
 		this.pointManager.focusedPOI = poiData;
 
 		// Toggle flip effect on Button
@@ -737,19 +744,18 @@ class App {
 			self.updateFormMode.call(self, "update");
 			self.autoFillForm(poiData);
 			const curType = document.getElementById("type-select").value;
-			self.updateColorOpts(curType, poiData.color);
+			self.updateSubtypes(curType, poiData.subtype);
 			self.updatePointId = poiData.id;
 			$(".add-point").show();
 		});
 		//Sharable link
 		const getLink = document.getElementById("linksharable");
 		getLink.onclick = function () {
-			const identifier = poiData.vanity ? poiData.vanity : poiData.id;
+			const identifier = poiData.vanity ? poiData.vanity : poiData.urlID;
 			const link = window.location.origin + "/" + identifier;
 			copyToClipboard(link);
 		};
 
-		//Sharable link
 		const epiValsBtn = document.getElementById("epivals");
 		epiValsBtn.onclick = function () {
 			const str = `${poiData.info.gamePos.x} ${poiData.info.gamePos.y} ${poiData.info.gamePos.z}`;
@@ -763,7 +769,6 @@ class App {
 				if (confirm("Are you sure you want to delete this point?")) {
 					infoWindow.innerHTML = "";
 					self.api.deletePoint(poiData.id);
-					self.updateDistTo();
 				}
 			};
 		}
@@ -788,6 +793,16 @@ class App {
 			MARKER_SIZE_MIN,
 			MARKER_SIZE_MAX
 		);
+		//Lets see if the scrollbar is visible on the sidenav, if it is we want to expand the sidenav a bit
+		const sidenav = document.getElementsByClassName("sidenav")[0];
+		// sidenav.style.width =
+		// 	parseInt(sidenav.style.width) + (160 - sidenav.scrollWidth) + "px";
+		//TODO: Make this not bad. Setting style like this is *very* bad practice, and not reliable
+		if (sidenav.scrollHeight > sidenav.clientHeight) {
+			sidenav.style.width = "175px";
+		} else {
+			sidenav.style.width = "160px";
+		}
 		//Check hovers
 		const hovers = this.castRay(mouseX, mouseY);
 		this.pointManager.points.forEach((p) => p.updateHoverMain(false));
@@ -801,6 +816,7 @@ class App {
 			point.marker.rotation.set(rot.x, rot.y, rot.z);
 		});
 		this.pointManager.runScales(markerScale);
+		this.pointManager.runZones();
 		this.cameraController.update();
 		this.sceneObjs.renderer.render(
 			this.sceneObjs.scene,
@@ -865,6 +881,11 @@ class App {
 		});
 		this.pointManager.updateLayers();
 		this.api.getPoints();
+
+		if (this.user.isPubToken) {
+			const addPointBtn = document.getElementById("new-point");
+			addPointBtn.style.display = "none";
+		}
 		//Load in the toggled filters (defer execution to ensure html elements get loaded)
 		setTimeout(this.initFilters.bind(this), 0);
 	}
@@ -875,17 +896,17 @@ class App {
 	setLoggedIn(newState) {
 		this.isLoggedIn = newState;
 		let loginBtn = document.getElementById("login");
-		let logoutBtn = document.getElementById("logout");
+		// let logoutBtn = document.getElementById("logout");
 		let addPointBtn = document.getElementById("new-point");
 
 		let pointsTitle = document.getElementById("points-title");
-		if (!loginBtn) {
-			return;
-		}
+		// if (!loginBtn) {
+		// 	return;
+		// }
 		//This sets if the buttion is visable or not
 		if (newState) {
 			loginBtn.style.display = "none";
-			logoutBtn.style.display = "block";
+			// logoutBtn.style.display = "block";
 			pointsTitle.style.display = "block";
 			addPointBtn.style.display = "block";
 			if (!this.lastLoginState) {
@@ -894,7 +915,7 @@ class App {
 			this.lastLoginState = true;
 		} else {
 			loginBtn.style.display = "block";
-			logoutBtn.style.display = "none";
+			// logoutBtn.style.display = "none";
 			pointsTitle.style.display = "none";
 			addPointBtn.style.display = "none";
 			if (this.lastLoginState) {
@@ -912,7 +933,7 @@ class App {
 		document.getElementById("formYPos").value = point.info.gamePos.y;
 		document.getElementById("formZPos").value = point.info.gamePos.z;
 		document.getElementById("group-select").value = point.groupID;
-		document.getElementById("color-select").value = point.color;
+		document.getElementById("subtype-select").value = point.subtype;
 	}
 	//We resue the same HTML elements for creating and updating a point, need to update a few things about it however
 	updateFormMode(mode) {
