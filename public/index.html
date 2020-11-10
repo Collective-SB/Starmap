@@ -5,6 +5,7 @@
   <meta charset="utf-8" />
   <title>Starmap</title>
   %OGP%
+
   <style>
     @font-face {
       font-family: 'Telegrama';
@@ -14,11 +15,23 @@
       font-style: normal;
     }
   </style>
+  <script src="js/vendor/jquery-1.12.4.js"></script>
+  <script src="css/lib-css/bootstrap-4.4.1-dist/js/popper.min.js"></script>
+  <script src="css/lib-css/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+  
+  <link rel="stylesheet" href="/css/lib-css/bootstrap-4.4.1-dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/lib-css/fontawesome-all.min.css" />
   <link rel="stylesheet" href="/css/master.css" />
+
+  
+
+
+
   <script src="https://cdn.jsdelivr.net/npm/opentype.js@latest/dist/opentype.min.js"></script>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="js/packages/info-dropdown.js" charset="utf-8"></script>
+
+  <!-- Imports - ThreeJS -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.120.0/build/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.120.0/examples/js/controls/OrbitControls.min.js"></script>
   <script src="js/packages/jwt-decode.js"></script>
@@ -207,10 +220,20 @@
     </div>
     <div class="popup" id="popup">
       <div class="popup-content">
-		<P>Welcome to the ISAN </P>
+		  
+		<ul class="nav nav-pills mb-12" id="pills-tab" role="tablist">
+			<li class="nav-item" role="presentation">
+			  <a class="nav-link active" id="pills-welcome-tab" data-toggle="pill" href="#pills-welcome" role="tab" aria-controls="pills-welcome" aria-selected="true">Welcome!</a>
+			</li>
+			<li class="nav-item" role="presentation">
+			  <a class="nav-link" id="pills-developers-tab" data-toggle="pill" href="#pills-developers" role="tab" aria-controls="pills-developers" aria-selected="false">Developers</a>
+			</li>
+		  </ul>
+		  <div class="tab-content" id="pills-tabContent">
+			<div class="tab-pane fade show active" id="pills-welcome" role="tabpanel" aria-labelledby="pills-welcome-tab">
+				<P>Welcome to the ISAN </P>
 		<h1>STARMAP</h1>
-        <div class="popupgrid">
-          <div class="popupgrid-01">
+        
             <p>
 				Starmap is a free ISAN-based 3D map for the game <a href="https://www.starbasegame.com/">STARBASE</a>!
 				<ul>
@@ -227,17 +250,50 @@
 						diplomatic ticket in the <a>#contact_us</a> channel of the <a href="https://discord.gg/VnU8apR">COLLECTIVE DISCORD</a>
 					</li>
 				</ul>
-              
-       
-          </div>
-          <div class="popupgrid-02">
-
-           
-          </div>
-
+			</div>
+			<div class="tab-pane fade" id="pills-developers" role="tabpanel" aria-labelledby="pills-developers-tab">
+				<div class="popupgrid-contact">
+					<div class="popupgrid-contact-01">
+						<ul class="list-group">
+							<li class="list-group-item d-flex justify-content-between align-items-center">
+							  Cras justo odio
+							  <span class="badge badge-primary badge-pill"><img src="assets/developers/Group 13.svg" alt=""></span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between align-items-center">
+							  Dapibus ac facilisis in
+							  <span class="badge badge-primary badge-pill"><img src="assets/developers/Group 13.svg" alt=""></span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between align-items-center">
+							  Morbi leo risus
+							  <span class="badge badge-primary badge-pill"><img src="assets/developers/Group 13.svg" alt=""></span>
+							</li>
+						  </ul>
+					</div>
+					<div class="popupgrid-contact-02">
+						<ul class="list-group">
+							<li class="list-group-item d-flex justify-content-between align-items-center">
+							  Cras justo odio
+							  <span class="badge badge-primary badge-pill"><img src="assets/developers/Group 13.svg" alt=""></span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between align-items-center">
+							  Dapibus ac facilisis in
+							  <span class="badge badge-primary badge-pill"><img src="assets/developers/Group 13.svg" alt=""></span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between align-items-center">
+							  Morbi leo risus
+							  <span class="badge badge-primary badge-pill"><img src="assets/developers/Group 13.svg" alt=""></span>
+							</li>
+						  </ul>
+					</div>
+					</div>
+			</div>
+		  </div>
+		  <div class="popup-wrapper">
+			  <p class="popup-agree">This website uses cookies for functional and analytical purposes. Press "Accept" to continue.</p>
+			<button id="acceptCookies">Accept</button>
 		</div>
-		<p>This website uses cookies for functional and analytical purposes. Press "Accept" to continue.</p>
-        <button id="acceptCookies">Accept</button>
+
+		
 
       </div>
     </div>

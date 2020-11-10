@@ -149,19 +149,21 @@
 |*************************************************************************;
 */
 
-.popupgrid{
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	grid-template-rows: 1fr;
-	grid-column-gap: 15px;
-	grid-row-gap: 0px;
-	}
+.nav-item {
+	width: 50%;
+}
 
-	.popupgrid-01 { 
-		grid-area: 1 / 1 / 2 / 2;
-		text-align: left;
-	}
-	.popupgrid-02 { 
-		grid-area: 1 / 2 / 2 / 3;
-		text-align: center;
-	}
+	.popupgrid-contact {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: 1fr;
+		grid-column-gap: 0px;
+		grid-row-gap: 0px;
+		}
+		
+		.popupgrid-contact-01 { 
+			grid-area: 1 / 1 / 2 / 2;
+		}
+		.popupgrid-contact-02 { 
+			grid-area: 1 / 2 / 2 / 3; 
+		}

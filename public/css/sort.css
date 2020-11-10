@@ -440,10 +440,27 @@
 		border-radius: 10px;
 		text-align: center;
 		margin: 15% auto;
-		padding: 20px;
 		width: 50%;
 	}
-	
+	.popup-wrapper {
+		background-color: var(--color-highlight-01);
+	}
+	.popup-agree {
+		color: #fff!important;
+	}
+
+	.tab-content {
+		padding: 20px;
+	}
+	#pills-welcome-tab {
+		border-radius: 5px 0px 0px 0px;
+	}
+	#pills-developers-tab {
+		border-radius: 0px 5px 0px 0px;
+	}
+	#pills-tabContent img {
+		width: 5em;
+	}
 	.popup-content h2 {
 		color: var(--color-highlight-01);
 		text-align: center;
