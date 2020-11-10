@@ -8,8 +8,6 @@ const infoTemplate = `
 		<span class="more-info-tooltip">
 			Type: %TYPE%
 			<br>
-			Creator: %CREATOR%
-			<br>
 			Layer: %LAYER%
 		</span>
 	</div>
@@ -30,11 +28,11 @@ const infoTemplate = `
 			<br>
 			<button id="focus">Focus</button>
 		</div>
-
 		<div class="infoDiv">
 			<img src=%TYPE_IMAGE% width="64" height="64">
 		</div>
 	</div>
+	<p class="infoText">Creator: %CREATOR%</p>
 	<div class="desc">
 		<p class="infoText no-drag">%DESCRIPTION%</p>
 	</div>
