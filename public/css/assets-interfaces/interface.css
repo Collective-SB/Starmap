@@ -142,3 +142,26 @@
 	margin: 5px;
 	user-select: none;
 }
+
+/*
+|*************************************************************************;
+* Win -PopUP -Terms
+|*************************************************************************;
+*/
+
+.popupgrid{
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: 1fr;
+	grid-column-gap: 15px;
+	grid-row-gap: 0px;
+	}
+
+	.popupgrid-01 { 
+		grid-area: 1 / 1 / 2 / 2;
+		text-align: left;
+	}
+	.popupgrid-02 { 
+		grid-area: 1 / 2 / 2 / 3;
+		text-align: center;
+	}

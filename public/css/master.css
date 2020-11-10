@@ -44,7 +44,6 @@
 --color-background:#111;
 
 
-
 /* Cursor Setting */
 --main-cursor-default: default;
 --main-cursor-grab: grab;
@@ -151,4 +150,22 @@ input[type="range"]::-ms-fill-lower {
 }
 input[type="range"]::-ms-fill-upper {  
   background-color: #9a905d;
+}
+
+p {
+  display: block;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+h1 {
+  display: block;
+  font-size: 2em;
+  margin-block-start: 0.2em;
+  margin-block-end: 0.2em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
 }
