@@ -9,7 +9,9 @@
     -moz-box-shadow: var(--moz-boxshadow);
     box-shadow: var(--box-boxshadow);
     background-color: #111;
-    border: solid 1px var(--color-highlight-02);
+	border: solid 1px var(--color-highlight-02);
+	
+	
 }
 
 .ui-draggable:hover {
@@ -157,7 +159,7 @@
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		grid-template-rows: 1fr;
-		grid-column-gap: 0px;
+		grid-column-gap: 20px;
 		grid-row-gap: 0px;
 		}
 		
