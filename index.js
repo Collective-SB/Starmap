@@ -4,21 +4,7 @@ const fs = require("fs");
 require("dotenv").config();
 const app = express();
 const POINT_INFO_API = "https://api-beta.isan.to/front/getPointInfo/";
-const redirs = [
-	{
-		names: ["doc", "documentation"],
-		link:
-			"https://docs.google.com/document/d/1UZWv5UM_DUMQZnlsFbLcuyjbu__Bs0yltIHsXP88qvk/edit",
-	},
-	{
-		names: ["git", "github"],
-		link: "https://github.com/Collective-SB/Starmap/",
-	},
-	{
-		names: ["discord", "server", "collective", "support", "help"],
-		link: "https://discord.gg/VnU8apR",
-	},
-];
+const redirs = require("./redirects.js");
 // const POINT_INFO_API = "http://localhost:8000/front/getPointInfo/"
 const IMGS = {
 	ship:
