@@ -10,7 +10,7 @@ module.exports = [
 	},
 	{
 		names: ["discord", "server", "collective", "support", "help"],
-		link: "https://discord.gg/VnU8apR",
+		link: "https://discord.gg/Collective",
 	},
 	{
 		names: ["isan-vid"],

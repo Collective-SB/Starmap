@@ -31,6 +31,7 @@ app.get("/favicon.ico", (req, res) => {
 });
 app.get(["/:pointId", "/"], async (req, res) => {
 	const URL = req.protocol + "://" + req.get("host") + req.originalUrl;
+	console.log(URL);
 	let openGraphStyles = `
 		<meta property="og:image:type" content="image/png" />
 		<meta property="og:image:width" content="128" />
@@ -42,7 +43,7 @@ app.get(["/:pointId", "/"], async (req, res) => {
 		<meta property="og:description" content="A dynamic live time map for Starbase\nCreated by Strikeeaglechase#0001" />
 		<meta property="og:image" content="${IMGS.ico}" />
 		<meta property="og:title" content="Starmap" />
-		<meta property="og:site_name" content="Support server - https://discord.gg/VnU8apR" />
+		<meta property="og:site_name" content="Support server - https://discord.gg/Collective" />
 		
 	`;
 	if (req.params.pointId) {
