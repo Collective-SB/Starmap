@@ -6,8 +6,7 @@
 */
 
 @import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
-@import url('https://fonts.googleapis.com/css?family=Squada+One&amp;display=swap');
-
+@import url("https://fonts.googleapis.com/css?family=Squada+One&amp;display=swap");
 
 /*
 |*************************************************************************;
@@ -29,7 +28,7 @@
 :root {
 	/* Font Imports */
 	--main-font-VT323: "VT323", monospace;
-	--main-font-Squada: 'Squada One', cursive;
+	--main-font-Squada: "Squada One", cursive;
 
 	/* Cursor Setting */
 	--main-cursor-default: default;
