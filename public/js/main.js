@@ -794,7 +794,7 @@ class App {
 		});
 		this.pointManager.updateLayers();
 		this.api.getPoints();
-
+		this.api.authorizeWebsocket(this.storage.getItem("jwt"));
 		if (this.user.isPubToken) {
 			const addPointBtn = document.getElementById("new-point");
 			addPointBtn.style.display = "none";
