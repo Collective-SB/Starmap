@@ -22,7 +22,7 @@ module.exports = [
 	},
 	{
 		names: ["gla-vid"],
-		link: "https://www.youtube.com/watch?v=ASuTG5dBYpo",
+		link: "https://www.youtube.com/watch?v=oxUv32Zk8Bo",
 	},
 	{
 		names: ["col-vid"],
