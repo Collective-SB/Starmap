@@ -761,6 +761,9 @@ class App {
 			this.sceneObjs.camera
 		);
 	}
+	updateTheme(newColor) {
+		document.documentElement.style.setProperty("--user-style", newColor);
+	}
 	//Called whenever a user successfully logs in, fills out the group options from user object
 	onLogin() {
 		const form = document.getElementById("filterFormLayers");
@@ -823,6 +826,10 @@ class App {
 		if (this.user.isPubToken) {
 			const addPointBtn = document.getElementById("new-point");
 			addPointBtn.style.display = "none";
+		}
+		if (this.user.g.some((layer) => layer.id == "MqJZYstndHmaxIEG")) {
+			//User is a subr, lets set their style
+			this.updateTheme("#b72015");
 		}
 		//Load in the toggled filters (defer execution to ensure html elements get loaded)
 		setTimeout(this.initFilters.bind(this), 0);

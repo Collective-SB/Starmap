@@ -4,16 +4,15 @@
 |*************************************************************************;
 */
 .ui-draggable {
-    border-radius: 5px;
-    -webkit-box-shadow: var(--webkit-boxshadow);
-    -moz-box-shadow: var(--moz-boxshadow);
-    box-shadow: var(--box-boxshadow);
-    background-color: #111;
-    border: solid 1px #0074F0;
+	border-radius: 5px;
+	-webkit-box-shadow: var(--webkit-boxshadow);
+	-moz-box-shadow: var(--moz-boxshadow);
+	box-shadow: var(--box-boxshadow);
+	background-color: #111;
+	border: solid 1px var(--user-style);
 }
 
 .ui-draggable:hover {
-
 }
 /*
 |*************************************************************************;
@@ -21,8 +20,8 @@
 |*************************************************************************;
 */
 .settings {
-    display: none;
-    opacity: 0.5;
+	display: none;
+	opacity: 0.5;
 	position: absolute;
 	left: 20%;
 	top: 10%;
@@ -33,7 +32,7 @@
 	color: whitesmoke;
 }
 .settings:hover {
-    opacity: 1;
+	opacity: 1;
 }
 
 .settings .settings-close {
