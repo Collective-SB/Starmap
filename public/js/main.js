@@ -356,6 +356,18 @@ class App {
 		);
 		return intersects;
 	}
+	getScreenPos(worldPos) {
+		const width = app.sceneObjs.renderer.domElement.width;
+		const height = app.sceneObjs.renderer.domElement.height;
+		const widthHalf = width / 2;
+		const heightHalf = height / 2;
+
+		const pos = worldPos.clone();
+		pos.project(this.sceneObjs.camera);
+		pos.x = -pos.x * widthHalf + widthHalf;
+		pos.y = -(pos.y * heightHalf) + heightHalf;
+		return pos;
+	}
 	//Figures out how the map should handle a user click
 	handleSceneClick(event) {
 		const intersects = this.castRay(event.clientX, event.clientY);
@@ -651,6 +663,19 @@ class App {
 		const infoWindow = document.getElementById("infoWindow");
 		infoWindow.innerHTML = template;
 		infoWindow.style.display = "";
+
+		//Also move the info window near the point
+		if (this.moveInfoOnClick) {
+			const container = document.getElementsByClassName("info-container");
+			const infoContainer = container[0];
+			const screenPos = this.getScreenPos(object.position);
+			infoContainer.style.right = `${
+				screenPos.x - infoContainer.clientWidth - 100
+			}px`;
+			infoContainer.style.top = `${
+				screenPos.y - infoContainer.clientHeight / 2
+			}px`;
+		}
 
 		//Handles pressing the update point button
 		$("#update-point").click(function () {
