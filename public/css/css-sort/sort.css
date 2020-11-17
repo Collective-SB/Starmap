@@ -83,7 +83,7 @@ button:hover {
 /* Note: There should be 2 rows, but for time only going with 1 for now */
 .button-grid {
 	/* height: 100px; */
-	height: 50px;
+	height: 44px;
 }
 
 .button-row {
@@ -101,15 +101,11 @@ button:hover {
 	color: #0074f0;
 	flex-grow: 1;
 	cursor: pointer;
-	border-width: 1px 0;
-}
-
-.button-row button:last-child {
-	border-left-width: 1px;
+	border-width: 1px 1px 1px 0;
 }
 
 .button-row button:first-child {
-	border-right-width: 1px;
+	border-left-width: 1px;
 }
 
 .button-row button:hover {
@@ -130,6 +126,7 @@ button:hover {
 	color: 333;
 	border: none;
 	margin-top: 2px;
+	cursor: text;
 }
 
 .nopadding {
@@ -147,6 +144,19 @@ button:hover {
 	font-size: 17px !important;
 	border-bottom-style: solid !important;
 	font-weight: bold;
+
+	transition: color 0.2s;
+	transition: background-color 0.2s;
+	transition: max-height 0.2s ease-out;
+}
+
+.layerheader:hover {
+	color: whitesmoke;
+	background-color: #333;
+
+	transition: color 0.2s;
+	transition: background-color 0.2s;
+	transition: max-height 0.2s ease-out;
 }
 
 .wrapper-sidebar {
@@ -200,7 +210,7 @@ button:hover {
 }
 
 .sidenav p {
-	padding: 0px 8px 6px 10px;
+	padding: 3px 8px 3	px 10px;
 	margin: 0;
 	text-decoration: none;
 	font-size: 15px;
