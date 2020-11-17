@@ -39,7 +39,7 @@ Whitesmoke
 */
 
 button {
-	font-family: var(--main-font-VT323);
+	font-family: var(--main-font-Squada);
 	background-color: #111111;
 	color: var(--user-style);
 	border-width: 1px;
@@ -47,7 +47,6 @@ button {
 	padding-top: 2px;
 	padding-bottom: 2px;
 	transition: color 0.25s;
-	font-weight: bold;
 	font-size: 1em;
 }
 
@@ -126,10 +125,17 @@ button:hover {
 /* Side Nav */
 
 #find {
-	background-color: whitesmoke;
-	color: 333;
-	border: none;
+	color: whitesmoke;
+	border: 2px dashed #0074f0;
+
+	background-color: #111111;
 	margin-top: 2px;
+}
+
+#find:hover {
+	border: 2px dashed #0074f0;
+	background-color: #0074f0;
+	color: #111;
 }
 
 .nopadding {
@@ -210,18 +216,14 @@ button:hover {
 	text-align: center;
 	user-select: none;
 
-	transition: color 0.2s;
-	transition: background-color 0.2s;
-	transition: max-height 0.2s ease-out;
+	transition: max-height 0.2s ease-out, background-color 0.2s, color 0.2s;
 }
 
 .sidenav-point:hover {
 	color: whitesmoke;
 	background-color: #333;
 
-	transition: color 0.2s;
-	transition: background-color 0.2s;
-	transition: max-height 0.2s ease-out;
+	transition: max-height 0.2s ease-out, background-color 0.2s, color 0.2s;
 }
 
 .sidenav-bottom {
