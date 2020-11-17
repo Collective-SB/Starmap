@@ -1,0 +1,143 @@
+/*
+|*************************************************************************;
+* Base Window Styles
+|*************************************************************************;
+*/
+.ui-draggable {
+	border-radius: 5px;
+	-webkit-box-shadow: var(--webkit-boxshadow);
+	-moz-box-shadow: var(--moz-boxshadow);
+	box-shadow: var(--box-boxshadow);
+	background-color: #111;
+	border: solid 1px var(--user-style);
+}
+
+.ui-draggable:hover {
+}
+/*
+|*************************************************************************;
+* Win -Settings Panel
+|*************************************************************************;
+*/
+.settings {
+	display: none;
+	opacity: 0.5;
+	position: absolute;
+	left: 20%;
+	top: 10%;
+	min-width: 12px;
+	min-height: 12px;
+	padding: 5px;
+	z-index: 1;
+	color: whitesmoke;
+}
+.settings:hover {
+	opacity: 1;
+}
+
+.settings .settings-close {
+	position: absolute;
+	color: var(--red);
+	top: 3px;
+	right: 3px;
+	user-select: none;
+	z-index: 2;
+}
+
+.settings .settings-close:hover {
+	cursor: pointer;
+	transform: scale(1.2);
+}
+
+/*
+|*************************************************************************;
+* Win -Add Point
+|*************************************************************************;
+*/
+
+.add-point {
+	display: none;
+	position: absolute;
+	left: 20%;
+	top: 10%;
+	min-width: 12px;
+	min-height: 12px;
+	padding: 5px;
+	z-index: 1;
+	color: whitesmoke;
+}
+
+.add-point form {
+	display: flex;
+	flex-direction: column;
+}
+
+.add-point form input {
+	margin: 5px 0;
+	filter: brightness(0.8);
+}
+
+.add-point form input:focus {
+	filter: brightness(1);
+	outline: none;
+}
+
+.add-point .coordinates {
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+.add-point input[type="number"] {
+	max-width: 80px;
+}
+
+.dropdown-select {
+	border: none;
+	margin-top: 1px;
+	margin-bottom: 1px;
+}
+
+.add-point input[type="text"] {
+	background-color: whitesmoke;
+	color: #111;
+	outline: none;
+	border: none;
+}
+
+.add-point input[type="submit"] {
+	cursor: pointer;
+	outline: none;
+	background-color: whitesmoke;
+	color: #333;
+	border: solid 1px whitesmoke;
+	transition: color 0.5s;
+}
+
+.add-point input[type="submit"]:hover {
+	background-color: #333;
+	color: whitesmoke;
+	transition: color 0.5s;
+}
+
+.add-point .close {
+	position: absolute;
+	color: var(--red);
+	top: 3px;
+	right: 3px;
+	user-select: none;
+	z-index: 2;
+}
+
+.add-point .close:hover {
+	cursor: pointer;
+	transform: scale(1.2);
+}
+
+.add-point legend {
+	font-weight: bold;
+	font-size: 20px;
+	text-align: center;
+	margin: 5px;
+	user-select: none;
+}

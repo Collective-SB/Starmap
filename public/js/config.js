@@ -22,6 +22,7 @@ export const DIST_TO_BELT = 3000000 + SOLONS_OFFSET;
 export const BELT_THICK = 2200000;
 export const SAFE_LEN = 1000000;
 export const SAFE_RAD = 100000 / 2;
+export const CAM_MAX_ZOOM = EOS_SIZE * 10;
 //Consts to control the marker scaling
 export const MARKER_SIZE_MIN = 0.1;
 export const MARKER_SIZE_MAX = 15;
@@ -29,7 +30,8 @@ export const DIST_MIN = 0;
 export const DIST_MAX = 500000;
 export const MARKER_SIZE = 1000;
 export const MARKER_RING_SIZE = 750;
-export const HOVER_SCALE_MAX = 2;
+export const HOVER_SCALE_BASE_MAX = 1.5;
+export const HOVER_CAM_DIST_FACTOR = 25000;
 export const HOVER_CHANGE_RATE = 0.35;
 export const FADE_MIN_DIST = 0;
 export const FADE_MAX_DIST = 2500;
@@ -60,7 +62,7 @@ export const TYPES = {
 			map: "../assets/icons/ship-done.png",
 			info: "../assets/icons/ship.png",
 		},
-		colorOpts: [
+		subtypes: [
 			{
 				name: "Default",
 				hex: "#f36a28",
@@ -75,7 +77,7 @@ export const TYPES = {
 			map: "../assets/icons/station-done.png",
 			info: "../assets/icons/station.png",
 		},
-		colorOpts: [
+		subtypes: [
 			{
 				name: "Default",
 				hex: "#3bbd4f",
@@ -102,7 +104,7 @@ export const TYPES = {
 			map: "../assets/icons/ore-done.png",
 			info: "../assets/icons/ore.png",
 		},
-		colorOpts: [
+		subtypes: [
 			{
 				name: "Default",
 				hex: "#8c63e8",
@@ -117,7 +119,7 @@ export const TYPES = {
 			map: "../assets/icons/random-done.png",
 			info: "../assets/icons/random.png",
 		},
-		colorOpts: [
+		subtypes: [
 			{
 				name: "Default",
 				hex: "#aaaaaa",

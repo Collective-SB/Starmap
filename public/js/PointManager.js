@@ -3,7 +3,7 @@
 //Class to hold all the map data after getting it from the api
 import {
 	MARKER_SIZE,
-	HOVER_SCALE_MAX,
+	HOVER_SCALE_BASE_MAX,
 	HOVER_CHANGE_RATE,
 	pointOffset,
 	TYPES,
@@ -14,6 +14,7 @@ import {
 	ZONE_WIRE_CUTOFF,
 	ZONE_OUTLINE_POINTS,
 	ZONE_INTERACTION_SIZE,
+	HOVER_CAM_DIST_FACTOR,
 } from "./config.js";
 
 import { lerp, hexToRgb, map, constrain, tubeLine } from "./functions.js";
@@ -82,13 +83,16 @@ class Point {
 			gamePos: null,
 			desc: null,
 			type: null,
+			subtype: null,
 			createdBy: null,
 		};
 		this.init(pointData);
 	}
 	//Creates the Threejs elements, sidebar elements, and internal object for the point
 	init(data) {
-		const color = data.color || TYPES[data.type].color; //If no color is provided fall back to default
+		const color = TYPES[data.type].subtypes.find(
+			(stype) => stype.name == data.subtype
+		).hex;
 		const position = fromGamePos(data.pos);
 		//Line from the astroid belt up
 		var points = [];
@@ -173,6 +177,7 @@ class Point {
 			gamePos: data.pos,
 			desc: data.desc,
 			type: data.type,
+			subtype: data.subtype,
 			createdBy: data.createdBy,
 		};
 		this.updateNamePosition();
@@ -269,8 +274,8 @@ class Point {
 			pointData.desc == this.info.desc &&
 			pointData.type == this.info.type &&
 			pointData.name == this.info.name &&
+			pointData.subtype == this.info.subtype &&
 			pointData.groupID == this.groupID &&
-			pointData.color == this.color &&
 			pointData.vanity == this.vanity
 		);
 	}
@@ -281,7 +286,9 @@ class Point {
 			return;
 		}
 		const position = fromGamePos(pointData.pos);
-		const color = pointData.color;
+		const color = TYPES[pointData.type].subtypes.find(
+			(stype) => stype.name == pointData.subtype
+		).hex;
 		const noNameChange = this.info.name == pointData.name;
 		const noPosChange =
 			pointData.pos.x == this.info.gamePos.x &&
@@ -291,13 +298,14 @@ class Point {
 		this.info.name = pointData.name;
 		this.info.type = pointData.type;
 		this.info.gamePos = pointData.pos;
+		this.info.subtype = pointData.subtype;
 		this.groupID = pointData.groupID;
 		this.vanity = pointData.vanity;
 		this.group = pointData.group;
-		this.color = pointData.color;
-		this.marker.material.color.set(pointData.color);
-		this.nameText.material.color.set(pointData.color);
-		this.linePart.material.color.set(pointData.color);
+		this.color = color;
+		this.marker.material.color.set(color);
+		this.nameText.material.color.set(color);
+		this.linePart.material.color.set(color);
 		this.marker.material.alphaMap = this.app.pointManager.pointTextures[
 			pointData.type
 		];
@@ -398,10 +406,13 @@ class Point {
 	}
 	//Updates the scale of the point based off the global scale (due to current zoom) and the point scale (due to hover)
 	runScale(scale) {
+		const dist = this.marker.position.distanceTo(
+			this.app.sceneObjs.camera.position
+		);
 		if (this.isHovered || this.isHoveredSide) {
 			this.hoverEffect = lerp(
 				this.hoverEffect,
-				HOVER_SCALE_MAX,
+				HOVER_SCALE_BASE_MAX + dist / HOVER_CAM_DIST_FACTOR,
 				HOVER_CHANGE_RATE
 			);
 		} else {
@@ -412,9 +423,7 @@ class Point {
 		this.nameText.scale.set(newScale, newScale, newScale);
 		this.updateMarkerPosition(newScale);
 		this.updateNamePosition(newScale);
-		const dist = this.marker.position.distanceTo(
-			this.app.sceneObjs.camera.position
-		);
+
 		this.marker.material.opacity = constrain(
 			map(dist, FADE_MIN_DIST, FADE_MAX_DIST, 0, 1),
 			0,
@@ -767,7 +776,11 @@ function createTextCanvas(string, parameters = {}) {
 	canvas.style.width = width + "px";
 	canvas.style.height = height + "px";
 
-	ctx.font = `${fontSize}px Roboto`;
+	// ctx.font = `${fontSize}px Roboto`;
+	const fontName = getComputedStyle(document.documentElement).getPropertyValue(
+		"--main-font-Squada"
+	);
+	ctx.font = `${fontSize}px ${fontName}`;
 	ctx.textAlign = parameters.align || "center";
 	ctx.textBaseline = parameters.baseline || "middle";
 	const rgb = hexToRgb(parameters.color);
