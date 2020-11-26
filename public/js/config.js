@@ -92,6 +92,10 @@ export const TYPES = {
 				name: "Kingdom",
 				hex: "#0074f0",
 			},
+			{
+				name: "Substrate",
+				hex: "#e72f2c",
+			},
 		],
 	},
 	ore: {
