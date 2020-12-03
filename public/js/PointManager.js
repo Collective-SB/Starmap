@@ -81,6 +81,7 @@ class Point {
 		this.group;
 		this.ring;
 		this.groupID;
+		this.imageUrl;
 		this.hoverEffect = 0;
 		this.isHovered = false;
 		this.isHoveredSide = false;
@@ -180,6 +181,7 @@ class Point {
 		this.group = data.group;
 		this.groupID = data.groupID;
 		this.vanity = data.vanity;
+		this.imageUrl = data.imageEmbed;
 		this.info = {
 			name: data.name,
 			gamePos: data.pos,
@@ -314,6 +316,7 @@ class Point {
 		this.groupID = pointData.groupID;
 		this.vanity = pointData.vanity;
 		this.group = pointData.group;
+		this.imageUrl = pointData.imageEmbed;
 		this.color = color;
 		this.marker.material.color.set(color);
 		this.nameText.material.color.set(color);

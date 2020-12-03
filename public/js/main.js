@@ -40,6 +40,7 @@ const infoTemplate = `
 	<div class="desc">
 		<p class="infoText no-drag">%DESCRIPTION%</p>
 	</div>
+	<img src="%IMAGE_URL%" style="display:%IMAGE_DISPLAY%" class="infoImage">
 </div>
 `;
 
@@ -636,6 +637,9 @@ class App {
 		template = template.replace("%LAYER%", poiData.group);
 		template = template.replace("%CREATED_AT%", poiData.info.createdAt);
 		template = template.replace("%EDITED_AT%", poiData.info.editedAt);
+
+		template = template.replace("%IMAGE_URL%", poiData.imageUrl);
+		template = template.replace("%IMAGE_DISPLAY%", poiData.imageUrl ? "block" : "none");
 
 		const pos = poiData.info.gamePos;
 		template = template.replace("%POS_X%", pos.x);
