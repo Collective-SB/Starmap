@@ -17,7 +17,13 @@ import {
 	HOVER_CAM_DIST_FACTOR,
 } from "./config.js";
 
-import { lerp, hexToRgb, map, constrain, tubeLine } from "./functions.js";
+import {
+	lerp,
+	hexToRgb,
+	map,
+	constrain,
+	tubeLine
+} from "./functions.js";
 
 function sortDiv(divId) {
 	var i, shouldSwitch;
@@ -85,6 +91,8 @@ class Point {
 			type: null,
 			subtype: null,
 			createdBy: null,
+			createdAt: null,
+			editedAt: null,
 		};
 		this.init(pointData);
 	}
@@ -179,6 +187,8 @@ class Point {
 			type: data.type,
 			subtype: data.subtype,
 			createdBy: data.createdBy,
+			createdAt: data.createdAt,
+			editedAt: data.editedAt
 		};
 		this.updateNamePosition();
 		this.updateMarkerPosition();
@@ -299,6 +309,8 @@ class Point {
 		this.info.type = pointData.type;
 		this.info.gamePos = pointData.pos;
 		this.info.subtype = pointData.subtype;
+		this.info.createdAt = pointData.createdAt;
+		this.info.editedAt = pointData.editedAt;
 		this.groupID = pointData.groupID;
 		this.vanity = pointData.vanity;
 		this.group = pointData.group;
@@ -556,9 +568,7 @@ class Zone {
 		switch (this.shape.type) {
 			case "sphere":
 				for (
-					let i = 0;
-					i < Math.PI * 2;
-					i += (Math.PI * 2) / ZONE_OUTLINE_POINTS
+					let i = 0; i < Math.PI * 2; i += (Math.PI * 2) / ZONE_OUTLINE_POINTS
 				) {
 					points.push(
 						// new THREE.Vector3(

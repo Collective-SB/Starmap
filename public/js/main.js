@@ -9,6 +9,10 @@ const infoTemplate = `
 			Type: %TYPE%
 			<br>
 			Layer: %LAYER%
+			<br>
+			Created: %CREATED_AT%
+			<br>
+			Edited: %EDITED_AT%
 		</span>
 	</div>
 
@@ -84,7 +88,11 @@ import {
 	ENV,
 } from "./config.js";
 
-import { constrain, map, copyToClipboard } from "./functions.js";
+import {
+	constrain,
+	map,
+	copyToClipboard
+} from "./functions.js";
 
 import PointManager from "./PointManager.js";
 import API from "./API.js";
@@ -402,8 +410,7 @@ class App {
 			stop: function () {
 				$(this).css({
 					left: "",
-					right:
-						$(window).width() -
+					right: $(window).width() -
 						($(this).offset().left + $(this).outerWidth()),
 				});
 			},
@@ -557,8 +564,8 @@ class App {
 				);
 				if (
 					point.info.name
-						.toLowerCase()
-						.includes(searchbar.value.toLowerCase())
+					.toLowerCase()
+					.includes(searchbar.value.toLowerCase())
 				) {
 					points.children[i].classList.remove("search-hide");
 				} else {
@@ -606,9 +613,9 @@ class App {
 		//Creates the info in the top right window
 		const self = this;
 		//Allow threejs object OR my point data object
-		const poiData = object.uuid
-			? this.pointManager.getByThreeId(object.uuid)
-			: object;
+		const poiData = object.uuid ?
+			this.pointManager.getByThreeId(object.uuid) :
+			object;
 		this.calculator.handlePointClick(poiData);
 		this.pointManager.focusedPOI = poiData;
 
@@ -627,6 +634,9 @@ class App {
 			TYPES[poiData.info.type].icons.info
 		);
 		template = template.replace("%LAYER%", poiData.group);
+		template = template.replace("%CREATED_AT%", poiData.info.createdAt);
+		template = template.replace("%EDITED_AT%", poiData.info.editedAt);
+
 		const pos = poiData.info.gamePos;
 		template = template.replace("%POS_X%", pos.x);
 		template = template.replace("%POS_Y%", pos.y);
