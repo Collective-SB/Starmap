@@ -40,7 +40,9 @@ const infoTemplate = `
 	<div class="desc">
 		<p class="infoText no-drag">%DESCRIPTION%</p>
 	</div>
-	<img src="%IMAGE_URL%" style="display:%IMAGE_DISPLAY%" class="infoImage">
+	<a href="%IMAGE_URL%" target="_blank">
+		<img src="%IMAGE_URL%" style="display:%IMAGE_DISPLAY%" class="infoImage">
+	</a>
 </div>
 `;
 
@@ -638,6 +640,7 @@ class App {
 		template = template.replace("%CREATED_AT%", poiData.info.createdAt);
 		template = template.replace("%EDITED_AT%", poiData.info.editedAt);
 
+		template = template.replace("%IMAGE_URL%", poiData.imageUrl); //There are two URL's that need to be filled
 		template = template.replace("%IMAGE_URL%", poiData.imageUrl);
 		template = template.replace("%IMAGE_DISPLAY%", poiData.imageUrl ? "block" : "none");
 
