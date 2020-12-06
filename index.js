@@ -3,9 +3,8 @@ const fetch = require("node-fetch");
 const fs = require("fs");
 require("dotenv").config();
 const app = express();
-// const POINT_INFO_API = "https://api-beta.isan.to/front/getPointInfo/";
-const redirs = require("./redirects.js");
-const POINT_INFO_API = "http://localhost:8000/front/getPointInfo/"
+const POINT_INFO_API = "https://api-beta.isan.to/front/getPointInfo/";
+// const POINT_INFO_API = "http://localhost:8000/front/getPointInfo/"
 const IMGS = {
 	ship: "https://cdn.discordapp.com/attachments/762209257738207252/762209368925929472/ship.png",
 	ore: "https://cdn.discordapp.com/attachments/762209257738207252/762209362332090378/ore.png",
@@ -13,11 +12,6 @@ const IMGS = {
 	other: "https://cdn.discordapp.com/attachments/762209257738207252/762209367386488852/random-done.png",
 	ico: "https://cdn.discordapp.com/attachments/762209257738207252/762219304694972447/eh5Artboard_1.png",
 };
-
-function getRedirect(path) {
-	const redir = redirs.find((dir) => dir.names.includes(path.toLowerCase()));
-	return redir ? redir.link : null;
-}
 
 app.get("/favicon.ico", (req, res) => {
 	res.sendFile("./public/favicon.ico", {
