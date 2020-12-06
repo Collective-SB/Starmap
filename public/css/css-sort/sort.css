@@ -340,6 +340,12 @@ button:hover {
 	width: fit-content;
 }
 
+.infoImage {
+	max-width: 270px;
+	max-height: 270px;
+	margin-top: 10px;
+}
+
 .distance-fieldset {
 	border-width: 2px 0 0 0;
 	text-align: center;
@@ -395,8 +401,7 @@ button:hover {
 #login:hover img {
 	color: #111;
 	/* This is equivalent to switching from whitesmoke to #333, lets us change the color of an image without any JS */
-	filter: invert(15%) sepia(1%) saturate(0%) hue-rotate(87deg) brightness(95%)
-		contrast(85%);
+	filter: invert(15%) sepia(1%) saturate(0%) hue-rotate(87deg) brightness(95%) contrast(85%);
 }
 
 #login .login-text {
@@ -464,9 +469,11 @@ button:hover {
 	z-index: 1;
 	color: whitesmoke;
 }
+
 .calculator:hover {
 	opacity: 1;
 }
+
 .calculator .calc-close {
 	position: absolute;
 	color: var(--red);
@@ -475,10 +482,12 @@ button:hover {
 	user-select: none;
 	z-index: 2;
 }
+
 .calculator .calc-close:hover {
 	cursor: pointer;
 	transform: scale(1.2);
 }
+
 .calc-title {
 	font-weight: bold;
 	font-size: 20px;
