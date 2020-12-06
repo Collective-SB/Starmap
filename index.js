@@ -3,20 +3,15 @@ const fetch = require("node-fetch");
 const fs = require("fs");
 require("dotenv").config();
 const app = express();
-const POINT_INFO_API = "https://api-beta.isan.to/front/getPointInfo/";
+// const POINT_INFO_API = "https://api-beta.isan.to/front/getPointInfo/";
 const redirs = require("./redirects.js");
-// const POINT_INFO_API = "http://localhost:8000/front/getPointInfo/"
+const POINT_INFO_API = "http://localhost:8000/front/getPointInfo/"
 const IMGS = {
-	ship:
-		"https://cdn.discordapp.com/attachments/762209257738207252/762209368925929472/ship.png",
-	ore:
-		"https://cdn.discordapp.com/attachments/762209257738207252/762209362332090378/ore.png",
-	station:
-		"https://cdn.discordapp.com/attachments/762209257738207252/762209374071947284/station.png",
-	other:
-		"https://cdn.discordapp.com/attachments/762209257738207252/762209367386488852/random-done.png",
-	ico:
-		"https://cdn.discordapp.com/attachments/762209257738207252/762219304694972447/eh5Artboard_1.png",
+	ship: "https://cdn.discordapp.com/attachments/762209257738207252/762209368925929472/ship.png",
+	ore: "https://cdn.discordapp.com/attachments/762209257738207252/762209362332090378/ore.png",
+	station: "https://cdn.discordapp.com/attachments/762209257738207252/762209374071947284/station.png",
+	other: "https://cdn.discordapp.com/attachments/762209257738207252/762209367386488852/random-done.png",
+	ico: "https://cdn.discordapp.com/attachments/762209257738207252/762219304694972447/eh5Artboard_1.png",
 };
 
 function getRedirect(path) {
@@ -48,13 +43,16 @@ app.get(["/:pointId", "/"], async (req, res) => {
 	`;
 	if (req.params.pointId) {
 		//For custom URL stuff
-		const redir = getRedirect(req.params.pointId);
-		if (redir) return res.redirect(redir);
+		// const redir = getRedirect(req.params.pointId);
+		// if (redir) return res.redirect(redir);
 		const apiRes = await fetch(POINT_INFO_API + req.params.pointId, {
 			method: "GET",
 		});
 		if (apiRes.status == 200) {
+			// 200 either means its a valid point, or a valid redirect, lets check
 			const data = await apiRes.json();
+			if (data.resType == "redirect") return res.redirect(data.url);
+
 			openGraphStyles += `
 				<meta property="og:site_name" content="Starmap" />
 				<meta property="og:title" content="${data.name}" />
