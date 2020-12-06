@@ -18,7 +18,7 @@ app.get("/favicon.ico", (req, res) => {
 		root: __dirname,
 	});
 });
-app.get("/test5.html", (req, res) => {
+app.get("/test6.html", (req, res) => {
 	res.sendFile("./test.html", {
 		root: __dirname,
 	});
