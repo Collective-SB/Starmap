@@ -18,6 +18,11 @@ app.get("/favicon.ico", (req, res) => {
 		root: __dirname,
 	});
 });
+app.get("/isan.pdf", (req, res) => {
+	res.sendFile("./public/isan.pdf", {
+		root: __dirname,
+	});
+});
 app.get(["/:pointId", "/"], async (req, res) => {
 	const URL = req.protocol + "://" + req.get("host") + req.originalUrl;
 	console.log(URL);
