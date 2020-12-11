@@ -39,7 +39,7 @@ export default class Calculator {
 			$(this).parent().hide();
 		});
 		$("#calcBtn").click(function () {
-			$("#calculator").show();
+			$("#calculator").toggle();
 		});
 		const speedInputDirect = document.getElementById("shipSpeedDirect");
 		const speedInputSlider = document.getElementById("shipSpeedSlider");

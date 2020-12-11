@@ -130,7 +130,7 @@ export default class SettingsManager {
 			$(this).parent().hide();
 		});
 		$("#settingsBtn").click(function () {
-			$("#settingsWindow").show();
+			$("#settingsWindow").toggle();
 		});
 		//Init all the values of the settings UI elements, and bind the event handler
 		let savedSettings;
