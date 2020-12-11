@@ -102,6 +102,8 @@ button:hover {
 	flex-grow: 1;
 	cursor: pointer;
 	border-width: 1px 1px 1px 0;
+
+	outline: 0;
 }
 
 .button-row button:first-child {
