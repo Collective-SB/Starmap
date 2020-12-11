@@ -375,7 +375,7 @@ button:hover {
 	overflow: hidden;
 	cursor: pointer;
 	outline: none;
-	height: 45px;
+	height: 75px;
 
 	display: flex;
 	flex-direction: row;
@@ -383,7 +383,7 @@ button:hover {
 	align-items: center;
 	vertical-align: middle;
 
-	justify-content: space-between;
+	justify-content: space-around;
 	transition: filter 0.25s;
 }
 
