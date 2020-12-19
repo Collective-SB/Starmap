@@ -7,7 +7,9 @@ const HEATRBEAT = JSON.stringify({
 import { ENV, URLS } from "./config.js";
 const API_URL = URLS.api[ENV];
 const WSS_URL = URLS.wss[ENV];
-
+function getExpInDays(user) {
+	return (user.exp - Date.now() / 1000) / (60 * 60 * 24);
+}
 export default class API {
 	constructor(pointManager, app) {
 		this.pointManager = pointManager;
@@ -36,8 +38,8 @@ export default class API {
 				case "heartbeat":
 					self.socket.send(HEATRBEAT);
 					break;
-				case "newPoints":
-					self.getPoints();
+				case "updatePoint":
+					self.getPoint(data.id);
 					break;
 				case "newLayers":
 					self.getNewJWT();
@@ -56,6 +58,14 @@ export default class API {
 				this.app.setLoggedIn(false);
 			}
 		}
+	}
+	authorizeWebsocket(jwt) {
+		this.socket.send(
+			JSON.stringify({
+				event: "authorize",
+				token: jwt,
+			})
+		);
 	}
 	async getNewJWT() {
 		if (!this.app.isLoggedIn) {
@@ -79,9 +89,9 @@ export default class API {
 	}
 	//Requests points from the server, then gives the data to the point manager
 	async getPoints() {
-		if (!this.app.isLoggedIn) {
-			return;
-		}
+		// if (!this.app.isLoggedIn) {
+		// 	return;
+		// }
 		const res = await fetch(API_URL + `points`, {
 			method: "GET",
 			headers: {
@@ -108,6 +118,38 @@ export default class API {
 			});
 		} else if (res.status == 401) {
 			this.app.setLoggedIn(false);
+		}
+	}
+	//Gets singular point from server
+	async getPoint(id) {
+		const res = await fetch(`${API_URL}point/${id}`, {
+			method: "GET",
+			headers: {
+				Authorization: "Bearer " + this.app.storage.getItem("jwt"),
+				"Content-Type": "application/json",
+			},
+		});
+		switch (res.status) {
+			case 200:
+				const data = await res.json();
+				const point = data.point;
+				point.id = point._id;
+				if (!this.pointManager.getById(point._id)) {
+					this.pointManager.addPoint(point);
+				} else {
+					this.pointManager.updatePoint(point);
+				}
+				break;
+			case 400:
+				this.pointManager.removeById(id);
+				break;
+			case 401:
+				this.app.setLoggedIn(false);
+				break;
+			default:
+				console.error(
+					`Got unknown API responce code ${res.status}: ${res.statusText}`
+				);
 		}
 	}
 	//Requests a point to be deleted
@@ -172,6 +214,21 @@ export default class API {
 		const res = await fetch(API_URL + "editPoint", request);
 		return res.status;
 	}
+	async getPubJWT() {
+		// app.onLogin();
+		const res = await fetch(API_URL + `publicJWT`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+		if (res.status == 200) {
+			const data = await res.json();
+			this.app.storage.setItem("jwt", data.jwt);
+			this.app.user = jwt_decode(data.jwt);
+			this.app.onLogin();
+		}
+	}
 	//Asks the server if our JWT is valid
 	async confirmJWT(jwt) {
 		const res = await fetch(API_URL + "checkJWT", {
@@ -185,10 +242,19 @@ export default class API {
 		if (!jsonRes || !jsonRes.valid) {
 			this.app.setLoggedIn(false);
 			this.app.user = null;
+			return false;
 		} else {
-			this.app.storage.setItem("jwt", jsonRes.newJwt);
-			this.app.user = jwt_decode(jsonRes.newJwt);
-			this.app.setLoggedIn(true);
+			this.app.user = jwt_decode(jwt);
+			if (this.app.user.isPubToken) {
+				this.app.setLoggedIn(false);
+				this.app.onLogin();
+			} else {
+				this.app.setLoggedIn(true);
+			}
+			if (getExpInDays(this.app.user) < 2) {
+				this.getNewJWT();
+			}
+			return true;
 		}
 	}
 	async getJWTFromCode(code) {

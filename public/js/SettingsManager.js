@@ -116,6 +116,14 @@ const SETTINGS_DEF = [
 			this.pointManager.setVis("ring", val);
 		},
 	},
+	{
+		id: "moveInfoOnClick",
+		default: false,
+		prop: "checked",
+		set: function (val) {
+			this.moveInfoOnClick = val;
+		},
+	},
 ];
 //This actually "enacts" the settings on the app, making the changes
 export default class SettingsManager {

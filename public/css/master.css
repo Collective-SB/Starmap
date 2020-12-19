@@ -1,782 +1,92 @@
+/*
+|*************************************************************************;
+* ScriptName    : Global Root for CSS 
+* ScriptPath    : /css/master.css
+|*************************************************************************;
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Squada+One&amp;display=swap");
+
+/*
+|*************************************************************************;
+* Stylesheets Imports
+|*************************************************************************;
+*/
+
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+@import url("assets-interfaces/interface.css");
+@import url("css-sort/sort.css");
+
+/*
+|*************************************************************************;
+* Stylesheets Global Var
+|*************************************************************************;
+*/
+
 :root {
+	/* Font Imports */
+	--main-font-VT323: "VT323", monospace;
+	--main-font-Squada: "Squada One", cursive;
+
+	/* Cursor Setting */
+	--main-cursor-default: default;
+	--main-cursor-grab: grab;
+	--main-cursor-grabbing: grabbing;
+	--main-cursor-pointer: pointer;
+	--main-cursor-text: text;
+
+	/* Text Settings */
+	--main-text-shadow: 0px 0px 4px rgb(0, 0, 0);
+
+	/* Style config settings */
+	--user-style: #0074f0;
+	/* Default Box Shadow */
+	--webkit-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+	--moz-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+	--box-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+
 	--background: #111;
 	--red: #f44336;
 	--red-hover: #b72015;
-}
 
-body,
-html {
-	background-color: var(--background);
-	margin: 0;
-	font-family: Roboto;
-}
-
-canvas {
-	display: block;
-	position: absolute;
-	left: 0px;
-	right: 0px;
-}
-
-.main {
-	margin-left: 160px;
-	padding: 0px 0px;
-}
-
-select:focus {
-	outline: none;
-}
-
-/* Universal */
-
-/* Color scheme:
-77878B - Grey
-1C1D21 - black
-96031A = red
-Whitesmoke
-#333;
-#111;
+	/*
+|*************************************************************************;
+* Box Properties 
+|*************************************************************************;
 */
 
-button {
-	background-color: whitesmoke;
-	color: #333;
-	border-width: 1px;
-	border-color: #333;
+	/* Default Box Shadow */
+	--webkit-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+	--moz-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+	--box-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 
-	padding-top: 2px;
-	padding-bottom: 2px;
+	/* Red Box Shadow */
+	--webkit-boxshadow-blue: inset 0px -16px 17px -13px var(--user-style);
+	--moz-boxshadow-blue: inset 0px -16px 17px -13px var(--user-style);
+	--box-boxshadow-blue: inset 0px -16px 17px -13px var(--user-style);
 
-	transition: color 0.25s;
+	/* Border Properties */
+	--border-radius-none: 0rem;
+	--border-radius-3: 3px;
 }
 
-button:hover {
-	background-color: #333;
-	color: whitesmoke;
+/*
+|*************************************************************************;
+* Page Properties 
+|*************************************************************************;
+*/
 
-	transition: color 0.25s;
+::-webkit-scrollbar {
+	width: 7px;
 }
 
-.checkbox-option {
-	margin: 0;
-	text-decoration: none;
-	font-size: 15px;
-	color: #818181;
-	display: block;
-	cursor: pointer;
-	user-select: none;
-
-	transition: color 0.2s;
-	transition: background-color 0.2s;
-}
-
-.checkbox-option:hover {
-	color: whitesmoke;
-	background-color: #111;
-
-	transition: color 0.2s;
-	transition: background-color 0.2s;
-}
-
-/* UI Button grid */
-/* Note: There should be 2 rows, but for time only going with 1 for now */
-.button-grid {
-	width: 160px;
-	/* height: 100px; */
-	height: 50px;
-}
-
-.button-row {
-	width: 100%;
-	/* height: 50%; */
-	height: 100%;
-	display: flex;
-	justify-content: space-around;
-}
-
-.button-row button {
-	display: inline-flex;
-	justify-content: center;
-	background-color: whitesmoke;
-	color: #333;
-	flex-grow: 1;
-	cursor: pointer;
-	border-width: 1px 0;
-}
-
-.button-row button:last-child {
-	border-left-width: 1px;
-}
-
-.button-row button:first-child {
-	border-right-width: 1px;
-}
-
-.button-row button:hover {
-	background-color: #333;
-	color: whitesmoke;
-	transition: color 0.25s;
-}
-
-.button-row span {
-	font-size: 250%;
-	margin: auto;
-}
-
-/* Side Nav */
-
-#find {
-	background-color: whitesmoke;
-	color: 333;
-	border: none;
-	margin-top: 2px;
-}
-
-.nopadding {
-	padding: unset !important;
-}
-
-.colap-content {
-	max-height: 0;
-	overflow: hidden;
-	transition: max-height 0.2s ease-out;
-}
-
-.layerheader {
-	margin: 2px !important;
-	font-size: 17px !important;
-	border-top-style: solid !important;
-	border-top-color: brown !important;
-	font-weight: bold;
-}
-
-.sidenav {
-	height: 100%;
-	/* Full-height: remove this if you want "auto" height */
-	width: 160px;
-	/* Set the width of the sidebar */
-	position: fixed;
-	/* Fixed Sidebar (stay in place on scroll) */
-	z-index: 1;
-	/* Stay on top */
-	top: 0;
-	/* Stay at the top */
-	left: 0;
-	background-color: #111;
-	/* Black */
-	overflow-x: hidden;
-
-	display: flex;
-	flex-direction: column;
-}
-
-.sidenav a {
-	text-align: center;
-	background-color: whitesmoke;
-	color: #333;
-
-	text-decoration: none;
-
-	padding: 0.75em 0;
-
-	transition: color 0.25s;
-	transition: background 0.25s;
-}
-
-.sidenav a:hover {
-	background-color: #333;
-	color: whitesmoke;
-}
-
-.sidenav p {
-	padding: 0px 8px 6px 10px;
-	margin: 0;
-	text-decoration: none;
-	font-size: 15px;
-	color: #818181;
-	display: block;
-	cursor: pointer;
-	text-align: center;
-	user-select: none;
-
-	transition: color 0.2s;
-	transition: background-color 0.2s;
-	transition: max-height 0.2s ease-out;
-}
-
-.sidenav-point:hover {
-	color: whitesmoke;
-	background-color: #333;
-
-	transition: color 0.2s;
-	transition: background-color 0.2s;
-	transition: max-height 0.2s ease-out;
-}
-
-.sidenav-bottom {
-	display: flex;
-	flex-direction: column;
-
-	margin-top: auto;
-}
-
-.sidenav-bottom * {
-	margin-top: 2px;
-}
-
-#points-title {
-	color: whitesmoke;
-	text-align: center;
-	padding: 8px 0;
-	font-weight: bold;
-	font-size: 1.5em;
-	display: none;
-	user-select: none;
-}
-
-#new-point {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-
-	outline: none;
-	background-color: whitesmoke;
-	font-size: 16px;
-	border: none;
-
-	min-height: 48px;
-	cursor: pointer;
-	transition: color 0.25s;
-	transition: background 0.25s;
-
-	color: #333;
-}
-
-#new-point span {
-	margin: auto 5px;
-}
-
-#new-point:hover {
-	background-color: #333333;
-	color: whitesmoke;
-}
-
-.search-hide {
-	display: none !important;
-}
-
-/* Info Window */
-
-.info-container {
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	min-width: 12px;
-	min-height: 12px;
-	border: solid 1px whitesmoke;
-	padding: 10px;
-	z-index: 1;
-	background-color: rgb(51, 51, 51);
-	color: whitesmoke;
-}
-
-#dropdown-minimize {
-	background-color: whitesmoke;
-	padding: 3px;
-
-	position: absolute;
-	top: 0;
-	right: 0;
-
-	margin: 5px;
-
-	transition: 0.5s transform;
-
-	cursor: pointer;
-
-	transform: scale(1);
-	z-index: 1;
-}
-
-.distance-to-selector {
-	outline: none;
-}
-
-.speed-input {
-	outline: none;
-}
-
-.info {
-	width: 100%;
-	height: 100%;
-
-	height: auto;
-}
-
-.infoText {
-	padding-left: 5px;
-	margin: 0;
-	margin-bottom: 5px;
-	margin-top: 5px;
-	width: fit-content;
-}
-
-.distance-fieldset {
-	border-width: 2px 0 0 0;
-	text-align: center;
-}
-
-.distance-fieldset legend {
-	padding: 0 5px;
-}
-
-.distance-fieldset p {
-	margin: 0;
-}
-
-/* Login Button */
-
-#login {
-	background-color: whitesmoke;
-	color: #333;
-	/*border-radius: 5px;
-
-	background-color: #7289da;
-	color: whitesmoke; */
-	width: 100%;
-
-	border: none;
-	text-align: center;
-	overflow: hidden;
-	cursor: pointer;
-	outline: none;
-	height: 45px;
-
-	display: flex;
-	flex-direction: row;
-
-	align-items: center;
-	vertical-align: middle;
-
-	justify-content: space-between;
-	transition: filter 0.25s;
-}
-
-#login:hover {
-	background-color: #333;
-	color: whitesmoke;
-}
-
-#login img {
-	color: #333;
-	height: 80%;
-	padding-left: 5px;
-	flex-grow: 0;
-	filter: invert(15%) sepia(1%) saturate(0%) hue-rotate(87deg) brightness(95%) contrast(85%);
-}
-
-#login:hover img {
-	/* This is equivalent to switching from whitesmoke to #333, lets us change the color of an image without any JS */
-	filter: invert(99%) sepia(2%) saturate(309%) hue-rotate(189deg) brightness(114%) contrast(92%);
-}
-
-#login .login-text {
-	flex-grow: 1;
-	font-size: 24px;
-	font-family: Quicksand;
-}
-
-/* One time popup */
-
-.popup {
-	display: none;
-	position: fixed;
-	z-index: 1;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
-	background-color: rgb(0, 0, 0);
-	background-color: rgba(0, 0, 0, 0.4);
-}
-
-.popup-content {
-	background-color: #d6d6d6;
-	margin: 15% auto;
-	padding: 20px;
-	border: 1px solid #888;
-	width: 50%;
-}
-
-.popup-content h1 {
-	color: black;
-	text-align: center;
-}
-
-.popup-content p {
-	color: black;
-}
-
-.topPopupBanner {
-	position: absolute;
-	z-index: 1;
-	width: 40%;
-	left: 30%;
-	background-color: rgba(0, 128, 0, 0.8);
-	border-radius: 5px;
-	top: 15px;
-}
-
-.topPopupBanner p {
-	text-align: center;
-}
-
-/* Add point popup */
-
-.add-point {
-	display: none;
-
-	position: absolute;
-	left: 20%;
-	top: 10%;
-	min-width: 12px;
-	min-height: 12px;
-	border: solid 1px whitesmoke;
-	padding: 5px;
-	z-index: 1;
-	background-color: rgb(51, 51, 51);
-	color: whitesmoke;
-}
-
-.add-point form {
-	display: flex;
-	flex-direction: column;
-}
-
-.add-point form input {
-	margin: 5px 0;
-	filter: brightness(0.8);
-}
-
-.add-point form input:focus {
-	filter: brightness(1);
-	outline: none;
-}
-
-.add-point .coordinates {
-	border: none;
-	margin: 0;
-	padding: 0;
-}
-
-.add-point input[type="number"] {
-	max-width: 80px;
-}
-
-.dropdown-select {
-	border: none;
-	margin-top: 1px;
-	margin-bottom: 1px;
-}
-
-.add-point input[type="text"] {
-	background-color: whitesmoke;
-	color: #111;
-	outline: none;
-	border: none;
-}
-
-.add-point input[type="submit"] {
-	cursor: pointer;
-	outline: none;
-	background-color: whitesmoke;
-	color: #333;
-	border: solid 1px whitesmoke;
-	transition: color 0.5s;
-}
-
-.add-point input[type="submit"]:hover {
-	background-color: #333;
-	color: whitesmoke;
-	transition: color 0.5s;
-}
-
-.add-point .close {
-	position: absolute;
-	color: var(--red);
-	top: 3px;
-	right: 3px;
-	user-select: none;
-	z-index: 2;
-}
-
-.add-point .close:hover {
-	cursor: pointer;
-	transform: scale(1.2);
-}
-
-.add-point legend {
-	font-weight: bold;
-	font-size: 20px;
-	text-align: center;
-	margin: 5px;
-	user-select: none;
-}
-
-/* Calculator panel */
-.calc-title {
-	font-weight: bold;
-	font-size: 20px;
-	text-align: center;
-	margin: 5px;
-	user-select: none;
-}
-
-.calculator .close {
-	position: absolute;
-	color: var(--red);
-	top: 3px;
-	right: 3px;
-	user-select: none;
-	z-index: 2;
-}
-
-/* Settings panel */
-.settings {
-	display: none;
-
-	position: absolute;
-	left: 20%;
-	top: 10%;
-	min-width: 12px;
-	min-height: 12px;
-	border: solid 1px whitesmoke;
-	padding: 5px;
-	z-index: 1;
-	background-color: rgb(51, 51, 51);
-	color: whitesmoke;
-}
-
-.settings .settings-close {
-	position: absolute;
-	color: var(--red);
-	top: 3px;
-	right: 3px;
-	user-select: none;
-	z-index: 2;
-}
-
-.settings .settings-close:hover {
-	cursor: pointer;
-	transform: scale(1.2);
-}
-
-.more-info {
-	width: fit-content;
-	right: 30px;
-	position: absolute;
-	top: 4px;
-}
-
-.more-info .more-info-tooltip {
-	visibility: hidden;
-	width: max-content;
-	background-color: black;
-	overflow: visible;
-	color: #fff;
-	text-align: center;
-	padding: 5px 0;
-	border-radius: 6px;
-
-	position: absolute;
-	z-index: 1;
-	bottom: 100%;
-}
-
-.more-info .more-info-tooltip::after {
-	content: " ";
-	position: absolute;
-	top: 100%;
-	/* At the bottom of the tooltip */
-	left: 50%;
-	margin-left: -5px;
-	border-width: 5px;
-	border-style: solid;
-	border-color: black transparent transparent transparent;
-}
-
-.more-info:hover .more-info-tooltip {
-	visibility: visible;
-}
-
-.infoMainBody {
-	display: flex;
-	flex-direction: row;
-}
-
-.isanDispalyDiv {
-	background-color: rgb(0, 10, 15);
-	width: fit-content;
-	display: inline-block;
-}
-
-.desc {
-	border: 1px solid gray;
-	margin-top: 10px;
-	max-width: min-content;
-	min-width: 100%;
-	word-break: break-word;
-}
-
-.infoDiv {
-	margin-left: 10px;
-}
-
-.infoDiv button {
-	width: 84px;
-}
-
-.isanDispalyVal {
-	font-family: Telegrama;
-	color: rgb(30, 175, 180);
-
-	margin-block-start: 0;
-	margin-block-end: 0;
-	padding-bottom: 1px;
-	padding-top: 1px;
-	padding-right: 15px;
-	white-space: nowrap;
-}
-
-.info #delete-point {
-	margin: 5px 0;
-	background-color: var(--red);
-	color: whitesmoke;
-	outline: none;
-	border: solid 1px whitesmoke;
-	width: 100%;
-	height: 2em;
-	cursor: pointer;
-}
-
-.info #delete-point:hover {
-	background-color: var(--red-hover);
-	color: whitesmoke;
-}
-
-/* Update point Button */
-/* Volcano please change the color being identical, I dont know css */
-
-.info #update-point {
-	margin: 5px 0;
-	/* CSS has variables??? W H A T */
-	background-color: var(--red);
-	color: whitesmoke;
-	outline: none;
-	border: solid 1px whitesmoke;
-	width: 100%;
-	height: 2em;
-	cursor: pointer;
-}
-
-.info #update-point:hover {
-	background-color: var(--red-hover);
-	color: whitesmoke;
-}
-
-/* Groups page */
-
-h1 {
-	color: whitesmoke;
-}
-
-p {
-	color: whitesmoke;
-}
-
-.back-index {
-	background-color: whitesmoke;
-	color: #333;
-
-	text-decoration: none;
-
-	padding: 10px 20px;
-}
-
-.back-index:hover {
-	background-color: #333;
-	color: whitesmoke;
-}
-
-.back-index span {
-	vertical-align: middle;
-	padding-bottom: 3px;
-}
-
-.filter-view-option {
-	/* padding: 6px 8px 6px 10px; */
-	width: 100%;
-	position: relative;
-	margin: 0;
-	text-decoration: none;
-	/* font-size: 12px; */
-	color: #818181;
-	display: inline-block;
-	cursor: pointer;
-	text-align: left;
-	user-select: none;
-
-	transition: color 0.2s;
-	transition: background-color 0.2s;
-}
-
-.filter-view-option label,input {
-	cursor: pointer;
-}
-
-.filter-view-option:hover {
-	color: whitesmoke;
-	background-color: #333;
-
-	transition: color 0.2s;
-	transition: background-color 0.2s;
-}
-
-.filter-view-option .filter-view-option-tooltip {
-	visibility: hidden;
-	width: 120px;
-	background-color: black;
-	overflow: visible;
-	color: #fff;
-	text-align: center;
-	padding: 5px 0;
-	border-radius: 6px;
-
-	position: absolute;
-	z-index: 1;
-	width: 120px;
-	bottom: 100%;
-	left: 50%;
-	margin-left: -60px;
-}
-
-.filter-view-option .filter-view-option-tooltip::after {
-	content: " ";
-	position: absolute;
-	top: 100%;
-	/* At the bottom of the tooltip */
-	left: 50%;
-	margin-left: -5px;
-	border-width: 5px;
-	border-style: solid;
-	border-color: black transparent transparent transparent;
-}
-
-.filter-view-option:hover .filter-view-option-tooltip {
-	visibility: visible;
+::-webkit-scrollbar-thumb {
+	border-radius: 7px;
+	background-color: var(--user-style);
 }
 
-.filter-view-option .filter-view-option-tooltip:hover {
-	visibility: hidden;
+::-webkit-scrollbar-track {
+	background-color: transparent;
 }

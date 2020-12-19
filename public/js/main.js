@@ -8,9 +8,11 @@ const infoTemplate = `
 		<span class="more-info-tooltip">
 			Type: %TYPE%
 			<br>
-			Creator: %CREATOR%
-			<br>
 			Layer: %LAYER%
+			<br>
+			Created: %CREATED_AT%
+			<br>
+			Edited: %EDITED_AT%
 		</span>
 	</div>
 
@@ -30,14 +32,17 @@ const infoTemplate = `
 			<br>
 			<button id="focus">Focus</button>
 		</div>
-
 		<div class="infoDiv">
 			<img src=%TYPE_IMAGE% width="64" height="64">
 		</div>
 	</div>
+	<p class="infoText">Creator: %CREATOR%</p>
 	<div class="desc">
 		<p class="infoText no-drag">%DESCRIPTION%</p>
 	</div>
+	<a href="%IMAGE_URL%" target="_blank">
+		<img src="%IMAGE_URL%" style="display:%IMAGE_DISPLAY%" class="infoImage">
+	</a>
 </div>
 `;
 
@@ -53,19 +58,6 @@ const optionTemplate = `
 <option value="%VALUE%">
 	%NAME%
 </option>
-`;
-
-const distanceInfoTemplate = `
-<div class="distance-info" id="distance-info">
-	<fieldset class="distance-fieldset">
-		<legend>Distance</legend>
-		<p>%DISTANCE%</p>
-	</fieldset>
-	<fieldset class="distance-fieldset">
-		<legend>Min flight time</legend>
-		<p>%FLIGHT_TIME%</p>
-	</fieldset>
-</div>
 `;
 
 const viewFilterTemplate = `
@@ -99,7 +91,11 @@ import {
 	ENV,
 } from "./config.js";
 
-import { constrain, map, copyToClipboard } from "./functions.js";
+import {
+	constrain,
+	map,
+	copyToClipboard
+} from "./functions.js";
 
 import PointManager from "./PointManager.js";
 import API from "./API.js";
@@ -117,21 +113,6 @@ const SUCCESS = 1;
 
 String.prototype.reverse = function () {
 	return this.split("").reverse().join("");
-};
-
-//Add commas into a string
-Number.prototype.format = function () {
-	const numChars = Math.floor(this).toString().split("").reverse();
-	let ret = "";
-	let lastCom = -1;
-	for (var i = 0; i < numChars.length; i++) {
-		ret = numChars[i] + ret;
-		if (i - lastCom > 2 && i != numChars.length - 1) {
-			lastCom = i;
-			ret = "," + ret;
-		}
-	}
-	return ret;
 };
 
 //Honestly I feel this should be broken into two classes, the main App and some form of "UI manager" class, perhaps a project for another day
@@ -181,14 +162,21 @@ class App {
 		this.UISetup();
 		//See if we just completed OAuth2
 		if (window.location.search.includes("code")) {
-			const code = window.location.search.substring("?code=".length);
-			const jwt = await this.api.getJWTFromCode(code);
-			if (jwt) this.storage.setItem("jwt", jwt);
+			try {
+				const code = window.location.search.substring("?code=".length);
+				const jwt = await this.api.getJWTFromCode(code);
+				if (jwt) this.storage.setItem("jwt", jwt);
+			} catch (e) {}
 		}
 		//Lets ensure the jwt is still valid (if we have one)
 		const jwt = this.storage.getItem("jwt");
+		let needPubToken = true;
 		if (jwt) {
-			await this.api.confirmJWT(jwt);
+			const hasValidToken = await this.api.confirmJWT(jwt);
+			if (hasValidToken) needPubToken = false;
+		}
+		if (needPubToken) {
+			await this.api.getPubJWT();
 		}
 	}
 	//Updates what points should be displayed
@@ -374,10 +362,22 @@ class App {
 		const mouse = new THREE.Vector2(x, y);
 		this.raycaster.setFromCamera(mouse, this.sceneObjs.camera);
 		var intersects = this.raycaster.intersectObjects(
-			this.pointManager.points.map((p) => p.marker),
+			this.pointManager.points.filter((p) => p.shown).map((p) => p.marker),
 			true
 		);
 		return intersects;
+	}
+	getScreenPos(worldPos) {
+		const width = app.sceneObjs.renderer.domElement.width;
+		const height = app.sceneObjs.renderer.domElement.height;
+		const widthHalf = width / 2;
+		const heightHalf = height / 2;
+
+		const pos = worldPos.clone();
+		pos.project(this.sceneObjs.camera);
+		pos.x = -pos.x * widthHalf + widthHalf;
+		pos.y = -(pos.y * heightHalf) + heightHalf;
+		return pos;
 	}
 	//Figures out how the map should handle a user click
 	handleSceneClick(event) {
@@ -394,7 +394,7 @@ class App {
 				const target = this.pointManager.getByThreeId(
 					intersects[0].object.uuid
 				);
-				this.updateDistTo(target);
+				this.calculator.setPoints(this.pointManager.focusedPOI, target);
 			} else {
 				this.handleObjectClick(intersects[0].object);
 			}
@@ -413,8 +413,7 @@ class App {
 			stop: function () {
 				$(this).css({
 					left: "",
-					right:
-						$(window).width() -
+					right: $(window).width() -
 						($(this).offset().left + $(this).outerWidth()),
 				});
 			},
@@ -437,12 +436,12 @@ class App {
 		$("#new-point").click(function () {
 			self.updateFormMode.call(self, "create");
 			const curType = document.getElementById("type-select").value;
-			self.updateColorOpts(curType);
+			self.updateSubtypes(curType);
 			$(".add-point").show();
 		});
 		const typeSelector = document.getElementById("type-select");
 		typeSelector.onchange = function (e) {
-			self.updateColorOpts(e.target.value);
+			self.updateSubtypes(e.target.value);
 		};
 
 		$(".add-point form").submit(async function (e) {
@@ -456,7 +455,7 @@ class App {
 				desc: serialized[1].value,
 				type: serialized[2].value,
 				groupID: group.id,
-				color: serialized[4].value,
+				subtype: serialized[4].value,
 				pos: {
 					x: parseInt(serialized[5].value),
 					y: parseInt(serialized[6].value),
@@ -508,6 +507,7 @@ class App {
 			window.location.href = `${URLS.api[ENV]}auth/login?redir=${AUTH_REDIR}`;
 		};
 		document.getElementById("logout").onclick = function () {
+			if (!confirm("Would you like to logout?")) return;
 			self.storage.removeItem("jwt");
 			self.setLoggedIn(false);
 		};
@@ -537,11 +537,9 @@ class App {
 			if (pointsMode.style.display == "block") {
 				pointsMode.style.display = "none";
 				layersMode.style.display = "block";
-				sortToggle.children[0].src = "assets/buttons/sort-none.png";
 			} else {
 				pointsMode.style.display = "block";
 				layersMode.style.display = "none";
-				sortToggle.children[0].src = "assets/buttons/sort-layers.png";
 			}
 		};
 
@@ -563,15 +561,14 @@ class App {
 		searchbar.onkeyup = function () {
 			pointsMode.style.display = "block";
 			layersMode.style.display = "none";
-			sortToggle.innerText = "Sort by layers";
 			for (var i = 0; i < points.childElementCount; i++) {
 				const point = self.pointManager.getById(
 					points.children[i].id.substring("side-".length)
 				);
 				if (
 					point.info.name
-						.toLowerCase()
-						.includes(searchbar.value.toLowerCase())
+					.toLowerCase()
+					.includes(searchbar.value.toLowerCase())
 				) {
 					points.children[i].classList.remove("search-hide");
 				} else {
@@ -600,90 +597,18 @@ class App {
 			mouseY = e.y;
 		};
 	}
-	updateColorOpts(newType, defaultTo) {
-		const dropDownColors = document.getElementById("color-select");
-		dropDownColors.innerHTML = "";
-		TYPES[newType].colorOpts.forEach((colOption) => {
+	updateSubtypes(newType, defaultTo) {
+		const dropDownSubtypes = document.getElementById("subtype-select");
+		dropDownSubtypes.innerHTML = "";
+		TYPES[newType].subtypes.forEach((colOption) => {
 			const option = document.createElement("option");
-			option.value = colOption.hex;
+			option.value = colOption.name;
 			option.innerText = colOption.name;
 			option.style.color = colOption.hex;
-			dropDownColors.appendChild(option);
+			dropDownSubtypes.appendChild(option);
 		});
 		if (defaultTo) {
-			dropDownColors.value = defaultTo;
-		}
-	}
-	//Called whenever a user selects a new item from the drop down list, updates the calculated time of flight between them
-	updateDistTo(object) {
-		const iWin = document.getElementById("infoWindow");
-		const existDiv = document.getElementById("distDiv");
-		if (existDiv) {
-			iWin.removeChild(existDiv);
-		}
-		if (!object) {
-			this.sceneObjs.scene.remove(this.pointManager.connectorLine);
-		} else {
-			var points = [];
-			points.push(new THREE.Vector3(0, 0, 0));
-			points.push(
-				new THREE.Vector3(
-					this.pointManager.focusedPOI.position.x - object.position.x,
-					this.pointManager.focusedPOI.position.y - object.position.y,
-					this.pointManager.focusedPOI.position.z - object.position.z
-				)
-			);
-			var geometry = new THREE.BufferGeometry().setFromPoints(points);
-			var material = new THREE.LineBasicMaterial({
-				color: 0xff0000,
-			});
-			var line = new THREE.Line(geometry, material);
-			line.position.set(
-				object.position.x,
-				object.position.y,
-				object.position.z
-			);
-			this.sceneObjs.scene.remove(this.pointManager.connectorLine);
-			this.pointManager.connectorLine = line;
-			this.sceneObjs.scene.add(line);
-
-			const p1 = new THREE.Vector3(
-				this.pointManager.focusedPOI.position.x,
-				this.pointManager.focusedPOI.position.y,
-				this.pointManager.focusedPOI.position.z
-			);
-			const p2 = new THREE.Vector3(
-				object.position.x,
-				object.position.y,
-				object.position.z
-			);
-			const d = p1.distanceTo(p2);
-
-			let speed = parseInt(document.getElementById("speed-input").value);
-			speed = speed ? speed : 150;
-			const t = d / speed;
-
-			const formatTime = (t) => {
-				if (t.length == 1) {
-					return "0" + t;
-				}
-				return t;
-			};
-			const hrs = formatTime(Math.floor(t / 3600).toString());
-			const mins = formatTime(Math.floor((t / 60) % 60).toString());
-			const secs = formatTime(Math.floor(t % 60).toString());
-
-			var template = distanceInfoTemplate;
-			template = template.replace("%DISTANCE%", d.format() + " m");
-			template = template.replace("%FLIGHT_TIME%", `${hrs}:${mins}:${secs}`);
-
-			var distanceDiv = document.getElementById("distance-info");
-			if (distanceDiv == undefined) {
-				distanceDiv = document.createElement("div");
-			}
-			distanceDiv.innerHTML = template;
-
-			iWin.appendChild(distanceDiv);
+			dropDownSubtypes.value = defaultTo;
 		}
 	}
 	//Fills out the info pannel whenever a point is clicked on
@@ -691,9 +616,10 @@ class App {
 		//Creates the info in the top right window
 		const self = this;
 		//Allow threejs object OR my point data object
-		const poiData = object.uuid
-			? this.pointManager.getByThreeId(object.uuid)
-			: object;
+		const poiData = object.uuid ?
+			this.pointManager.getByThreeId(object.uuid) :
+			object;
+		this.calculator.handlePointClick(poiData);
 		this.pointManager.focusedPOI = poiData;
 
 		// Toggle flip effect on Button
@@ -711,6 +637,13 @@ class App {
 			TYPES[poiData.info.type].icons.info
 		);
 		template = template.replace("%LAYER%", poiData.group);
+		template = template.replace("%CREATED_AT%", poiData.info.createdAt);
+		template = template.replace("%EDITED_AT%", poiData.info.editedAt);
+
+		template = template.replace("%IMAGE_URL%", poiData.imageUrl); //There are two URL's that need to be filled
+		template = template.replace("%IMAGE_URL%", poiData.imageUrl);
+		template = template.replace("%IMAGE_DISPLAY%", poiData.imageUrl ? "block" : "none");
+
 		const pos = poiData.info.gamePos;
 		template = template.replace("%POS_X%", pos.x);
 		template = template.replace("%POS_Y%", pos.y);
@@ -748,12 +681,25 @@ class App {
 		infoWindow.innerHTML = template;
 		infoWindow.style.display = "";
 
+		//Also move the info window near the point
+		if (this.moveInfoOnClick) {
+			const container = document.getElementsByClassName("info-container");
+			const infoContainer = container[0];
+			const screenPos = this.getScreenPos(object.position);
+			infoContainer.style.right = `${
+				screenPos.x - infoContainer.clientWidth - 100
+			}px`;
+			infoContainer.style.top = `${
+				screenPos.y - infoContainer.clientHeight / 2
+			}px`;
+		}
+
 		//Handles pressing the update point button
 		$("#update-point").click(function () {
 			self.updateFormMode.call(self, "update");
 			self.autoFillForm(poiData);
 			const curType = document.getElementById("type-select").value;
-			self.updateColorOpts(curType, poiData.color);
+			self.updateSubtypes(curType, poiData.subtype);
 			self.updatePointId = poiData.id;
 			$(".add-point").show();
 		});
@@ -765,7 +711,6 @@ class App {
 			copyToClipboard(link);
 		};
 
-		//Sharable link
 		const epiValsBtn = document.getElementById("epivals");
 		epiValsBtn.onclick = function () {
 			const str = `${poiData.info.gamePos.x} ${poiData.info.gamePos.y} ${poiData.info.gamePos.z}`;
@@ -779,7 +724,6 @@ class App {
 				if (confirm("Are you sure you want to delete this point?")) {
 					infoWindow.innerHTML = "";
 					self.api.deletePoint(poiData.id);
-					self.updateDistTo();
 				}
 			};
 		}
@@ -833,6 +777,9 @@ class App {
 			this.sceneObjs.scene,
 			this.sceneObjs.camera
 		);
+	}
+	updateTheme(newColor) {
+		document.documentElement.style.setProperty("--user-style", newColor);
 	}
 	//Called whenever a user successfully logs in, fills out the group options from user object
 	onLogin() {
@@ -892,6 +839,15 @@ class App {
 		});
 		this.pointManager.updateLayers();
 		this.api.getPoints();
+		this.api.authorizeWebsocket(this.storage.getItem("jwt"));
+		if (this.user.isPubToken) {
+			const addPointBtn = document.getElementById("new-point");
+			addPointBtn.style.display = "none";
+		}
+		if (this.user.g.some((layer) => layer.id == "MqJZYstndHmaxIEG")) {
+			//User is a subr, lets set their style
+			this.updateTheme("#b72015");
+		}
 		//Load in the toggled filters (defer execution to ensure html elements get loaded)
 		setTimeout(this.initFilters.bind(this), 0);
 	}
@@ -939,7 +895,7 @@ class App {
 		document.getElementById("formYPos").value = point.info.gamePos.y;
 		document.getElementById("formZPos").value = point.info.gamePos.z;
 		document.getElementById("group-select").value = point.groupID;
-		document.getElementById("color-select").value = point.color;
+		document.getElementById("subtype-select").value = point.subtype;
 	}
 	//We resue the same HTML elements for creating and updating a point, need to update a few things about it however
 	updateFormMode(mode) {

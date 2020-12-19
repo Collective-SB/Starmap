@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="overflow: hidden;">
+<html>
 
 <head>
 	<meta charset="utf-8" />
@@ -14,8 +14,6 @@
 			font-style: normal;
 		}
 	</style>
-	<link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Roboto&display=swap" rel="stylesheet" />
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 	<link rel="stylesheet" href="/css/master.css" />
 	<script src="https://cdn.jsdelivr.net/npm/opentype.js@latest/dist/opentype.min.js"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -24,8 +22,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/three@0.120.0/build/three.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.120.0/examples/js/controls/OrbitControls.min.js"></script>
 	<script src="js/packages/jwt-decode.js"></script>
+
 	<script>
-		// Dont ask me why this is here, I dont know either
+		// Dont ask me why this is here, I dont know either   [I still want to ask? :) -Tim]
 		function hoverHandler() {
 			const elm = document.getElementsByClassName('more-info-tooltip')[0];
 			elm.style.left = `-${elm.clientWidth / 2 - 12}px`;
@@ -35,7 +34,7 @@
 </head>
 
 <body>
-	<div class="sidenav" style="width: 160px;">
+	<div class="sidenav">
 		<button id="login">
 			<img srcset="assets/Discord-Logo-White.svg" />
 			<span class="login-text">
@@ -57,6 +56,10 @@
 					<span class="material-icons">sort</span>
 					<!-- <img src="assets/buttons/sort-none.png"> -->
 				</button>
+				<button id="calcBtn" title="ETA Calculator">
+					<span class="material-icons">calculate</span>
+					<!-- <img src="assets/buttons/sort-none.png"> -->
+				</button>
 			</div>
 			<!-- <div class="button-row">
 				<button id="calcBtn"><img src="assets/buttons/calculator.png"></button><button id="empty"></button><button
@@ -68,9 +71,11 @@
 		<span id="points-title">
 			Points
 		</span>
-		<div id="sidebar">
-			<div id="layers" style="display:block"></div>
-			<div id="points" style="display:none"></div>
+		<div class="wrapper-sidebar">
+			<div id="sidebar">
+				<div id="layers" style="display:block"></div>
+				<div id="points" style="display:none"></div>
+			</div>
 		</div>
 		<div class="sidenav-bottom">
 			<form id="filterForm">
@@ -112,7 +117,7 @@
 			</select> -->
 			<br>
 			<p style="display: inline;">Camera damping factor</p>
-			<input id="dampFact" type="range" min="0" max="0.5" step="0.01" name="dampFact">
+			<input id="dampFact" type="range" min="0.1" max="0.5" step="0.01" name="dampFact">
 			<br>
 			<p style="display: inline;">Zoom speed</p>
 			<input id="zoomSpeed" type="range" min="0.5" max="5" step="0.01" name="zoomSpeed">
@@ -163,15 +168,35 @@
 				<p style="display: inline;">Show base ring</p>
 			</div>
 
+			<div class="checkbox-option">
+				<input id="moveInfoOnClick" type="checkbox" name="moveInfoOnClick">
+				<p style="display: inline;">Move infobox on click</p>
+			</div>
 		</div>
-		<div id="calculator" class="settings calculator">
+		<div id="calculator" class="calculator">
 			<span class="calc-close material-icons">
 				close
 			</span>
-			<p class="calc-title">Distance/Time Calculator WIP</p>
-			<p style="display: inline;">Enter ship speed: </p>
-			<input id="shipSpeedSlider" type="range" min="1" max="150" step="1" name="shipSpeed">
-			<input id="shipSpeedDirect" type="number" min="1" max="150" name="shipSpeed">
+			<p class="calc-title">Distance/Time Calculator</p>
+			<div class="no-drag">
+				<p style="display: inline;">Enter ship speed: </p>
+				<input id="shipSpeedSlider" type="range" min="1" max="150" step="1" name="shipSpeed">
+				<input id="shipSpeedDirect" type="number" min="1" max="150" name="shipSpeed">
+			</div>
+			<br>
+			<br>
+			<div style="float: left;">
+				<button id="selPoint0">Choose start point</button>
+				<p id="selectedPoint0" class="sel-point">None Selected</p>
+			</div>
+			<div style="float: right;">
+				<button id="selPoint1">Choose end point</button>
+				<p id="selectedPoint1" class="sel-point">None Selected</p>
+			</div>
+			<div class="no-drag">
+				<p id="calc-dist">Distance: 0m</p>
+				<p id="calc-time">Estimated Traval Time: 00:00:00</p>
+			</div>
 		</div>
 		<div class="add-point">
 			<span class="material-icons close">
@@ -181,10 +206,10 @@
 				<legend id="formLegend">Create Point</legend>
 				<input required type="text" name="point-name" placeholder="Name" id="formName" minlength="3"
 					maxlength="16" />
-				<input type="text" name="point-description" placeholder="Description" id="formDesc" maxlength="256" />
+				<input type="text" name="point-description" placeholder="Description" id="formDesc" maxlength="512" />
 				<select class="dropdown-select" name="Type" id="type-select" form="addPointForm"></select>
 				<select class="dropdown-select" name="Layer" id="group-select" form="addPointForm"></select>
-				<select class="dropdown-select" name="Color" id="color-select" form="addPointForm"></select>
+				<select class="dropdown-select" name="Subtype" id="subtype-select" form="addPointForm"></select>
 				<fieldset class="coordinates">
 					<legend>Coordinates</legend>
 					<lable>X: </lable><input required type="number" name="pos-x" placeholder="X pos" id="formXPos" />
@@ -218,7 +243,7 @@
 		</div>
 		<div class="info-container">
 			<svg id="dropdown-minimize" height="16" width="16">
-				<path d="M16 2 L8 14 L0 2 Z" fill="#333333" />
+				<path d="M16 2 L8 14 L0 2 Z" fill="var(--user-style)" />
 			</svg>
 			<div class="info" id="infoWindow"></div>
 		</div>
