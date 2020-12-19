@@ -99,6 +99,7 @@ export const TYPES = {
 				hex: "#0074f0",
 			},
 			{
+
 				name: "The Wake",
 				hex: "#922d22"
 			},
