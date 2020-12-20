@@ -46,3 +46,6 @@ API:
  - Fixed points always returning 400 when editing (and thus being unable to edit)
  - Improved URL parsing to allow .jpeg image format for image embeds
  - Fixed discord embed API always returning 400
+
+
+
