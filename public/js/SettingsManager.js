@@ -1,8 +1,7 @@
 /*global $ */
 /*global THREE */
 const BUTTONS = ["LEFT", "MIDDLE", "RIGHT"];
-const SETTINGS_DEF = [
-	{
+const SETTINGS_DEF = [{
 		id: "panSelect",
 		default: 2,
 		prop: "value",
@@ -129,6 +128,7 @@ const SETTINGS_DEF = [
 export default class SettingsManager {
 	constructor(app) {
 		this.app = app;
+		this.shown = false;
 	}
 	init() {
 		$("#settingsWindow").draggable({
@@ -136,9 +136,16 @@ export default class SettingsManager {
 		});
 		$(".settings-close").click(function () {
 			$(this).parent().hide();
+			self.shown = false;
 		});
 		$("#settingsBtn").click(function () {
-			$("#settingsWindow").show();
+			if (!self.shown) {
+				$("#settingsWindow").show();
+				self.shown = true;
+			} else {
+				$("#settingsWindow").hide();
+				self.shown = false;
+			}
 		});
 		//Init all the values of the settings UI elements, and bind the event handler
 		let savedSettings;
