@@ -123,6 +123,27 @@ const SETTINGS_DEF = [{
 			this.moveInfoOnClick = val;
 		},
 	},
+	{
+		id: "customColorTheme",
+		default: "#0074f0",
+		prop: "value",
+		set: function (val) {
+			const code = val.split(" ").join("")
+
+			//checks if it is valid hex
+			const validHex = /^#[0-9A-F]{6}$/i.test(code)
+			if (validHex) {
+				app.updateTheme(val);
+			} else {
+				//check if it just hasn't been set
+				if (code === "") {
+					return;
+				} else {
+					alert("That color code is invalid.")
+				}
+			}
+		},
+	},
 ];
 //This actually "enacts" the settings on the app, making the changes
 export default class SettingsManager {

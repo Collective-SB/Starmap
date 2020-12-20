@@ -66,16 +66,37 @@ button:hover {
 	cursor: pointer;
 	user-select: none;
 
-	transition: color 0.2s;
-	transition: background-color 0.2s;
+	transition: color 0.4s;
+	transition: background-color 0.4s;
 }
 
 .checkbox-option:hover {
 	color: whitesmoke;
 	background-color: #111;
 
-	transition: color 0.2s;
-	transition: background-color 0.2s;
+	transition: color 0.4s;
+	transition: background-color 0.4s;
+}
+
+.text-option {
+	margin: 0;
+	text-decoration: none;
+	font-size: 15px;
+	color: #818181;
+	display: block;
+	cursor: pointer;
+	user-select: none;
+
+	transition: color 0.4s;
+	transition: background-color 0.4s;
+}
+
+.text-option:hover {
+	color: whitesmoke;
+	background-color: #111;
+
+	transition: color 0.4s;
+	transition: background-color 0.4s;
 }
 
 /* UI Button grid */
@@ -216,24 +237,24 @@ button:hover {
 	text-align: center;
 	user-select: none;
 
-	transition: max-height 0.2s ease-out, background-color 0.2s, color 0.2s;
+	transition: max-height 0.2s ease-out, background-color 0.4s, color 0.4s;
 }
 
 .sidenav-point:hover {
 	color: whitesmoke;
 	background-color: #333;
 
-	transition: max-height 0.2s ease-out, background-color 0.2s, color 0.2s;
+	transition: max-height 0.2s ease-out, background-color 0.4s, color 0.4s;
 }
 
 .sidenav-bottom {
 	display: flex;
 	flex-direction: column;
 	margin-top: auto;
-	/* 
+	/*
 	This was a fix for the hover info being unreadable near the top, however it completly broke when you scrolled
 	margin-top: -200px;
-	padding-top: 200px; 
+	padding-top: 200px;
 	*/
 	height: 50%;
 	overflow-y: auto;
@@ -655,8 +676,8 @@ p {
 	text-align: left;
 	user-select: none;
 
-	transition: color 0.2s;
-	transition: background-color 0.2s;
+	transition: color 0.4s;
+	transition: background-color 0.4s;
 }
 
 .filter-view-option label,
@@ -668,8 +689,8 @@ input {
 	color: whitesmoke;
 	background-color: #333;
 
-	transition: color 0.2s;
-	transition: background-color 0.2s;
+	transition: color 0.4s;
+	transition: background-color 0.4s;
 }
 
 .filter-view-option .filter-view-option-tooltip {
@@ -704,8 +725,30 @@ input {
 
 .filter-view-option:hover .filter-view-option-tooltip {
 	visibility: visible;
+	animation: 0.5s fadeIn;
 }
 
 .filter-view-option .filter-view-option-tooltip:hover {
 	visibility: hidden;
+	animation: 0.5s fadeOut;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		visibility: visible;
+		opacity: 1;
+	}
+}
+
+@keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		visibility: hidden;
+		opacity: 0;
+	}
 }
