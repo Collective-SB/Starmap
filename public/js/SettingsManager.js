@@ -130,6 +130,9 @@ const SETTINGS_DEF = [{
 		set: function (val) {
 			const code = val.split(" ").join("")
 
+			document.getElementById("color_val").innerHTML = val
+			document.getElementById("color_val").style.color = val
+
 			//checks if it is valid hex
 			const validHex = /^#[0-9A-F]{6}$/i.test(code)
 			if (validHex) {
