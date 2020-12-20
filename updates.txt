@@ -41,6 +41,7 @@ Client:
  - Fixed issue with name settings conflicting
  - Added feedback when you copy link/cords
  - Moved layer info from the "extra info" box to the main info box
+ - Added support for custom themes via the settings menu.
  
 API:
  - Fixed points always returning 400 when editing (and thus being unable to edit)
