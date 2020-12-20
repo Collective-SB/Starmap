@@ -126,15 +126,15 @@ button:hover {
 
 #find {
 	color: whitesmoke;
-	border: 2px dashed #0074f0;
+	border: 2px dashed var(--user-style);
 
 	background-color: #111111;
 	margin-top: 2px;
 }
 
 #find:hover {
-	border: 2px dashed #0074f0;
-	background-color: #0074f0;
+	border: 2px dashed var(--user-style);
+	background-color: var(--user-style);
 	color: #111;
 }
 
