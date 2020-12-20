@@ -41,9 +41,9 @@ Whitesmoke
 button {
 	font-family: var(--main-font-Squada);
 	background-color: #111111;
-	color: #0074f0;
+	color: var(--user-style);
 	border-width: 1px;
-	border-color: #0074f0;
+	border-color: var(--user-style);
 	padding-top: 2px;
 	padding-bottom: 2px;
 	transition: color 0.25s;
@@ -51,7 +51,7 @@ button {
 }
 
 button:hover {
-	background-color: #0074f0;
+	background-color: var(--user-style);
 	color: #111111;
 
 	transition: color 0.25s;
@@ -97,7 +97,7 @@ button:hover {
 	display: inline-flex;
 	justify-content: center;
 	background-color: #111111;
-	color: #0074f0;
+	color: var(--user-style);
 	flex-grow: 1;
 	cursor: pointer;
 	border-width: 1px 0;
@@ -112,7 +112,7 @@ button:hover {
 }
 
 .button-row button:hover {
-	background-color: #0074f0;
+	background-color: var(--user-style);
 	color: #111111;
 	transition: color 0.25s;
 }
@@ -126,15 +126,15 @@ button:hover {
 
 #find {
 	color: whitesmoke;
-	border: 2px dashed #0074f0;
+	border: 2px dashed var(--user-style);
 
 	background-color: #111111;
 	margin-top: 2px;
 }
 
 #find:hover {
-	border: 2px dashed #0074f0;
-	background-color: #0074f0;
+	border: 2px dashed var(--user-style);
+	background-color: var(--user-style);
 	color: #111;
 }
 
@@ -210,7 +210,7 @@ button:hover {
 	margin: 0;
 	text-decoration: none;
 	font-size: 15px;
-	color: #0074f0;
+	color: var(--user-style);
 	display: block;
 	cursor: pointer;
 	text-align: center;
@@ -229,8 +229,12 @@ button:hover {
 .sidenav-bottom {
 	display: flex;
 	flex-direction: column;
-
 	margin-top: auto;
+	/* 
+	This was a fix for the hover info being unreadable near the top, however it completly broke when you scrolled
+	margin-top: -200px;
+	padding-top: 200px; 
+	*/
 	height: 50%;
 	overflow-y: auto;
 	overflow-x: hidden;
@@ -255,7 +259,7 @@ button:hover {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	border: 2px dashed #0074f0;
+	border: 2px dashed var(--user-style);
 
 	outline: none;
 	background-color: #111;
@@ -266,7 +270,7 @@ button:hover {
 	transition: color 0.25s;
 	transition: background 0.25s;
 
-	color: #0074f0;
+	color: var(--user-style);
 }
 
 #new-point span {
@@ -274,8 +278,8 @@ button:hover {
 }
 
 #new-point:hover {
-	border: 2px dashed #0074f0;
-	background-color: #0074f0;
+	border: 2px dashed var(--user-style);
+	background-color: var(--user-style);
 	color: #111;
 }
 
@@ -336,6 +340,12 @@ button:hover {
 	width: fit-content;
 }
 
+.infoImage {
+	max-width: 270px;
+	max-height: 270px;
+	margin-top: 10px;
+}
+
 .distance-fieldset {
 	border-width: 2px 0 0 0;
 	text-align: center;
@@ -352,8 +362,8 @@ button:hover {
 /* Login Button */
 
 #login {
-	background-color: #111111;
-	color: #0074f0;
+	background-color: var(--user-style);
+	color: #111111;
 	/*border-radius: 5px;
 
 	background-color: #7289da;
@@ -378,7 +388,7 @@ button:hover {
 }
 
 #login:hover {
-	background-color: #0074f0;
+	background-color: var(--user-style);
 	color: #111;
 }
 
@@ -391,8 +401,7 @@ button:hover {
 #login:hover img {
 	color: #111;
 	/* This is equivalent to switching from whitesmoke to #333, lets us change the color of an image without any JS */
-	filter: invert(15%) sepia(1%) saturate(0%) hue-rotate(87deg) brightness(95%)
-		contrast(85%);
+	filter: invert(15%) sepia(1%) saturate(0%) hue-rotate(87deg) brightness(95%) contrast(85%);
 }
 
 #login .login-text {
@@ -460,9 +469,11 @@ button:hover {
 	z-index: 1;
 	color: whitesmoke;
 }
+
 .calculator:hover {
 	opacity: 1;
 }
+
 .calculator .calc-close {
 	position: absolute;
 	color: var(--red);
@@ -471,10 +482,12 @@ button:hover {
 	user-select: none;
 	z-index: 2;
 }
+
 .calculator .calc-close:hover {
 	cursor: pointer;
 	transform: scale(1.2);
 }
+
 .calc-title {
 	font-weight: bold;
 	font-size: 20px;
@@ -494,7 +507,7 @@ button:hover {
 	visibility: hidden;
 	width: max-content;
 	background-color: #111;
-	border: #0074f0 2px solid;
+	border: var(--user-style) 2px solid;
 	overflow: visible;
 	color: #fff;
 	text-align: center;
@@ -514,7 +527,7 @@ button:hover {
 	left: 50%;
 	margin-left: -5px;
 	background-color: #111;
-	border: #0074f0 2px solid;
+	border: var(--user-style) 2px solid;
 }
 
 .more-info:hover .more-info-tooltip {
@@ -524,6 +537,7 @@ button:hover {
 .infoMainBody {
 	display: flex;
 	flex-direction: row;
+	margin-bottom: 0.5em;
 }
 
 .isanDispalyDiv {
@@ -635,7 +649,7 @@ p {
 	margin: 0;
 	text-decoration: none;
 	/* font-size: 12px; */
-	color: #0074f0;
+	color: var(--user-style);
 	display: inline-block;
 	cursor: pointer;
 	text-align: left;
@@ -662,7 +676,7 @@ input {
 	visibility: hidden;
 	width: 120px;
 	background-color: #111;
-	border: #0074f0 2px solid;
+	border: var(--user-style) 2px solid;
 	overflow: visible;
 	color: #fff;
 	text-align: center;
@@ -685,7 +699,7 @@ input {
 	left: 50%;
 	margin-left: -5px;
 	background-color: #111;
-	border: #0074f0 2px solid;
+	border: var(--user-style) 2px solid;
 }
 
 .filter-view-option:hover .filter-view-option-tooltip {

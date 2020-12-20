@@ -6,8 +6,7 @@
 */
 
 @import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
-@import url('https://fonts.googleapis.com/css?family=Squada+One&amp;display=swap');
-
+@import url("https://fonts.googleapis.com/css?family=Squada+One&amp;display=swap");
 
 /*
 |*************************************************************************;
@@ -29,7 +28,7 @@
 :root {
 	/* Font Imports */
 	--main-font-VT323: "VT323", monospace;
-	--main-font-Squada: 'Squada One', cursive;
+	--main-font-Squada: "Squada One", cursive;
 
 	/* Cursor Setting */
 	--main-cursor-default: default;
@@ -41,6 +40,8 @@
 	/* Text Settings */
 	--main-text-shadow: 0px 0px 4px rgb(0, 0, 0);
 
+	/* Style config settings */
+	--user-style: #0074f0;
 	/* Default Box Shadow */
 	--webkit-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 	--moz-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
@@ -62,9 +63,9 @@
 	--box-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 
 	/* Red Box Shadow */
-	--webkit-boxshadow-blue: inset 0px -16px 17px -13px rgba(0, 116, 240, 1);
-	--moz-boxshadow-blue: inset 0px -16px 17px -13px rgba(0, 116, 240, 1);
-	--box-boxshadow-blue: inset 0px -16px 17px -13px rgba(0, 116, 240, 1);
+	--webkit-boxshadow-blue: inset 0px -16px 17px -13px var(--user-style);
+	--moz-boxshadow-blue: inset 0px -16px 17px -13px var(--user-style);
+	--box-boxshadow-blue: inset 0px -16px 17px -13px var(--user-style);
 
 	/* Border Properties */
 	--border-radius-none: 0rem;
@@ -83,7 +84,7 @@
 
 ::-webkit-scrollbar-thumb {
 	border-radius: 7px;
-	background-color: rgb(0, 116, 240);
+	background-color: var(--user-style);
 }
 
 ::-webkit-scrollbar-track {

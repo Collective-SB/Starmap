@@ -1,0 +1,51 @@
+v1.1.0 Update list
+Client:
+ - Massive changes to styles thanks to @Timothy
+ - Moved "Creator" to be more visible on the info panel
+ - Point scaling has been improved 
+ - You can no longer click on invisible points
+ - Created new calculator panel with the ability to select two points and enter a ship speed to calculate ETA
+ - Added hotkey for opening calculator (click one point, then shift click another)
+ - Added confirmation for logout
+ - Limited max zoom out distance
+ - Added setting to allow automatically moving infobox
+ - Increased max description length from 256 to 512
+ - Allowed discord image URLs or imgur URLs to be put in description and image shown
+ 
+API Breaking Changes: 
+ - Points require "subtype" rather than "color", check https://github.com/Collective-SB/Starmap/blob/master/public/js/config.js to see new subtype options
+ - Websocket will no longer provide update events unless you authorize first. Check documentation
+ - Websocket events are per-point now rather than global
+
+API:
+ - You no longer have to be logged in to view public points
+ - Fixed issue that meant occasionally users would login without their permissions
+ - Made websocket require authentication
+ - Point updates now only notify users who can see the point that an update occured
+ - Added new endpoint + changed websocket so point updates only update the specific point, not all points
+ - Improved token refresh system
+ - Changed from storing point "color" to point "subtype"
+ - Improved API code for validating points
+ - Fixed some issues with point aproval system
+ - Fixed issue that could have caused malformed websocket packets to casue errors
+ - Full re-write of the API, now using Typescript
+ - Allowed discord bot prefix to be changed ("$prefix" command)
+ - Rewrote DB managmenet code to be more future proof
+ - Begun work on changes to user system
+
+v1.1.1
+Client: 
+ - Fixed Z-clipping on base ring
+ - Fixed issue with Collective color theme (theme customization is in the works)
+ - Settings/calculator buttons are now toggles
+ - Fixed issue with name settings conflicting
+ - Added feedback when you copy link/cords
+ - Moved layer info from the "extra info" box to the main info box
+ 
+API:
+ - Fixed points always returning 400 when editing (and thus being unable to edit)
+ - Improved URL parsing to allow .jpeg image format for image embeds
+ - Fixed discord embed API always returning 400
+
+
+

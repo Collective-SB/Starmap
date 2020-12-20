@@ -168,6 +168,10 @@
 				<p style="display: inline;">Show base ring</p>
 			</div>
 
+			<div class="checkbox-option">
+				<input id="moveInfoOnClick" type="checkbox" name="moveInfoOnClick">
+				<p style="display: inline;">Move infobox on click</p>
+			</div>
 		</div>
 		<div id="calculator" class="calculator">
 			<span class="calc-close material-icons">
@@ -202,7 +206,7 @@
 				<legend id="formLegend">Create Point</legend>
 				<input required type="text" name="point-name" placeholder="Name" id="formName" minlength="3"
 					maxlength="16" />
-				<input type="text" name="point-description" placeholder="Description" id="formDesc" maxlength="256" />
+				<input type="text" name="point-description" placeholder="Description" id="formDesc" maxlength="512" />
 				<select class="dropdown-select" name="Type" id="type-select" form="addPointForm"></select>
 				<select class="dropdown-select" name="Layer" id="group-select" form="addPointForm"></select>
 				<select class="dropdown-select" name="Subtype" id="subtype-select" form="addPointForm"></select>
@@ -221,8 +225,7 @@
 				<p>
 					Starmap is a free ISAN-based 3D map for the game <a href="https://www.starbasegame.com/">Starbase</a>!
 					You can use these
-					coordinates in-game by <a
-						href="https://docs.google.com/document/d/1UZWv5UM_DUMQZnlsFbLcuyjbu__Bs0yltIHsXP88qvk/">
+					coordinates in-game by <a href="https://isan.to/doc">
 						installing
 						ISAN
 					</a> on your ship.
@@ -240,7 +243,7 @@
 		</div>
 		<div class="info-container">
 			<svg id="dropdown-minimize" height="16" width="16">
-				<path d="M16 2 L8 14 L0 2 Z" fill="#0074F0" />
+				<path d="M16 2 L8 14 L0 2 Z" fill="var(--user-style)" />
 			</svg>
 			<div class="info" id="infoWindow"></div>
 		</div>

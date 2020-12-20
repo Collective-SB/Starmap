@@ -16,8 +16,14 @@ import {
 	ZONE_INTERACTION_SIZE,
 	HOVER_CAM_DIST_FACTOR,
 } from "./config.js";
-
-import { lerp, hexToRgb, map, constrain, tubeLine } from "./functions.js";
+const RING_OFFSET = 5;
+import {
+	lerp,
+	hexToRgb,
+	map,
+	constrain,
+	tubeLine
+} from "./functions.js";
 
 function sortDiv(divId) {
 	var i, shouldSwitch;
@@ -75,6 +81,7 @@ class Point {
 		this.group;
 		this.ring;
 		this.groupID;
+		this.imageUrl;
 		this.hoverEffect = 0;
 		this.isHovered = false;
 		this.isHoveredSide = false;
@@ -85,6 +92,8 @@ class Point {
 			type: null,
 			subtype: null,
 			createdBy: null,
+			createdAt: null,
+			editedAt: null,
 		};
 		this.init(pointData);
 	}
@@ -132,7 +141,7 @@ class Point {
 		);
 		const ring = new THREE.Mesh(ringGeom, material);
 		ring.rotation.set(Math.PI / 2, 0, 0);
-		ring.position.set(position.x, 0, position.z);
+		ring.position.set(position.x, RING_OFFSET, position.z);
 		this.app.sceneObjs.scene.add(ring);
 		//Create clickable sidebar element
 		const self = this;
@@ -172,6 +181,7 @@ class Point {
 		this.group = data.group;
 		this.groupID = data.groupID;
 		this.vanity = data.vanity;
+		this.imageUrl = data.imageEmbed;
 		this.info = {
 			name: data.name,
 			gamePos: data.pos,
@@ -179,6 +189,8 @@ class Point {
 			type: data.type,
 			subtype: data.subtype,
 			createdBy: data.createdBy,
+			createdAt: data.createdAt,
+			editedAt: data.editedAt
 		};
 		this.updateNamePosition();
 		this.updateMarkerPosition();
@@ -257,7 +269,7 @@ class Point {
 			this.position.y,
 			this.position.z
 		);
-		this.ring.position.set(this.position.x, 0, this.position.z);
+		this.ring.position.set(this.position.x, RING_OFFSET, this.position.z);
 
 		this.marker.position.set(
 			this.position.x, // - (MARKER_SIZE * s / 2),
@@ -299,9 +311,12 @@ class Point {
 		this.info.type = pointData.type;
 		this.info.gamePos = pointData.pos;
 		this.info.subtype = pointData.subtype;
+		this.info.createdAt = pointData.createdAt;
+		this.info.editedAt = pointData.editedAt;
 		this.groupID = pointData.groupID;
 		this.vanity = pointData.vanity;
 		this.group = pointData.group;
+		this.imageUrl = pointData.imageEmbed;
 		this.color = color;
 		this.marker.material.color.set(color);
 		this.nameText.material.color.set(color);
@@ -312,7 +327,7 @@ class Point {
 		this.marker.material.needsUpdate = true;
 		this.linePart.geometry.attributes.position.array[4] = -position.y;
 		this.linePart.geometry.attributes.position.needsUpdate = true;
-		this.ring.position.set(0, -position.y, 0);
+		this.ring.position.set(0, -position.y + RING_OFFSET, 0);
 		if (!noPosChange) {
 			if (
 				this.app.pointManager.focusedPOI &&
@@ -432,7 +447,7 @@ class Point {
 	}
 	updateHoverSidebar(hover) {
 		this.isHoveredSide = hover;
-		if (this.app.pointManager.onlyShowNameOnHover && !hover) {
+		if ((this.app.pointManager.onlyShowNameOnHover && !hover) || !this.app.pointManager.shows.nameText) {
 			this.nameText.visible = false;
 		} else if (this.shown) {
 			this.nameText.visible = true;
@@ -442,9 +457,10 @@ class Point {
 		this.isHovered = hover;
 		//This function gets called per frame, so need to prevent overriding sidebar hover which only happens per mouse event
 		if (
-			this.app.pointManager.onlyShowNameOnHover &&
-			!hover &&
-			!this.isHoveredSide
+			(this.app.pointManager.onlyShowNameOnHover &&
+				!hover &&
+				!this.isHoveredSide) ||
+			!this.app.pointManager.shows.nameText
 		) {
 			this.nameText.visible = false;
 		} else if (this.shown) {
@@ -556,9 +572,7 @@ class Zone {
 		switch (this.shape.type) {
 			case "sphere":
 				for (
-					let i = 0;
-					i < Math.PI * 2;
-					i += (Math.PI * 2) / ZONE_OUTLINE_POINTS
+					let i = 0; i < Math.PI * 2; i += (Math.PI * 2) / ZONE_OUTLINE_POINTS
 				) {
 					points.push(
 						// new THREE.Vector3(

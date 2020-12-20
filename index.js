@@ -4,47 +4,28 @@ const fs = require("fs");
 require("dotenv").config();
 const app = express();
 const POINT_INFO_API = "https://api-beta.isan.to/front/getPointInfo/";
-const redirs = [
-	{
-		names: ["doc", "documentation"],
-		link:
-			"https://docs.google.com/document/d/1UZWv5UM_DUMQZnlsFbLcuyjbu__Bs0yltIHsXP88qvk/edit",
-	},
-	{
-		names: ["git", "github"],
-		link: "https://github.com/Collective-SB/Starmap/",
-	},
-	{
-		names: ["discord", "server", "collective", "support", "help"],
-		link: "https://discord.gg/VnU8apR",
-	},
-];
 // const POINT_INFO_API = "http://localhost:8000/front/getPointInfo/"
 const IMGS = {
-	ship:
-		"https://cdn.discordapp.com/attachments/762209257738207252/762209368925929472/ship.png",
-	ore:
-		"https://cdn.discordapp.com/attachments/762209257738207252/762209362332090378/ore.png",
-	station:
-		"https://cdn.discordapp.com/attachments/762209257738207252/762209374071947284/station.png",
-	other:
-		"https://cdn.discordapp.com/attachments/762209257738207252/762209367386488852/random-done.png",
-	ico:
-		"https://cdn.discordapp.com/attachments/762209257738207252/762219304694972447/eh5Artboard_1.png",
+	ship: "https://cdn.discordapp.com/attachments/762209257738207252/762209368925929472/ship.png",
+	ore: "https://cdn.discordapp.com/attachments/762209257738207252/762209362332090378/ore.png",
+	station: "https://cdn.discordapp.com/attachments/762209257738207252/762209374071947284/station.png",
+	other: "https://cdn.discordapp.com/attachments/762209257738207252/762209367386488852/random-done.png",
+	ico: "https://cdn.discordapp.com/attachments/762209257738207252/762219304694972447/eh5Artboard_1.png",
 };
-
-function getRedirect(path) {
-	const redir = redirs.find((dir) => dir.names.includes(path.toLowerCase()));
-	return redir ? redir.link : null;
-}
 
 app.get("/favicon.ico", (req, res) => {
 	res.sendFile("./public/favicon.ico", {
 		root: __dirname,
 	});
 });
+app.get("/isan.pdf", (req, res) => {
+	res.sendFile("./public/isan.pdf", {
+		root: __dirname,
+	});
+});
 app.get(["/:pointId", "/"], async (req, res) => {
 	const URL = req.protocol + "://" + req.get("host") + req.originalUrl;
+	console.log(URL);
 	let openGraphStyles = `
 		<meta property="og:image:type" content="image/png" />
 		<meta property="og:image:width" content="128" />
@@ -56,18 +37,21 @@ app.get(["/:pointId", "/"], async (req, res) => {
 		<meta property="og:description" content="A dynamic live time map for Starbase\nCreated by Strikeeaglechase#0001" />
 		<meta property="og:image" content="${IMGS.ico}" />
 		<meta property="og:title" content="Starmap" />
-		<meta property="og:site_name" content="Support server - https://discord.gg/VnU8apR" />
+		<meta property="og:site_name" content="Support server - https://discord.gg/Collective" />
 		
 	`;
 	if (req.params.pointId) {
 		//For custom URL stuff
-		const redir = getRedirect(req.params.pointId);
-		if (redir) return res.redirect(redir);
+		// const redir = getRedirect(req.params.pointId);
+		// if (redir) return res.redirect(redir);
 		const apiRes = await fetch(POINT_INFO_API + req.params.pointId, {
 			method: "GET",
 		});
 		if (apiRes.status == 200) {
+			// 200 either means its a valid point, or a valid redirect, lets check
 			const data = await apiRes.json();
+			if (data.resType == "redirect") return res.redirect(data.url);
+
 			openGraphStyles += `
 				<meta property="og:site_name" content="Starmap" />
 				<meta property="og:title" content="${data.name}" />

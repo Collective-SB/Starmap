@@ -13,6 +13,7 @@ function formatNum(value) {
 	}
 	return ret;
 }
+
 function formatTime(value) {
 	if (value.length == 1) {
 		return "0" + value;
@@ -27,6 +28,7 @@ export default class Calculator {
 		this.selecting = -1;
 		this.points = [];
 		this.pointTextElms = [];
+		this.shown = false;
 	}
 	init() {
 		const self = this;
@@ -39,7 +41,13 @@ export default class Calculator {
 			$(this).parent().hide();
 		});
 		$("#calcBtn").click(function () {
-			$("#calculator").show();
+			if (!self.shown) {
+				$("#calculator").show();
+				self.shown = true;
+			} else {
+				self.hide.call(self);
+				$("#calculator").hide();
+			}
 		});
 		const speedInputDirect = document.getElementById("shipSpeedDirect");
 		const speedInputSlider = document.getElementById("shipSpeedSlider");
@@ -69,9 +77,9 @@ export default class Calculator {
 			if (newSelNum == idx) {
 				elm.innerText = "Selecting";
 			} else {
-				elm.innerText = this.points[idx]
-					? this.points[idx].info.name
-					: "None Selected";
+				elm.innerText = this.points[idx] ?
+					this.points[idx].info.name :
+					"None Selected";
 			}
 		});
 		this.selecting = newSelNum;
@@ -91,6 +99,7 @@ export default class Calculator {
 	}
 	hide() {
 		this.app.sceneObjs.scene.remove(this.app.pointManager.connectorLine);
+		this.shown = false;
 	}
 	updateValues() {
 		if (!this.points[0] || !this.points[1]) return;
