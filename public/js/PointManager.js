@@ -447,7 +447,7 @@ class Point {
 	}
 	updateHoverSidebar(hover) {
 		this.isHoveredSide = hover;
-		if (this.app.pointManager.onlyShowNameOnHover && !hover) {
+		if ((this.app.pointManager.onlyShowNameOnHover && !hover) || !this.app.pointManager.shows.nameText) {
 			this.nameText.visible = false;
 		} else if (this.shown) {
 			this.nameText.visible = true;
@@ -457,9 +457,10 @@ class Point {
 		this.isHovered = hover;
 		//This function gets called per frame, so need to prevent overriding sidebar hover which only happens per mouse event
 		if (
-			this.app.pointManager.onlyShowNameOnHover &&
-			!hover &&
-			!this.isHoveredSide
+			(this.app.pointManager.onlyShowNameOnHover &&
+				!hover &&
+				!this.isHoveredSide) ||
+			!this.app.pointManager.shows.nameText
 		) {
 			this.nameText.visible = false;
 		} else if (this.shown) {
