@@ -173,11 +173,21 @@
 				<p style="display: inline;">Move infobox on click</p>
 			</div>
 
-			<p style="margin-bottom: 0px; margin-top: 0px;">Enter a hex code, e.g. <span style="font-family: monospace; color: white; background-color: black; font-weight: bold;">#0074f0</span>, then click enter to set</p>
-			<div class="text-option">
-				<input id="customColorTheme" type="text" name="nameOnHover">
-				<p style="display: inline;">Custom Color Code</p>
+			<div class="color-option">
+				<p style="display: inline;">Custom Color Theme - <span class="container" id="color_val"></span> </p>
+				<div>
+					<input type="color" id="customColorTheme">
+				</div>
 			</div>
+
+			<script>
+				let colorButton = document.getElementById("customColorTheme");
+				let colorDiv = document.getElementById("color_val");
+				colorButton.onchange = function() {
+					colorDiv.innerHTML = colorButton.value;
+					colorDiv.style.color = colorButton.value;
+				}
+			</script>
 
 		</div>
 		<div id="calculator" class="calculator">
@@ -247,12 +257,6 @@
 				</p>
 				<button id="acceptCookies">Accept</button>
 			</div>
-		</div>
-		<div class="info-container">
-			<svg id="dropdown-minimize" height="16" width="16">
-				<path d="M16 2 L8 14 L0 2 Z" fill="var(--user-style)" />
-			</svg>
-			<div class="info" id="infoWindow"></div>
 		</div>
 		<div id="topBanner" class="topPopupBanner" style="display: none;">
 			<p id="bannerMsg">Banner message</p>
