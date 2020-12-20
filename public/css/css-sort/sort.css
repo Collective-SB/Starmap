@@ -537,6 +537,7 @@ button:hover {
 .infoMainBody {
 	display: flex;
 	flex-direction: row;
+	margin-bottom: 0.5em;
 }
 
 .isanDispalyDiv {

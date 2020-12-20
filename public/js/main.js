@@ -8,8 +8,6 @@ const infoTemplate = `
 		<span class="more-info-tooltip">
 			Type: %TYPE%
 			<br>
-			Layer: %LAYER%
-			<br>
 			Created: %CREATED_AT%
 			<br>
 			Edited: %EDITED_AT%
@@ -36,7 +34,8 @@ const infoTemplate = `
 			<img src=%TYPE_IMAGE% width="64" height="64">
 		</div>
 	</div>
-	<p class="infoText">Creator: %CREATOR%</p>
+	<p class="infoText" style="display: inline;">Creator: %CREATOR%</p>
+	<p class="infoText" style="display: inline;">Layer: %LAYER%</p>
 	<div class="desc">
 		<p class="infoText no-drag">%DESCRIPTION%</p>
 	</div>
