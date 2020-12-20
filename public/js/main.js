@@ -709,12 +709,14 @@ class App {
 			const identifier = poiData.vanity ? poiData.vanity : poiData.urlID;
 			const link = window.location.origin + "/" + identifier;
 			copyToClipboard(link);
+			self.banner("Link has been copied to clipboard", SUCCESS);
 		};
 
 		const epiValsBtn = document.getElementById("epivals");
 		epiValsBtn.onclick = function () {
 			const str = `${poiData.info.gamePos.x} ${poiData.info.gamePos.y} ${poiData.info.gamePos.z}`;
 			copyToClipboard(str);
+			self.banner("Coordinates have been copied to clipboard", SUCCESS);
 		};
 
 		//Delete button
