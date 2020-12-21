@@ -8,8 +8,6 @@ const infoTemplate = `
 		<span class="more-info-tooltip">
 			Type: %TYPE%
 			<br>
-			Layer: %LAYER%
-			<br>
 			Created: %CREATED_AT%
 			<br>
 			Edited: %EDITED_AT%
@@ -36,7 +34,8 @@ const infoTemplate = `
 			<img src=%TYPE_IMAGE% width="64" height="64">
 		</div>
 	</div>
-	<p class="infoText">Creator: %CREATOR%</p>
+	<p class="infoText" style="display: inline;">Creator: %CREATOR%</p>
+	<p class="infoText" style="display: inline;">Layer: %LAYER%</p>
 	<div class="desc">
 		<p class="infoText no-drag">%DESCRIPTION%</p>
 	</div>
@@ -709,12 +708,14 @@ class App {
 			const identifier = poiData.vanity ? poiData.vanity : poiData.urlID;
 			const link = window.location.origin + "/" + identifier;
 			copyToClipboard(link);
+			self.banner("Link has been copied to clipboard", SUCCESS);
 		};
 
 		const epiValsBtn = document.getElementById("epivals");
 		epiValsBtn.onclick = function () {
 			const str = `${poiData.info.gamePos.x} ${poiData.info.gamePos.y} ${poiData.info.gamePos.z}`;
 			copyToClipboard(str);
+			self.banner("Coordinates have been copied to clipboard", SUCCESS);
 		};
 
 		//Delete button

@@ -66,16 +66,56 @@ button:hover {
 	cursor: pointer;
 	user-select: none;
 
-	transition: color 0.2s;
-	transition: background-color 0.2s;
+	transition: color 0.4s;
+	transition: background-color 0.4s;
 }
 
 .checkbox-option:hover {
 	color: whitesmoke;
 	background-color: #111;
 
-	transition: color 0.2s;
-	transition: background-color 0.2s;
+	transition: color 0.4s;
+	transition: background-color 0.4s;
+}
+
+.color-option {
+	margin: 0;
+	text-decoration: none;
+	font-size: 15px;
+	color: #818181;
+	display: block;
+	cursor: pointer;
+	user-select: none;
+
+	transition: color 0.4s;
+	transition: background-color 0.4s;
+}
+
+.color-option:hover {
+	color: whitesmoke;
+	background-color: #111;
+
+	transition: color 0.4s;
+	transition: background-color 0.4s;
+}
+
+/* fancy color picker */
+
+#customColorTheme{
+	border-radius: 100%;
+	height: 20px;
+	width: 20px;
+	border: none;
+	outline: none;
+	-webkit-appearance: none;
+}
+
+#customColorTheme::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+#customColorTheme::-webkit-color-swatch {
+	border: none;
+	border-radius: 100%;
 }
 
 /* UI Button grid */
@@ -126,15 +166,15 @@ button:hover {
 
 #find {
 	color: whitesmoke;
-	border: 2px dashed #0074f0;
+	border: 2px dashed var(--user-style);
 
 	background-color: #111111;
 	margin-top: 2px;
 }
 
 #find:hover {
-	border: 2px dashed #0074f0;
-	background-color: #0074f0;
+	border: 2px dashed var(--user-style);
+	background-color: var(--user-style);
 	color: #111;
 }
 
@@ -216,24 +256,24 @@ button:hover {
 	text-align: center;
 	user-select: none;
 
-	transition: max-height 0.2s ease-out, background-color 0.2s, color 0.2s;
+	transition: max-height 0.2s ease-out, background-color 0.4s, color 0.4s;
 }
 
 .sidenav-point:hover {
 	color: whitesmoke;
 	background-color: #333;
 
-	transition: max-height 0.2s ease-out, background-color 0.2s, color 0.2s;
+	transition: max-height 0.2s ease-out, background-color 0.4s, color 0.4s;
 }
 
 .sidenav-bottom {
 	display: flex;
 	flex-direction: column;
 	margin-top: auto;
-	/* 
+	/*
 	This was a fix for the hover info being unreadable near the top, however it completly broke when you scrolled
 	margin-top: -200px;
-	padding-top: 200px; 
+	padding-top: 200px;
 	*/
 	height: 50%;
 	overflow-y: auto;
@@ -537,6 +577,7 @@ button:hover {
 .infoMainBody {
 	display: flex;
 	flex-direction: row;
+	margin-bottom: 0.5em;
 }
 
 .isanDispalyDiv {
@@ -654,8 +695,8 @@ p {
 	text-align: left;
 	user-select: none;
 
-	transition: color 0.2s;
-	transition: background-color 0.2s;
+	transition: color 0.4s;
+	transition: background-color 0.4s;
 }
 
 .filter-view-option label,
@@ -667,8 +708,8 @@ input {
 	color: whitesmoke;
 	background-color: #333;
 
-	transition: color 0.2s;
-	transition: background-color 0.2s;
+	transition: color 0.4s;
+	transition: background-color 0.4s;
 }
 
 .filter-view-option .filter-view-option-tooltip {
@@ -703,8 +744,30 @@ input {
 
 .filter-view-option:hover .filter-view-option-tooltip {
 	visibility: visible;
+	animation: 0.5s fadeIn;
 }
 
 .filter-view-option .filter-view-option-tooltip:hover {
 	visibility: hidden;
+	animation: 0.5s fadeOut;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		visibility: visible;
+		opacity: 1;
+	}
+}
+
+@keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		visibility: hidden;
+		opacity: 0;
+	}
 }
