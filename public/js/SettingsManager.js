@@ -52,6 +52,14 @@ const SETTINGS_DEF = [{
 		},
 	},
 	{
+		id: "beltSamples",
+		default: 32,
+		prop: "value",
+		set: function (val) {
+			document.getElementById("beltSampleDisplay").innerText = val
+		},
+	},
+	{
 		id: "cloudDisp",
 		default: true,
 		prop: "checked",

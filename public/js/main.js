@@ -87,7 +87,9 @@ import {
 	TYPES,
 	AUTH_REDIR,
 	URLS,
-	ENV, BELT_RING_COUNT, BELT_HEIGHT,
+	ENV,
+	BELT_HEIGHT,
+	BELT_EDGE_RADIUS
 } from "./config.js";
 
 import {
@@ -221,6 +223,64 @@ class App {
 			0.1,
 			5000000000
 		);
+
+		//Belt. Doing at the start because it sends off lots of async jobs and I want that to have as much time before.
+		//load to finish asynchronously as possible.
+		const startPos = 0 - (BELT_HEIGHT / 2)
+		const endPos = 0 + (BELT_HEIGHT / 2)
+
+		//load from local storage. Settings aren't initialised yet
+		let BELT_RING_COUNT = undefined;
+		try {
+			BELT_RING_COUNT = JSON.parse(window.localStorage.getItem("settings")).beltSamples
+		} catch {
+			console.log("Using default belt ring count")
+			BELT_RING_COUNT = 32
+		}
+
+
+		if (BELT_RING_COUNT === undefined || BELT_RING_COUNT === null) {
+			console.log("Using default belt ring count")
+			BELT_RING_COUNT = 32
+		}
+
+		let i = 0;
+
+		const startTime = Date.now()
+
+		let beltMat = new THREE.MeshStandardMaterial({
+			color: 0x515151,
+			opacity: (0.8/BELT_RING_COUNT),
+			transparent: true,
+		});
+
+		beltMat.depthWrite = false;
+		beltMat.needsUpdate = true;
+
+		while (i < BELT_RING_COUNT-1) {
+			i++
+
+			let height = startPos + ((BELT_HEIGHT / BELT_RING_COUNT) * i)
+
+			let distToCentre;
+
+			if (height > 0) {
+				distToCentre = i - (BELT_RING_COUNT / 2)
+			} else if (height === 0) {
+				distToCentre = 0
+			} else {
+				distToCentre = (BELT_RING_COUNT / 2) - i
+			}
+
+			let offset = distToCentre * (BELT_EDGE_RADIUS / BELT_RING_COUNT)
+
+			this.makeBeltLayer(height, offset, -offset, beltMat)
+		}
+
+		const endTime = Date.now()
+
+		console.log(endTime - startTime + "ms to load the belt.")
+
 		const divElm = document.getElementById("main");
 		this.sceneObjs.renderer = new THREE.WebGLRenderer({
 			logarithmicDepthBuffer: true,
@@ -241,23 +301,6 @@ class App {
 		this.sceneObjs.Eos = new THREE.Mesh(eosGem, eosMat);
 		this.sceneObjs.Eos.castShadow = true;
 		this.sceneObjs.scene.add(this.sceneObjs.Eos);
-
-		//Belt
-		const startPos = 0 - (BELT_HEIGHT / 2)
-		const endPos = 0 + (BELT_HEIGHT / 2)
-		let i = 1;
-
-		this.makeBeltLayer(startPos, (BELT_THICK / 16), -(BELT_THICK / 16))
-
-		while (i < BELT_RING_COUNT - 1) {
-			i++
-
-			let height = startPos + ((BELT_HEIGHT / BELT_RING_COUNT) * i)
-
-			this.makeBeltLayer(height)
-		}
-
-		this.makeBeltLayer(endPos, (BELT_THICK / 16), -(BELT_THICK / 16))
 
 		//Safe zone
 		var safeGem = new THREE.CylinderGeometry(
@@ -353,23 +396,15 @@ class App {
 		);
 	}
 
-	makeBeltLayer(height, innerOverride=0, outerOverride=0) {
+	async makeBeltLayer(height, innerOverride=0, outerOverride=0, material) {
 		var beltGem = new THREE.RingGeometry(
 			EOS_SIZE + DIST_TO_BELT + innerOverride,
 			EOS_SIZE + DIST_TO_BELT + BELT_THICK + outerOverride,
 			128,
-			8
+			1,
 		);
 
-		var beltMat = new THREE.MeshStandardMaterial({
-			color: 0x515151,
-			opacity: 0.1,
-			transparent: true,
-		});
-
-		beltMat.depthWrite = false;
-		beltMat.needsUpdate = true;
-		const Belt = new THREE.Mesh(beltGem, beltMat);
+		const Belt = new THREE.Mesh(beltGem, material);
 		Belt.material.side = THREE.DoubleSide;
 		Belt.rotation.set(Math.PI / 2, 0, 0);
 		this.sceneObjs.Belt = Belt;
