@@ -57,6 +57,29 @@ button:hover {
 	transition: color 0.25s;
 }
 
+input[type=submit] {
+	background-color: #111111;
+	color: var(--user-style);
+	border: 2px var(--user-style) solid;
+
+	transition: color 0.25s;
+}
+
+input[type=submit]:hover {
+	background-color: var(--user-style);
+	color: #111111;
+
+	transition: color 0.25s;
+}
+
+input[type=number] {
+	background-color: #111111;
+	color: white;
+	border: 2px var(--user-style) solid;
+
+	transition: color 0.25s;
+}
+
 .checkbox-option {
 	margin: 0;
 	text-decoration: none;
