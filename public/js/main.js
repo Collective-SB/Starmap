@@ -87,7 +87,7 @@ import {
 	TYPES,
 	AUTH_REDIR,
 	URLS,
-	ENV,
+	ENV, BELT_RING_COUNT, BELT_HEIGHT,
 } from "./config.js";
 
 import {
@@ -243,35 +243,21 @@ class App {
 		this.sceneObjs.scene.add(this.sceneObjs.Eos);
 
 		//Belt
-		let i = -3;
-		while (i < 3)
-		{
+		const startPos = 0 - (BELT_HEIGHT / 2)
+		const endPos = 0 + (BELT_HEIGHT / 2)
+		let i = 1;
+
+		this.makeBeltLayer(startPos, (BELT_THICK / 16), -(BELT_THICK / 16))
+
+		while (i < BELT_RING_COUNT - 1) {
 			i++
 
-			var beltGem = new THREE.RingGeometry(
-				EOS_SIZE + DIST_TO_BELT,
-				EOS_SIZE + DIST_TO_BELT + BELT_THICK,
-				128,
-				8
-			);
+			let height = startPos + ((BELT_HEIGHT / BELT_RING_COUNT) * i)
 
-			var beltMat = new THREE.MeshStandardMaterial({
-				color: 0x515151,
-				opacity: 0.1,
-				transparent: true,
-			});
-
-			beltMat.depthWrite = false;
-			beltMat.needsUpdate = true;
-			const Belt = new THREE.Mesh(beltGem, beltMat);
-			Belt.material.side = THREE.DoubleSide;
-			Belt.rotation.set(Math.PI / 2, 0, 0);
-			this.sceneObjs.Belt = Belt;
-
-			this.sceneObjs.Belt.position.set(0, i*20000, 0)
-
-			this.sceneObjs.scene.add(Belt);
+			this.makeBeltLayer(height)
 		}
+
+		this.makeBeltLayer(endPos, (BELT_THICK / 16), -(BELT_THICK / 16))
 
 		//Safe zone
 		var safeGem = new THREE.CylinderGeometry(
@@ -366,6 +352,33 @@ class App {
 			this
 		);
 	}
+
+	makeBeltLayer(height, innerOverride=0, outerOverride=0) {
+		var beltGem = new THREE.RingGeometry(
+			EOS_SIZE + DIST_TO_BELT + innerOverride,
+			EOS_SIZE + DIST_TO_BELT + BELT_THICK + outerOverride,
+			128,
+			8
+		);
+
+		var beltMat = new THREE.MeshStandardMaterial({
+			color: 0x515151,
+			opacity: 0.1,
+			transparent: true,
+		});
+
+		beltMat.depthWrite = false;
+		beltMat.needsUpdate = true;
+		const Belt = new THREE.Mesh(beltGem, beltMat);
+		Belt.material.side = THREE.DoubleSide;
+		Belt.rotation.set(Math.PI / 2, 0, 0);
+		this.sceneObjs.Belt = Belt;
+
+		this.sceneObjs.Belt.position.set(0, height, 0)
+
+		this.sceneObjs.scene.add(Belt);
+	}
+
 	//Casts a ray and returns what points are hit
 	castRay(screenX, screenY) {
 		const x = (screenX / window.innerWidth) * 2 - 1;
