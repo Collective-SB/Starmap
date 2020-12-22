@@ -484,26 +484,30 @@ input[type=number] {
 	width: 100%;
 	height: 100%;
 	overflow: auto;
-	background-color: rgb(0, 0, 0);
-	background-color: rgba(0, 0, 0, 0.4);
 }
 
 .popup-content {
-	background-color: #d6d6d6;
 	margin: 15% auto;
 	padding: 20px;
-	border: 1px solid #888;
 	width: 50%;
+	color: var(--user-style);
+	background-color: #111111;
+	border: 2px solid var(--user-style);
+
+	box-shadow: 0px 0px 43px 1px var(--user-style);
+	-webkit-box-shadow: 0px 0px 43px 1px var(--user-style);
+	-moz-box-shadow: 0px 0px 43px 1px var(--user-style);
 }
 
-.popup-content h1 {
-	color: black;
+.popup-content h1 h2 h3 h4 h5 h6 h7 h8 {
+	color: var(--user-style);
 	text-align: center;
 }
 
-.popup-content p {
-	color: black;
+.popup-content a {
+	color: var(--user-style);
 }
+
 
 .topPopupBanner {
 	position: absolute;

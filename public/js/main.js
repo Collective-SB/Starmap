@@ -465,7 +465,7 @@ class App {
 			$(this).parent().hide();
 			if (
 				group.isPublicRead &&
-				!confirm(
+				! await app.modalConfirm(
 					"This will create a point on a PUBLIC layer, make sure this is correct"
 				)
 			) {
@@ -505,8 +505,8 @@ class App {
 			// setCookie("authRedirect", AUTH_REDIR, 1);
 			window.location.href = `${URLS.api[ENV]}auth/login?redir=${AUTH_REDIR}`;
 		};
-		document.getElementById("logout").onclick = function () {
-			if (!confirm("Would you like to logout?")) return;
+		document.getElementById("logout").onclick = async function () {
+			if (!await app.modalConfirm("Would you like to logout?")) return;
 			self.storage.removeItem("jwt");
 			self.setLoggedIn(false);
 		};
@@ -721,8 +721,8 @@ class App {
 		//Delete button
 		if (canDelete) {
 			const delBtn = document.getElementById("delete-point");
-			delBtn.onclick = function () {
-				if (confirm("Are you sure you want to delete this point?")) {
+			delBtn.onclick = async function () {
+				if (await app.modalConfirm("Are you sure you want to delete this point?")) {
 					infoWindow.innerHTML = "";
 					self.api.deletePoint(poiData.id);
 				}
@@ -782,6 +782,27 @@ class App {
 	updateTheme(newColor) {
 		document.documentElement.style.setProperty("--user-style", newColor);
 	}
+
+	modalConfirm(text) {
+		return new Promise(resolve => {
+			document.getElementById("betterConfirm-text").innerText = text;
+
+			document.getElementById("betterConfirm").style.display = "block"
+
+			document.getElementById('betterConfirm-yes').onclick = function () {
+				document.getElementById("betterConfirm").style.display = "none";
+				console.log("yes")
+				resolve(true);
+			};
+
+			document.getElementById('betterConfirm-no').onclick = function () {
+				document.getElementById("betterConfirm").style.display = "none";
+				console.log("no")
+				resolve(false);
+			};
+		});
+	}
+
 	//Called whenever a user successfully logs in, fills out the group options from user object
 	onLogin() {
 		const form = document.getElementById("filterFormLayers");
