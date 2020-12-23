@@ -89,7 +89,9 @@ import {
 	URLS,
 	ENV,
 	BELT_HEIGHT,
-	BELT_EDGE_RADIUS
+	BELT_EDGE_RADIUS,
+	BELT_QUALITY,
+	EOS_QUALITY
 } from "./config.js";
 
 import {
@@ -233,11 +235,9 @@ class App {
 	}
 	//Sets up the threejs scene
 	initScene() {
-		const CAMERA_FOV = this.settingGet("cameraFOV", 75)
-
 		this.sceneObjs.scene = new THREE.Scene();
 		this.sceneObjs.camera = new THREE.PerspectiveCamera(
-			CAMERA_FOV,
+			75,
 			window.innerWidth / window.innerHeight,
 			0.1,
 			5000000000
@@ -249,8 +249,7 @@ class App {
 		const endPos = 0 + (BELT_HEIGHT / 2)
 
 		//load from local storage. Settings aren't initialised yet
-		const BELT_RING_COUNT = this.settingGet("beltSamples", 32)
-		const BELT_QUALITY = this.settingGet("beltQuality", 96)
+		const BELT_RING_COUNT = this.settingGet("beltSamples", 16)
 		const BELT_TRANSPARENCY = this.settingGet("beltTransparency", 0.8)
 
 		let i = 0;
@@ -267,7 +266,7 @@ class App {
 		beltMat.needsUpdate = true;
 
 		if (BELT_RING_COUNT == 2) {
-			this.makeBeltLayer(0, 0, 0, beltMat, BELT_QUALITY)
+			this.makeBeltLayer(0, 0, 0, beltMat)
 		} else {
 			while (i < BELT_RING_COUNT-1) {
 				i++
@@ -287,7 +286,7 @@ class App {
 				let x = BELT_EDGE_RADIUS / BELT_RING_COUNT
 				let offset = (distToCentre * x) / 2
 
-				this.makeBeltLayer(height, offset, -offset, beltMat, BELT_QUALITY)
+				this.makeBeltLayer(height, offset, -offset, beltMat)
 			}
 		}
 
@@ -305,10 +304,6 @@ class App {
 
 
 		//Eos
-
-		//load from local storage. Settings aren't initialised yet
-		const EOS_QUALITY = this.settingGet("eosQuality", 32)
-
 		const tex = new THREE.TextureLoader().load("../assets/planetTex.png");
 		const eosGem = new THREE.SphereGeometry(EOS_SIZE, EOS_QUALITY, EOS_QUALITY);
 		const eosMat = new THREE.MeshStandardMaterial({
@@ -416,11 +411,11 @@ class App {
 		);
 	}
 
-	async makeBeltLayer(height, innerOverride=0, outerOverride=0, material, quality) {
+	async makeBeltLayer(height, innerOverride=0, outerOverride=0, material) {
 		var beltGem = new THREE.RingGeometry(
 			EOS_SIZE + DIST_TO_BELT + innerOverride,
 			EOS_SIZE + DIST_TO_BELT + BELT_THICK + outerOverride,
-			quality,
+			BELT_QUALITY,
 			1,
 		);
 

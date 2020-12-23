@@ -67,35 +67,11 @@ const SETTINGS_DEF = [{
 		},
 	},
 	{
-		id: "eosQuality",
-		default: 32,
-		prop: "value",
-		set: function (val) {
-			document.getElementById("eosQualityDisplay").innerText = val
-		},
-	},
-	{
-		id: "beltQuality",
-		default: 96,
-		prop: "value",
-		set: function (val) {
-			document.getElementById("beltQualityDisplay").innerText = val
-		},
-	},
-	{
 		id: "beltTransparency",
 		default: 0.8,
 		prop: "value",
 		set: function (val) {
 			document.getElementById("beltTransparencyDisplay").innerText = val
-		},
-	},
-	{
-		id: "cameraFOV",
-		default: 75,
-		prop: "value",
-		set: function (val) {
-			document.getElementById("cameraFOVDisplay").innerText = val
 		},
 	},
 	{
