@@ -84,7 +84,7 @@ const SETTINGS_DEF = [{
 	},
 	{
 		id: "beltTransparency",
-		default: 96,
+		default: 0.8,
 		prop: "value",
 		set: function (val) {
 			document.getElementById("beltTransparencyDisplay").innerText = val
