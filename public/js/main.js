@@ -166,7 +166,14 @@ class App {
 	}
 
 	hideLoadingMessage() {
-		document.getElementById("loading-screen").style.display = "none"
+		const el = document.getElementById("loading-screen");
+		el.style.opacity = 0;
+
+		el.addEventListener("transitionend", () =>
+		{
+			console.log("transition end")
+			el.remove()
+		})
 	}
 
 	async init() {
