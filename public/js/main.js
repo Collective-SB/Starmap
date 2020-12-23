@@ -216,9 +216,24 @@ class App {
 	}
 	//Sets up the threejs scene
 	initScene() {
+		//load from local storage. Settings aren't initialised yet
+		let CAMERA_FOV = undefined;
+		try {
+			CAMERA_FOV = JSON.parse(window.localStorage.getItem("settings")).cameraFOV
+		} catch {
+			console.log("Using default camera FOV")
+			CAMERA_FOV = 75
+		}
+
+
+		if (CAMERA_FOV === undefined || CAMERA_FOV === null) {
+			console.log("Using default camera FOV")
+			CAMERA_FOV = 75
+		}
+
 		this.sceneObjs.scene = new THREE.Scene();
 		this.sceneObjs.camera = new THREE.PerspectiveCamera(
-			75,
+			CAMERA_FOV,
 			window.innerWidth / window.innerHeight,
 			0.1,
 			5000000000
@@ -244,13 +259,41 @@ class App {
 			BELT_RING_COUNT = 32
 		}
 
+		let BELT_QUALITY = undefined;
+		try {
+			BELT_QUALITY = JSON.parse(window.localStorage.getItem("settings")).beltQuality
+		} catch {
+			console.log("Using default belt quality")
+			BELT_QUALITY = 96
+		}
+
+
+		if (BELT_QUALITY === undefined || BELT_QUALITY === null) {
+			console.log("Using default belt quality")
+			BELT_QUALITY = 96
+		}
+
+		let BELT_TRANSPARENCY = undefined;
+		try {
+			BELT_TRANSPARENCY = JSON.parse(window.localStorage.getItem("settings")).beltTransparency
+		} catch {
+			console.log("Using default belt transparency")
+			BELT_TRANSPARENCY = 0.8
+		}
+
+
+		if (BELT_TRANSPARENCY === undefined || BELT_TRANSPARENCY === null) {
+			console.log("Using default belt transparency")
+			BELT_TRANSPARENCY = 0.8
+		}
+
 		let i = 0;
 
 		const startTime = Date.now()
 
 		let beltMat = new THREE.MeshStandardMaterial({
 			color: 0x515151,
-			opacity: (0.8/BELT_RING_COUNT),
+			opacity: (BELT_TRANSPARENCY/BELT_RING_COUNT),
 			transparent: true,
 		});
 
@@ -258,7 +301,7 @@ class App {
 		beltMat.needsUpdate = true;
 
 		if (BELT_RING_COUNT == 2) {
-			this.makeBeltLayer(0, 0, 0, beltMat)
+			this.makeBeltLayer(0, 0, 0, beltMat, BELT_QUALITY)
 		} else {
 			while (i < BELT_RING_COUNT-1) {
 				i++
@@ -278,7 +321,7 @@ class App {
 				let x = BELT_EDGE_RADIUS / BELT_RING_COUNT
 				let offset = distToCentre * x
 
-				this.makeBeltLayer(height, offset, -offset, beltMat)
+				this.makeBeltLayer(height, offset, -offset, beltMat, BELT_QUALITY)
 			}
 		}
 
@@ -293,9 +336,26 @@ class App {
 		});
 		this.sceneObjs.renderer.setSize(window.innerWidth, window.innerHeight);
 		divElm.appendChild(this.sceneObjs.renderer.domElement);
+
+
 		//Eos
+
+		//load from local storage. Settings aren't initialised yet
+		let EOS_QUALITY = undefined;
+		try {
+			EOS_QUALITY = JSON.parse(window.localStorage.getItem("settings")).eosQuality
+		} catch {
+			console.log("Using default eos quality")
+			EOS_QUALITY = 32
+		}
+
+		if (EOS_QUALITY === undefined || EOS_QUALITY === null) {
+			console.log("Using default eos quality")
+			EOS_QUALITY = 32
+		}
+
 		const tex = new THREE.TextureLoader().load("../assets/planetTex.png");
-		const eosGem = new THREE.SphereGeometry(EOS_SIZE, 32, 32);
+		const eosGem = new THREE.SphereGeometry(EOS_SIZE, EOS_QUALITY, EOS_QUALITY);
 		const eosMat = new THREE.MeshStandardMaterial({
 			// color: 0x2c3ca3,
 			metalness: 0.8,
@@ -363,7 +423,7 @@ class App {
 			// ).load("../assets/cloud3.png");
 		).load("https://i.ibb.co/hf26qqm/cloud3.png");
 		const MESH_SIZE = 76;
-		const cloudGeom = new THREE.SphereGeometry(MESH_SIZE, 100, 100);
+		const cloudGeom = new THREE.SphereGeometry(MESH_SIZE, EOS_QUALITY*2, EOS_QUALITY*2);
 		const cloudMat = new THREE.MeshStandardMaterial({
 			color: 0xcdddfd,
 			transparent: true,
@@ -401,11 +461,11 @@ class App {
 		);
 	}
 
-	async makeBeltLayer(height, innerOverride=0, outerOverride=0, material) {
+	async makeBeltLayer(height, innerOverride=0, outerOverride=0, material, quality) {
 		var beltGem = new THREE.RingGeometry(
 			EOS_SIZE + DIST_TO_BELT + innerOverride,
 			EOS_SIZE + DIST_TO_BELT + BELT_THICK + outerOverride,
-			96,
+			quality,
 			1,
 		);
 

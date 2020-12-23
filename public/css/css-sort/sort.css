@@ -193,12 +193,16 @@ input[type=number] {
 
 	background-color: #111111;
 	margin-top: 2px;
+
+	transition: color 0.25s;
 }
 
 #find:hover {
 	border: 2px dashed var(--user-style);
 	background-color: var(--user-style);
 	color: #111;
+
+	transition: color 0.25s;
 }
 
 .nopadding {

@@ -150,6 +150,9 @@ class Point {
 		sidebarElm.id = `side-${data.id}`;
 		sidebarElm.classList.add("sidenav-point");
 
+		sidebarElm.addEventListener("mouseover", function(){ app.arrowHoverEffectStart(this); })
+		sidebarElm.addEventListener("mouseleave", function(){ app.arrowHoverEffectEnd(this); })
+
 		document.getElementById("points").appendChild(sidebarElm);
 		sidebarElm.onclick = () => {
 			self.app.cameraController.lerpCamTo(
@@ -252,7 +255,7 @@ class Point {
 		sidebarElm.onmouseout = () => {
 			self.updateHoverSidebar(false);
 		};
-		
+
 		sidebarElm.addEventListener("mouseover", function(){ app.arrowHoverEffectStart(this); })
 		sidebarElm.addEventListener("mouseleave", function(){ app.arrowHoverEffectEnd(this); })
 	}
