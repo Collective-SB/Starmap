@@ -31,6 +31,7 @@
 	z-index: 1;
 	color: whitesmoke;
 }
+
 .settings:hover {
 	opacity: 1;
 }
@@ -93,31 +94,32 @@
 }
 
 .dropdown-select {
-	border: none;
 	margin-top: 1px;
 	margin-bottom: 1px;
+
+	background-color: #111111;
+	color: var(--user-style);
+	border: 2px var(--user-style) solid;
+
+	transition: color 0.25s;
 }
 
-.add-point input[type="text"] {
-	background-color: whitesmoke;
-	color: #111;
-	outline: none;
-	border: none;
+.dropdown-select:hover {
+	background-color: var(--user-style);
+	color: #111111;
+
+	transition: color 0.25s;
 }
 
-.add-point input[type="submit"] {
-	cursor: pointer;
-	outline: none;
-	background-color: whitesmoke;
-	color: #333;
-	border: solid 1px whitesmoke;
-	transition: color 0.5s;
+.dropdown-select:focus {
+	background-color: #111111;
+	color: var(--user-style);
 }
 
-.add-point input[type="submit"]:hover {
-	background-color: #333;
-	color: whitesmoke;
-	transition: color 0.5s;
+input[type="text"] {
+	background-color: #111111;
+	border: 2px var(--user-style) solid;
+	color: white;
 }
 
 .add-point .close {

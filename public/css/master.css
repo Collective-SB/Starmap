@@ -1,6 +1,6 @@
 /*
 |*************************************************************************;
-* ScriptName    : Global Root for CSS 
+* ScriptName    : Global Root for CSS
 * ScriptPath    : /css/master.css
 |*************************************************************************;
 */
@@ -43,9 +43,9 @@
 	/* Style config settings */
 	--user-style: #0074f0;
 	/* Default Box Shadow */
-	--webkit-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-	--moz-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-	--box-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+	--webkit-boxshadow: 0px 0px 5px 0px var(--user-style);
+	--moz-boxshadow: 0px 0px 5px 0px var(--user-style);
+	--box-boxshadow: 0px 0px 5px 0px var(--user-style);
 
 	--background: #111;
 	--red: #f44336;
@@ -53,14 +53,14 @@
 
 	/*
 |*************************************************************************;
-* Box Properties 
+* Box Properties
 |*************************************************************************;
 */
 
 	/* Default Box Shadow */
-	--webkit-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-	--moz-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-	--box-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+	--webkit-boxshadow: 0px 0px 5px 0px var(--user-style);
+	--moz-boxshadow: 0px 0px 5px 0px var(--user-style);
+	--box-boxshadow: 0px 0px 5px 0px var(--user-style);
 
 	/* Red Box Shadow */
 	--webkit-boxshadow-blue: inset 0px -16px 17px -13px var(--user-style);
@@ -74,7 +74,7 @@
 
 /*
 |*************************************************************************;
-* Page Properties 
+* Page Properties
 |*************************************************************************;
 */
 

@@ -88,6 +88,10 @@ import {
 	AUTH_REDIR,
 	URLS,
 	ENV,
+	BELT_HEIGHT,
+	BELT_EDGE_RADIUS,
+	BELT_QUALITY,
+	EOS_QUALITY
 } from "./config.js";
 
 import {
@@ -212,6 +216,23 @@ class App {
 
 		this.pointManager.updateDisplayed(this.viewFilters);
 	}
+
+	settingGet(setting, _default) {
+		let result = undefined;
+		try {
+			result = JSON.parse(window.localStorage.getItem("settings"))[setting]
+		} catch {
+			console.log("Using default " + setting)
+			result = _default
+		}
+
+		if (setting === undefined || setting === null) {
+			console.log("Using default " + setting)
+			result = _default
+		}
+
+		return result
+	}
 	//Sets up the threejs scene
 	initScene() {
 		this.sceneObjs.scene = new THREE.Scene();
@@ -221,6 +242,58 @@ class App {
 			0.1,
 			5000000000
 		);
+
+		//Belt. Doing at the start because it sends off lots of async jobs and I want that to have as much time before.
+		//load to finish asynchronously as possible.
+		const startPos = 0 - (BELT_HEIGHT / 2)
+		const endPos = 0 + (BELT_HEIGHT / 2)
+
+		//load from local storage. Settings aren't initialised yet
+		const BELT_RING_COUNT = this.settingGet("beltSamples", 16)
+		const BELT_TRANSPARENCY = this.settingGet("beltTransparency", 0.8)
+
+		let i = 0;
+
+		const startTime = Date.now()
+
+		let beltMat = new THREE.MeshStandardMaterial({
+			color: 0x515151,
+			opacity: (BELT_TRANSPARENCY/BELT_RING_COUNT),
+			transparent: true,
+		});
+
+		beltMat.depthWrite = false;
+		beltMat.needsUpdate = true;
+
+		if (BELT_RING_COUNT == 2) {
+			this.makeBeltLayer(0, 0, 0, beltMat)
+		} else {
+			while (i < BELT_RING_COUNT-1) {
+				i++
+
+				let height = startPos + ((BELT_HEIGHT / BELT_RING_COUNT) * i)
+
+				let distToCentre;
+
+				if (height > 0) {
+					distToCentre = i - (BELT_RING_COUNT / 2)
+				} else if (height === 0) {
+					distToCentre = 0
+				} else {
+					distToCentre = (BELT_RING_COUNT / 2) - i
+				}
+
+				let x = BELT_EDGE_RADIUS / BELT_RING_COUNT
+				let offset = (distToCentre * x) / 2
+
+				this.makeBeltLayer(height, offset, -offset, beltMat)
+			}
+		}
+
+		const endTime = Date.now()
+
+		console.log(endTime - startTime + "ms to load the belt.")
+
 		const divElm = document.getElementById("main");
 		this.sceneObjs.renderer = new THREE.WebGLRenderer({
 			logarithmicDepthBuffer: true,
@@ -228,9 +301,11 @@ class App {
 		});
 		this.sceneObjs.renderer.setSize(window.innerWidth, window.innerHeight);
 		divElm.appendChild(this.sceneObjs.renderer.domElement);
+
+
 		//Eos
 		const tex = new THREE.TextureLoader().load("../assets/planetTex.png");
-		const eosGem = new THREE.SphereGeometry(EOS_SIZE, 32, 32);
+		const eosGem = new THREE.SphereGeometry(EOS_SIZE, EOS_QUALITY, EOS_QUALITY);
 		const eosMat = new THREE.MeshStandardMaterial({
 			// color: 0x2c3ca3,
 			metalness: 0.8,
@@ -239,27 +314,8 @@ class App {
 			// wireframe: false,
 		});
 		this.sceneObjs.Eos = new THREE.Mesh(eosGem, eosMat);
+		this.sceneObjs.Eos.castShadow = true;
 		this.sceneObjs.scene.add(this.sceneObjs.Eos);
-
-		//Belt
-		var beltGem = new THREE.RingGeometry(
-			EOS_SIZE + DIST_TO_BELT,
-			EOS_SIZE + DIST_TO_BELT + BELT_THICK,
-			128,
-			8
-		);
-		var beltMat = new THREE.MeshStandardMaterial({
-			color: 0x515151,
-			opacity: 0.5,
-			transparent: true,
-		});
-		beltMat.depthWrite = false;
-		beltMat.needsUpdate = true;
-		const Belt = new THREE.Mesh(beltGem, beltMat);
-		Belt.material.side = THREE.DoubleSide;
-		Belt.rotation.set(Math.PI / 2, 0, 0);
-		this.sceneObjs.Belt = Belt;
-		this.sceneObjs.scene.add(Belt);
 
 		//Safe zone
 		var safeGem = new THREE.CylinderGeometry(
@@ -317,7 +373,7 @@ class App {
 			// ).load("../assets/cloud3.png");
 		).load("https://i.ibb.co/hf26qqm/cloud3.png");
 		const MESH_SIZE = 76;
-		const cloudGeom = new THREE.SphereGeometry(MESH_SIZE, 100, 100);
+		const cloudGeom = new THREE.SphereGeometry(MESH_SIZE, EOS_QUALITY*2, EOS_QUALITY*2);
 		const cloudMat = new THREE.MeshStandardMaterial({
 			color: 0xcdddfd,
 			transparent: true,
@@ -354,6 +410,25 @@ class App {
 			this
 		);
 	}
+
+	async makeBeltLayer(height, innerOverride=0, outerOverride=0, material) {
+		var beltGem = new THREE.RingGeometry(
+			EOS_SIZE + DIST_TO_BELT + innerOverride,
+			EOS_SIZE + DIST_TO_BELT + BELT_THICK + outerOverride,
+			BELT_QUALITY,
+			1,
+		);
+
+		const Belt = new THREE.Mesh(beltGem, material);
+		Belt.material.side = THREE.DoubleSide;
+		Belt.rotation.set(Math.PI / 2, 0, 0);
+		this.sceneObjs.Belt = Belt;
+
+		this.sceneObjs.Belt.position.set(0, height, 0)
+
+		this.sceneObjs.scene.add(Belt);
+	}
+
 	//Casts a ray and returns what points are hit
 	castRay(screenX, screenY) {
 		const x = (screenX / window.innerWidth) * 2 - 1;
@@ -465,7 +540,7 @@ class App {
 			$(this).parent().hide();
 			if (
 				group.isPublicRead &&
-				!confirm(
+				! await app.modalConfirm(
 					"This will create a point on a PUBLIC layer, make sure this is correct"
 				)
 			) {
@@ -505,8 +580,8 @@ class App {
 			// setCookie("authRedirect", AUTH_REDIR, 1);
 			window.location.href = `${URLS.api[ENV]}auth/login?redir=${AUTH_REDIR}`;
 		};
-		document.getElementById("logout").onclick = function () {
-			if (!confirm("Would you like to logout?")) return;
+		document.getElementById("logout").onclick = async function () {
+			if (!await app.modalConfirm("Would you like to logout?")) return;
 			self.storage.removeItem("jwt");
 			self.setLoggedIn(false);
 		};
@@ -610,6 +685,15 @@ class App {
 			dropDownSubtypes.value = defaultTo;
 		}
 	}
+
+	arrowHoverEffectStart(element) {
+		element.innerText = "> " + element.innerText + " <"
+	}
+
+	arrowHoverEffectEnd(element) {
+		element.innerText = element.innerText.slice(2, -2)
+	}
+
 	//Fills out the info pannel whenever a point is clicked on
 	handleObjectClick(object) {
 		//Creates the info in the top right window
@@ -721,8 +805,8 @@ class App {
 		//Delete button
 		if (canDelete) {
 			const delBtn = document.getElementById("delete-point");
-			delBtn.onclick = function () {
-				if (confirm("Are you sure you want to delete this point?")) {
+			delBtn.onclick = async function () {
+				if (await app.modalConfirm("Are you sure you want to delete this point?")) {
 					infoWindow.innerHTML = "";
 					self.api.deletePoint(poiData.id);
 				}
@@ -782,6 +866,27 @@ class App {
 	updateTheme(newColor) {
 		document.documentElement.style.setProperty("--user-style", newColor);
 	}
+
+	modalConfirm(text) {
+		return new Promise(resolve => {
+			document.getElementById("betterConfirm-text").innerText = text;
+
+			document.getElementById("betterConfirm").style.display = "block"
+
+			document.getElementById('betterConfirm-yes').onclick = function () {
+				document.getElementById("betterConfirm").style.display = "none";
+				console.log("yes")
+				resolve(true);
+			};
+
+			document.getElementById('betterConfirm-no').onclick = function () {
+				document.getElementById("betterConfirm").style.display = "none";
+				console.log("no")
+				resolve(false);
+			};
+		});
+	}
+
 	//Called whenever a user successfully logs in, fills out the group options from user object
 	onLogin() {
 		const form = document.getElementById("filterFormLayers");
@@ -820,6 +925,10 @@ class App {
 			header.className = "layerheader";
 			header.id = `layer-header-${layer.id}`;
 			header.innerText = layer.name;
+
+			header.addEventListener("mouseover", function(){ app.arrowHoverEffectStart(this); })
+			header.addEventListener("mouseleave", function(){ app.arrowHoverEffectEnd(this); })
+
 			const div = document.createElement("div");
 			div.id = `sort-div-${layer.id}`;
 
@@ -862,15 +971,13 @@ class App {
 		// let logoutBtn = document.getElementById("logout");
 		let addPointBtn = document.getElementById("new-point");
 
-		let pointsTitle = document.getElementById("points-title");
 		// if (!loginBtn) {
 		// 	return;
 		// }
-		//This sets if the buttion is visable or not
+		//This sets if the button is visible or not
 		if (newState) {
 			loginBtn.style.display = "none";
 			// logoutBtn.style.display = "block";
-			pointsTitle.style.display = "block";
 			addPointBtn.style.display = "block";
 			if (!this.lastLoginState) {
 				this.onLogin();
@@ -879,7 +986,6 @@ class App {
 		} else {
 			loginBtn.style.display = "block";
 			// logoutBtn.style.display = "none";
-			pointsTitle.style.display = "none";
 			addPointBtn.style.display = "none";
 			if (this.lastLoginState) {
 				this.onLogout();

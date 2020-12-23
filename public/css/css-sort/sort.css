@@ -57,6 +57,29 @@ button:hover {
 	transition: color 0.25s;
 }
 
+input[type=submit] {
+	background-color: #111111;
+	color: var(--user-style);
+	border: 2px var(--user-style) solid;
+
+	transition: color 0.25s;
+}
+
+input[type=submit]:hover {
+	background-color: var(--user-style);
+	color: #111111;
+
+	transition: color 0.25s;
+}
+
+input[type=number] {
+	background-color: #111111;
+	color: white;
+	border: 2px var(--user-style) solid;
+
+	transition: color 0.25s;
+}
+
 .checkbox-option {
 	margin: 0;
 	text-decoration: none;
@@ -170,12 +193,16 @@ button:hover {
 
 	background-color: #111111;
 	margin-top: 2px;
+
+	transition: color 0.25s;
 }
 
 #find:hover {
 	border: 2px dashed var(--user-style);
 	background-color: var(--user-style);
 	color: #111;
+
+	transition: color 0.25s;
 }
 
 .nopadding {
@@ -201,6 +228,9 @@ button:hover {
 	-webkit-box-shadow: var(--webkit-boxshadow-blue);
 	-moz-box-shadow: var(--moz-boxshadow-blue);
 	box-shadow: var(--box-boxshadow-blue);
+
+	scrollbar-color: var(--user-style) rgba(0, 0, 0, 0);
+	scrollbar-width: thin;
 }
 
 .sidenav {
@@ -225,6 +255,9 @@ button:hover {
 
 	display: flex;
 	flex-direction: column;
+
+	scrollbar-color: var(--user-style) rgba(0, 0, 0, 0);
+	scrollbar-width: thin;
 }
 
 .sidenav a {
@@ -278,6 +311,8 @@ button:hover {
 	height: 50%;
 	overflow-y: auto;
 	overflow-x: hidden;
+	scrollbar-color: var(--user-style) rgba(0, 0, 0, 0);
+	scrollbar-width: thin;
 }
 
 .sidenav-bottom * {
@@ -290,7 +325,6 @@ button:hover {
 	padding: 8px 0;
 	font-weight: bold;
 	font-size: 1.5em;
-	display: none;
 	user-select: none;
 }
 
@@ -461,26 +495,30 @@ button:hover {
 	width: 100%;
 	height: 100%;
 	overflow: auto;
-	background-color: rgb(0, 0, 0);
-	background-color: rgba(0, 0, 0, 0.4);
 }
 
 .popup-content {
-	background-color: #d6d6d6;
 	margin: 15% auto;
 	padding: 20px;
-	border: 1px solid #888;
 	width: 50%;
+	color: var(--user-style);
+	background-color: #111111;
+	border: 2px solid var(--user-style);
+
+	box-shadow: 0px 0px 43px 1px var(--user-style);
+	-webkit-box-shadow: 0px 0px 43px 1px var(--user-style);
+	-moz-box-shadow: 0px 0px 43px 1px var(--user-style);
 }
 
-.popup-content h1 {
-	color: black;
+.popup-content h1 h2 h3 h4 h5 h6 h7 h8 {
+	color: var(--user-style);
 	text-align: center;
 }
 
-.popup-content p {
-	color: black;
+.popup-content a {
+	color: var(--user-style);
 }
+
 
 .topPopupBanner {
 	position: absolute;

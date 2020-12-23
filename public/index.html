@@ -82,11 +82,11 @@
 				<div id="filterFormTypes"></div>
 				<div id="filterFormLayers"></div>
 			</form>
-			<button id="new-point" style="display: none;">
-				<span class="material-icons">add_box</span>
-				<span>Add Point</span>
-			</button>
 		</div>
+		<button id="new-point" style="display: none;">
+			<span class="material-icons">add_box</span>
+			<span>Add Point</span>
+		</button>
 	</div>
 	<div class="main" id="main">
 		<!-- Create the new point popup -->
@@ -116,12 +116,24 @@
 				<option value="2">right</option>
 			</select> -->
 			<br>
-			<p style="display: inline;">Camera damping factor</p>
+			<p style="display: inline;">Camera damping factor</p> <br>
 			<input id="dampFact" type="range" min="0.1" max="0.5" step="0.01" name="dampFact">
 			<br>
-			<p style="display: inline;">Zoom speed</p>
+			<p style="display: inline;">Zoom speed</p> <br>
 			<input id="zoomSpeed" type="range" min="0.5" max="5" step="0.01" name="zoomSpeed">
 			<br>
+
+			<p style="display: inline;">Belt Sample Count - <span id="beltSampleDisplay">16</span></p>
+			<br>
+			<input id="beltSamples" type="range" min="2" max="64" step="2" name="beltSamples" defaultValue="16">
+			<br>
+
+			<p style="display: inline;">Belt Transparency - <span id="beltTransparencyDisplay">32</span></p>
+			<br>
+			<input id="beltTransparency" type="range" min="0" max="1" step="0.05" name="beltTransparency" defaultValue="0.8">
+			<br>
+
+			<i>Some settings will need a webpage refresh.</i> <br>
 
 			<div class="checkbox-option">
 				<input id="eosDisp" type="checkbox" name="eosDisp">
@@ -183,7 +195,7 @@
 			<script>
 				let colorButton = document.getElementById("customColorTheme");
 				let colorDiv = document.getElementById("color_val");
-				colorButton.onchange = function() {
+				colorButton.onchange = function () {
 					colorDiv.innerHTML = colorButton.value;
 					colorDiv.style.color = colorButton.value;
 				}
@@ -236,6 +248,12 @@
 				<input type="submit" name="submit-new-point" id="add-point-submit" value="Create" class="genericbutton" />
 			</form>
 		</div>
+		<div class="info-container">
+			<svg id="dropdown-minimize" height="16" width="16">
+				<path d="M16 2 L8 14 L0 2 Z" fill="var(--user-style)" />
+			</svg>
+			<div class="info" id="infoWindow"></div>
+		</div>
 		<div class="popup" id="popup">
 			<div class="popup-content">
 				<h2>Welcome to Starmap!</h2>
@@ -258,6 +276,18 @@
 				<button id="acceptCookies">Accept</button>
 			</div>
 		</div>
+
+		<div class="popup" id="betterConfirm">
+			<div class="popup-content">
+				<h2 id="betterConfirm-text" class="popup-text">
+
+				</h2>
+
+				<button id="betterConfirm-yes">OK</button>
+				<button id="betterConfirm-no" >Cancel</button>
+			</div>
+		</div>
+
 		<div id="topBanner" class="topPopupBanner" style="display: none;">
 			<p id="bannerMsg">Banner message</p>
 		</div>
