@@ -24,7 +24,7 @@ export const SOLONS_OFFSET = 24000;
 
 export const DIST_TO_BELT = 3000000 + SOLONS_OFFSET;
 export const BELT_HEIGHT = 80000;
-export const BELT_EDGE_RADIUS = 120000;
+export const BELT_EDGE_RADIUS = 50000;
 
 export const BELT_THICK = 2200000;
 export const SAFE_LEN = 1000000;

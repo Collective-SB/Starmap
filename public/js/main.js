@@ -257,24 +257,29 @@ class App {
 		beltMat.depthWrite = false;
 		beltMat.needsUpdate = true;
 
-		while (i < BELT_RING_COUNT-1) {
-			i++
+		if (BELT_RING_COUNT == 2) {
+			this.makeBeltLayer(0, 0, 0, beltMat)
+		} else {
+			while (i < BELT_RING_COUNT-1) {
+				i++
 
-			let height = startPos + ((BELT_HEIGHT / BELT_RING_COUNT) * i)
+				let height = startPos + ((BELT_HEIGHT / BELT_RING_COUNT) * i)
 
-			let distToCentre;
+				let distToCentre;
 
-			if (height > 0) {
-				distToCentre = i - (BELT_RING_COUNT / 2)
-			} else if (height === 0) {
-				distToCentre = 0
-			} else {
-				distToCentre = (BELT_RING_COUNT / 2) - i
+				if (height > 0) {
+					distToCentre = i - (BELT_RING_COUNT / 2)
+				} else if (height === 0) {
+					distToCentre = 0
+				} else {
+					distToCentre = (BELT_RING_COUNT / 2) - i
+				}
+
+				let x = BELT_EDGE_RADIUS / BELT_RING_COUNT
+				let offset = distToCentre * x
+
+				this.makeBeltLayer(height, offset, -offset, beltMat)
 			}
-
-			let offset = distToCentre * (BELT_EDGE_RADIUS / BELT_RING_COUNT)
-
-			this.makeBeltLayer(height, offset, -offset, beltMat)
 		}
 
 		const endTime = Date.now()
@@ -400,7 +405,7 @@ class App {
 		var beltGem = new THREE.RingGeometry(
 			EOS_SIZE + DIST_TO_BELT + innerOverride,
 			EOS_SIZE + DIST_TO_BELT + BELT_THICK + outerOverride,
-			128,
+			96,
 			1,
 		);
 
