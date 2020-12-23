@@ -224,6 +224,9 @@ input[type=number] {
 	-webkit-box-shadow: var(--webkit-boxshadow-blue);
 	-moz-box-shadow: var(--moz-boxshadow-blue);
 	box-shadow: var(--box-boxshadow-blue);
+
+	scrollbar-color: var(--user-style) rgba(0, 0, 0, 0);
+	scrollbar-width: thin;
 }
 
 .sidenav {
@@ -250,6 +253,7 @@ input[type=number] {
 	flex-direction: column;
 
 	scrollbar-color: var(--user-style) rgba(0, 0, 0, 0);
+	scrollbar-width: thin;
 }
 
 .sidenav a {
@@ -304,6 +308,7 @@ input[type=number] {
 	overflow-y: auto;
 	overflow-x: hidden;
 	scrollbar-color: var(--user-style) rgba(0, 0, 0, 0);
+	scrollbar-width: thin;
 }
 
 .sidenav-bottom * {
@@ -316,7 +321,6 @@ input[type=number] {
 	padding: 8px 0;
 	font-weight: bold;
 	font-size: 1.5em;
-	display: none;
 	user-select: none;
 }
 

@@ -235,6 +235,7 @@ class Point {
 			sidebarElm.classList.add("nopadding");
 		}
 		sidebarElm.classList.add("sidenav-point");
+
 		sidebarElm.classList.add("colap-content");
 		sidebar.appendChild(sidebarElm);
 		sidebarElm.onclick = () => {
@@ -251,6 +252,9 @@ class Point {
 		sidebarElm.onmouseout = () => {
 			self.updateHoverSidebar(false);
 		};
+		
+		sidebarElm.addEventListener("mouseover", function(){ app.arrowHoverEffectStart(this); })
+		sidebarElm.addEventListener("mouseleave", function(){ app.arrowHoverEffectEnd(this); })
 	}
 	//Updates the position of the name ontop of the point
 	updateNamePosition(scale) {
@@ -356,6 +360,7 @@ class Point {
 			pointData.name;
 		document.getElementById(`side-layersort-${pointData.id}`).innerText =
 			pointData.name;
+
 		const selected = this.app.pointManager.focusedPOI;
 		if (selected && selected.id == this.id) {
 			this.app.handleObjectClick(this);

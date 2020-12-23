@@ -675,6 +675,15 @@ class App {
 			dropDownSubtypes.value = defaultTo;
 		}
 	}
+
+	arrowHoverEffectStart(element) {
+		element.innerText = "> " + element.innerText + " <"
+	}
+
+	arrowHoverEffectEnd(element) {
+		element.innerText = element.innerText.slice(2, -2)
+	}
+
 	//Fills out the info pannel whenever a point is clicked on
 	handleObjectClick(object) {
 		//Creates the info in the top right window
@@ -906,6 +915,10 @@ class App {
 			header.className = "layerheader";
 			header.id = `layer-header-${layer.id}`;
 			header.innerText = layer.name;
+
+			header.addEventListener("mouseover", function(){ app.arrowHoverEffectStart(this); })
+			header.addEventListener("mouseleave", function(){ app.arrowHoverEffectEnd(this); })
+
 			const div = document.createElement("div");
 			div.id = `sort-div-${layer.id}`;
 
@@ -948,15 +961,13 @@ class App {
 		// let logoutBtn = document.getElementById("logout");
 		let addPointBtn = document.getElementById("new-point");
 
-		let pointsTitle = document.getElementById("points-title");
 		// if (!loginBtn) {
 		// 	return;
 		// }
-		//This sets if the buttion is visable or not
+		//This sets if the button is visible or not
 		if (newState) {
 			loginBtn.style.display = "none";
 			// logoutBtn.style.display = "block";
-			pointsTitle.style.display = "block";
 			addPointBtn.style.display = "block";
 			if (!this.lastLoginState) {
 				this.onLogin();
@@ -965,7 +976,6 @@ class App {
 		} else {
 			loginBtn.style.display = "block";
 			// logoutBtn.style.display = "none";
-			pointsTitle.style.display = "none";
 			addPointBtn.style.display = "none";
 			if (this.lastLoginState) {
 				this.onLogout();
