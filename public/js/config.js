@@ -20,10 +20,10 @@ export const URLS = {
 	},
 };
 export const EOS_SIZE = 11000000 / 2;
-export const SOLONS_OFFSET = 24000;
+export const SOLONS_OFFSET = 12000;
 
 export const DIST_TO_BELT = 3000000 + SOLONS_OFFSET;
-export const BELT_HEIGHT = 80000;
+export const BELT_HEIGHT = 38000;
 export const BELT_EDGE_RADIUS = 50000;
 
 export const BELT_THICK = 2200000;

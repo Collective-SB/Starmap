@@ -285,7 +285,7 @@ class App {
 				}
 
 				let x = BELT_EDGE_RADIUS / BELT_RING_COUNT
-				let offset = distToCentre * x
+				let offset = (distToCentre * x) / 2
 
 				this.makeBeltLayer(height, offset, -offset, beltMat, BELT_QUALITY)
 			}
