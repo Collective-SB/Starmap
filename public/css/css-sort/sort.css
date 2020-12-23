@@ -248,6 +248,8 @@ input[type=number] {
 
 	display: flex;
 	flex-direction: column;
+
+	scrollbar-color: var(--user-style) rgba(0, 0, 0, 0);
 }
 
 .sidenav a {
@@ -301,6 +303,7 @@ input[type=number] {
 	height: 50%;
 	overflow-y: auto;
 	overflow-x: hidden;
+	scrollbar-color: var(--user-style) rgba(0, 0, 0, 0);
 }
 
 .sidenav-bottom * {
