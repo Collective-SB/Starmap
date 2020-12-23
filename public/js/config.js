@@ -1,4 +1,7 @@
-import { ENV_FROM_ENVJS, AUTH_REDIR_FROM_ENVJS } from "./env.js";
+import {
+	ENV_FROM_ENVJS,
+	AUTH_REDIR_FROM_ENVJS
+} from "./env.js";
 
 export const ENV = ENV_FROM_ENVJS; //"remoteDev";
 export const AUTH_REDIR = AUTH_REDIR_FROM_ENVJS; //"beta";
@@ -30,7 +33,8 @@ export const DIST_MIN = 0;
 export const DIST_MAX = 500000;
 export const MARKER_SIZE = 1000;
 export const MARKER_RING_SIZE = 750;
-export const HOVER_SCALE_MAX = 2;
+export const HOVER_SCALE_BASE_MAX = 1.5;
+export const HOVER_CAM_DIST_FACTOR = 25000;
 export const HOVER_CHANGE_RATE = 0.35;
 export const FADE_MIN_DIST = 0;
 export const FADE_MAX_DIST = 2500;
@@ -61,12 +65,10 @@ export const TYPES = {
 			map: "../assets/icons/ship-done.png",
 			info: "../assets/icons/ship.png",
 		},
-		subtypes: [
-			{
-				name: "Default",
-				hex: "#f36a28",
-			},
-		],
+		subtypes: [{
+			name: "Default",
+			hex: "#f36a28",
+		}, ],
 	},
 	station: {
 		name: "station",
@@ -76,14 +78,17 @@ export const TYPES = {
 			map: "../assets/icons/station-done.png",
 			info: "../assets/icons/station.png",
 		},
-		subtypes: [
-			{
+		subtypes: [{
 				name: "Default",
 				hex: "#3bbd4f",
 			},
 			{
 				name: "Collective",
 				hex: "#ff0000",
+			},
+			{
+				name: "Substrate",
+				hex: "#e72f2c",
 			},
 			{
 				name: "Empire",
@@ -93,6 +98,15 @@ export const TYPES = {
 				name: "Kingdom",
 				hex: "#0074f0",
 			},
+			{
+
+				name: "The Wake",
+				hex: "#922d22"
+			},
+			{
+				name: "Artemis Cargo Corporation",
+				hex: "#22acda"
+			}
 		],
 	},
 	ore: {
@@ -103,12 +117,10 @@ export const TYPES = {
 			map: "../assets/icons/ore-done.png",
 			info: "../assets/icons/ore.png",
 		},
-		subtypes: [
-			{
-				name: "Default",
-				hex: "#8c63e8",
-			},
-		],
+		subtypes: [{
+			name: "Default",
+			hex: "#8c63e8",
+		}, ],
 	},
 	other: {
 		name: "other",
@@ -118,11 +130,9 @@ export const TYPES = {
 			map: "../assets/icons/random-done.png",
 			info: "../assets/icons/random.png",
 		},
-		subtypes: [
-			{
-				name: "Default",
-				hex: "#aaaaaa",
-			},
-		],
+		subtypes: [{
+			name: "Default",
+			hex: "#aaaaaa",
+		}, ],
 	},
 };

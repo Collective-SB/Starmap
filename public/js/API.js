@@ -38,8 +38,8 @@ export default class API {
 				case "heartbeat":
 					self.socket.send(HEATRBEAT);
 					break;
-				case "newPoints":
-					self.getPoints();
+				case "updatePoint":
+					self.getPoint(data.id);
 					break;
 				case "newLayers":
 					self.getNewJWT();
@@ -58,6 +58,14 @@ export default class API {
 				this.app.setLoggedIn(false);
 			}
 		}
+	}
+	authorizeWebsocket(jwt) {
+		this.socket.send(
+			JSON.stringify({
+				event: "authorize",
+				token: jwt,
+			})
+		);
 	}
 	async getNewJWT() {
 		if (!this.app.isLoggedIn) {
@@ -110,6 +118,38 @@ export default class API {
 			});
 		} else if (res.status == 401) {
 			this.app.setLoggedIn(false);
+		}
+	}
+	//Gets singular point from server
+	async getPoint(id) {
+		const res = await fetch(`${API_URL}point/${id}`, {
+			method: "GET",
+			headers: {
+				Authorization: "Bearer " + this.app.storage.getItem("jwt"),
+				"Content-Type": "application/json",
+			},
+		});
+		switch (res.status) {
+			case 200:
+				const data = await res.json();
+				const point = data.point;
+				point.id = point._id;
+				if (!this.pointManager.getById(point._id)) {
+					this.pointManager.addPoint(point);
+				} else {
+					this.pointManager.updatePoint(point);
+				}
+				break;
+			case 400:
+				this.pointManager.removeById(id);
+				break;
+			case 401:
+				this.app.setLoggedIn(false);
+				break;
+			default:
+				console.error(
+					`Got unknown API responce code ${res.status}: ${res.statusText}`
+				);
 		}
 	}
 	//Requests a point to be deleted
