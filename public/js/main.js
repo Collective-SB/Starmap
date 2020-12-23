@@ -160,9 +160,22 @@ class App {
 		this.stats.dom.style.left = "85%";
 		// document.body.appendChild(this.stats.dom);
 	}
+
+	setLoadingMessage(message) {
+		document.getElementById("loading-text").innerText = message;
+	}
+
+	hideLoadingMessage() {
+		document.getElementById("loading-screen").style.display = "none"
+	}
+
 	async init() {
+		this.setLoadingMessage("Initialising...")
 		this.initScene();
 		this.UISetup();
+
+		this.setLoadingMessage("Authenticating...")
+
 		//See if we just completed OAuth2
 		if (window.location.search.includes("code")) {
 			try {
@@ -367,6 +380,7 @@ class App {
 			]);
 			this.sceneObjs.scene.background = skybox;
 		}
+
 		//Add the clouds around Eos
 		const cloudText = new THREE.TextureLoader(
 			new THREE.LoadingManager(() => {})
@@ -403,6 +417,7 @@ class App {
 			pointOffset.z
 		);
 		this.sceneObjs.scene.add(this.sceneObjs.IsanSphere);
+
 		//Create the cam controller
 		this.cameraController = new CamController(
 			this.sceneObjs.camera,
@@ -947,6 +962,8 @@ class App {
 				}
 			};
 		});
+
+		app.setLoadingMessage("Setting up points...")
 		this.pointManager.updateLayers();
 		this.api.getPoints();
 		this.api.authorizeWebsocket(this.storage.getItem("jwt"));
