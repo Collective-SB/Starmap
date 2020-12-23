@@ -198,6 +198,9 @@ class Point {
 		this.updateNamePosition();
 		this.updateMarkerPosition();
 		this.updateShow(true);
+
+		app.setLoadingMessage("Done!")
+		app.hideLoadingMessage()
 	}
 	createNameMesh(data, color) {
 		const canv = createTextCanvas(data.name, {

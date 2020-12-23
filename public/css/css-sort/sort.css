@@ -185,6 +185,24 @@ input[type=number] {
 	margin: auto;
 }
 
+/* Loading Screen */
+
+#loading-screen {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: #111111;
+	z-index: 1000;
+}
+
+.loading-text {
+	color: var(--user-style);
+	text-align: center;
+	width: 100%;
+	vertical-align: middle;
+}
+
 /* Side Nav */
 
 #find {
