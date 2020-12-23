@@ -170,11 +170,10 @@ class App {
 	}
 
 	async init() {
-		this.setLoadingMessage("Initialising...")
 		this.initScene();
 		this.UISetup();
 
-		this.setLoadingMessage("Authenticating...")
+		this.setLoadingMessage("Loading assets...")
 
 		//See if we just completed OAuth2
 		if (window.location.search.includes("code")) {
@@ -279,7 +278,7 @@ class App {
 		beltMat.needsUpdate = true;
 
 		if (BELT_RING_COUNT == 2) {
-			this.makeBeltLayer(0, 0, 0, beltMat)
+			this.makeBeltLayer(0, -20000, 0, beltMat)
 		} else {
 			while (i < BELT_RING_COUNT-1) {
 				i++
@@ -296,10 +295,13 @@ class App {
 					distToCentre = (BELT_RING_COUNT / 2) - i
 				}
 
-				let x = BELT_EDGE_RADIUS / BELT_RING_COUNT
-				let offset = (distToCentre * x) / 2
+				let distToEdge = (BELT_RING_COUNT / 2) - distToCentre
 
-				this.makeBeltLayer(height, offset, -offset, beltMat)
+				//Thanks to g.w.a.c.a for the help with creating this
+				let x = Math.cbrt(distToEdge / BELT_RING_COUNT)
+				let offset = -x * BELT_EDGE_RADIUS
+
+				this.makeBeltLayer(height, offset, (-offset*100), beltMat)
 			}
 		}
 
@@ -426,7 +428,7 @@ class App {
 		);
 	}
 
-	async makeBeltLayer(height, innerOverride=0, outerOverride=0, material) {
+	async makeBeltLayer(height, innerOverride, outerOverride, material) {
 		var beltGem = new THREE.RingGeometry(
 			EOS_SIZE + DIST_TO_BELT + innerOverride,
 			EOS_SIZE + DIST_TO_BELT + BELT_THICK + outerOverride,
