@@ -214,22 +214,26 @@ class App {
 
 		this.pointManager.updateDisplayed(this.viewFilters);
 	}
+
+	settingGet(setting, _default) {
+		let result = undefined;
+		try {
+			result = JSON.parse(window.localStorage.getItem("settings"))[setting]
+		} catch {
+			console.log("Using default " + setting)
+			result = _default
+		}
+
+		if (setting === undefined || setting === null) {
+			console.log("Using default " + setting)
+			result = _default
+		}
+
+		return result
+	}
 	//Sets up the threejs scene
 	initScene() {
-		//load from local storage. Settings aren't initialised yet
-		let CAMERA_FOV = undefined;
-		try {
-			CAMERA_FOV = JSON.parse(window.localStorage.getItem("settings")).cameraFOV
-		} catch {
-			console.log("Using default camera FOV")
-			CAMERA_FOV = 75
-		}
-
-
-		if (CAMERA_FOV === undefined || CAMERA_FOV === null) {
-			console.log("Using default camera FOV")
-			CAMERA_FOV = 75
-		}
+		const CAMERA_FOV = this.settingGet("cameraFOV", 75)
 
 		this.sceneObjs.scene = new THREE.Scene();
 		this.sceneObjs.camera = new THREE.PerspectiveCamera(
@@ -245,47 +249,9 @@ class App {
 		const endPos = 0 + (BELT_HEIGHT / 2)
 
 		//load from local storage. Settings aren't initialised yet
-		let BELT_RING_COUNT = undefined;
-		try {
-			BELT_RING_COUNT = JSON.parse(window.localStorage.getItem("settings")).beltSamples
-		} catch {
-			console.log("Using default belt ring count")
-			BELT_RING_COUNT = 32
-		}
-
-
-		if (BELT_RING_COUNT === undefined || BELT_RING_COUNT === null) {
-			console.log("Using default belt ring count")
-			BELT_RING_COUNT = 32
-		}
-
-		let BELT_QUALITY = undefined;
-		try {
-			BELT_QUALITY = JSON.parse(window.localStorage.getItem("settings")).beltQuality
-		} catch {
-			console.log("Using default belt quality")
-			BELT_QUALITY = 96
-		}
-
-
-		if (BELT_QUALITY === undefined || BELT_QUALITY === null) {
-			console.log("Using default belt quality")
-			BELT_QUALITY = 96
-		}
-
-		let BELT_TRANSPARENCY = undefined;
-		try {
-			BELT_TRANSPARENCY = JSON.parse(window.localStorage.getItem("settings")).beltTransparency
-		} catch {
-			console.log("Using default belt transparency")
-			BELT_TRANSPARENCY = 0.8
-		}
-
-
-		if (BELT_TRANSPARENCY === undefined || BELT_TRANSPARENCY === null) {
-			console.log("Using default belt transparency")
-			BELT_TRANSPARENCY = 0.8
-		}
+		const BELT_RING_COUNT = this.settingGet("beltSamples", 32)
+		const BELT_QUALITY = this.settingGet("beltQuality", 96)
+		const BELT_TRANSPARENCY = this.settingGet("beltTransparency", 0.8)
 
 		let i = 0;
 
@@ -341,18 +307,7 @@ class App {
 		//Eos
 
 		//load from local storage. Settings aren't initialised yet
-		let EOS_QUALITY = undefined;
-		try {
-			EOS_QUALITY = JSON.parse(window.localStorage.getItem("settings")).eosQuality
-		} catch {
-			console.log("Using default eos quality")
-			EOS_QUALITY = 32
-		}
-
-		if (EOS_QUALITY === undefined || EOS_QUALITY === null) {
-			console.log("Using default eos quality")
-			EOS_QUALITY = 32
-		}
+		const EOS_QUALITY = this.settingGet("eosQuality", 32)
 
 		const tex = new THREE.TextureLoader().load("../assets/planetTex.png");
 		const eosGem = new THREE.SphereGeometry(EOS_SIZE, EOS_QUALITY, EOS_QUALITY);
