@@ -285,7 +285,7 @@ class App {
 		beltMat.needsUpdate = true;
 
 		if (BELT_RING_COUNT == 2) {
-			this.makeBeltLayer(0, -20000, 0, beltMat)
+			this.makeBeltLayer(0, -35000, 0, beltMat)
 		} else {
 			while (i < BELT_RING_COUNT-1) {
 				i++
@@ -308,7 +308,7 @@ class App {
 				let x = Math.cbrt(distToEdge / BELT_RING_COUNT)
 				let offset = -x * BELT_EDGE_RADIUS
 
-				this.makeBeltLayer(height, offset, (-offset*100), beltMat)
+				this.makeBeltLayer(height, offset, (-offset*25), beltMat)
 			}
 		}
 
@@ -367,16 +367,17 @@ class App {
 		this.sceneObjs.scene.add(light);
 
 		if (ENABLE_SBOX) {
-			// const skybox = new THREE.CubeTextureLoader()
-			// 	.setPath("../assets/skybox/")
-			// 	.load([
-			// 		"left.png",
-			// 		"right.png",
-			// 		"top.png",
-			// 		"bot.png",
-			// 		"front.png",
-			// 		"back.png",
-			// 	]);
+			const skybox = new THREE.CubeTextureLoader()
+			 	.setPath("../assets/skybox/")
+			 	.load([
+			 		"left.jpg",
+			 		"right.jpg",
+			 		"top.jpg",
+			 		"bot.jpg",
+			 		"front.jpg",
+			 		"back.jpg",
+			 	]);
+			/*
 			const loader = new THREE.CubeTextureLoader();
 
 			const skybox = loader.load([
@@ -387,6 +388,7 @@ class App {
 				"https://i.ibb.co/TtpZB45/front.png",
 				"https://i.ibb.co/56d6cPp/back.png",
 			]);
+			*/
 			this.sceneObjs.scene.background = skybox;
 		}
 
