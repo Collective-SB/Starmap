@@ -194,14 +194,9 @@ input[type=number] {
 	height: 100%;
 	z-index: 1000;
 
-	/*
-	background-image: url('/../../assets/backdrop.jpg');
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-size: 100% 100%;
+	opacity: 1;
 
-	backdrop-filter: blur(100px);
-	*/
+	transition: opacity 0.5s ease;
 }
 
 .loading-text {
