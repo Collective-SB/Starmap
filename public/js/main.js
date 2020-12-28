@@ -755,9 +755,9 @@ class App {
 		// 	parseInt(sidenav.style.width) + (160 - sidenav.scrollWidth) + "px";
 		//TODO: Make this not bad. Setting style like this is *very* bad practice, and not reliable
 		if (sidenav.scrollHeight > sidenav.clientHeight) {
-			sidenav.style.width = "175px";
+			sidenav.style.resize = "horizontal";
 		} else {
-			sidenav.style.width = "160px";
+			sidenav.style.resize = "horizontal";
 		}
 		//Check hovers
 		const hovers = this.castRay(mouseX, mouseY);
@@ -816,7 +816,7 @@ class App {
 		const sidenav = document.getElementById("layers");
 		sidenav.innerHTML = "";
 		this.user.g.forEach((layer) => {
-			const header = document.createElement("p");
+			const header = document.createElement("h1");
 			header.className = "layerheader";
 			header.id = `layer-header-${layer.id}`;
 			header.innerText = layer.name;

@@ -8,7 +8,7 @@
 	-webkit-box-shadow: var(--webkit-boxshadow);
 	-moz-box-shadow: var(--moz-boxshadow);
 	box-shadow: var(--box-boxshadow);
-	background-color: #111;
+	background-color: #333;
 	border: solid 1px var(--user-style);
 }
 

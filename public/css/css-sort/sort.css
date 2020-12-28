@@ -40,7 +40,7 @@ Whitesmoke
 
 button {
 	font-family: var(--main-font-Squada);
-	background-color: #111111;
+	background-color: transparent;
 	color: var(--user-style);
 	border-width: 1px;
 	border-color: var(--user-style);
@@ -121,7 +121,6 @@ button:hover {
 /* UI Button grid */
 /* Note: There should be 2 rows, but for time only going with 1 for now */
 .button-grid {
-	/* height: 100px; */
 	height: 50px;
 }
 
@@ -131,25 +130,32 @@ button:hover {
 	height: 100%;
 	display: flex;
 	justify-content: space-around;
+	border-bottom: 1px solid var(--user-style);
 }
 
 .button-row button {
 	display: inline-flex;
 	justify-content: center;
-	background-color: #111111;
 	color: var(--user-style);
 	flex-grow: 1;
 	cursor: pointer;
-	border-width: 1px 0;
+	border-width: 0px 0px;
 }
 
-.button-row button:last-child {
-	border-left-width: 1px;
+.button-row button:nth-child(1) {
+	border-right-width: 2px;
+}
+.button-row button:nth-child(2) {
+	border-right-width: 2px;
+}
+.button-row button:nth-child(3) {
+	border-right-width: 2px;
+}
+.button-row button:nth-child(4) {
+	border-right-width: 0px;
 }
 
-.button-row button:first-child {
-	border-right-width: 1px;
-}
+
 
 .button-row button:hover {
 	background-color: var(--user-style);
@@ -165,17 +171,24 @@ button:hover {
 /* Side Nav */
 
 #find {
-	color: whitesmoke;
-	border: 2px dashed var(--user-style);
-
-	background-color: #111111;
-	margin-top: 2px;
+	text-align: center;
+	color: var(--user-style);
+	border-bottom: 1px solid var(--user-style);
+	border-top: 0px solid var(--user-style);
+	border-left: 0px solid var(--user-style);
+	border-right: 0px solid var(--user-style);
+	background-color: transparent;
+}
+#find::placeholder {
+	color: var(--user-style);
 }
 
 #find:hover {
-	border: 2px dashed var(--user-style);
-	background-color: var(--user-style);
-	color: #111;
+	border-bottom: 1px solid var(--user-style);
+	border-top: 0px solid var(--user-style);
+	border-left: 0px solid var(--user-style);
+	border-right: 0px solid var(--user-style);
+
 }
 
 .nopadding {
@@ -188,14 +201,10 @@ button:hover {
 	transition: max-height 0.2s ease-out;
 }
 
-.layerheader {
-	margin: 2px !important;
-	font-size: 17px !important;
-	border-bottom-style: solid !important;
-	font-weight: bold;
-}
+
 
 .wrapper-sidebar {
+	margin-top: 0.5em;
 	height: 100vh;
 	overflow: auto;
 	-webkit-box-shadow: var(--webkit-boxshadow-blue);
@@ -204,13 +213,17 @@ button:hover {
 }
 
 .sidenav {
+	background-color: #111;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
 	-webkit-box-shadow: var(--webkit-boxshadow);
 	-moz-box-shadow: var(--moz-boxshadow);
 	box-shadow: var(--box-boxshadow);
 
 	height: 100%;
 	/* Full-height: remove this if you want "auto" height */
-	width: 175px !important;
+
+	min-width: 190px !important;
+	max-width: 100% !important;
 	/* Set the width of the sidebar */
 	position: fixed;
 	/* Fixed Sidebar (stay in place on scroll) */
@@ -219,7 +232,7 @@ button:hover {
 	top: 0;
 	/* Stay at the top */
 	left: 0;
-	background-color: #111;
+	
 	/* Black */
 	overflow: hidden;
 
@@ -256,14 +269,21 @@ button:hover {
 	text-align: center;
 	user-select: none;
 
-	transition: max-height 0.2s ease-out, background-color 0.4s, color 0.4s;
 }
 
 .sidenav-point:hover {
-	color: whitesmoke;
-	background-color: #333;
+	color: #333;
+	background-color: var(--user-style);
 
-	transition: max-height 0.2s ease-out, background-color 0.4s, color 0.4s;
+}
+.layerheader {
+	color: var(--user-style);
+    text-align: center;
+    border-radius: 5px;
+    margin: 2px !important;
+    font-size: 17px !important;
+    font-weight: 100;
+    border: solid 2px var(--user-style);
 }
 
 .sidenav-bottom {
@@ -770,4 +790,9 @@ input {
 		visibility: hidden;
 		opacity: 0;
 	}
+}
+
+
+button, input {
+	outline:none;
 }
