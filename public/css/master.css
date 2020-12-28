@@ -90,3 +90,30 @@
 ::-webkit-scrollbar-track {
 	background-color: transparent;
 }
+
+/*
+|*************************************************************************;
+* Page Animations 
+|*************************************************************************;
+*/
+
+@keyframes modal-open-800x-500y{
+	0%{width:0px;height: 0px; padding:0;}
+	70%{width:750px;height:0px; padding:0;}
+	100%{width:800px;height: 500px;}
+}
+@keyframes modal-open-content{
+	0%{opacity: 0;}
+	70%{opacity: 0;}
+	100%{opacity: 1;}
+}
+@keyframes modal-close{
+	0%{}
+	30%{width:750px;height:0px; padding:0;}
+	100%{width:0;height: 0;padding:0;}
+}
+@keyframes modal-close-content{
+	0%{opacity: 1;}
+	20%{opacity: 0;}
+	100%{opacity: 0;}
+}
