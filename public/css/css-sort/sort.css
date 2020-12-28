@@ -171,6 +171,9 @@ button:hover {
 /* Side Nav */
 
 #find {
+	height: 45px;
+	font-size: 15px;
+    text-decoration: underline;
 	text-align: center;
 	color: var(--user-style);
 	border-bottom: 1px solid var(--user-style);
@@ -213,8 +216,9 @@ button:hover {
 }
 
 .sidenav {
+	border-right: 2px solid var(--user-style);
 	background-color: #111;
-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+	background-image: var(--svg-ui-background);
 	-webkit-box-shadow: var(--webkit-boxshadow);
 	-moz-box-shadow: var(--moz-boxshadow);
 	box-shadow: var(--box-boxshadow);
@@ -280,7 +284,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 	color: var(--user-style);
     text-align: center;
     border-radius: 5px;
-    margin: 2px !important;
+    margin: 5px !important;
     font-size: 17px !important;
     font-weight: 100;
     border: solid 2px var(--user-style);
@@ -305,13 +309,14 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 }
 
 #points-title {
-	color: whitesmoke;
-	text-align: center;
-	padding: 8px 0;
-	font-weight: bold;
-	font-size: 1.5em;
-	display: none;
-	user-select: none;
+	color: #111111;
+    background: #107fe0;
+    text-align: center;
+    padding: 0px 0;
+    font-weight: bold;
+    font-size: 1.5em;
+    display: none;
+    user-select: none;
 }
 
 #new-point {
@@ -422,29 +427,22 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 /* Login Button */
 
 #login {
-	background-color: var(--user-style);
-	color: #111111;
-	/*border-radius: 5px;
-
-	background-color: #7289da;
-	color: whitesmoke; */
-	width: 100%;
-
-	border: none;
-	text-align: center;
-	overflow: hidden;
-	cursor: pointer;
-	outline: none;
-	height: 45px;
-
-	display: flex;
-	flex-direction: row;
-
-	align-items: center;
-	vertical-align: middle;
-
-	justify-content: space-between;
-	transition: filter 0.25s;
+    background-color: var(--user-style);
+    color: #111111;
+    width: 100%;
+    border: none;
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+    outline: none;
+    height: 45px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    transition: filter 0.25s;
+    display: flex;
+    justify-content: center;
 }
 
 #login:hover {
@@ -453,7 +451,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 }
 
 #login img {
-	height: 80%;
+	height: 50%;
 	padding-left: 5px;
 	flex-grow: 0;
 }
