@@ -358,6 +358,7 @@ button:hover {
 	position: absolute;
 	right: 10px;
 	top: 10px;
+	max-height: 300px;
 	min-width: 12px;
 	min-height: 12px;
 	padding: 10px;
@@ -406,11 +407,17 @@ button:hover {
 }
 
 .infoImage {
+	border: #107fe0 dashed 2px;
+	transform: rotate(7deg);
 	max-width: 270px;
 	max-height: 270px;
 	margin-top: 10px;
+	transition: all .2s ease-in-out;
 }
+.infoImage:hover {
+	transform: scale(1.2)
 
+}
 .distance-fieldset {
 	border-width: 2px 0 0 0;
 	text-align: center;

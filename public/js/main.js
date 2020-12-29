@@ -39,7 +39,7 @@ const infoTemplate = `
 	<div class="desc">
 		<p class="infoText no-drag">%DESCRIPTION%</p>
 	</div>
-	<a href="%IMAGE_URL%" target="_blank">
+	<a href="%IMAGE_URL%" class="MagicThumb" data-options="expandAlign:image;">
 		<img src="%IMAGE_URL%" style="display:%IMAGE_DISPLAY%" class="infoImage">
 	</a>
 </div>
