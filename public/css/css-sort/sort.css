@@ -180,7 +180,7 @@ button:hover {
 
 .sidenav {
   border-right: 2px solid var(--user-style);
-  background-color: #111;
+  background-color: var(--user-style-02);
   background-image: var(--svg-ui-background);
   -webkit-box-shadow: var(--webkit-boxshadow);
   -moz-box-shadow: var(--moz-boxshadow);

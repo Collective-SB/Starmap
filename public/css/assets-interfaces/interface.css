@@ -9,9 +9,9 @@
 	-webkit-box-shadow: var(--webkit-boxshadow);
 	-moz-box-shadow: var(--moz-boxshadow);
 	box-shadow: var(--box-boxshadow);
-	background-color: #111;
+	background-color: var(--user-style-02);
 	border: solid 2px var(--user-style);
-	
+	 
 }
 
 .ui-draggable:hover {
