@@ -14,7 +14,7 @@ import {
 	ZONE_WIRE_CUTOFF,
 	ZONE_OUTLINE_POINTS,
 	ZONE_INTERACTION_SIZE,
-	HOVER_CAM_DIST_FACTOR,
+	HOVER_CAM_DIST_FACTOR, EOS_SIZE,
 } from "./config.js";
 const RING_OFFSET = 5;
 import {
@@ -203,6 +203,8 @@ class Point {
 
 		app.setLoadingMessage("Done!")
 		app.hideLoadingMessage()
+
+		app.cameraController.posLerpTo(EOS_SIZE * 1.6, 100000, 100000)
 	}
 	createNameMesh(data, color) {
 		const canv = createTextCanvas(data.name, {

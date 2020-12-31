@@ -539,6 +539,10 @@ class App {
 		// New point button
 		const self = this;
 		$("#new-point").click(function () {
+			if (app.user.isPubToken) {
+				app.modalConfirm("You need to login to do that.")
+				return;
+			}
 			self.updateFormMode.call(self, "create");
 			const curType = document.getElementById("type-select").value;
 			self.updateSubtypes(curType);
@@ -612,6 +616,10 @@ class App {
 			window.location.href = `${URLS.api[ENV]}auth/login?redir=${AUTH_REDIR}`;
 		};
 		document.getElementById("logout").onclick = async function () {
+			if (app.user.isPubToken) {
+				app.modalConfirm("You're already logged out.")
+				return;
+			}
 			if (!await app.modalConfirm("Would you like to logout?")) return;
 			self.storage.removeItem("jwt");
 			self.setLoggedIn(false);
@@ -984,8 +992,8 @@ class App {
 		this.api.getPoints();
 		this.api.authorizeWebsocket(this.storage.getItem("jwt"));
 		if (this.user.isPubToken) {
-			const addPointBtn = document.getElementById("new-point");
-			addPointBtn.style.display = "none";
+			const addPointMsg = document.getElementById("add-point-message")
+			addPointMsg.innerText = "Login to Add Point"
 		}
 		if (this.user.g.some((layer) => layer.id == "MqJZYstndHmaxIEG")) {
 			//User is a subr, lets set their style
@@ -1011,7 +1019,8 @@ class App {
 		if (newState) {
 			loginBtn.style.display = "none";
 			// logoutBtn.style.display = "block";
-			addPointBtn.style.display = "block";
+
+			document.getElementById("add-point-message").innerText = "Add Point"
 			if (!this.lastLoginState) {
 				this.onLogin();
 			}
@@ -1019,7 +1028,6 @@ class App {
 		} else {
 			loginBtn.style.display = "block";
 			// logoutBtn.style.display = "none";
-			addPointBtn.style.display = "none";
 			if (this.lastLoginState) {
 				this.onLogout();
 			}
@@ -1096,18 +1104,17 @@ const sleep = (milliseconds) => {
 }
 
 let now,delta,then = Date.now();
-let interval = 1000/60;
 
 function animate() {
-	requestAnimationFrame (animate);
+	requestAnimationFrame(animate);
 	now = Date.now();
 	delta = now - then;
 	//update time dependent animations here at 30 fps
-	if (delta > interval) {
+	if (delta > app.frameInterval) {
 		app.stats.begin();
 		app.run();
 		app.stats.end();
-		then = now - (delta % interval);
+		then = now - (delta % app.frameInterval);
 	}
 }
 

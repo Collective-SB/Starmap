@@ -43,8 +43,8 @@ export default class CamController {
 		this.orbitCtrl.maxDistance = CAM_MAX_ZOOM;
 		this.lastPos = {x: 0, y: 0, z: 0}
 
-		this.camera.position.set(EOS_SIZE * 5, 1000000, 1000000);
-		this.posLerpTo(EOS_SIZE * 1.6, 100000, 100000)
+		this.camera.position.set(EOS_SIZE * 10, 1000000, 1000000);
+		//once points are loaded in point manager this will lerp to the starting point
 	}
 	//Called to move the camera to the target point
 	update() {
