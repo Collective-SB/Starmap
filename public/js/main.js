@@ -158,6 +158,7 @@ class App {
 		this.stats.showPanel(0);
 		this.vertCamMove = 1;
 		this.stats.dom.style.left = "85%";
+		this.frameInterval = 1000/60
 		// document.body.appendChild(this.stats.dom);
 	}
 
@@ -171,7 +172,6 @@ class App {
 
 		el.addEventListener("transitionend", () =>
 		{
-			console.log("transition end")
 			el.remove()
 		})
 	}
@@ -259,7 +259,7 @@ class App {
 			75,
 			window.innerWidth / window.innerHeight,
 			0.1,
-			5000000000
+			100000000
 		);
 
 		//Belt. Doing at the start because it sends off lots of async jobs and I want that to have as much time before.
@@ -269,14 +269,16 @@ class App {
 
 		//load from local storage. Settings aren't initialised yet
 		const BELT_RING_COUNT = this.settingGet("beltSamples", 16)
-		const BELT_TRANSPARENCY = this.settingGet("beltTransparency", 0.8)
+		const BELT_TRANSPARENCY = this.settingGet("beltTransparency", 0.6)
 
 		let i = 0;
 
 		const startTime = Date.now()
 
-		let beltMat = new THREE.MeshStandardMaterial({
-			color: 0x515151,
+		const beltTexture = new THREE.TextureLoader().load("../assets/planetTex.png");
+
+		let beltMat = new THREE.MeshBasicMaterial({
+			color: 0xffffff,
 			opacity: (BELT_TRANSPARENCY/BELT_RING_COUNT),
 			transparent: true,
 		});
@@ -320,6 +322,7 @@ class App {
 		this.sceneObjs.renderer = new THREE.WebGLRenderer({
 			logarithmicDepthBuffer: true,
 			antialias: true,
+			powerPreference: "high-performance"
 		});
 		this.sceneObjs.renderer.setSize(window.innerWidth, window.innerHeight);
 		divElm.appendChild(this.sceneObjs.renderer.domElement);
@@ -451,6 +454,8 @@ class App {
 		this.sceneObjs.Belt = Belt;
 
 		this.sceneObjs.Belt.position.set(0, height, 0)
+
+		//Belt.matrixAutoUpdate = false
 
 		this.sceneObjs.scene.add(Belt);
 	}
@@ -1077,17 +1082,35 @@ class App {
 			divElm.style.display = "none";
 		}, 4000);
 	}
+
+	async setFpsTarget(target) {
+		app.frameInterval = 1000/target
+	}
 }
 
 const app = new App();
 window.app = app;
 
-function animate() {
-	app.stats.begin();
-	app.run();
-	app.stats.end();
-	requestAnimationFrame(animate);
+const sleep = (milliseconds) => {
+	return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
+
+let now,delta,then = Date.now();
+let interval = 1000/60;
+
+function animate() {
+	requestAnimationFrame (animate);
+	now = Date.now();
+	delta = now - then;
+	//update time dependent animations here at 30 fps
+	if (delta > interval) {
+		app.stats.begin();
+		app.run();
+		app.stats.end();
+		then = now - (delta % interval);
+	}
+}
+
 window.onload = function () {
 	app.init();
 	animate();

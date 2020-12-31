@@ -130,6 +130,7 @@ class Point {
 			side: THREE.DoubleSide,
 		});
 		var object = new THREE.Mesh(markerGeometry, mat);
+		//TODO set object.matrixAutoUpdate = false; and manually move with object.updateMatrix() for extra fps
 		this.app.sceneObjs.scene.add(object);
 
 		//Base ring thing
@@ -142,6 +143,7 @@ class Point {
 		const ring = new THREE.Mesh(ringGeom, material);
 		ring.rotation.set(Math.PI / 2, 0, 0);
 		ring.position.set(position.x, RING_OFFSET, position.z);
+
 		this.app.sceneObjs.scene.add(ring);
 		//Create clickable sidebar element
 		const self = this;
