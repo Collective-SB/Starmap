@@ -158,6 +158,7 @@ class App {
 		this.stats.showPanel(0);
 		this.vertCamMove = 1;
 		this.stats.dom.style.left = "85%";
+		this.frameInterval = 1000/60
 		// document.body.appendChild(this.stats.dom);
 	}
 
@@ -171,7 +172,6 @@ class App {
 
 		el.addEventListener("transitionend", () =>
 		{
-			console.log("transition end")
 			el.remove()
 		})
 	}
@@ -259,7 +259,7 @@ class App {
 			75,
 			window.innerWidth / window.innerHeight,
 			0.1,
-			5000000000
+			100000000
 		);
 
 		//Belt. Doing at the start because it sends off lots of async jobs and I want that to have as much time before.
@@ -269,14 +269,16 @@ class App {
 
 		//load from local storage. Settings aren't initialised yet
 		const BELT_RING_COUNT = this.settingGet("beltSamples", 16)
-		const BELT_TRANSPARENCY = this.settingGet("beltTransparency", 0.8)
+		const BELT_TRANSPARENCY = this.settingGet("beltTransparency", 0.6)
 
 		let i = 0;
 
 		const startTime = Date.now()
 
-		let beltMat = new THREE.MeshStandardMaterial({
-			color: 0x515151,
+		const beltTexture = new THREE.TextureLoader().load("../assets/planetTex.png");
+
+		let beltMat = new THREE.MeshBasicMaterial({
+			color: 0xffffff,
 			opacity: (BELT_TRANSPARENCY/BELT_RING_COUNT),
 			transparent: true,
 		});
@@ -320,6 +322,7 @@ class App {
 		this.sceneObjs.renderer = new THREE.WebGLRenderer({
 			logarithmicDepthBuffer: true,
 			antialias: true,
+			powerPreference: "high-performance"
 		});
 		this.sceneObjs.renderer.setSize(window.innerWidth, window.innerHeight);
 		divElm.appendChild(this.sceneObjs.renderer.domElement);
@@ -452,6 +455,8 @@ class App {
 
 		this.sceneObjs.Belt.position.set(0, height, 0)
 
+		//Belt.matrixAutoUpdate = false
+
 		this.sceneObjs.scene.add(Belt);
 	}
 
@@ -534,6 +539,10 @@ class App {
 		// New point button
 		const self = this;
 		$("#new-point").click(function () {
+			if (app.user.isPubToken) {
+				app.modalConfirm("You need to login to do that.")
+				return;
+			}
 			self.updateFormMode.call(self, "create");
 			const curType = document.getElementById("type-select").value;
 			self.updateSubtypes(curType);
@@ -607,6 +616,10 @@ class App {
 			window.location.href = `${URLS.api[ENV]}auth/login?redir=${AUTH_REDIR}`;
 		};
 		document.getElementById("logout").onclick = async function () {
+			if (app.user.isPubToken) {
+				app.modalConfirm("You're already logged out.")
+				return;
+			}
 			if (!await app.modalConfirm("Would you like to logout?")) return;
 			self.storage.removeItem("jwt");
 			self.setLoggedIn(false);
@@ -979,8 +992,8 @@ class App {
 		this.api.getPoints();
 		this.api.authorizeWebsocket(this.storage.getItem("jwt"));
 		if (this.user.isPubToken) {
-			const addPointBtn = document.getElementById("new-point");
-			addPointBtn.style.display = "none";
+			const addPointMsg = document.getElementById("add-point-message")
+			addPointMsg.innerText = "Login to Add Point"
 		}
 		if (this.user.g.some((layer) => layer.id == "MqJZYstndHmaxIEG")) {
 			//User is a subr, lets set their style
@@ -1006,7 +1019,8 @@ class App {
 		if (newState) {
 			loginBtn.style.display = "none";
 			// logoutBtn.style.display = "block";
-			addPointBtn.style.display = "block";
+
+			document.getElementById("add-point-message").innerText = "Add Point"
 			if (!this.lastLoginState) {
 				this.onLogin();
 			}
@@ -1014,7 +1028,6 @@ class App {
 		} else {
 			loginBtn.style.display = "block";
 			// logoutBtn.style.display = "none";
-			addPointBtn.style.display = "none";
 			if (this.lastLoginState) {
 				this.onLogout();
 			}
@@ -1077,17 +1090,34 @@ class App {
 			divElm.style.display = "none";
 		}, 4000);
 	}
+
+	async setFpsTarget(target) {
+		app.frameInterval = 1000/target
+	}
 }
 
 const app = new App();
 window.app = app;
 
-function animate() {
-	app.stats.begin();
-	app.run();
-	app.stats.end();
-	requestAnimationFrame(animate);
+const sleep = (milliseconds) => {
+	return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
+
+let now,delta,then = Date.now();
+
+function animate() {
+	requestAnimationFrame(animate);
+	now = Date.now();
+	delta = now - then;
+	//update time dependent animations here at 30 fps
+	if (delta > app.frameInterval) {
+		app.stats.begin();
+		app.run();
+		app.stats.end();
+		then = now - (delta % app.frameInterval);
+	}
+}
+
 window.onload = function () {
 	app.init();
 	animate();
