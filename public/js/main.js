@@ -39,7 +39,7 @@ const infoTemplate = `
 	<div class="desc">
 		<p class="infoText no-drag">%DESCRIPTION%</p>
 	</div>
-	<a href="%IMAGE_URL%" class="MagicThumb" data-options="expandAlign:image;">
+	<a href="%IMAGE_URL%" target="_blank" class="MagicThumb" >
 		<img src="%IMAGE_URL%" style="display:%IMAGE_DISPLAY%" class="infoImage">
 	</a>
 </div>
@@ -60,7 +60,7 @@ const optionTemplate = `
 `;
 
 const viewFilterTemplate = `
-<div class="filter-view-option checkbox">
+<div class="filter-view-option">
 	<input id=%ID% type="checkbox" name="%NAME%" value="%NAME%" checked>
 	<label for="%NAME%">
 		%NAME%

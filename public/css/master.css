@@ -47,7 +47,7 @@
 	--moz-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 	--box-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 
-	--background: #333;
+	--background-color-01: #333;
 	--red: #f44336;
 	--red-hover: #b72015;
 /*
@@ -56,7 +56,8 @@
 |*************************************************************************;
 */
 
---svg-ui-background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+	--svg-ui-background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+	--png-background-profile: url("/assets/float-pdf.svg");
 
 	/*
 |*************************************************************************;
@@ -123,4 +124,65 @@
 	0%{opacity: 1;}
 	20%{opacity: 0;}
 	100%{opacity: 0;}
+}
+
+/*
+|*************************************************************************;
+* Grid Layouts 
+|*************************************************************************;
+*/
+
+/* Options 01 Layout */
+.grid-container-options-01 { height: 100%; margin: 0; }
+.grid-container-options-01 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+	"desc-01-01 option-01-01"
+	"desc-01-02 option-01-02"
+	"desc-01-03 option-01-03"
+	"desc-01-04 option-01-04"
+	"desc-01-05 option-01-05";
+}
+.desc-01-01 { grid-area: desc-01-01; }
+.desc-01-02 { grid-area: desc-01-02; }
+.desc-01-03 { grid-area: desc-01-03; }
+.desc-01-04 { grid-area: desc-01-04; }
+.desc-01-05 { grid-area: desc-01-05; }
+.option01 { grid-area: option-01-01; }
+.option02 { grid-area: option-01-02; }
+.option03 { grid-area: option-01-03; }
+.option04 { grid-area: option-01-04; }
+.option05 { grid-area: option-01-05; }
+.text-center {
+  text-align: center;
+}
+/* Options 02 Layout */
+.grid-container-options-02 { height: 100%; margin: 0; }
+.grid-container-options-02 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+	"option-02-01 option-02-02"
+	"option-02-03 option-02-04"
+	"option-02-05 option-02-06"
+	"option-02-07 option-02-08"
+	"option-02-09 option-02-10";
+}
+.desc-02-01 { grid-area: desc-02-01; }
+.desc-02-02 { grid-area: desc-02-02; }
+.desc-02-03 { grid-area: desc-02-03; }
+.desc-02-04 { grid-area: desc-02-04; }
+.desc-02-05 { grid-area: desc-02-05; }
+.option-02-01 { grid-area: option-02-01; }
+.option-02-02 { grid-area: option-02-02; }
+.option-02-03 { grid-area: option-02-03; }
+.option-02-04 { grid-area: option-02-04; }
+.option-02-05 { grid-area: option-02-05; }
+.text-center {
+  text-align: center;
 }
