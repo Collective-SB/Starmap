@@ -60,7 +60,7 @@ const optionTemplate = `
 `;
 
 const viewFilterTemplate = `
-<div class="filter-view-option">
+<div class="filter-view-option checkbox-option checkbox">
 	<input id=%ID% type="checkbox" name="%NAME%" value="%NAME%" checked>
 	<label for="%NAME%">
 		%NAME%

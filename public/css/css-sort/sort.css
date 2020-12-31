@@ -217,13 +217,18 @@ button:hover {
   padding: 0.75em 0;
 
   transition: color 0.25s;
-  transition: background 0.25s;
 }
 
 .sidenav a:hover {
   background-color: #333;
   color: whitesmoke;
+  transition: color 0.25s;
 }
+
+
+
+
+
 
 .sidenav p {
   padding: 0px 8px 6px 10px;
@@ -373,7 +378,7 @@ button:hover {
 }
 
 .infoImage {
-  border: #107fe0 dashed 2px;
+  border: dashed 2px var(--user-style);
   transform: rotate(7deg);
   max-width: 270px;
   max-height: 270px;
@@ -696,7 +701,7 @@ input {
 }
 
 .filter-view-option:hover {
-  color: whitesmoke;
+  color: #fff;
   background-color: #333;
 
   transition: color 0.4s;
@@ -767,7 +772,7 @@ input {
   margin: 0;
   text-decoration: none;
   font-size: 15px;
-  color: #818181;
+  color: #fff;
   display: block;
   cursor: var(--main-cursor-pointer);
   user-select: none;
@@ -788,6 +793,9 @@ input {
 }
 
 .checkbox > input {
+    -webkit-box-shadow: var(--webkit-boxshadow);
+  -moz-box-shadow: var(--moz-boxshadow);
+  box-shadow: var(--box-boxshadow);
   height: 25px;
   width: 25px;
   -webkit-appearance: none;
@@ -808,7 +816,8 @@ input {
 }
 
 .checkbox > input:checked {
-  border: 2px solid #111;
+
+  
   background-color: var(--user-style);
 }
 
