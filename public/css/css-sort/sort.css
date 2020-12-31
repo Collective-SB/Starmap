@@ -217,17 +217,13 @@ button:hover {
   padding: 0.75em 0;
 
   transition: color 0.25s;
+  transition: background 0.25s;
 }
 
 .sidenav a:hover {
   background-color: #333;
   color: whitesmoke;
-  transition: color 0.25s;
 }
-
-
-
-
 
 
 .sidenav p {

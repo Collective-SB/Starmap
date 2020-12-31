@@ -132,7 +132,7 @@
 */
 
 /* Options 01 Layout */
-.grid-container-options-01 { height: 100%; margin: 0; }
+.grid-container-options-01 { height: 100%; margin: 0; padding: 5px; }
 .grid-container-options-01 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -159,7 +159,7 @@
   text-align: center;
 }
 /* Options 02 Layout */
-.grid-container-options-02 { height: 100%; margin: 0; }
+.grid-container-options-02 { height: 100%; margin: 0; padding: 5px; }
 .grid-container-options-02 {
   display: grid;
   grid-template-columns: 1fr 1fr;
