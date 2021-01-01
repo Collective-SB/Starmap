@@ -902,11 +902,8 @@ class App {
 			this.sceneObjs.camera
 		);
 	}
-	updateTheme01(newColor01) {
-		document.documentElement.style.setProperty("--user-style", newColor01);
-	}
-	updateTheme02(newColor02) {
-		document.documentElement.style.setProperty("--user-style-02", newColor02);
+	updateTheme(newColor) {
+		document.documentElement.style.setProperty("--user-style", newColor);
 	}
 
 	modalConfirm(text) {
