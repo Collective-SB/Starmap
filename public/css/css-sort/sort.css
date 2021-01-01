@@ -137,7 +137,7 @@ button:hover {
 /* Side Nav */
 
 #find {
-  height: 45px;
+  height: 35px;
   font-size: 15px;
   text-decoration: underline;
   text-align: center;
@@ -194,7 +194,7 @@ button:hover {
   /* Set the width of the sidebar */
   position: fixed;
   /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1;
+  z-index: 2;
   /* Stay on top */
   top: 0;
   /* Stay at the top */
@@ -333,7 +333,7 @@ button:hover {
   min-width: 12px;
   min-height: 12px;
   padding: 10px;
-  z-index: 1;
+  z-index: 2;
   color: whitesmoke;
 }
 
@@ -351,7 +351,7 @@ button:hover {
   cursor: var(--main-cursor-pointer);
 
   transform: scale(1);
-  z-index: 1;
+  z-index: 2;
 }
 
 .distance-to-selector {
@@ -412,7 +412,7 @@ button:hover {
   overflow: hidden;
   cursor: var(--main-cursor-pointer);
   outline: none;
-  height: 45px;
+  height: 35px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -446,7 +446,7 @@ button:hover {
 .popup {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   left: 0;
   top: 0;
   width: 100%;
@@ -465,6 +465,15 @@ button:hover {
   color: var(--user-style);
   background-image: var(--svg-ui-background);
 }
+.popup-content {
+
+  padding: 20px;
+  color: var(--user-style);
+  background-image: var(--svg-ui-background);
+  border: 2px solid var(--user-style);
+  background-color: var(--user-style-02);
+}
+
 
 .popup-content h1 {
   text-align: center;
@@ -475,7 +484,7 @@ button:hover {
   -moz-box-shadow: var(--moz-boxshadow);
   box-shadow: var(--box-boxshadow);
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   width: 40%;
   left: 30%;
   border: solid 2px rgba(0, 197, 0, 0.8);
@@ -499,7 +508,7 @@ button:hover {
   min-width: 12px;
   min-height: 12px;
   padding: 5px;
-  z-index: 1;
+  z-index: 2;
   color: whitesmoke;
 }
 
@@ -548,7 +557,7 @@ button:hover {
   border-radius: 6px;
 
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   bottom: 100%;
 }
 
@@ -676,7 +685,6 @@ p {
 }
 
 .filter-view-option {
-  padding: 6px 8px 6px 10px;
   width: 100%;
   position: relative;
   margin: 0;
@@ -695,6 +703,7 @@ p {
 .filter-view-option label,
 input {
   cursor: var(--main-cursor-pointer);
+  
 }
 
 .filter-view-option:hover {
@@ -706,6 +715,7 @@ input {
 }
 
 .filter-view-option .filter-view-option-tooltip {
+  z-index: 3;
   visibility: hidden;
   width: 120px;
   background-color: #111;
@@ -717,7 +727,7 @@ input {
   border-radius: 6px;
 
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   width: 120px;
   bottom: 100%;
   left: 50%;
@@ -973,7 +983,7 @@ input {
 }
 
 .loading-container-sub {
-  background-color: #1eafb4;
+  background-color: var(--user-style);
   border-radius: 10px 10px 0px 0px;
   bottom: -10px;
   width: 85%;
@@ -984,3 +994,5 @@ input {
 .loading-container-sub > .loading-text {
   color: var(--user-style-02);
 } 
+
+
