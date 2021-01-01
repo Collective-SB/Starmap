@@ -4,14 +4,12 @@
 |*************************************************************************;
 */
 .ui-draggable {
-	background-image: var(--svg-ui-background);
 	border-radius: 5px;
 	-webkit-box-shadow: var(--webkit-boxshadow);
 	-moz-box-shadow: var(--moz-boxshadow);
 	box-shadow: var(--box-boxshadow);
-	background-color: var(--user-style-02);
-	border: solid 2px var(--user-style);
-	
+	background-color: #111;
+	border: solid 1px var(--user-style);
 }
 
 .ui-draggable:hover {
@@ -21,17 +19,14 @@
 * Win -Settings Panel
 |*************************************************************************;
 */
-
 .settings {
-	
-	min-width: 12px;
-	min-height: 12px;
 	display: none;
 	opacity: 0.5;
 	position: absolute;
 	left: 20%;
 	top: 10%;
-	
+	min-width: 12px;
+	min-height: 12px;
 	padding: 5px;
 	z-index: 1;
 	color: whitesmoke;
