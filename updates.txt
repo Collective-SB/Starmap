@@ -42,11 +42,12 @@ Client:
  - Added feedback when you copy link/cords
  - Moved layer info from the "extra info" box to the main info box
  - Added support for custom themes via the settings menu.
+ - Improved asteroid belt significantly
+ - Added loading screen
+ - General UI polishing, including making it more Firefox compatible, making less things the HTML default, and making a new, custom confirm instead of built in browser ones.
+ - New skybox, courtesy of Garageagle
  
 API:
  - Fixed points always returning 400 when editing (and thus being unable to edit)
  - Improved URL parsing to allow .jpeg image format for image embeds
  - Fixed discord embed API always returning 400
-
-
-
