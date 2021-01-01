@@ -61,7 +61,7 @@
 	<div class="sidenav">
 		<button id="login">
 			<img srcset="assets/Discord-Logo-White.svg" />
-			
+
 		</button>
 		<input id="find" type="text" placeholder="Search...">
 		<!-- 4 action buttons -->
@@ -99,17 +99,18 @@
 				<div id="points" style="display:none"></div>
 			</div>
 		</div>
-		
+
 		<div class="sidenav-bottom">
 			<form id="filterForm">
 				<div id="filterFormTypes"></div>
 				<div id="filterFormLayers"></div>
 			</form>
-			<button id="new-point" style="display: none;">
-				<span class="material-icons">add_box</span>
-				<span>Add Point</span>
-			</button>
 		</div>
+
+		<button id="new-point">
+			<span class="material-icons">add_box</span>
+			<span id="add-point-message">Login to Add Point</span>
+		</button>
 	</div>
 	<div class="main" id="main">
 		<!-- Create the new point popup -->
@@ -121,10 +122,10 @@
 
 
 
+			<!-- I don't know why this is here but I'm scared to change it -->
 
-		
 
-			
+
 			<button class="accordion">Camera & Interface Settings</button>
 			<div class="panel">
 				<div class="grid-container-options-01">
@@ -194,12 +195,12 @@
 				  <br>
 				  <input id="beltSamples" type="range" min="2" max="64" step="2" name="beltSamples" defaultValue="16">
 				  <br>
-	  
+
 				  <p style="display: inline;">Belt Transparency - <span id="beltTransparencyDisplay">32</span></p>
 				  <br>
 				  <input id="beltTransparency" type="range" min="0" max="1" step="0.05" name="beltTransparency" defaultValue="0.8">
 				  <br>
-				<!-- 
+				<!--
 				<br>
 				<div class="input-option">
 				<p style="display: inline;">Move camera vertically button</p>
@@ -252,7 +253,7 @@
 						</div>
 					</div>
 					<div class="option-02-07">
-						
+
 				<div class="checkbox-option checkbox">
 					<input id="showLines" type="checkbox" name="nameOnHover">
 					<p style="display: inline;">Show marker line</p>
@@ -277,35 +278,35 @@
 						</div>
 					</div>
 				  </div>
-			
-	
-			
-	
-				
-	
-				
-	
-				
-	
-			
-	
-	
-			
-	
-				
-	
-				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			</div>
 
 			<button class="accordion">Section 3</button>
 			<div class="panel">
-			
+
 			</div>
-					
+
 			<script>
 				var acc = document.getElementsByClassName("accordion");
 				var i;
-				
+
 				for (i = 0; i < acc.length; i++) {
 				acc[i].addEventListener("click", function() {
 					this.classList.toggle("active");
@@ -314,13 +315,13 @@
 					panel.style.maxHeight = null;
 					} else {
 					panel.style.maxHeight = panel.scrollHeight + "px";
-					} 
+					}
 				});
 				}
 				</script>
 		</div>
 
-		
+
 		<div id="calculator" class="calculator">
 			<span class="calc-close material-icons">
 				close
