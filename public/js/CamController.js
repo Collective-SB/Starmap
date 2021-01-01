@@ -20,7 +20,6 @@ export default class CamController {
 		this.rotLerp = false;
 		this.dist = 0;
 		this.app = app;
-		this.samePosTime = 0
 		this.init();
 	}
 	//Initilizes the camera controller
@@ -41,35 +40,12 @@ export default class CamController {
 		);
 		this.orbitCtrl.enableDamping = true;
 		this.orbitCtrl.maxDistance = CAM_MAX_ZOOM;
-		this.lastPos = {x: 0, y: 0, z: 0}
 
-		this.camera.position.set(EOS_SIZE * 10, 1000000, 1000000);
-		//once points are loaded in point manager this will lerp to the starting point
+		this.camera.position.set(EOS_SIZE * 1.6, 100000, 100000);
 	}
 	//Called to move the camera to the target point
 	update() {
-		//handles dynamic FPS changing
-		let distanceTo = this.camera.position.distanceTo(this.orbitCtrl.target);
-
-		if (this.dist === distanceTo && this.lastPos.x === this.camera.position.x
-			&& this.lastPos.y === this.camera.position.y && this.lastPos.z === this.camera.position.z) {
-			this.samePosTime++
-		} else {
-			this.samePosTime = 0;
-		}
-
-		this.lastPos.x = this.camera.position.x
-		this.lastPos.y = this.camera.position.y
-		this.lastPos.z = this.camera.position.z
-
-		this.dist = distanceTo;
-
-		if (this.samePosTime > 50) {
-			this.app.setFpsTarget(15)
-		} else {
-			this.app.setFpsTarget(60)
-		}
-
+		this.dist = this.camera.position.distanceTo(this.orbitCtrl.target);
 		if (this.posLerp) {
 			if (
 				this.camera.position.distanceTo(this.lerpTarget) < ZOOM_INTO_DIST
@@ -110,10 +86,5 @@ export default class CamController {
 		this.lerpTarget.set(x, y, z);
 		this.posLerp = true;
 		this.rotLerp = true;
-	}
-
-	posLerpTo(x, y, z) {
-		this.lerpTarget = new THREE.Vector3(x, y, z)
-		this.posLerp = true;
 	}
 }

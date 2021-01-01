@@ -52,29 +52,6 @@ const SETTINGS_DEF = [{
 		},
 	},
 	{
-		id: "beltSamples",
-		default: 16,
-		prop: "value",
-		set: function (val) {
-			let newVal;
-
-			if (val == 2) {
-				newVal = 1
-			} else {
-				newVal = val
-			}
-			document.getElementById("beltSampleDisplay").innerText = newVal
-		},
-	},
-	{
-		id: "beltTransparency",
-		default: 0.8,
-		prop: "value",
-		set: function (val) {
-			document.getElementById("beltTransparencyDisplay").innerText = val
-		},
-	},
-	{
 		id: "cloudDisp",
 		default: true,
 		prop: "checked",

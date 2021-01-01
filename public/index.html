@@ -42,24 +42,6 @@
 </head>
 
 <body>
-	<div id="loading-screen">
-
-
-		<div class="loading-elevated" id="loading-elevated">
-			<h1 class="loading-text">Loading...</h1>
-			<p id="loading-text" class="loading-text"> Loading UI... </p>
-
-			<p class="loading-text">
-				<a href="https://https://github.com/Collective-SB/Starmap" style="color: white">Starmap</a>,
-				made by Strikeeaglechase with
-				<a href="https://discord.gg/VnU8apR" style="color: white" >Collective</a>.
-
-			<p class="loading-text">Other Contributors:<br>Volcano, MuNK, Timothy, IHave</p>
-			</p>
-		</div>
-	</div>
-
-
 	<div class="sidenav">
 		<button id="login">
 			<img srcset="assets/Discord-Logo-White.svg" />
@@ -107,11 +89,11 @@
 				<div id="filterFormTypes"></div>
 				<div id="filterFormLayers"></div>
 			</form>
+			<button id="new-point" style="display: none;">
+				<span class="material-icons">add_box</span>
+				<span>Add Point</span>
+			</button>
 		</div>
-		<button id="new-point">
-			<span class="material-icons">add_box</span>
-			<span id="add-point-message">Login to Add Point</span>
-		</button>
 	</div>
 	<div class="main" id="main">
 		<!-- Create the new point popup -->
@@ -362,7 +344,7 @@
 						ISAN
 					</a> on your ship.
 					<br><br>
-					To give feedback or report bugs please create a support ticket <a href="https://discord.gg/VnU8apR">here</a>
+					For any feedback, or bugs please create a support ticket <a href="https://discord.gg/VnU8apR">here</a>
 					<br>
 					Private layers are a premium feature. If you want to acquire one for your faction, please open a
 					diplomatic ticket in
@@ -373,18 +355,6 @@
 				<button id="acceptCookies">Accept</button>
 			</div>
 		</div>
-
-		<div class="popup" id="betterConfirm">
-			<div class="popup-content">
-				<h2 id="betterConfirm-text" class="popup-text">
-
-				</h2>
-
-				<button id="betterConfirm-yes">OK</button>
-				<button id="betterConfirm-no" >Cancel</button>
-			</div>
-		</div>
-
 		<div id="topBanner" class="topPopupBanner" style="display: none;">
 			<p id="bannerMsg">Banner message</p>
 		</div>
