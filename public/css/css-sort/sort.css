@@ -205,6 +205,8 @@ button:hover {
 
   display: flex;
   flex-direction: column;
+
+  scrollbar-color: var(--user-style) rgba(0, 0, 0, 0);
 }
 
 .sidenav a {
@@ -218,6 +220,8 @@ button:hover {
 
   transition: color 0.25s;
   transition: background 0.25s;
+
+  scrollbar-color: var(--user-style) rgba(0, 0, 0, 0);
 }
 
 .sidenav a:hover {
@@ -453,20 +457,17 @@ button:hover {
 }
 
 .popup-content {
-  background-color: #d6d6d6;
+  background-color: var(--user-style-02);;
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
   width: 50%;
+  color: var(--user-style);
+  background-image: var(--svg-ui-background);
 }
 
 .popup-content h1 {
-  color: black;
   text-align: center;
-}
-
-.popup-content p {
-  color: black;
 }
 
 .topPopupBanner {
@@ -813,7 +814,7 @@ input {
 
 .checkbox > input:checked {
 
-  
+
   background-color: var(--user-style);
 }
 
@@ -851,12 +852,12 @@ input {
     font-size: 15px;
     transition: 0.4s;
   }
-  
+
   .active, .accordion:hover {
 	background-color: var(--user-style);
 	color: #111;
   }
-  
+
   .accordion:after {
 	content: '\002B';
 	color: var(--user-style);
@@ -864,14 +865,14 @@ input {
 	float: right;
 	margin-left: 5px;
   }
-  
+
 
 
   .active:after {
 	content: "\2212";
 	color: #111;
   }
-  
+
   .panel {
 	border-left: 2px solid var(--user-style);
     border-right: 2px solid var(--user-style);
