@@ -42,6 +42,22 @@
 </head>
 
 <body>
+	<div id="loading-screen">
+
+
+		<div class="loading-elevated" id="loading-elevated">
+			<h1 class="loading-text">Loading...</h1>
+			<p id="loading-text" class="loading-text"> Loading UI... </p>
+
+			<p class="loading-text">
+				<a href="https://https://github.com/Collective-SB/Starmap" style="color: white">Starmap</a>,
+				made by Strikeeaglechase with
+				<a href="https://discord.gg/VnU8apR" style="color: white" >Collective</a>.
+
+			<p class="loading-text">Other Contributors:<br>Volcano, MuNK, Timothy, IHave</p>
+			</p>
+		</div>
+	</div>
 	<div class="sidenav">
 		<button id="login">
 			<img srcset="assets/Discord-Logo-White.svg" />
@@ -112,15 +128,7 @@
 			<button class="accordion">Camera & Interface Settings</button>
 			<div class="panel">
 				<div class="grid-container-options-01">
-					<p style="display: inline;">Belt Sample Count - <span id="beltSampleDisplay">16</span></p>
-					<br>
-					<input id="beltSamples" type="range" min="2" max="64" step="2" name="beltSamples" defaultValue="16">
-					<br>
-		
-					<p style="display: inline;">Belt Transparency - <span id="beltTransparencyDisplay">32</span></p>
-					<br>
-					<input id="beltTransparency" type="range" min="0" max="1" step="0.05" name="beltTransparency" defaultValue="0.8">
-					<br>
+
 					<div class="desc-01-01">
 						<p style="display: inline;">Custom Border - <span class="container" id="color_val-01"></span> </p>
 					</div>
@@ -182,6 +190,15 @@
 						<input id="zoomSpeed" type="range" min="0.5" max="5" step="0.01" name="zoomSpeed">
 					</div>
 				  </div>
+				  <p style="display: inline;">Belt Sample Count - <span id="beltSampleDisplay">16</span></p>
+				  <br>
+				  <input id="beltSamples" type="range" min="2" max="64" step="2" name="beltSamples" defaultValue="16">
+				  <br>
+	  
+				  <p style="display: inline;">Belt Transparency - <span id="beltTransparencyDisplay">32</span></p>
+				  <br>
+				  <input id="beltTransparency" type="range" min="0" max="1" step="0.05" name="beltTransparency" defaultValue="0.8">
+				  <br>
 				<!-- 
 				<br>
 				<div class="input-option">

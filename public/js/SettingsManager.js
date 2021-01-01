@@ -52,6 +52,29 @@ const SETTINGS_DEF = [{
 		},
 	},
 	{
+		id: "beltSamples",
+		default: 16,
+		prop: "value",
+		set: function (val) {
+			let newVal;
+
+			if (val == 2) {
+				newVal = 1
+			} else {
+				newVal = val
+			}
+			document.getElementById("beltSampleDisplay").innerText = newVal
+		},
+	},
+	{
+		id: "beltTransparency",
+		default: 0.8,
+		prop: "value",
+		set: function (val) {
+			document.getElementById("beltTransparencyDisplay").innerText = val
+		},
+	},
+	{
 		id: "cloudDisp",
 		default: true,
 		prop: "checked",
@@ -136,7 +159,7 @@ const SETTINGS_DEF = [{
 			//checks if it is valid hex
 			const validHex = /^#[0-9A-F]{6}$/i.test(code)
 			if (validHex) {
-				app.updateTheme(val);
+				app.updateTheme01(val);
 			} else {
 				//check if it just hasn't been set
 				if (code === "") {
@@ -160,7 +183,7 @@ const SETTINGS_DEF = [{
 			//checks if it is valid hex
 			const validHex = /^#[0-9A-F]{6}$/i.test(code)
 			if (validHex) {
-				app.updateTheme(val);
+				app.updateTheme02(val);
 			} else {
 				//check if it just hasn't been set
 				if (code === "") {
