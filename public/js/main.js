@@ -60,7 +60,7 @@ const optionTemplate = `
 `;
 
 const viewFilterTemplate = `
-<div class="filter-view-option">
+<div class="filter-view-option checkbox-option checkbox">
 	<input id=%ID% type="checkbox" name="%NAME%" value="%NAME%" checked>
 	<label for="%NAME%">
 		%NAME%
@@ -902,8 +902,11 @@ class App {
 			this.sceneObjs.camera
 		);
 	}
-	updateTheme(newColor) {
-		document.documentElement.style.setProperty("--user-style", newColor);
+	updateTheme01(newColor01) {
+		document.documentElement.style.setProperty("--user-style", newColor01);
+	}
+	updateTheme02(newColor02) {
+		document.documentElement.style.setProperty("--user-style-02", newColor02);
 	}
 
 	modalConfirm(text) {
@@ -997,7 +1000,7 @@ class App {
 		}
 		if (this.user.g.some((layer) => layer.id == "MqJZYstndHmaxIEG")) {
 			//User is a subr, lets set their style
-			this.updateTheme("#b72015");
+			this.updateTheme01("#b72015");
 		}
 		//Load in the toggled filters (defer execution to ensure html elements get loaded)
 		setTimeout(this.initFilters.bind(this), 0);
