@@ -779,8 +779,11 @@ class App {
 			this.sceneObjs.camera
 		);
 	}
-	updateTheme(newColor) {
-		document.documentElement.style.setProperty("--user-style", newColor);
+	updateTheme01(newColor01) {
+		document.documentElement.style.setProperty("--user-style", newColor01);
+	}
+	updateTheme02(newColor02) {
+		document.documentElement.style.setProperty("--user-style-02", newColor02);
 	}
 	//Called whenever a user successfully logs in, fills out the group options from user object
 	onLogin() {
