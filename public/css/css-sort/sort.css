@@ -958,3 +958,15 @@ input {
 	background-color: var(--user-style-02);
 	border: solid 2px var(--user-style);
 }
+
+
+.loader-svg {
+	font-family: var(--main-font-Squada);
+}
+
+#loading-elevated > svg > g > text {
+  fill: var(--user-style);
+}
+#loading-elevated > svg > g > #Line_1 {
+  stroke: var(--user-style);
+}
