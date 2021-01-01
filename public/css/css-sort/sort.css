@@ -180,7 +180,7 @@ button:hover {
 
 .sidenav {
   border-right: 2px solid var(--user-style);
-  background-color: #111;
+  background-color: var(--user-style-02);
   background-image: var(--svg-ui-background);
   -webkit-box-shadow: var(--webkit-boxshadow);
   -moz-box-shadow: var(--moz-boxshadow);
@@ -914,3 +914,46 @@ input {
 	visibility: visible;
 	opacity: 1;
   }
+
+  /* Loading Screen */
+
+#loading-screen {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+
+	opacity: 1;
+
+	transition: opacity 0.5s ease;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.loading-text {
+	color: var(--user-style);
+	text-align: center;
+	width: 100%;
+	vertical-align: middle;
+}
+
+.loading-elevated {
+	margin: 10px;
+	padding: 0px;
+
+	width: 25%;
+	height: auto;
+	margin: 0 auto;
+	padding: 10px;
+	position: relative;
+
+	box-shadow: 0px 0px 43px 1px var(--user-style);
+	-webkit-box-shadow: 0px 0px 43px 1px var(--user-style);
+	-moz-box-shadow: 0px 0px 43px 1px var(--user-style);
+  background-image: var(--svg-ui-background);
+	background-color: var(--user-style-02);
+	border: solid 2px var(--user-style);
+}

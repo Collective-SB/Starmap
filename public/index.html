@@ -42,6 +42,22 @@
 </head>
 
 <body>
+	<div id="loading-screen">
+
+
+		<div class="loading-elevated" id="loading-elevated">
+			<h1 class="loading-text">Loading...</h1>
+			<p id="loading-text" class="loading-text"> Loading UI... </p>
+
+			<p class="loading-text">
+				<a href="https://https://github.com/Collective-SB/Starmap" style="color: white">Starmap</a>,
+				made by Strikeeaglechase with
+				<a href="https://discord.gg/VnU8apR" style="color: white" >Collective</a>.
+
+			<p class="loading-text">Other Contributors:<br>Volcano, MuNK, Timothy, IHave</p>
+			</p>
+		</div>
+	</div>
 	<div class="sidenav">
 		<button id="login">
 			<img srcset="assets/Discord-Logo-White.svg" />
@@ -112,53 +128,77 @@
 			<button class="accordion">Camera & Interface Settings</button>
 			<div class="panel">
 				<div class="grid-container-options-01">
+
 					<div class="desc-01-01">
-						<p style="display: inline;">Custom Color Theme - <span class="container" id="color_val"></span> </p>
+						<p style="display: inline;">Custom Border - <span class="container" id="color_val-01"></span> </p>
 					</div>
 					<div class="desc-01-02">
-						<p style="display: inline;">Mouse pan button</p>
+						<p style="display: inline;">Custom Background - <span class="container" id="color_val-02"></span> </p>
 					</div>
 					<div class="desc-01-03">
-						<p style="display: inline;">Rotate view button</p>
+						<p style="display: inline;">Mouse pan button</p>
 					</div>
 					<div class="desc-01-04">
-						<p style="display: inline;">Camera damping factor</p>
+						<p style="display: inline;">Rotate view button</p>
 					</div>
 					<div class="desc-01-05">
+						<p style="display: inline;">Camera damping factor</p>
+					</div>
+					<div class="desc-01-06">
 						<p style="display: inline;">Zoom speed</p>
 					</div>
 					<div class="option-01-01 text-center">
-						<input type="color" id="customColorTheme">
+						<input type="color" id="customColorTheme-01">
 						<script>
-							let colorButton = document.getElementById("customColorTheme");
-							let colorDiv = document.getElementById("color_val");
-							colorButton.onchange = function () {
-								colorDiv.innerHTML = colorButton.value;
-								colorDiv.style.color = colorButton.value;
+							let colorButton01 = document.getElementById("customColorTheme-01");
+							let colorDiv01 = document.getElementById("color_val-01");
+							colorButton01.onchange = function () {
+								colorDiv01.innerHTML = colorButton01.value;
+								colorDiv01.style.color = colorButton01.value;
 							}
 						</script>
 					</div>
 					<div class="option-01-02 text-center">
+						<input type="color" id="customColorTheme-02">
+						<script>
+							let colorButton02 = document.getElementById("customColorTheme-02");
+							let colorDiv02 = document.getElementById("color_val-02");
+							colorButton02.onchange = function () {
+								colorDiv02.innerHTML = colorButton02.value;
+								colorDiv02.style.color = colorButton02.value;
+							}
+						</script>
+					</div>
+					<div class="option-01-03 text-center">
 						<select id="panSelect">
 							<option value="0">left</option>
 							<option value="1">middle</option>
 							<option value="2">right</option>
 						</select>
 					</div>
-					<div class="option-01-03 text-center">
+					<div class="option-01-04 text-center">
 						<select id="rotSelect">
 							<option value="0">left</option>
 							<option value="1">middle</option>
 							<option value="2">right</option>
 						</select>
 					</div>
-					<div class="option-01-04 text-center">
+					<div class="option-01-05 text-center">
 						<input id="dampFact" type="range" min="0.1" max="0.5" step="0.01" name="dampFact">
 					</div>
-					<div class="option-01-05 text-center">
+					<div class="option-01-06 text-center">
 						<input id="zoomSpeed" type="range" min="0.5" max="5" step="0.01" name="zoomSpeed">
 					</div>
 				  </div>
+				  <p style="display: inline;">Belt Sample Count - <span id="beltSampleDisplay">16</span></p>
+				  <br>
+				  <input id="beltSamples" type="range" min="2" max="64" step="2" name="beltSamples" defaultValue="16">
+				  <br>
+	  
+				  <p style="display: inline;">Belt Transparency - <span id="beltTransparencyDisplay">32</span></p>
+				  <br>
+				  <input id="beltTransparency" type="range" min="0" max="1" step="0.05" name="beltTransparency" defaultValue="0.8">
+				  <br>
 				<!-- 
 				<br>
 				<div class="input-option">
@@ -259,7 +299,7 @@
 
 			<button class="accordion">Section 3</button>
 			<div class="panel">
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+			
 			</div>
 					
 			<script>
@@ -344,7 +384,7 @@
 						ISAN
 					</a> on your ship.
 					<br><br>
-					For any feedback, or bugs please create a support ticket <a href="https://discord.gg/VnU8apR">here</a>
+					To give feedback or report bugs please create a support ticket <a href="https://discord.gg/VnU8apR">here</a>
 					<br>
 					Private layers are a premium feature. If you want to acquire one for your faction, please open a
 					diplomatic ticket in
@@ -353,6 +393,16 @@
 					This website uses cookies for functional and analytical purposes. Press "Accept" to continue.
 				</p>
 				<button id="acceptCookies">Accept</button>
+			</div>
+		</div>
+		<div class="popup" id="betterConfirm">
+			<div class="popup-content">
+				<h2 id="betterConfirm-text" class="popup-text">
+
+				</h2>
+
+				<button id="betterConfirm-yes">OK</button>
+				<button id="betterConfirm-no" >Cancel</button>
 			</div>
 		</div>
 		<div id="topBanner" class="topPopupBanner" style="display: none;">
