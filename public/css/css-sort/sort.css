@@ -475,6 +475,10 @@ button:hover {
 }
 
 
+.popup-content a {
+  color: var(--user-style)
+}
+
 .popup-content h1 {
   text-align: center;
 }

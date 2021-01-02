@@ -1,6 +1,6 @@
 /*
 |*************************************************************************;
-* ScriptName    : Global Root for CSS 
+* ScriptName    : Global Root for CSS
 * ScriptPath    : /css/master.css
 |*************************************************************************;
 */
@@ -13,7 +13,7 @@
 * Stylesheets Imports
 |*************************************************************************;
 */
- 
+
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 @import url("assets-interfaces/interface.css");
@@ -28,7 +28,7 @@
 :root {
 	/* Font Imports */
 	--main-font-VT323: "VT323", monospace;
-	--main-font-Squada: "Squada One", cursive;
+	--main-font-Squada: "Squada One", sans-serif;
 
 	/* Cursor Setting */
 	--main-cursor-default: default;
@@ -53,7 +53,7 @@
 	--red-hover: #b72015;
 /*
 |*************************************************************************;
-* SVG Global 
+* SVG Global
 |*************************************************************************;
 */
 
@@ -62,7 +62,7 @@
 	--svg-loader: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='299.5' height='64' viewBox='0 0 299.5 64'%3E%3Cg id='Group_1' data-name='Group 1' transform='translate(-732 895)'%3E%3Ctext id='ISAN' transform='translate(732 -843)' fill='%23707070' font-size='60' font-family='SquadaOne-Regular, Squada One'%3E%3Ctspan x='0' y='0'%3EISAN%3C/tspan%3E%3C/text%3E%3Ctext id='Integrated_System_' data-name='Integrated System ' transform='translate(836 -867)' fill='%23707070' font-size='21' font-family='SquadaOne-Regular, Squada One'%3E%3Ctspan x='0' y='0'%3EIntegrated System %3C/tspan%3E%3C/text%3E%3Ctext id='Autonomous_Navigation' data-name='Autonomous Navigation' transform='translate(836 -843)' fill='%23707070' font-size='21' font-family='SquadaOne-Regular, Squada One'%3E%3Ctspan x='0' y='0'%3EAutonomous Navigation%3C/tspan%3E%3C/text%3E%3Cline id='Line_1' data-name='Line 1' x2='203' transform='translate(828.5 -861.5)' fill='none' stroke='%23707070' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E%0A");
 	/*
 |*************************************************************************;
-* Box Properties 
+* Box Properties
 |*************************************************************************;
 */
 
@@ -83,7 +83,7 @@
 
 /*
 |*************************************************************************;
-* Page Properties 
+* Page Properties
 |*************************************************************************;
 */
 
@@ -102,7 +102,7 @@
 
 /*
 |*************************************************************************;
-* Page Animations 
+* Page Animations
 |*************************************************************************;
 */
 
@@ -129,7 +129,7 @@
 
 /*
 |*************************************************************************;
-* Grid Layouts 
+* Grid Layouts
 |*************************************************************************;
 */
 
