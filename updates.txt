@@ -48,5 +48,17 @@ API:
  - Improved URL parsing to allow .jpeg image format for image embeds
  - Fixed discord embed API always returning 400
 
+V1.1.2
+IHave adding this presuming these features go in a separate release.
+Client:
+- Added new, volumetric belt.
+- Changed the skybox.
+- Added loader.
+- Big UI improvements from Timothy.
+- New intro animation (not particularly important)
+- FPS now lowers when you aren't using Starmap.
+- General UI polishing
+- You can now edit background and foreground colours independently.
+- Got rid of Comic Sans
 
-
+API:
