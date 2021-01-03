@@ -1,8 +1,76 @@
-<svg class="loader-svg" xmlns="http://www.w3.org/2000/svg" width="299.5" height="64" viewBox="0 0 299.5 64">
-  <g id="Group_1" data-name="Group 1" transform="translate(-732 895)">
-    <text id="ISAN" transform="translate(732 -843)" fill="#707070" font-size="60" font-family="SquadaOne-Regular, Squada One"><tspan x="0" y="0">ISAN</tspan></text>
-    <text id="Integrated_System_" data-name="Integrated System " transform="translate(836 -867)" fill="#707070" font-size="21" font-family="SquadaOne-Regular, Squada One"><tspan x="0" y="0">Integrated System </tspan></text>
-    <text id="Autonomous_Navigation" data-name="Autonomous Navigation" transform="translate(836 -843)" fill="#707070" font-size="21" font-family="SquadaOne-Regular, Squada One"><tspan x="0" y="0">Autonomous Navigation</tspan></text>
-    <line id="Line_1" data-name="Line 1" x2="203" transform="translate(828.5 -861.5)" fill="none" stroke="#707070" stroke-width="1"/>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="308.5" height="82" viewBox="0 0 308.5 82">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3 {
+        fill: #707070;
+        font-family: SquadaOne-Regular, Squada One;
+      }
+
+      .cls-1 {
+        font-size: 60px;
+      }
+
+      .cls-2 {
+        stroke: rgba(255,0,0,0.39);
+      }
+
+      .cls-2, .cls-3 {
+        font-size: 21px;
+      }
+
+      .cls-3 {
+        stroke: rgba(255,0,0,0.53);
+      }
+
+      .cls-4 {
+        fill: none;
+        stroke: #707070;
+      }
+
+      .cls-5 {
+        filter: url(#Autonomous_Navigation);
+      }
+
+      .cls-6 {
+        filter: url(#Integrated_System_);
+      }
+
+      .cls-7 {
+        filter: url(#ISAN);
+      }
+    </style>
+    <filter id="ISAN" x="0" y="0" width="118" height="82" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Integrated_System_" x="103" y="9" width="162" height="42" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.478"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Autonomous_Navigation" x="103" y="33" width="203" height="42" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-3"/>
+      <feFlood flood-opacity="0.251"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_1" data-name="Group 1" transform="translate(-3436 -1341)">
+    <g class="cls-7" transform="matrix(1, 0, 0, 1, 3436, 1341)">
+      <text id="ISAN-2" data-name="ISAN" class="cls-1" transform="translate(9 58)"><tspan x="0" y="0">ISAN</tspan></text>
+    </g>
+    <g class="cls-6" transform="matrix(1, 0, 0, 1, 3436, 1341)">
+      <text id="Integrated_System_2" data-name="Integrated System " class="cls-2" transform="translate(113 34)"><tspan x="0" y="0">Integrated System</tspan></text>
+    </g>
+    <g class="cls-5" transform="matrix(1, 0, 0, 1, 3436, 1341)">
+      <text id="Autonomous_Navigation-2" data-name="Autonomous Navigation" class="cls-3" transform="translate(113 58)"><tspan x="0" y="0">Autonomous Navigation</tspan></text>
+    </g>
+    <line id="Line_1" data-name="Line 1" class="cls-4" x2="203" transform="translate(3541.5 1380.5)"/>
   </g>
 </svg>
