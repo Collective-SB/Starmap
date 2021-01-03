@@ -5,7 +5,7 @@
 */
 .ui-draggable {
 	background-image: var(--svg-ui-background);
-
+	border-radius: 5px;
 	-webkit-box-shadow: var(--webkit-boxshadow);
 	-moz-box-shadow: var(--moz-boxshadow);
 	box-shadow: var(--box-boxshadow);
@@ -14,7 +14,8 @@
 
 }
 
-
+.ui-draggable:hover {
+}
 /*
 |*************************************************************************;
 * Win -Settings Panel
@@ -22,36 +23,17 @@
 */
 
 .settings {
-	z-index: 3;
-	-webkit-box-shadow: var(--webkit-boxshadow);
-	-moz-box-shadow: var(--moz-boxshadow);
-	box-shadow: var(--box-boxshadow);
 
-	background: var(--user-style);
-	
-	position: absolute;
-	width: calc( 100% - 36px );
-	max-width: 400px;
-	clip-path: polygon(
-		0 0,
-		100% 0px,
-		100% calc(100% - 30px),
-		calc(100% - 30px) 100%,
-		0 100%,
-		
-		0 60%,
-		10px calc(60% - 10px),
-		10px calc(40% + 10px),
-		0 40%
-	  );
-	  
-	height: 400px;
+	min-width: 12px;
+	min-height: 12px;
 	display: none;
 	opacity: 0.5;
+	position: absolute;
 	left: 20%;
 	top: 10%;
 
 	padding: 5px;
+	z-index: 1;
 	color: whitesmoke;
 }
 .settings:hover {
@@ -188,4 +170,3 @@ input[type="number"] {
 	margin: 5px;
 	user-select: none;
 }
-
