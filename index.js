@@ -34,7 +34,7 @@ app.get(["/:pointId", "/"], async (req, res) => {
 		<meta property="og:url" content="${URL}" />
 	`;
 	const defaultSiteTags = `
-		<meta property="og:description" content="A dynamic live time map for Starbase\nCreated by Strikeeaglechase#0001" />
+		<meta property="og:description" content="A dynamic real time map for Starbase\nCreated by Strikeeaglechase#0001" />
 		<meta property="og:image" content="${IMGS.ico}" />
 		<meta property="og:title" content="Starmap" />
 		<meta property="og:site_name" content="Support server - https://discord.gg/Collective" />
