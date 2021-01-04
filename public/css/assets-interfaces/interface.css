@@ -4,18 +4,16 @@
 |*************************************************************************;
 */
 .ui-draggable {
+	background-color: var(--user-style-02);
+	border: solid 2px var(--user-style);
 	background-image: var(--svg-ui-background);
-	border-radius: 5px;
 	-webkit-box-shadow: var(--webkit-boxshadow);
 	-moz-box-shadow: var(--moz-boxshadow);
 	box-shadow: var(--box-boxshadow);
-	background-color: var(--user-style-02);
-	border: solid 2px var(--user-style);
 
+	border-radius: 5px;
 }
 
-.ui-draggable:hover {
-}
 /*
 |*************************************************************************;
 * Win -Settings Panel
@@ -53,6 +51,54 @@
 	cursor: pointer;
 	transform: scale(1.2);
 }
+
+
+
+/*
+|*************************************************************************;
+* Win -Calculator
+|*************************************************************************;
+*/
+/* Calculator panel */
+.calculator {
+	display: none;
+	opacity: 0.5;
+	position: absolute;
+	left: 20%;
+	top: 10%;
+	min-width: 12px;
+	min-height: 12px;
+	padding: 5px;
+	z-index: 2;
+	color: whitesmoke;
+  }
+  
+  .calculator:hover {
+	opacity: 1;
+  }
+  
+  .calculator .calc-close {
+	position: absolute;
+	color: var(--red);
+	top: 3px;
+	right: 3px;
+	user-select: none;
+	z-index: 2;
+  }
+  
+  .calculator .calc-close:hover {
+	cursor: var(--main-cursor-pointer);
+	transform: scale(1.2);
+  }
+  
+  .calc-title {
+	font-weight: bold;
+	font-size: 20px;
+	text-align: center;
+	margin: 5px;
+	user-select: none;
+  }
+
 
 /*
 |*************************************************************************;
