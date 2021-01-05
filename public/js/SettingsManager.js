@@ -36,14 +36,6 @@ const SETTINGS_DEF = [{
 		},
 	},
 	{
-		id: "beltDisp",
-		default: true,
-		prop: "checked",
-		set: function (val) {
-			this.sceneObjs.Belt.visible = val;
-		},
-	},
-	{
 		id: "dampFact",
 		default: 0.05,
 		prop: "value",
@@ -63,6 +55,7 @@ const SETTINGS_DEF = [{
 			} else {
 				newVal = val
 			}
+			app.beltSamples = val
 			document.getElementById("beltSampleDisplay").innerText = newVal
 		},
 	},
@@ -71,6 +64,7 @@ const SETTINGS_DEF = [{
 		default: 0.8,
 		prop: "value",
 		set: function (val) {
+			app.beltTransparency = val
 			document.getElementById("beltTransparencyDisplay").innerText = val
 		},
 	},
