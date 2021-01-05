@@ -29,7 +29,7 @@
 	 <link href="/css/image-hover.css" rel="stylesheet" type="text/css" />
 	 <script src="/js/image-hover.js"></script>
 -->
-
+ 
 
 	<script>
 		// Dont ask me why this is here, I dont know either   [I still want to ask? :) -Tim]
@@ -46,18 +46,31 @@
 
 
 		<div class="loading-elevated" id="loading-elevated">
-			<h1 class="loading-text">Loading...</h1>
-			<p id="loading-text" class="loading-text"> Loading UI... </p>
+			<svg class="loading-text" xmlns="http://www.w3.org/2000/svg" width="299.5" height="64" viewBox="0 0 299.5 64">
+				<g id="Group_1" data-name="Group 1" transform="translate(-732 895)">
+				  <text id="ISAN" transform="translate(732 -843)" fill="#707070" font-size="60" font-family="SquadaOne-Regular, Squada One"><tspan x="0" y="0">ISAN</tspan></text>
+				  <text id="Integrated_System_" data-name="Integrated System " transform="translate(836 -867)" fill="#707070" font-size="21" font-family="SquadaOne-Regular, Squada One"><tspan x="0" y="0">Integrated System </tspan></text>
+				  <text id="Autonomous_Navigation" data-name="Autonomous Navigation" transform="translate(836 -843)" fill="#707070" font-size="21" font-family="SquadaOne-Regular, Squada One"><tspan x="0" y="0">Autonomous Navigation</tspan></text>
+				  <line id="Line_1" data-name="Line 1" x2="203" transform="translate(828.5 -861.5)" fill="none" stroke="#707070" stroke-width="1"/>
+				</g>
+			  </svg>
+			
 
-			<p class="loading-text">
+			<!--<p class="loading-text">
 				<a href="https://https://github.com/Collective-SB/Starmap" style="color: white">Starmap</a>,
 				made by Strikeeaglechase with
 				<a href="https://discord.gg/VnU8apR" style="color: white" >Collective</a>.
 
-			<p class="loading-text">Other Contributors:<br>Volcano, MuNK, Timothy, IHave</p>
-			</p>
+			<p class="loading-text">Other Contributors:<br>Volcano, MuNK, Timothy, IHave</p> 
+			</p>-->
+			<div class="loading-container-sub">
+				<p id="loading-text" class="loading-text"> Loading UI-Interface... </p>
+			</div>
 		</div>
 	</div>
+
+
+	
 	<div class="sidenav">
 		<button id="login">
 			<img srcset="assets/Discord-Logo-White.svg" />
@@ -100,12 +113,7 @@
 			</div>
 		</div>
 
-		<div class="sidenav-bottom">
-			<form id="filterForm">
-				<div id="filterFormTypes"></div>
-				<div id="filterFormLayers"></div>
-			</form>
-		</div>
+
 
 		<button id="new-point">
 			<span class="material-icons">add_box</span>
@@ -195,7 +203,6 @@
 				  <br>
 				  <input id="beltSamples" type="range" min="2" max="64" step="2" name="beltSamples" defaultValue="16">
 				  <br>
-
 				  <p style="display: inline;">Belt Transparency - <span id="beltTransparencyDisplay">32</span></p>
 				  <br>
 				  <input id="beltTransparency" type="range" min="0" max="1" step="0.05" name="beltTransparency" defaultValue="0.8">
@@ -272,31 +279,21 @@
 						</div>
 					</div>
 				  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			</div>
 
+			<button class="accordion">Map Filter Select</button>
+			<div class="panel">
+				<form id="filterForm">
+					<div id="filterFormTypes"></div>
+					<div id="filterFormLayers"></div>
+				</form>
+			</div>
+			
+			<!--
 			<button class="accordion">Section 3</button>
 			<div class="panel">
-
 			</div>
-
+		-->
 			<script>
 				var acc = document.getElementsByClassName("accordion");
 				var i;

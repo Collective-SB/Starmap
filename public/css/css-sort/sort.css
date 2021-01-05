@@ -1,3 +1,11 @@
+/*
+|*************************************************************************;
+* ScriptName    : Temp Sort File
+* ScriptPath    : /css/css-sort/sort.css
+|*************************************************************************;
+*/
+
+/* */
 body,
 html {
   overflow: hidden;
@@ -137,7 +145,7 @@ button:hover {
 /* Side Nav */
 
 #find {
-  height: 45px;
+  height: 35px;
   font-size: 15px;
   text-decoration: underline;
   text-align: center;
@@ -194,7 +202,7 @@ button:hover {
   /* Set the width of the sidebar */
   position: fixed;
   /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1;
+  z-index: 2;
   /* Stay on top */
   top: 0;
   /* Stay at the top */
@@ -333,7 +341,7 @@ button:hover {
   min-width: 12px;
   min-height: 12px;
   padding: 10px;
-  z-index: 1;
+  z-index: 2;
   color: whitesmoke;
 }
 
@@ -351,7 +359,7 @@ button:hover {
   cursor: var(--main-cursor-pointer);
 
   transform: scale(1);
-  z-index: 1;
+  z-index: 2;
 }
 
 .distance-to-selector {
@@ -379,7 +387,7 @@ button:hover {
 
 .infoImage {
   border: dashed 2px var(--user-style);
-  transform: rotate(7deg);
+  /*transform: rotate(7deg); */
   max-width: 270px;
   max-height: 270px;
   margin-top: 10px;
@@ -412,7 +420,7 @@ button:hover {
   overflow: hidden;
   cursor: var(--main-cursor-pointer);
   outline: none;
-  height: 45px;
+  height: 35px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -446,7 +454,7 @@ button:hover {
 .popup {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   left: 0;
   top: 0;
   width: 100%;
@@ -465,10 +473,15 @@ button:hover {
   color: var(--user-style);
   background-image: var(--svg-ui-background);
 }
+.popup-content {
 
-.popup-content a {
-  color: var(--user-style)
+  padding: 20px;
+  color: var(--user-style);
+  background-image: var(--svg-ui-background);
+  border: 2px solid var(--user-style);
+  background-color: var(--user-style-02);
 }
+
 
 .popup-content h1 {
   text-align: center;
@@ -479,7 +492,7 @@ button:hover {
   -moz-box-shadow: var(--moz-boxshadow);
   box-shadow: var(--box-boxshadow);
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   width: 40%;
   left: 30%;
   border: solid 2px rgba(0, 197, 0, 0.8);
@@ -503,7 +516,7 @@ button:hover {
   min-width: 12px;
   min-height: 12px;
   padding: 5px;
-  z-index: 1;
+  z-index: 2;
   color: whitesmoke;
 }
 
@@ -552,7 +565,7 @@ button:hover {
   border-radius: 6px;
 
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   bottom: 100%;
 }
 
@@ -680,7 +693,6 @@ p {
 }
 
 .filter-view-option {
-  padding: 6px 8px 6px 10px;
   width: 100%;
   position: relative;
   margin: 0;
@@ -699,6 +711,7 @@ p {
 .filter-view-option label,
 input {
   cursor: var(--main-cursor-pointer);
+  
 }
 
 .filter-view-option:hover {
@@ -710,6 +723,7 @@ input {
 }
 
 .filter-view-option .filter-view-option-tooltip {
+  z-index: 3;
   visibility: hidden;
   width: 120px;
   background-color: #111;
@@ -721,7 +735,7 @@ input {
   border-radius: 6px;
 
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   width: 120px;
   bottom: 100%;
   left: 50%;
@@ -849,8 +863,7 @@ input {
     border: 2px solid var(--user-style);
     color: #fff;
     cursor: pointer;
-    padding: 5px;
-	width: 100%;
+	width: 101%;
     text-align: left;
     outline: none;
     font-size: 15px;
@@ -883,7 +896,7 @@ input {
 	border-bottom: 2px solid var(--user-style);
 	margin-bottom: 10px;
 	padding: 0px;
-	width: 350px;
+	width: 100%;
 	background-color: transparent;
 	max-height: 0;
 	overflow: hidden;
@@ -946,6 +959,7 @@ input {
 }
 
 .loading-elevated {
+  border-radius: 5px;
 	margin: 10px;
 	padding: 0px;
 
@@ -962,3 +976,149 @@ input {
 	background-color: var(--user-style-02);
 	border: solid 2px var(--user-style);
 }
+
+
+.loader-svg {
+	font-family: var(--main-font-Squada);
+}
+
+#loading-elevated > svg > g > text {
+  fill: var(--user-style);
+}
+#loading-elevated > svg > g > #Line_1 {
+  stroke: var(--user-style);
+}
+
+.loading-container-sub {
+  background-color: var(--user-style);
+  border-radius: 10px 10px 0px 0px;
+  bottom: -10px;
+  width: 85%;
+  height: 20px;
+  margin: 0 auto;
+  position: relative;
+}
+.loading-container-sub > .loading-text {
+  color: var(--user-style-02);
+} 
+
+
+/*
+.border
+{
+  z-index: 3;
+ background: #fc0;
+ position: absolute;
+ top: 0;
+ bottom: 0;
+ width: calc( 100% - 36px );
+ max-width: 766px;
+ clip-path: polygon(0 0, 100% 0px, 100% calc( 100% - 30px ), calc( 100% - 30px ) 100%, 0 100%, 0 50%, 10px calc( 50% - 10px ), 10px calc( 25% + 10px ), 0 25% );
+} */
+.ui-interface-wrap
+{
+ position: absolute;
+ top: 2px;
+ bottom: 2px;
+ left: 50%;
+ transform: translateX(-50%);
+ width: calc( 100% - 4px );
+ max-width: 100%;
+ background-image: var(--svg-ui-background);
+
+ background-position: calc( 100% - 7px ) 0, 99.5% calc( 100% - 3px ), 0 0, 0 0, 0 0;
+ background-repeat: repeat-y, no-repeat, repeat, repeat, repeat;
+ clip-path: polygon(
+    0 0,
+    100% 0px,
+    100% calc(100% - 30px),
+    calc(100% - 30px) 100%,
+    0 100%,
+    
+    0 60%,
+    10px calc(60% - 10px),
+    10px calc(40% + 10px),
+    0 40%
+  );
+ overflow: hidden;
+}
+
+.ui-center {
+	background-color: var(--user-style-02);
+	background-image:  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+  height: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+
+content
+{
+ position: relative;
+ box-sizing: initial;
+ display: block;
+ width: 100%;
+ height: 100%;
+ padding-top: 20px;
+ padding-left: 20px;
+ padding-right: 25px;
+ overflow-y: scroll;
+ word-wrap: break-word;
+}
+
+#blog-content .my-post
+{
+ box-sizing: border-box;
+ margin-bottom: 20px;
+ padding: 10px 30px 10px 30px;
+ background-color: rgba( 255, 200, 0, 0.2 );
+ background-repeat: no-repeat;
+ color: #c93;
+ clip-path: polygon(0 0, calc( 100% - 30px ) 0px, 100% 30px, 100% 100%, 30px 100%, 0 calc( 100% - 30px), 0 50%, 10px calc( 50% - 10px ), 10px calc( 15% + 10px ), 0 15% );
+}
+#blog-content .my-post:not(:last-child)
+{
+ background: repeating-linear-gradient( -45deg, transparent 4px, #750 0, #750 6px, transparent 0, transparent 9px ), rgba( 255, 200, 0, 0.2 );
+ background-size: 296px 7px;
+ background-position: 99.5% calc( 100% - 3px ), 0 0;
+ background-repeat: no-repeat;
+}
+#blog-content .my-post h2
+{
+ display: block;
+ position: relative;
+ width: 103%;
+ margin: 0 0 0 -10px;
+ padding-left: 5px;
+ padding-bottom: 2px;
+ border-bottom: 1px solid #fc0;
+ background: rgba( 0, 0, 0, 0.8 );
+ color: #fff;
+ font-family: 'Orbitron';
+ text-transform: uppercase;
+ text-shadow: 0 0 2px #000;
+ clip-path: polygon(0 0, calc( 100% - 30px ) 0px, 100% 30px, 100% 100%, 0 100% );
+}
+#blog-content .my-post p
+{
+ margin-top: 10px;
+ font-family: 'Orbitron';
+ font-size: 12px;
+ letter-spacing: 2px;
+}
+#blog-content .my-post p:not(last-child)
+{
+ margin-bottom: 10px;
+}
+#blog-content .my-post.text h2::before
+{
+ content: "Text";
+ position: relative;
+ top: -3px;
+ margin-right: 5px;
+ background: #444;
+ border-radius: 3px;
+ padding: 2px 5px;
+ font-size: 14px;
+}
+
