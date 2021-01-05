@@ -262,62 +262,6 @@ class App {
 			100000000
 		);
 
-		//Belt. Doing at the start because it sends off lots of async jobs and I want that to have as much time before.
-		//load to finish asynchronously as possible.
-		const startPos = 0 - (BELT_HEIGHT / 2)
-		const endPos = 0 + (BELT_HEIGHT / 2)
-
-		//load from local storage. Settings aren't initialised yet
-		const BELT_RING_COUNT = this.settingGet("beltSamples", 16)
-		const BELT_TRANSPARENCY = this.settingGet("beltTransparency", 0.6)
-
-		let i = 0;
-
-		const startTime = Date.now()
-
-		const beltTexture = new THREE.TextureLoader().load("../assets/planetTex.png");
-
-		let beltMat = new THREE.MeshBasicMaterial({
-			color: 0xffffff,
-			opacity: (BELT_TRANSPARENCY/BELT_RING_COUNT),
-			transparent: true,
-		});
-
-		beltMat.depthWrite = false;
-		beltMat.needsUpdate = true;
-
-		if (BELT_RING_COUNT == 2) {
-			this.makeBeltLayer(0, -35000, 0, beltMat)
-		} else {
-			while (i < BELT_RING_COUNT-1) {
-				i++
-
-				let height = startPos + ((BELT_HEIGHT / BELT_RING_COUNT) * i)
-
-				let distToCentre;
-
-				if (height > 0) {
-					distToCentre = i - (BELT_RING_COUNT / 2)
-				} else if (height === 0) {
-					distToCentre = 0
-				} else {
-					distToCentre = (BELT_RING_COUNT / 2) - i
-				}
-
-				let distToEdge = (BELT_RING_COUNT / 2) - distToCentre
-
-				//Thanks to g.w.a.c.a for the help with creating this
-				let x = Math.cbrt(distToEdge / BELT_RING_COUNT)
-				let offset = -x * BELT_EDGE_RADIUS
-
-				this.makeBeltLayer(height, offset, (-offset*25), beltMat)
-			}
-		}
-
-		const endTime = Date.now()
-
-		console.log(endTime - startTime + "ms to load the belt.")
-
 		const divElm = document.getElementById("main");
 		this.sceneObjs.renderer = new THREE.WebGLRenderer({
 			logarithmicDepthBuffer: true,
@@ -326,7 +270,6 @@ class App {
 		});
 		this.sceneObjs.renderer.setSize(window.innerWidth, window.innerHeight);
 		divElm.appendChild(this.sceneObjs.renderer.domElement);
-
 
 		//Eos
 		const tex = new THREE.TextureLoader().load("../assets/planetTex.png");
@@ -472,6 +415,7 @@ class App {
 		);
 		return intersects;
 	}
+
 	getScreenPos(worldPos) {
 		const width = app.sceneObjs.renderer.domElement.width;
 		const height = app.sceneObjs.renderer.domElement.height;
@@ -525,6 +469,9 @@ class App {
 		});
 		// Settings popup
 		this.settings.init();
+		
+		this.makeBelt()
+
 
 		// Calculator popup
 		this.calculator.init();
@@ -710,6 +657,63 @@ class App {
 			mouseY = e.y;
 		};
 	}
+
+	async makeBelt() {
+		//Belt
+		const startPos = 0 - (BELT_HEIGHT / 2)
+		const endPos = 0 + (BELT_HEIGHT / 2)
+
+		const BELT_RING_COUNT = this.beltSamples
+		const BELT_TRANSPARENCY = this.beltTransparency
+
+		let i = 0;
+
+		const startTime = Date.now()
+
+		const beltTexture = new THREE.TextureLoader().load("../assets/planetTex.png");
+
+		let beltMat = new THREE.MeshBasicMaterial({
+			color: 0xffffff,
+			opacity: (BELT_TRANSPARENCY/BELT_RING_COUNT),
+			transparent: true,
+		});
+
+		beltMat.depthWrite = false;
+		beltMat.needsUpdate = true;
+
+		if (BELT_RING_COUNT == 2) {
+			this.makeBeltLayer(0, -35000, 0, beltMat)
+		} else {
+			while (i < BELT_RING_COUNT-1) {
+				i++
+
+				let height = startPos + ((BELT_HEIGHT / BELT_RING_COUNT) * i)
+
+				let distToCentre;
+
+				if (height > 0) {
+					distToCentre = i - (BELT_RING_COUNT / 2)
+				} else if (height === 0) {
+					distToCentre = 0
+				} else {
+					distToCentre = (BELT_RING_COUNT / 2) - i
+				}
+
+				let distToEdge = (BELT_RING_COUNT / 2) - distToCentre
+
+				//Thanks to g.w.a.c.a for the help with creating this
+				let x = Math.cbrt(distToEdge / BELT_RING_COUNT)
+				let offset = -x * BELT_EDGE_RADIUS
+
+				this.makeBeltLayer(height, offset, (-offset*25), beltMat)
+			}
+		}
+
+		const endTime = Date.now()
+
+		console.log(endTime - startTime + "ms to load the belt.")
+	}
+
 	updateSubtypes(newType, defaultTo) {
 		const dropDownSubtypes = document.getElementById("subtype-select");
 		dropDownSubtypes.innerHTML = "";
