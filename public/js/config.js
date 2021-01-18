@@ -72,8 +72,8 @@ export const TYPES = {
 		color: "#f36a28",
 		info: "All marked ship locations",
 		icons: {
-			map: "../assets/icons/ship-done.png",
-			info: "../assets/icons/ship.png",
+			map: "../assets/icons/ship-done.svg",
+			info: "../assets/icons/ship.svg",
 		},
 		subtypes: [{
 			name: "Default",
@@ -85,8 +85,8 @@ export const TYPES = {
 		color: "#3bbd4f",
 		info: "All marked station locations",
 		icons: {
-			map: "../assets/icons/station-done.png",
-			info: "../assets/icons/station.png",
+			map: "../assets/icons/station-done.svg",
+			info: "../assets/icons/station.svg",
 		},
 		subtypes: [{
 				name: "Default",
@@ -128,8 +128,8 @@ export const TYPES = {
 		color: "#8c63e8",
 		info: "Any ore that has been found",
 		icons: {
-			map: "../assets/icons/ore-done.png",
-			info: "../assets/icons/ore.png",
+			map: "../assets/icons/ore-done.svg",
+			info: "../assets/icons/ore.svg",
 		},
 		subtypes: [{
 			name: "Default",
@@ -141,8 +141,8 @@ export const TYPES = {
 		color: "#aaaaaa",
 		info: "Misc POI's that dont fit into the other categories",
 		icons: {
-			map: "../assets/icons/random-done.png",
-			info: "../assets/icons/random.png",
+			map: "../assets/icons/random-done.svg",
+			info: "../assets/icons/random.svg",
 		},
 		subtypes: [{
 			name: "Default",
