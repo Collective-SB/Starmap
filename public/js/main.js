@@ -60,7 +60,7 @@ const optionTemplate = `
 `;
 
 const viewFilterTemplate = `
-<div class="filter-view-option">
+<div class="filter-view-option checkbox-option checkbox">
 	<input id=%ID% type="checkbox" name="%NAME%" value="%NAME%" checked>
 	<label for="%NAME%">
 		%NAME%
@@ -88,6 +88,13 @@ import {
 	AUTH_REDIR,
 	URLS,
 	ENV,
+	BELT_HEIGHT,
+	BELT_EDGE_RADIUS,
+	BELT_QUALITY,
+	EOS_QUALITY,
+	FPS_DROP_TIME,
+	LOW_FPS_VAL,
+	HIGH_FPS_VAL
 } from "./config.js";
 
 import {
@@ -154,11 +161,30 @@ class App {
 		this.stats.showPanel(0);
 		this.vertCamMove = 1;
 		this.stats.dom.style.left = "85%";
+		this.frameInterval = 1000 / 60;
+		this.lastMouseMoved = Date.now();
 		// document.body.appendChild(this.stats.dom);
 	}
+
+	setLoadingMessage(message) {
+		document.getElementById("loading-text").innerText = message;
+	}
+
+	hideLoadingMessage() {
+		const el = document.getElementById("loading-screen");
+		el.style.opacity = 0;
+
+		el.addEventListener("transitionend", () => {
+			el.remove()
+		})
+	}
+
 	async init() {
 		this.initScene();
 		this.UISetup();
+
+		this.setLoadingMessage("Loading assets...")
+
 		//See if we just completed OAuth2
 		if (window.location.search.includes("code")) {
 			try {
@@ -212,6 +238,23 @@ class App {
 
 		this.pointManager.updateDisplayed(this.viewFilters);
 	}
+
+	settingGet(setting, _default) {
+		let result = undefined;
+		try {
+			result = JSON.parse(window.localStorage.getItem("settings"))[setting]
+		} catch {
+			console.log("Using default " + setting)
+			result = _default
+		}
+
+		if (setting === undefined || setting === null) {
+			console.log("Using default " + setting)
+			result = _default
+		}
+
+		return result
+	}
 	//Sets up the threejs scene
 	initScene() {
 		this.sceneObjs.scene = new THREE.Scene();
@@ -219,18 +262,21 @@ class App {
 			75,
 			window.innerWidth / window.innerHeight,
 			0.1,
-			5000000000
+			100000000
 		);
+
 		const divElm = document.getElementById("main");
 		this.sceneObjs.renderer = new THREE.WebGLRenderer({
 			logarithmicDepthBuffer: true,
 			antialias: true,
+			powerPreference: "high-performance"
 		});
 		this.sceneObjs.renderer.setSize(window.innerWidth, window.innerHeight);
 		divElm.appendChild(this.sceneObjs.renderer.domElement);
+
 		//Eos
 		const tex = new THREE.TextureLoader().load("../assets/planetTex.png");
-		const eosGem = new THREE.SphereGeometry(EOS_SIZE, 32, 32);
+		const eosGem = new THREE.SphereGeometry(EOS_SIZE, EOS_QUALITY, EOS_QUALITY);
 		const eosMat = new THREE.MeshStandardMaterial({
 			// color: 0x2c3ca3,
 			metalness: 0.8,
@@ -239,27 +285,8 @@ class App {
 			// wireframe: false,
 		});
 		this.sceneObjs.Eos = new THREE.Mesh(eosGem, eosMat);
+		this.sceneObjs.Eos.castShadow = true;
 		this.sceneObjs.scene.add(this.sceneObjs.Eos);
-
-		//Belt
-		var beltGem = new THREE.RingGeometry(
-			EOS_SIZE + DIST_TO_BELT,
-			EOS_SIZE + DIST_TO_BELT + BELT_THICK,
-			128,
-			8
-		);
-		var beltMat = new THREE.MeshStandardMaterial({
-			color: 0x515151,
-			opacity: 0.5,
-			transparent: true,
-		});
-		beltMat.depthWrite = false;
-		beltMat.needsUpdate = true;
-		const Belt = new THREE.Mesh(beltGem, beltMat);
-		Belt.material.side = THREE.DoubleSide;
-		Belt.rotation.set(Math.PI / 2, 0, 0);
-		this.sceneObjs.Belt = Belt;
-		this.sceneObjs.scene.add(Belt);
 
 		//Safe zone
 		var safeGem = new THREE.CylinderGeometry(
@@ -289,16 +316,17 @@ class App {
 		this.sceneObjs.scene.add(light);
 
 		if (ENABLE_SBOX) {
-			// const skybox = new THREE.CubeTextureLoader()
-			// 	.setPath("../assets/skybox/")
-			// 	.load([
-			// 		"left.png",
-			// 		"right.png",
-			// 		"top.png",
-			// 		"bot.png",
-			// 		"front.png",
-			// 		"back.png",
-			// 	]);
+			const skybox = new THREE.CubeTextureLoader()
+				.setPath("../assets/skybox/")
+				.load([
+					"left.jpg",
+					"right.jpg",
+					"top.jpg",
+					"bot.jpg",
+					"front.jpg",
+					"back.jpg",
+				]);
+			/*
 			const loader = new THREE.CubeTextureLoader();
 
 			const skybox = loader.load([
@@ -309,15 +337,17 @@ class App {
 				"https://i.ibb.co/TtpZB45/front.png",
 				"https://i.ibb.co/56d6cPp/back.png",
 			]);
+			*/
 			this.sceneObjs.scene.background = skybox;
 		}
+
 		//Add the clouds around Eos
 		const cloudText = new THREE.TextureLoader(
 			new THREE.LoadingManager(() => {})
 			// ).load("../assets/cloud3.png");
 		).load("https://i.ibb.co/hf26qqm/cloud3.png");
 		const MESH_SIZE = 76;
-		const cloudGeom = new THREE.SphereGeometry(MESH_SIZE, 100, 100);
+		const cloudGeom = new THREE.SphereGeometry(MESH_SIZE, EOS_QUALITY * 2, EOS_QUALITY * 2);
 		const cloudMat = new THREE.MeshStandardMaterial({
 			color: 0xcdddfd,
 			transparent: true,
@@ -347,6 +377,7 @@ class App {
 			pointOffset.z
 		);
 		this.sceneObjs.scene.add(this.sceneObjs.IsanSphere);
+
 		//Create the cam controller
 		this.cameraController = new CamController(
 			this.sceneObjs.camera,
@@ -354,6 +385,27 @@ class App {
 			this
 		);
 	}
+
+	async makeBeltLayer(height, innerOverride, outerOverride, material) {
+		var beltGem = new THREE.RingGeometry(
+			EOS_SIZE + DIST_TO_BELT + innerOverride,
+			EOS_SIZE + DIST_TO_BELT + BELT_THICK + outerOverride,
+			BELT_QUALITY,
+			1,
+		);
+
+		const Belt = new THREE.Mesh(beltGem, material);
+		Belt.material.side = THREE.DoubleSide;
+		Belt.rotation.set(Math.PI / 2, 0, 0);
+		this.sceneObjs.Belt = Belt;
+
+		this.sceneObjs.Belt.position.set(0, height, 0)
+
+		//Belt.matrixAutoUpdate = false
+
+		this.sceneObjs.scene.add(Belt);
+	}
+
 	//Casts a ray and returns what points are hit
 	castRay(screenX, screenY) {
 		const x = (screenX / window.innerWidth) * 2 - 1;
@@ -366,6 +418,7 @@ class App {
 		);
 		return intersects;
 	}
+
 	getScreenPos(worldPos) {
 		const width = app.sceneObjs.renderer.domElement.width;
 		const height = app.sceneObjs.renderer.domElement.height;
@@ -401,6 +454,7 @@ class App {
 	}
 	//Sets up a bunch of event handlers for the UI
 	UISetup() {
+		document.body.onmousemove = () => this.lastMouseMoved = Date.now();
 		$(".info-container").draggable({
 			containment: "document",
 			cancel: ".no-drag",
@@ -420,6 +474,9 @@ class App {
 		// Settings popup
 		this.settings.init();
 
+		this.makeBelt()
+
+
 		// Calculator popup
 		this.calculator.init();
 
@@ -433,6 +490,10 @@ class App {
 		// New point button
 		const self = this;
 		$("#new-point").click(function () {
+			if (app.user.isPubToken) {
+				app.modalConfirm("You need to login to do that.")
+				return;
+			}
 			self.updateFormMode.call(self, "create");
 			const curType = document.getElementById("type-select").value;
 			self.updateSubtypes(curType);
@@ -465,7 +526,7 @@ class App {
 			$(this).parent().hide();
 			if (
 				group.isPublicRead &&
-				!confirm(
+				!await app.modalConfirm(
 					"This will create a point on a PUBLIC layer, make sure this is correct"
 				)
 			) {
@@ -505,8 +566,12 @@ class App {
 			// setCookie("authRedirect", AUTH_REDIR, 1);
 			window.location.href = `${URLS.api[ENV]}auth/login?redir=${AUTH_REDIR}`;
 		};
-		document.getElementById("logout").onclick = function () {
-			if (!confirm("Would you like to logout?")) return;
+		document.getElementById("logout").onclick = async function () {
+			if (app.user.isPubToken) {
+				app.modalConfirm("You're already logged out.")
+				return;
+			}
+			if (!await app.modalConfirm("Would you like to logout?")) return;
 			self.storage.removeItem("jwt");
 			self.setLoggedIn(false);
 		};
@@ -596,6 +661,63 @@ class App {
 			mouseY = e.y;
 		};
 	}
+
+	async makeBelt() {
+		//Belt
+		const startPos = 0 - (BELT_HEIGHT / 2)
+		const endPos = 0 + (BELT_HEIGHT / 2)
+
+		const BELT_RING_COUNT = this.beltSamples
+		const BELT_TRANSPARENCY = this.beltTransparency
+
+		let i = 0;
+
+		const startTime = Date.now()
+
+		const beltTexture = new THREE.TextureLoader().load("../assets/planetTex.png");
+
+		let beltMat = new THREE.MeshBasicMaterial({
+			color: 0xffffff,
+			opacity: (BELT_TRANSPARENCY / BELT_RING_COUNT),
+			transparent: true,
+		});
+
+		beltMat.depthWrite = false;
+		beltMat.needsUpdate = true;
+
+		if (BELT_RING_COUNT == 2) {
+			this.makeBeltLayer(0, -35000, 0, beltMat)
+		} else {
+			while (i < BELT_RING_COUNT - 1) {
+				i++
+
+				let height = startPos + ((BELT_HEIGHT / BELT_RING_COUNT) * i)
+
+				let distToCentre;
+
+				if (height > 0) {
+					distToCentre = i - (BELT_RING_COUNT / 2)
+				} else if (height === 0) {
+					distToCentre = 0
+				} else {
+					distToCentre = (BELT_RING_COUNT / 2) - i
+				}
+
+				let distToEdge = (BELT_RING_COUNT / 2) - distToCentre
+
+				//Thanks to g.w.a.c.a for the help with creating this
+				let x = Math.cbrt(distToEdge / BELT_RING_COUNT)
+				let offset = -x * BELT_EDGE_RADIUS
+
+				this.makeBeltLayer(height, offset, (-offset * 25), beltMat)
+			}
+		}
+
+		const endTime = Date.now()
+
+		console.log(endTime - startTime + "ms to load the belt.")
+	}
+
 	updateSubtypes(newType, defaultTo) {
 		const dropDownSubtypes = document.getElementById("subtype-select");
 		dropDownSubtypes.innerHTML = "";
@@ -610,8 +732,18 @@ class App {
 			dropDownSubtypes.value = defaultTo;
 		}
 	}
+
+	arrowHoverEffectStart(element) {
+		element.innerText = "> " + element.innerText + " <"
+	}
+
+	arrowHoverEffectEnd(element) {
+		element.innerText = element.innerText.slice(2, -2)
+	}
+
 	//Fills out the info pannel whenever a point is clicked on
 	handleObjectClick(object) {
+		// console.log("Handling click");
 		//Creates the info in the top right window
 		const self = this;
 		//Allow threejs object OR my point data object
@@ -721,8 +853,8 @@ class App {
 		//Delete button
 		if (canDelete) {
 			const delBtn = document.getElementById("delete-point");
-			delBtn.onclick = function () {
-				if (confirm("Are you sure you want to delete this point?")) {
+			delBtn.onclick = async function () {
+				if (await app.modalConfirm("Are you sure you want to delete this point?")) {
 					infoWindow.innerHTML = "";
 					self.api.deletePoint(poiData.id);
 				}
@@ -759,6 +891,11 @@ class App {
 		} else {
 			sidenav.style.width = "160px";
 		}
+		if (Date.now() - this.lastMouseMoved < FPS_DROP_TIME) {
+			this.setFpsTarget(HIGH_FPS_VAL);
+		} else {
+			this.setFpsTarget(LOW_FPS_VAL)
+		}
 		//Check hovers
 		const hovers = this.castRay(mouseX, mouseY);
 		this.pointManager.points.forEach((p) => p.updateHoverMain(false));
@@ -779,9 +916,33 @@ class App {
 			this.sceneObjs.camera
 		);
 	}
-	updateTheme(newColor) {
-		document.documentElement.style.setProperty("--user-style", newColor);
+	updateTheme01(newColor01) {
+		document.documentElement.style.setProperty("--user-style", newColor01);
 	}
+	updateTheme02(newColor02) {
+		document.documentElement.style.setProperty("--user-style-02", newColor02);
+	}
+
+	modalConfirm(text) {
+		return new Promise(resolve => {
+			document.getElementById("betterConfirm-text").innerText = text;
+
+			document.getElementById("betterConfirm").style.display = "block"
+
+			document.getElementById('betterConfirm-yes').onclick = function () {
+				document.getElementById("betterConfirm").style.display = "none";
+				console.log("yes")
+				resolve(true);
+			};
+
+			document.getElementById('betterConfirm-no').onclick = function () {
+				document.getElementById("betterConfirm").style.display = "none";
+				console.log("no")
+				resolve(false);
+			};
+		});
+	}
+
 	//Called whenever a user successfully logs in, fills out the group options from user object
 	onLogin() {
 		const form = document.getElementById("filterFormLayers");
@@ -820,6 +981,14 @@ class App {
 			header.className = "layerheader";
 			header.id = `layer-header-${layer.id}`;
 			header.innerText = layer.name;
+
+			header.addEventListener("mouseover", function () {
+				app.arrowHoverEffectStart(this);
+			})
+			header.addEventListener("mouseleave", function () {
+				app.arrowHoverEffectEnd(this);
+			})
+
 			const div = document.createElement("div");
 			div.id = `sort-div-${layer.id}`;
 
@@ -838,16 +1007,18 @@ class App {
 				}
 			};
 		});
+
+		app.setLoadingMessage("Setting up points...")
 		this.pointManager.updateLayers();
 		this.api.getPoints();
 		this.api.authorizeWebsocket(this.storage.getItem("jwt"));
 		if (this.user.isPubToken) {
-			const addPointBtn = document.getElementById("new-point");
-			addPointBtn.style.display = "none";
+			const addPointMsg = document.getElementById("add-point-message")
+			addPointMsg.innerText = "Login to Add Point"
 		}
 		if (this.user.g.some((layer) => layer.id == "MqJZYstndHmaxIEG")) {
 			//User is a subr, lets set their style
-			this.updateTheme("#b72015");
+			this.updateTheme01("#b72015");
 		}
 		//Load in the toggled filters (defer execution to ensure html elements get loaded)
 		setTimeout(this.initFilters.bind(this), 0);
@@ -862,16 +1033,15 @@ class App {
 		// let logoutBtn = document.getElementById("logout");
 		let addPointBtn = document.getElementById("new-point");
 
-		let pointsTitle = document.getElementById("points-title");
 		// if (!loginBtn) {
 		// 	return;
 		// }
-		//This sets if the buttion is visable or not
+		//This sets if the button is visible or not
 		if (newState) {
 			loginBtn.style.display = "none";
 			// logoutBtn.style.display = "block";
-			pointsTitle.style.display = "block";
-			addPointBtn.style.display = "block";
+
+			document.getElementById("add-point-message").innerText = "Add Point"
 			if (!this.lastLoginState) {
 				this.onLogin();
 			}
@@ -879,8 +1049,6 @@ class App {
 		} else {
 			loginBtn.style.display = "block";
 			// logoutBtn.style.display = "none";
-			pointsTitle.style.display = "none";
-			addPointBtn.style.display = "none";
 			if (this.lastLoginState) {
 				this.onLogout();
 			}
@@ -943,17 +1111,34 @@ class App {
 			divElm.style.display = "none";
 		}, 4000);
 	}
+
+	async setFpsTarget(target) {
+		app.frameInterval = 1000 / target
+	}
 }
 
 const app = new App();
 window.app = app;
 
-function animate() {
-	app.stats.begin();
-	app.run();
-	app.stats.end();
-	requestAnimationFrame(animate);
+const sleep = (milliseconds) => {
+	return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
+
+let now, delta, then = Date.now();
+
+function animate() {
+	requestAnimationFrame(animate);
+	now = Date.now();
+	delta = now - then;
+	//update time dependent animations here at 30 fps
+	if (delta > app.frameInterval) {
+		app.stats.begin();
+		app.run();
+		app.stats.end();
+		then = now - (delta % app.frameInterval);
+	}
+}
+
 window.onload = function () {
 	app.init();
 	animate();

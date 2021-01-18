@@ -1,0 +1,1 @@
+The skybox was too large to put in a git repository uncompressed without making everyone have 400mb extra in their repos. See https://drive.google.com/file/d/10Rh-pjMQPbFIQNgGvnOHhVa9TwZA4klw/view?usp=sharing for garageagle's zip file containing them.

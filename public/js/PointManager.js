@@ -15,6 +15,7 @@ import {
 	ZONE_OUTLINE_POINTS,
 	ZONE_INTERACTION_SIZE,
 	HOVER_CAM_DIST_FACTOR,
+	EOS_SIZE,
 } from "./config.js";
 const RING_OFFSET = 5;
 import {
@@ -130,6 +131,7 @@ class Point {
 			side: THREE.DoubleSide,
 		});
 		var object = new THREE.Mesh(markerGeometry, mat);
+		//TODO set object.matrixAutoUpdate = false; and manually move with object.updateMatrix() for extra fps
 		this.app.sceneObjs.scene.add(object);
 
 		//Base ring thing
@@ -142,6 +144,7 @@ class Point {
 		const ring = new THREE.Mesh(ringGeom, material);
 		ring.rotation.set(Math.PI / 2, 0, 0);
 		ring.position.set(position.x, RING_OFFSET, position.z);
+
 		this.app.sceneObjs.scene.add(ring);
 		//Create clickable sidebar element
 		const self = this;
@@ -149,6 +152,13 @@ class Point {
 		sidebarElm.innerText = data.name;
 		sidebarElm.id = `side-${data.id}`;
 		sidebarElm.classList.add("sidenav-point");
+
+		sidebarElm.addEventListener("mouseover", function () {
+			app.arrowHoverEffectStart(this);
+		})
+		sidebarElm.addEventListener("mouseleave", function () {
+			app.arrowHoverEffectEnd(this);
+		})
 
 		document.getElementById("points").appendChild(sidebarElm);
 		sidebarElm.onclick = () => {
@@ -195,6 +205,8 @@ class Point {
 		this.updateNamePosition();
 		this.updateMarkerPosition();
 		this.updateShow(true);
+
+		app.cameraController.posLerpTo(EOS_SIZE * 1.6, 100000, 100000)
 	}
 	createNameMesh(data, color) {
 		const canv = createTextCanvas(data.name, {
@@ -235,6 +247,7 @@ class Point {
 			sidebarElm.classList.add("nopadding");
 		}
 		sidebarElm.classList.add("sidenav-point");
+
 		sidebarElm.classList.add("colap-content");
 		sidebar.appendChild(sidebarElm);
 		sidebarElm.onclick = () => {
@@ -251,6 +264,13 @@ class Point {
 		sidebarElm.onmouseout = () => {
 			self.updateHoverSidebar(false);
 		};
+
+		sidebarElm.addEventListener("mouseover", function () {
+			app.arrowHoverEffectStart(this);
+		})
+		sidebarElm.addEventListener("mouseleave", function () {
+			app.arrowHoverEffectEnd(this);
+		})
 	}
 	//Updates the position of the name ontop of the point
 	updateNamePosition(scale) {
@@ -356,6 +376,7 @@ class Point {
 			pointData.name;
 		document.getElementById(`side-layersort-${pointData.id}`).innerText =
 			pointData.name;
+
 		const selected = this.app.pointManager.focusedPOI;
 		if (selected && selected.id == this.id) {
 			this.app.handleObjectClick(this);

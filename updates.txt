@@ -48,5 +48,19 @@ API:
  - Improved URL parsing to allow .jpeg image format for image embeds
  - Fixed discord embed API always returning 400
 
+V1.1.2
+Client:
+ - Added new, volumetric belt.
+ - Changed the skybox.
+ - Added loader.
+ - Big UI improvements from Timothy.
+ - New intro animation (not particularly important)
+ - FPS now lowers when you aren't using Starmap.
+ - General UI polishing
+ - You can now edit background and foreground colours independently.
+ - Got rid of Comic Sans
+ - Fixed issue limiting max name length to 16, now allows up to 32
 
-
+API:
+ - Added more faction colors
+ - Better DDoS protection

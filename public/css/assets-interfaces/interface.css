@@ -4,12 +4,14 @@
 |*************************************************************************;
 */
 .ui-draggable {
+	background-image: var(--svg-ui-background);
 	border-radius: 5px;
 	-webkit-box-shadow: var(--webkit-boxshadow);
 	-moz-box-shadow: var(--moz-boxshadow);
 	box-shadow: var(--box-boxshadow);
-	background-color: #111;
-	border: solid 1px var(--user-style);
+	background-color: var(--user-style-02);
+	border: solid 2px var(--user-style);
+
 }
 
 .ui-draggable:hover {
@@ -19,14 +21,17 @@
 * Win -Settings Panel
 |*************************************************************************;
 */
+
 .settings {
+
+	min-width: 12px;
+	min-height: 12px;
 	display: none;
 	opacity: 0.5;
 	position: absolute;
 	left: 20%;
 	top: 10%;
-	min-width: 12px;
-	min-height: 12px;
+
 	padding: 5px;
 	z-index: 1;
 	color: whitesmoke;
@@ -96,28 +101,52 @@
 	border: none;
 	margin-top: 1px;
 	margin-bottom: 1px;
+
+	background-color: var(--user-style-02);
+	color: var(--user-style);
+	border: 2px var(--user-style) solid;
+
+	transition: color 0.25s;
 }
 
-.add-point input[type="text"] {
-	background-color: whitesmoke;
-	color: #111;
-	outline: none;
-	border: none;
+.dropdown-select:hover {
+	background-color: var(--user-style);
+	color: var(--user-style-02);
+
+	transition: color 0.25s;
 }
 
-.add-point input[type="submit"] {
-	cursor: pointer;
-	outline: none;
-	background-color: whitesmoke;
-	color: #333;
-	border: solid 1px whitesmoke;
-	transition: color 0.5s;
+.dropdown-select:focus {
+	background-color: var(--user-style-02);
+	color: var(--user-style);
 }
 
-.add-point input[type="submit"]:hover {
-	background-color: #333;
-	color: whitesmoke;
-	transition: color 0.5s;
+input[type="text"] {
+	background-color: var(--user-style-02);
+	border: 2px var(--user-style) solid;
+	color: var(--user-style);
+}
+
+input[type="number"] {
+	background-color: var(--user-style-02);
+	border: 2px var(--user-style) solid;
+	color: var(--user-style);
+}
+
+.genericbutton {
+	background-color: var(--user-style-02);
+	border: 2px var(--user-style) solid;
+	color: var(--user-style);
+
+	transition: color 0.25s;
+}
+
+.genericbutton:hover {
+	background-color: var(--user-style);
+	border: 2px var(--user-style) solid;
+	color: var(--user-style-02);
+
+	transition: color 0.25s;
 }
 
 .add-point .close {
