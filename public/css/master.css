@@ -4,9 +4,10 @@
 * ScriptPath    : /css/master.css
 |*************************************************************************;
 */
-
-@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Squada+One&amp;display=swap");
+@import url("../assets/fonts/squadaone.woff2");
+@import url("../assets/fonts/materialicons.woff2");
+/* @import url("https://fonts.googleapis.com/css2?family=VT323&display=swap"); */
+/* @import url("https://fonts.googleapis.com/css?family=Squada+One&amp;display=swap"); */
 
 /*
 |*************************************************************************;
@@ -58,7 +59,7 @@
 */
 
 	--svg-ui-background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
-	--png-background-profile: url("/assets/float-pdf.svg");
+	--png-background-profile: url("/assets/images/org/float-pdf.svg");
 	--svg-loader: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='299.5' height='64' viewBox='0 0 299.5 64'%3E%3Cg id='Group_1' data-name='Group 1' transform='translate(-732 895)'%3E%3Ctext id='ISAN' transform='translate(732 -843)' fill='%23707070' font-size='60' font-family='SquadaOne-Regular, Squada One'%3E%3Ctspan x='0' y='0'%3EISAN%3C/tspan%3E%3C/text%3E%3Ctext id='Integrated_System_' data-name='Integrated System ' transform='translate(836 -867)' fill='%23707070' font-size='21' font-family='SquadaOne-Regular, Squada One'%3E%3Ctspan x='0' y='0'%3EIntegrated System %3C/tspan%3E%3C/text%3E%3Ctext id='Autonomous_Navigation' data-name='Autonomous Navigation' transform='translate(836 -843)' fill='%23707070' font-size='21' font-family='SquadaOne-Regular, Squada One'%3E%3Ctspan x='0' y='0'%3EAutonomous Navigation%3C/tspan%3E%3C/text%3E%3Cline id='Line_1' data-name='Line 1' x2='203' transform='translate(828.5 -861.5)' fill='none' stroke='%23707070' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E%0A");
 	/*
 |*************************************************************************;
