@@ -4,10 +4,9 @@
 * ScriptPath    : /css/master.css
 |*************************************************************************;
 */
-@import url("../assets/fonts/squadaone.woff2");
-@import url("../assets/fonts/materialicons.woff2");
-/* @import url("https://fonts.googleapis.com/css2?family=VT323&display=swap"); */
-/* @import url("https://fonts.googleapis.com/css?family=Squada+One&amp;display=swap"); */
+
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Squada+One&amp;display=swap");
 
 /*
 |*************************************************************************;
