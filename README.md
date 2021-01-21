@@ -30,7 +30,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Collective-SB/Starmap">
-    <img src="readme-assets/isan.svg" alt="Logo" width="500" height="120">
+    <img src="readme-assets/ISAN.svg" alt="Logo" width="500" height="120">
   </a>
 
   <!--<h3 align="center">ISAN Starmap</h3>-->
@@ -93,13 +93,8 @@ _For a more descriptive explanation about the ISAN Starmap please read the:
 
 
 ### Built With
+<strong><a href="#">Starmap API</a> | <a href="https://expressjs.com/">Express</a> | <a href="https://www.w3schools.com/">HTML/CSS</a> | <a href="https://jquery.com">JQuerry</a> | <a href="https://threejs.org/">ThreeJS</a> | <a href="https://www.adobe.com/nz/products/xd.html">AdobeXD</a></strong>
 
-* [Starmap API]()
-* [Express](https://expressjs.com/)
-* [HTML/CSS](https://www.w3schools.com/)
-* [JQuerry](https://jquery.com)
-* [ThreeJS](https://threejs.org/)
-* [AdobeXD](https://www.adobe.com/nz/products/xd.html)
 <!-- GETTING STARTED -->
 ## Getting Started
 
@@ -166,7 +161,7 @@ ISAN Starpmap Team Members:
 
 
 <details>
-  <summary><p style="display: inline-block">Thanks to the old Starmap team for the insparation</p></summary>
+  <summary><p style="display: inline-block">Thanks to the old Starmap team for the insparation:</p></summary>
   <ol>
     <li>
     <strong>Peter Shepherd:</strong> JS Developer [<a href="https://www.linkedin.com/in/peter-shepherd-a912a8201/">Linkedin</a>]
