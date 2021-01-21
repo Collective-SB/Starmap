@@ -26,13 +26,11 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
-
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
   <a href="https://github.com/Collective-SB/Starmap">
-    <img src="readme-assets/isan.svg" alt="Logo" width="500" height="100">
+    <img src="readme-assets/isan.svg" alt="Logo" width="500" height="120">
   </a>
 
   <!--<h3 align="center">ISAN Starmap</h3>-->
@@ -56,7 +54,7 @@
 
 
 <!-- TABLE OF CONTENTS -->
-<details open="open">
+<details>
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
   <ol>
     <li>
