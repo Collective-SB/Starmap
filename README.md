@@ -210,3 +210,4 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 [license-shield]: https://img.shields.io/github/license/Collective-SB/Starmap.svg?style=for-the-badge
 [license-url]: https://github.com/Collective-SB/Starmap/blob/master/LICENSE.txt
 [product-screenshot]: readme-assets/header-picture.png
+[product-screenshot02]: readme-assets/ISAN.svg
