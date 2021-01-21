@@ -4,9 +4,13 @@
 const HEATRBEAT = JSON.stringify({
 	event: "heartbeat",
 });
-import { ENV, URLS } from "./config.js";
+import {
+	ENV,
+	URLS
+} from "./config.js";
 const API_URL = URLS.api[ENV];
 const WSS_URL = URLS.wss[ENV];
+
 function getExpInDays(user) {
 	return (user.exp - Date.now() / 1000) / (60 * 60 * 24);
 }
@@ -119,6 +123,8 @@ export default class API {
 		} else if (res.status == 401) {
 			this.app.setLoggedIn(false);
 		}
+		app.setLoadingMessage("Done!")
+		app.hideLoadingMessage()
 	}
 	//Gets singular point from server
 	async getPoint(id) {

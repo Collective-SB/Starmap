@@ -31,7 +31,7 @@ const infoTemplate = `
 			<button id="focus">Focus</button>
 		</div>
 		<div class="infoDiv">
-			<img src=%TYPE_IMAGE% width="64" height="64">
+			<img src=%TYPE_IMAGE% width="64" height="64" alt="">
 		</div>
 	</div>
 	<p class="infoText" style="display: inline;">Creator: %CREATOR%</p>
@@ -40,7 +40,7 @@ const infoTemplate = `
 		<p class="infoText no-drag">%DESCRIPTION%</p>
 	</div>
 	<a href="%IMAGE_URL%" target="_blank">
-		<img src="%IMAGE_URL%" style="display:%IMAGE_DISPLAY%" class="infoImage">
+		<img src="%IMAGE_URL%" alt="" style="display:%IMAGE_DISPLAY%" class="infoImage">
 	</a>
 </div>
 `;
@@ -91,7 +91,10 @@ import {
 	BELT_HEIGHT,
 	BELT_EDGE_RADIUS,
 	BELT_QUALITY,
-	EOS_QUALITY
+	EOS_QUALITY,
+	FPS_DROP_TIME,
+	LOW_FPS_VAL,
+	HIGH_FPS_VAL
 } from "./config.js";
 
 import {
@@ -158,7 +161,8 @@ class App {
 		this.stats.showPanel(0);
 		this.vertCamMove = 1;
 		this.stats.dom.style.left = "85%";
-		this.frameInterval = 1000/60
+		this.frameInterval = 1000 / 60;
+		this.lastMouseMoved = Date.now();
 		// document.body.appendChild(this.stats.dom);
 	}
 
@@ -170,8 +174,7 @@ class App {
 		const el = document.getElementById("loading-screen");
 		el.style.opacity = 0;
 
-		el.addEventListener("transitionend", () =>
-		{
+		el.addEventListener("transitionend", () => {
 			el.remove()
 		})
 	}
@@ -262,62 +265,6 @@ class App {
 			100000000
 		);
 
-		//Belt. Doing at the start because it sends off lots of async jobs and I want that to have as much time before.
-		//load to finish asynchronously as possible.
-		const startPos = 0 - (BELT_HEIGHT / 2)
-		const endPos = 0 + (BELT_HEIGHT / 2)
-
-		//load from local storage. Settings aren't initialised yet
-		const BELT_RING_COUNT = this.settingGet("beltSamples", 16)
-		const BELT_TRANSPARENCY = this.settingGet("beltTransparency", 0.6)
-
-		let i = 0;
-
-		const startTime = Date.now()
-
-		const beltTexture = new THREE.TextureLoader().load("../assets/planetTex.png");
-
-		let beltMat = new THREE.MeshBasicMaterial({
-			color: 0xffffff,
-			opacity: (BELT_TRANSPARENCY/BELT_RING_COUNT),
-			transparent: true,
-		});
-
-		beltMat.depthWrite = false;
-		beltMat.needsUpdate = true;
-
-		if (BELT_RING_COUNT == 2) {
-			this.makeBeltLayer(0, -35000, 0, beltMat)
-		} else {
-			while (i < BELT_RING_COUNT-1) {
-				i++
-
-				let height = startPos + ((BELT_HEIGHT / BELT_RING_COUNT) * i)
-
-				let distToCentre;
-
-				if (height > 0) {
-					distToCentre = i - (BELT_RING_COUNT / 2)
-				} else if (height === 0) {
-					distToCentre = 0
-				} else {
-					distToCentre = (BELT_RING_COUNT / 2) - i
-				}
-
-				let distToEdge = (BELT_RING_COUNT / 2) - distToCentre
-
-				//Thanks to g.w.a.c.a for the help with creating this
-				let x = Math.cbrt(distToEdge / BELT_RING_COUNT)
-				let offset = -x * BELT_EDGE_RADIUS
-
-				this.makeBeltLayer(height, offset, (-offset*25), beltMat)
-			}
-		}
-
-		const endTime = Date.now()
-
-		console.log(endTime - startTime + "ms to load the belt.")
-
 		const divElm = document.getElementById("main");
 		this.sceneObjs.renderer = new THREE.WebGLRenderer({
 			logarithmicDepthBuffer: true,
@@ -327,9 +274,8 @@ class App {
 		this.sceneObjs.renderer.setSize(window.innerWidth, window.innerHeight);
 		divElm.appendChild(this.sceneObjs.renderer.domElement);
 
-
 		//Eos
-		const tex = new THREE.TextureLoader().load("../assets/planetTex.png");
+		const tex = new THREE.TextureLoader().load("../assets/images/planetTex.webp");
 		const eosGem = new THREE.SphereGeometry(EOS_SIZE, EOS_QUALITY, EOS_QUALITY);
 		const eosMat = new THREE.MeshStandardMaterial({
 			// color: 0x2c3ca3,
@@ -371,15 +317,15 @@ class App {
 
 		if (ENABLE_SBOX) {
 			const skybox = new THREE.CubeTextureLoader()
-			 	.setPath("../assets/skybox/")
-			 	.load([
-			 		"left.jpg",
-			 		"right.jpg",
-			 		"top.jpg",
-			 		"bot.jpg",
-			 		"front.jpg",
-			 		"back.jpg",
-			 	]);
+				.setPath("../assets/images/skybox/")
+				.load([
+					"left.webp",
+					"right.webp",
+					"top.webp",
+					"bot.webp",
+					"front.webp",
+					"back.webp",
+				]);
 			/*
 			const loader = new THREE.CubeTextureLoader();
 
@@ -398,10 +344,10 @@ class App {
 		//Add the clouds around Eos
 		const cloudText = new THREE.TextureLoader(
 			new THREE.LoadingManager(() => {})
-			// ).load("../assets/cloud3.png");
-		).load("https://i.ibb.co/hf26qqm/cloud3.png");
+			//).load("https://i.ibb.co/hf26qqm/cloud3.png");
+			).load("../assets/images/eos-cloud.webp");
 		const MESH_SIZE = 76;
-		const cloudGeom = new THREE.SphereGeometry(MESH_SIZE, EOS_QUALITY*2, EOS_QUALITY*2);
+		const cloudGeom = new THREE.SphereGeometry(MESH_SIZE, EOS_QUALITY * 2, EOS_QUALITY * 2);
 		const cloudMat = new THREE.MeshStandardMaterial({
 			color: 0xcdddfd,
 			transparent: true,
@@ -472,6 +418,7 @@ class App {
 		);
 		return intersects;
 	}
+
 	getScreenPos(worldPos) {
 		const width = app.sceneObjs.renderer.domElement.width;
 		const height = app.sceneObjs.renderer.domElement.height;
@@ -507,6 +454,7 @@ class App {
 	}
 	//Sets up a bunch of event handlers for the UI
 	UISetup() {
+		document.body.onmousemove = () => this.lastMouseMoved = Date.now();
 		$(".info-container").draggable({
 			containment: "document",
 			cancel: ".no-drag",
@@ -525,6 +473,9 @@ class App {
 		});
 		// Settings popup
 		this.settings.init();
+
+		this.makeBelt()
+
 
 		// Calculator popup
 		this.calculator.init();
@@ -575,7 +526,7 @@ class App {
 			$(this).parent().hide();
 			if (
 				group.isPublicRead &&
-				! await app.modalConfirm(
+				!await app.modalConfirm(
 					"This will create a point on a PUBLIC layer, make sure this is correct"
 				)
 			) {
@@ -710,6 +661,63 @@ class App {
 			mouseY = e.y;
 		};
 	}
+
+	async makeBelt() {
+		//Belt
+		const startPos = 0 - (BELT_HEIGHT / 2)
+		const endPos = 0 + (BELT_HEIGHT / 2)
+
+		const BELT_RING_COUNT = this.beltSamples
+		const BELT_TRANSPARENCY = this.beltTransparency
+
+		let i = 0;
+
+		const startTime = Date.now()
+
+		const beltTexture = new THREE.TextureLoader().load("../assets/images/planetTex.webp");
+
+		let beltMat = new THREE.MeshBasicMaterial({
+			color: 0xffffff,
+			opacity: (BELT_TRANSPARENCY / BELT_RING_COUNT),
+			transparent: true,
+		});
+
+		beltMat.depthWrite = false;
+		beltMat.needsUpdate = true;
+
+		if (BELT_RING_COUNT == 2) {
+			this.makeBeltLayer(0, -35000, 0, beltMat)
+		} else {
+			while (i < BELT_RING_COUNT - 1) {
+				i++
+
+				let height = startPos + ((BELT_HEIGHT / BELT_RING_COUNT) * i)
+
+				let distToCentre;
+
+				if (height > 0) {
+					distToCentre = i - (BELT_RING_COUNT / 2)
+				} else if (height === 0) {
+					distToCentre = 0
+				} else {
+					distToCentre = (BELT_RING_COUNT / 2) - i
+				}
+
+				let distToEdge = (BELT_RING_COUNT / 2) - distToCentre
+
+				//Thanks to g.w.a.c.a for the help with creating this
+				let x = Math.cbrt(distToEdge / BELT_RING_COUNT)
+				let offset = -x * BELT_EDGE_RADIUS
+
+				this.makeBeltLayer(height, offset, (-offset * 25), beltMat)
+			}
+		}
+
+		const endTime = Date.now()
+
+		console.log(endTime - startTime + "ms to load the belt.")
+	}
+
 	updateSubtypes(newType, defaultTo) {
 		const dropDownSubtypes = document.getElementById("subtype-select");
 		dropDownSubtypes.innerHTML = "";
@@ -735,6 +743,7 @@ class App {
 
 	//Fills out the info pannel whenever a point is clicked on
 	handleObjectClick(object) {
+		// console.log("Handling click");
 		//Creates the info in the top right window
 		const self = this;
 		//Allow threejs object OR my point data object
@@ -882,6 +891,11 @@ class App {
 		} else {
 			sidenav.style.width = "160px";
 		}
+		if (Date.now() - this.lastMouseMoved < FPS_DROP_TIME) {
+			this.setFpsTarget(HIGH_FPS_VAL);
+		} else {
+			this.setFpsTarget(LOW_FPS_VAL)
+		}
 		//Check hovers
 		const hovers = this.castRay(mouseX, mouseY);
 		this.pointManager.points.forEach((p) => p.updateHoverMain(false));
@@ -968,8 +982,12 @@ class App {
 			header.id = `layer-header-${layer.id}`;
 			header.innerText = layer.name;
 
-			header.addEventListener("mouseover", function(){ app.arrowHoverEffectStart(this); })
-			header.addEventListener("mouseleave", function(){ app.arrowHoverEffectEnd(this); })
+			header.addEventListener("mouseover", function () {
+				app.arrowHoverEffectStart(this);
+			})
+			header.addEventListener("mouseleave", function () {
+				app.arrowHoverEffectEnd(this);
+			})
 
 			const div = document.createElement("div");
 			div.id = `sort-div-${layer.id}`;
@@ -1095,7 +1113,7 @@ class App {
 	}
 
 	async setFpsTarget(target) {
-		app.frameInterval = 1000/target
+		app.frameInterval = 1000 / target
 	}
 }
 
@@ -1106,7 +1124,7 @@ const sleep = (milliseconds) => {
 	return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
-let now,delta,then = Date.now();
+let now, delta, then = Date.now();
 
 function animate() {
 	requestAnimationFrame(animate);
@@ -1125,4 +1143,3 @@ window.onload = function () {
 	app.init();
 	animate();
 };
-

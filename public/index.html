@@ -1,213 +1,211 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-	<meta charset="utf-8" />
-	<title>Starmap</title>
-	%OGP%
-	<style>
-		@font-face {
-			font-family: 'Telegrama';
-			src: url('./assets/telegrama/telegrama-webfont.woff') format('woff2'),
-				url('./assets/telegrama/telegrama-webfont.woff2') format('woff');
-			font-weight: normal;
-			font-style: normal;
-		}
-	</style>
-	<link rel="stylesheet" href="/css/master.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="canonical" href="https://isan.to"/>
+  <meta charset="utf-8" />
+  <title>Starmap</title>
+  %OGP%
+  <style>
+    @font-face {
+      font-family: 'Telegrama';
+      src: url('./assets/fonts/telegrama/telegrama-webfont.woff') format('woff2'),
+        url('./assets/fonts/telegrama/telegrama-webfont.woff2') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  </style>
+  <link rel="stylesheet" href="/css/master.css" />
 
+  <script src="js/packages/cdn-local/opentype.min.js"></script>
+  <script src="js/packages/cdn-local/jquery-3.5.1.min.js"></script>
+  <script src="js/packages/cdn-local/jquery-ui.min.js"></script>
+  <script src="js/packages/info-dropdown.js" charset="utf-8"></script>
+  <script src="js/packages/three.min.js"></script>
+  <script src="js/packages/OrbitControls.js"></script>
+  <script src="js/packages/jwt-decode.js"></script>
+
+  <!--
 	<script src="https://cdn.jsdelivr.net/npm/opentype.js@latest/dist/opentype.min.js"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="js/packages/info-dropdown.js" charset="utf-8"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.120.0/build/three.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/three@0.120.0/examples/js/controls/OrbitControls.min.js"></script>
-	<script src="js/packages/jwt-decode.js"></script>
+  -->
 
-<!--
+	<!--
 	Image Hover
 	 <link href="/css/image-hover.css" rel="stylesheet" type="text/css" />
 	 <script src="/js/image-hover.js"></script>
--->
- 
+	-->
 
-	<script>
-		// Dont ask me why this is here, I dont know either   [I still want to ask? :) -Tim]
-		function hoverHandler() {
-			const elm = document.getElementsByClassName('more-info-tooltip')[0];
-			elm.style.left = `-${elm.clientWidth / 2 - 12}px`;
-		}
-	</script>
-	<script src="js/main.js" type="module"></script>
+  <script>
+    // Dont ask me why this is here, I dont know either   [I still want to ask? :) -Tim]
+    function hoverHandler() {
+      const elm = document.getElementsByClassName('more-info-tooltip')[0];
+      elm.style.left = `-${elm.clientWidth / 2 - 12}px`;
+    }
+  </script>
+  <script src="js/main.js" type="module"></script>
 </head>
 
 <body>
-	<div id="loading-screen">
+  <div id="loading-screen">
 
+    <div class="loading-elevated" id="loading-elevated">
+      <svg class="loading-text" xmlns="http://www.w3.org/2000/svg" width="299.5" height="64" viewBox="0 0 299.5 64">
+        <g id="Group_1" data-name="Group 1" transform="translate(-732 895)">
+          <text id="ISAN" transform="translate(732 -843)" fill="#707070" font-size="60" font-family="SquadaOne-Regular, Squada One">
+            <tspan x="0" y="0">ISAN</tspan>
+          </text>
+          <text id="Integrated_System_" data-name="Integrated System " transform="translate(836 -867)" fill="#707070" font-size="21" font-family="SquadaOne-Regular, Squada One">
+            <tspan x="0" y="0">Integrated System </tspan>
+          </text>
+          <text id="Autonomous_Navigation" data-name="Autonomous Navigation" transform="translate(836 -843)" fill="#707070" font-size="21" font-family="SquadaOne-Regular, Squada One">
+            <tspan x="0" y="0">Autonomous Navigation</tspan>
+          </text>
+          <line id="Line_1" data-name="Line 1" x2="203" transform="translate(828.5 -861.5)" fill="none" stroke="#707070" stroke-width="1" />
+        </g>
+      </svg>
 
-		<div class="loading-elevated" id="loading-elevated">
-			<svg class="loading-text" xmlns="http://www.w3.org/2000/svg" width="299.5" height="64" viewBox="0 0 299.5 64">
-				<g id="Group_1" data-name="Group 1" transform="translate(-732 895)">
-				  <text id="ISAN" transform="translate(732 -843)" fill="#707070" font-size="60" font-family="SquadaOne-Regular, Squada One"><tspan x="0" y="0">ISAN</tspan></text>
-				  <text id="Integrated_System_" data-name="Integrated System " transform="translate(836 -867)" fill="#707070" font-size="21" font-family="SquadaOne-Regular, Squada One"><tspan x="0" y="0">Integrated System </tspan></text>
-				  <text id="Autonomous_Navigation" data-name="Autonomous Navigation" transform="translate(836 -843)" fill="#707070" font-size="21" font-family="SquadaOne-Regular, Squada One"><tspan x="0" y="0">Autonomous Navigation</tspan></text>
-				  <line id="Line_1" data-name="Line 1" x2="203" transform="translate(828.5 -861.5)" fill="none" stroke="#707070" stroke-width="1"/>
-				</g>
-			  </svg>
-			
+      <div class="loading-container-sub">
+        <p id="loading-text" class="loading-text"> Loading UI-Interface... </p>
+      </div>
+    </div>
+  </div>
 
-			<!--<p class="loading-text">
-				<a href="https://https://github.com/Collective-SB/Starmap" style="color: white">Starmap</a>,
-				made by Strikeeaglechase with
-				<a href="https://discord.gg/VnU8apR" style="color: white" >Collective</a>.
-
-			<p class="loading-text">Other Contributors:<br>Volcano, MuNK, Timothy, IHave</p> 
-			</p>-->
-			<div class="loading-container-sub">
-				<p id="loading-text" class="loading-text"> Loading UI-Interface... </p>
-			</div>
-		</div>
-	</div>
-
-
+  <div class="sidenav">
+    <button aria-label="Login" id="login">
+      <img srcset="assets/images/Discord-Logo-White.svg" alt="Login"/>
+    </button>
+	<input id="find" type="text" placeholder="Search...">
 	
-	<div class="sidenav">
-		<button id="login">
-			<img srcset="assets/Discord-Logo-White.svg" />
-
-		</button>
-		<input id="find" type="text" placeholder="Search...">
-		<!-- 4 action buttons -->
-		<div class="button-grid">
-			<div class="button-row">
-				<button id="logout" title="Logout">
-					<span class="material-icons">exit_to_app</span>
-					<!-- <img src="assets/buttons/logout.png"> -->
-				</button>
-				<button id="settingsBtn" title="Settings">
-					<span class="material-icons">settings</span>
-					<!-- <img src="assets/buttons/settings.png"> -->
-				</button>
-				<button id="sortToggle" title="Change sort mode">
-					<span class="material-icons">sort</span>
-					<!-- <img src="assets/buttons/sort-none.png"> -->
-				</button>
-				<button id="calcBtn" title="ETA Calculator">
-					<span class="material-icons">calculate</span>
-					<!-- <img src="assets/buttons/sort-none.png"> -->
-				</button>
-			</div>
-			<!-- <div class="button-row">
-				<button id="calcBtn"><img src="assets/buttons/calculator.png"></button><button id="empty"></button><button
+    <!-- 4 action buttons -->
+    <div class="button-grid">
+      <div class="button-row">
+        <button aria-label="Logout" id="logout" title="Logout">
+          <span class="material-icons">exit_to_app</span>
+          <!-- <img src="assets/buttons/logout.png" alt="Logout"/> -->
+        </button>
+        <button aria-label="Settings" id="settingsBtn" title="Settings">
+          <span class="material-icons">settings</span>
+          <!-- <img src="assets/buttons/settings.png" alt="Settings"/> -->
+        </button>
+        <button aria-label="Toggle Sort" id="sortToggle" title="Change sort mode">
+          <span class="material-icons">sort</span>
+          <!-- <img src="assets/buttons/sort-none.png" alt="Sort"/> -->
+        </button>
+        <button aria-label="Calculator" id="calcBtn" title="ETA Calculator">
+          <span class="material-icons">calculate</span>
+          <!-- <img src="assets/buttons/sort-none.png" alt="Calculator"/> -->
+        </button>
+      </div>
+      <!-- <div class="button-row">
+				<button id="calcBtn"><img src="assets/buttons/calculator.png" alt="Calc"/></button><button id="empty"></button><button
 					id="empty"></button>
 			</div> -->
-		</div>
+    </div>
 
-		<span id="points-title">
-			Map Points
-		</span>
-		<div class="wrapper-sidebar">
-			<div id="sidebar">
-				<div id="layers" style="display:block"></div>
-				<div id="points" style="display:none"></div>
-			</div>
-		</div>
+    <span id="points-title">
+      Map Points
+    </span>
+    <div class="wrapper-sidebar">
+      <div id="sidebar">
+        <div id="layers" style="display:block"></div>
+        <div id="points" style="display:none"></div>
+      </div>
+    </div>
 
+    <button aria-label="New Point" id="new-point">
+      <span class="material-icons">add_box</span>
+      <span id="add-point-message">Login to Add Point</span>
+    </button>
+  </div>
+  <div class="main" id="main">
+    <!-- Create the new point popup -->
+    <div id="settingsWindow" class="settings">
+      <span class="settings-close material-icons">
+        close
+      </span>
+      <p class="calc-title">Settings / Options</p>
 
+      <!-- I don't know why this is here but I'm scared to change it -->
 
-		<button id="new-point">
-			<span class="material-icons">add_box</span>
-			<span id="add-point-message">Login to Add Point</span>
-		</button>
-	</div>
-	<div class="main" id="main">
-		<!-- Create the new point popup -->
-		<div id="settingsWindow" class="settings">
-			<span class="settings-close material-icons">
-				close
-			</span>
-			<p class="calc-title">Settings / Options</p>
+      <button aria-label="Camera and Settings" class="accordion">Camera & Interface Settings</button>
+      <div class="panel">
+        <div class="grid-container-options-01">
 
-
-
-			<!-- I don't know why this is here but I'm scared to change it -->
-
-
-
-			<button class="accordion">Camera & Interface Settings</button>
-			<div class="panel">
-				<div class="grid-container-options-01">
-
-					<div class="desc-01-01">
-						<p style="display: inline;">Custom Border - <span class="container" id="color_val-01"></span> </p>
-					</div>
-					<div class="desc-01-02">
-						<p style="display: inline;">Custom Background - <span class="container" id="color_val-02"></span> </p>
-					</div>
-					<div class="desc-01-03">
-						<p style="display: inline;">Mouse pan button</p>
-					</div>
-					<div class="desc-01-04">
-						<p style="display: inline;">Rotate view button</p>
-					</div>
-					<div class="desc-01-05">
-						<p style="display: inline;">Camera damping factor</p>
-					</div>
-					<div class="desc-01-06">
-						<p style="display: inline;">Zoom speed</p>
-					</div>
-					<div class="option-01-01 text-center">
-						<input type="color" id="customColorTheme-01">
-						<script>
-							let colorButton01 = document.getElementById("customColorTheme-01");
-							let colorDiv01 = document.getElementById("color_val-01");
-							colorButton01.onchange = function () {
-								colorDiv01.innerHTML = colorButton01.value;
-								colorDiv01.style.color = colorButton01.value;
-							}
-						</script>
-					</div>
-					<div class="option-01-02 text-center">
-						<input type="color" id="customColorTheme-02">
-						<script>
-							let colorButton02 = document.getElementById("customColorTheme-02");
-							let colorDiv02 = document.getElementById("color_val-02");
-							colorButton02.onchange = function () {
-								colorDiv02.innerHTML = colorButton02.value;
-								colorDiv02.style.color = colorButton02.value;
-							}
-						</script>
-					</div>
-					<div class="option-01-03 text-center">
-						<select id="panSelect">
-							<option value="0">left</option>
-							<option value="1">middle</option>
-							<option value="2">right</option>
-						</select>
-					</div>
-					<div class="option-01-04 text-center">
-						<select id="rotSelect">
-							<option value="0">left</option>
-							<option value="1">middle</option>
-							<option value="2">right</option>
-						</select>
-					</div>
-					<div class="option-01-05 text-center">
-						<input id="dampFact" type="range" min="0.1" max="0.5" step="0.01" name="dampFact">
-					</div>
-					<div class="option-01-06 text-center">
-						<input id="zoomSpeed" type="range" min="0.5" max="5" step="0.01" name="zoomSpeed">
-					</div>
-				  </div>
-				  <p style="display: inline;">Belt Sample Count - <span id="beltSampleDisplay">16</span></p>
-				  <br>
-				  <input id="beltSamples" type="range" min="2" max="64" step="2" name="beltSamples" defaultValue="16">
-				  <br>
-				  <p style="display: inline;">Belt Transparency - <span id="beltTransparencyDisplay">32</span></p>
-				  <br>
-				  <input id="beltTransparency" type="range" min="0" max="1" step="0.05" name="beltTransparency" defaultValue="0.8">
-				  <br>
-				<!--
+          <div class="desc-01-01">
+            <p style="display: inline;">Custom Border - <span class="container" id="color_val-01"></span> </p>
+          </div>
+          <div class="desc-01-02">
+            <p style="display: inline;">Custom Background - <span class="container" id="color_val-02"></span> </p>
+          </div>
+          <div class="desc-01-03">
+            <p style="display: inline;">Mouse pan button</p>
+          </div>
+          <div class="desc-01-04">
+            <p style="display: inline;">Rotate view button</p>
+          </div>
+          <div class="desc-01-05">
+            <p style="display: inline;">Camera damping factor</p>
+          </div>
+          <div class="desc-01-06">
+            <p style="display: inline;">Zoom speed</p>
+          </div>
+          <div class="option-01-01 text-center">
+            <input type="color" id="customColorTheme-01">
+            <script>
+              let colorButton01 = document.getElementById("customColorTheme-01");
+              let colorDiv01 = document.getElementById("color_val-01");
+              colorButton01.onchange = function() {
+                colorDiv01.innerHTML = colorButton01.value;
+                colorDiv01.style.color = colorButton01.value;
+              }
+            </script>
+          </div>
+          <div class="option-01-02 text-center">
+            <input type="color" id="customColorTheme-02">
+            <script>
+              let colorButton02 = document.getElementById("customColorTheme-02");
+              let colorDiv02 = document.getElementById("color_val-02");
+              colorButton02.onchange = function() {
+                colorDiv02.innerHTML = colorButton02.value;
+                colorDiv02.style.color = colorButton02.value;
+              }
+            </script>
+          </div>
+          <div class="option-01-03 text-center">
+            <select id="panSelect">
+              <option value="0">left</option>
+              <option value="1">middle</option>
+              <option value="2">right</option>
+            </select>
+          </div>
+          <div class="option-01-04 text-center">
+            <select id="rotSelect">
+              <option value="0">left</option>
+              <option value="1">middle</option>
+              <option value="2">right</option>
+            </select>
+          </div>
+          <div class="option-01-05 text-center">
+            <input id="dampFact" type="range" min="0.1" max="0.5" step="0.01" name="dampFact">
+          </div>
+          <div class="option-01-06 text-center">
+            <input id="zoomSpeed" type="range" min="0.5" max="5" step="0.01" name="zoomSpeed">
+          </div>
+        </div>
+        <p style="display: inline;">Belt Sample Count - <span id="beltSampleDisplay">16</span></p>
+        <br>
+        <input id="beltSamples" type="range" min="2" max="64" step="2" name="beltSamples" defaultValue="16">
+        <br>
+        <p style="display: inline;">Belt Transparency - <span id="beltTransparencyDisplay">32</span></p>
+        <br>
+        <input id="beltTransparency" type="range" min="0" max="1" step="0.05" name="beltTransparency" defaultValue="0.8">
+        <br>
+        <!--
 				<br>
 				<div class="input-option">
 				<p style="display: inline;">Move camera vertically button</p>
@@ -217,199 +215,189 @@
 					<option value="2">right</option>
 				</select>
 				</div> -->
-			</div>
+      </div>
 
-			<button class="accordion">Map Filter Settings</button>
-			<div class="panel">
-				<div class="grid-container-options-02">
-					<div class="option-02-01">
-						<div class="checkbox-option checkbox">
-							<input id="eosDisp" type="checkbox" name="eosDisp">
-							<p style="display: inline;">Display Eos</p>
-						</div>
-					</div>
-					<div class="option-02-02">
-						<div class="checkbox-option checkbox">
-							<input id="cloudDisp" type="checkbox" name="cloudDisp">
-							<p style="display: inline;">Display Clouds</p>
-						</div>
-					</div>
-					<div class="option-02-03">
-						<div class="checkbox-option checkbox">
-							<input id="beltDisp" type="checkbox" name="beltDisp">
-							<p style="display: inline;">Display Belt</p>
-						</div>
-					</div>
-					<div class="option-02-04">
-						<div class="checkbox-option checkbox">
-							<input id="isanRangeDisp" type="checkbox" name="isanRangeDisp">
-							<p style="display: inline;">Display ISAN range</p>
-						</div>
-					</div>
+      <button aria-label="Filter Settings" class="accordion">Map Filter Settings</button>
+      <div class="panel">
+        <div class="grid-container-options-02">
+          <div class="option-02-01">
+            <div class="checkbox-option checkbox">
+              <input id="eosDisp" type="checkbox" name="eosDisp">
+              <p style="display: inline;">Display Eos</p>
+            </div>
+          </div>
+          <div class="option-02-02">
+            <div class="checkbox-option checkbox">
+              <input id="cloudDisp" type="checkbox" name="cloudDisp">
+              <p style="display: inline;">Display Clouds</p>
+            </div>
+          </div>
+          <div class="option-02-04">
+            <div class="checkbox-option checkbox">
+              <input id="isanRangeDisp" type="checkbox" name="isanRangeDisp">
+              <p style="display: inline;">Display ISAN range</p>
+            </div>
+          </div>
 
-					<div class="option-02-05">
-						<div class="checkbox-option checkbox">
-							<input id="nameOnHover" type="checkbox" name="nameOnHover">
-							<p style="display: inline;">Display name on hover</p>
-						</div>
-					</div>
-					<div class="option-02-06">
-						<div class="checkbox-option checkbox">
-							<input id="showNames" type="checkbox" name="nameOnHover">
-							<p style="display: inline;">Show names</p>
-						</div>
-					</div>
-					<div class="option-02-07">
+          <div class="option-02-05">
+            <div class="checkbox-option checkbox">
+              <input id="nameOnHover" type="checkbox" name="nameOnHover">
+              <p style="display: inline;">Display name on hover</p>
+            </div>
+          </div>
+          <div class="option-02-06">
+            <div class="checkbox-option checkbox">
+              <input id="showNames" type="checkbox" name="nameOnHover">
+              <p style="display: inline;">Show names</p>
+            </div>
+          </div>
+          <div class="option-02-07">
 
-				<div class="checkbox-option checkbox">
-					<input id="showLines" type="checkbox" name="nameOnHover">
-					<p style="display: inline;">Show marker line</p>
-				</div>
-					</div>
-					<div class="option-02-08">
-						<div class="checkbox-option checkbox">
-							<input id="showMarkers" type="checkbox" name="nameOnHover">
-							<p style="display: inline;">Show marker icon</p>
-						</div>
-					</div>
-					<div class="option-02-09">
-						<div class="checkbox-option checkbox">
-							<input id="showRings" type="checkbox" name="nameOnHover">
-							<p style="display: inline;">Show base ring</p>
-						</div>
-					</div>
-					<div class="option-02-10">
-						<div class="checkbox-option checkbox">
-							<input id="moveInfoOnClick" type="checkbox" name="moveInfoOnClick">
-							<p style="display: inline;">Move infobox on click</p>
-						</div>
-					</div>
-				  </div>
-			</div>
+            <div class="checkbox-option checkbox">
+              <input id="showLines" type="checkbox" name="nameOnHover">
+              <p style="display: inline;">Show marker line</p>
+            </div>
+          </div>
+          <div class="option-02-08">
+            <div class="checkbox-option checkbox">
+              <input id="showMarkers" type="checkbox" name="nameOnHover">
+              <p style="display: inline;">Show marker icon</p>
+            </div>
+          </div>
+          <div class="option-02-09">
+            <div class="checkbox-option checkbox">
+              <input id="showRings" type="checkbox" name="nameOnHover">
+              <p style="display: inline;">Show base ring</p>
+            </div>
+          </div>
+          <div class="option-02-10">
+            <div class="checkbox-option checkbox">
+              <input id="moveInfoOnClick" type="checkbox" name="moveInfoOnClick">
+              <p style="display: inline;">Move infobox on click</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-			<button class="accordion">Map Filter Select</button>
-			<div class="panel">
-				<form id="filterForm">
-					<div id="filterFormTypes"></div>
-					<div id="filterFormLayers"></div>
-				</form>
-			</div>
-			
-			<!--
+      <button aria-label="Filter Select" class="accordion">Map Filter Select</button>
+      <div class="panel">
+        <form id="filterForm">
+          <div id="filterFormTypes"></div>
+          <div id="filterFormLayers"></div>
+        </form>
+      </div>
+
+      <!--
 			<button class="accordion">Section 3</button>
 			<div class="panel">
 			</div>
 		-->
-			<script>
-				var acc = document.getElementsByClassName("accordion");
-				var i;
+      <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+              panel.style.maxHeight = null;
+            } else {
+              panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+          });
+        }
+      </script>
+    </div>
 
-				for (i = 0; i < acc.length; i++) {
-				acc[i].addEventListener("click", function() {
-					this.classList.toggle("active");
-					var panel = this.nextElementSibling;
-					if (panel.style.maxHeight) {
-					panel.style.maxHeight = null;
-					} else {
-					panel.style.maxHeight = panel.scrollHeight + "px";
-					}
-				});
-				}
-				</script>
-		</div>
+    <div id="calculator" class="calculator">
+      <span class="calc-close material-icons">
+        close
+      </span>
+      <p class="calc-title">Distance/Time Calculator</p>
+      <div class="no-drag">
+        <p style="display: inline;">Enter ship speed: </p>
+        <input id="shipSpeedSlider" type="range" min="1" max="150" step="1" name="shipSpeed">
+        <input id="shipSpeedDirect" type="number" min="1" max="150" name="shipSpeed">
+      </div>
+      <br>
+      <br>
+      <div style="float: left;">
+        <button aria-label="Start Point" id="selPoint0">Choose start point</button>
+        <p id="selectedPoint0" class="sel-point">None Selected</p>
+      </div>
+      <div style="float: right;">
+        <button aria-label="End Point" id="selPoint1">Choose end point</button>
+        <p id="selectedPoint1" class="sel-point">None Selected</p>
+      </div>
+      <div class="no-drag">
+        <p id="calc-dist">Distance: 0m</p>
+        <p id="calc-time">Estimated Traval Time: 00:00:00</p>
+      </div>
+    </div>
+    <div class="add-point">
+      <span class="material-icons close">
+        close
+      </span>
+      <form id="addPointForm">
+        <legend id="formLegend">Create Point</legend>
+        <input required type="text" name="point-name" placeholder="Name" id="formName" minlength="3" maxlength="32" />
+        <input type="text" name="point-description" placeholder="Description" id="formDesc" maxlength="512" />
+        <select class="dropdown-select" name="Type" id="type-select" form="addPointForm"></select>
+        <select class="dropdown-select" name="Layer" id="group-select" form="addPointForm"></select>
+        <select class="dropdown-select" name="Subtype" id="subtype-select" form="addPointForm"></select>
+        <fieldset class="coordinates">
+          <legend>Coordinates</legend>
+          <lable>X: </lable><input required type="number" name="pos-x" placeholder="X pos" id="formXPos" />
+          <lable>Y: </lable><input required type="number" name="pos-y" placeholder="Y pos" id="formYPos" />
+          <lable>Z: </lable><input required type="number" name="pos-z" placeholder="Z pos" id="formZPos" />
+        </fieldset>
+        <input type="submit" name="submit-new-point" id="add-point-submit" value="Create" class="genericbutton" />
+      </form>
+    </div>
+    <div class="info-container">
+      <svg id="dropdown-minimize" height="16" width="16">
+        <path d="M16 2 L8 14 L0 2 Z" fill="var(--user-style)" />
+      </svg>
+      <div class="info" id="infoWindow"></div>
+    </div>
+    <div class="popup" id="popup">
+      <div class="popup-content">
+        <h2>Welcome to Starmap!</h2>
+        <p>
+          Starmap is a free ISAN-based 3D map for the game <a href="https://www.starbasegame.com/">Starbase</a>!
+          You can use these
+          coordinates in-game by <a href="https://isan.to/doc">
+            installing
+            ISAN
+          </a> on your ship.
+          <br><br>
+          To give feedback or report bugs please create a support ticket at <a href="https://discord.gg/VnU8apR">ISAN-Support</a>
+          <br>
+          Private layers are a premium feature. If you want to acquire one for your faction, please open a
+          diplomatic ticket in
+          the #contact_us channel of the <a href="https://discord.gg/VnU8apR">Collective Discord</a>
+          <br><br>
+          This website uses cookies for functional and analytical purposes. Press "Accept" to continue.
+        </p>
+        <button aria-label="Cookies" id="acceptCookies">Accept</button>
+      </div>
+    </div>
+    <div class="popup" id="betterConfirm">
+      <div class="popup-content">
+        <h2 id="betterConfirm-text" class="popup-text">
 
+        </h2>
 
-		<div class="ui-draggable calculator" id="calculator" >
-			<span class="calc-close material-icons">
-				close
-			</span>
-			<p class="calc-title">Distance/Time Calculator</p>
-			<div class="no-drag">
-				<p style="display: inline;">Enter ship speed: </p>
-				<input id="shipSpeedSlider" type="range" min="1" max="150" step="1" name="shipSpeed">
-				<input id="shipSpeedDirect" type="number" min="1" max="150" name="shipSpeed">
-			</div>
-			<br>
-			<br>
-			<div style="float: left;">
-				<button id="selPoint0">Choose start point</button>
-				<p id="selectedPoint0" class="sel-point">None Selected</p>
-			</div>
-			<div style="float: right;">
-				<button id="selPoint1">Choose end point</button>
-				<p id="selectedPoint1" class="sel-point">None Selected</p>
-			</div>
-			<div class="no-drag">
-				<p id="calc-dist">Distance: 0m</p>
-				<p id="calc-time">Estimated Traval Time: 00:00:00</p>
-			</div>
-		</div>
-		<div class="ui-draggable add-point ">
-			<span class="material-icons close">
-				close
-			</span>
-			<form id="addPointForm">
-				<legend id="formLegend">Create Point</legend>
-				<input required type="text" name="point-name" placeholder="Name" id="formName" minlength="3"
-					maxlength="16" />
-				<input type="text" name="point-description" placeholder="Description" id="formDesc" maxlength="512" />
-				<select class="dropdown-select" name="Type" id="type-select" form="addPointForm"></select>
-				<select class="dropdown-select" name="Layer" id="group-select" form="addPointForm"></select>
-				<select class="dropdown-select" name="Subtype" id="subtype-select" form="addPointForm"></select>
-				<fieldset class="coordinates">
-					<legend>Coordinates</legend>
-					<lable>X: </lable><input required type="number" name="pos-x" placeholder="X pos" id="formXPos" />
-					<lable>Y: </lable><input required type="number" name="pos-y" placeholder="Y pos" id="formYPos" />
-					<lable>Z: </lable><input required type="number" name="pos-z" placeholder="Z pos" id="formZPos" />
-				</fieldset>
-				<input type="submit" name="submit-new-point" id="add-point-submit" value="Create" class="genericbutton" />
-			</form>
-		</div>
-		<div class="info-container">
-			<svg id="dropdown-minimize" height="16" width="16">
-				<path d="M16 2 L8 14 L0 2 Z" fill="var(--user-style)" />
-			</svg>
-			<div class="info" id="infoWindow"></div>
-		</div>
-		<div class="popup" id="popup">
-			<div class="popup-content">
-				<h2>Welcome to Starmap!</h2>
-				<p>
-					Starmap is a free ISAN-based 3D map for the game <a href="https://www.starbasegame.com/">Starbase</a>!
-					You can use these
-					coordinates in-game by <a href="https://isan.to/doc">
-						installing
-						ISAN
-					</a> on your ship.
-					<br><br>
-					To give feedback or report bugs please create a support ticket <a href="https://discord.gg/VnU8apR">here</a>
-					<br>
-					Private layers are a premium feature. If you want to acquire one for your faction, please open a
-					diplomatic ticket in
-					the #contact_us channel of the <a href="https://discord.gg/VnU8apR">Collective Discord</a>
-					<br><br>
-					This website uses cookies for functional and analytical purposes. Press "Accept" to continue.
-				</p>
-				<button id="acceptCookies">Accept</button>
-			</div>
-		</div>
-		<div class="popup" id="betterConfirm">
-			<div class="popup-content">
-				<h2 id="betterConfirm-text" class="popup-text">
+        <button aria-label="ConfirmationYes" id="betterConfirm-yes">OK</button>
+        <button aria-label="ConfirmationNo" id="betterConfirm-no">Cancel</button>
+      </div>
+    </div>
+    <div id="topBanner" class="topPopupBanner" style="display: none;">
+      <p id="bannerMsg">Banner message</p>
+    </div>
+  </div>
 
-				</h2>
-
-				<button id="betterConfirm-yes">OK</button>
-				<button id="betterConfirm-no" >Cancel</button>
-			</div>
-		</div>
-		<div id="topBanner" class="topPopupBanner" style="display: none;">
-			<p id="bannerMsg">Banner message</p>
-		</div>
-	</div>
-
-
-<!--
+  <!--
 	<a href="isan.pdf" target="_blank" class="float">
 	</a>
 	<div class="label-container">

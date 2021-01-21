@@ -14,7 +14,8 @@ import {
 	ZONE_WIRE_CUTOFF,
 	ZONE_OUTLINE_POINTS,
 	ZONE_INTERACTION_SIZE,
-	HOVER_CAM_DIST_FACTOR, EOS_SIZE,
+	HOVER_CAM_DIST_FACTOR,
+	EOS_SIZE,
 } from "./config.js";
 const RING_OFFSET = 5;
 import {
@@ -152,8 +153,12 @@ class Point {
 		sidebarElm.id = `side-${data.id}`;
 		sidebarElm.classList.add("sidenav-point");
 
-		sidebarElm.addEventListener("mouseover", function(){ app.arrowHoverEffectStart(this); })
-		sidebarElm.addEventListener("mouseleave", function(){ app.arrowHoverEffectEnd(this); })
+		sidebarElm.addEventListener("mouseover", function () {
+			app.arrowHoverEffectStart(this);
+		})
+		sidebarElm.addEventListener("mouseleave", function () {
+			app.arrowHoverEffectEnd(this);
+		})
 
 		document.getElementById("points").appendChild(sidebarElm);
 		sidebarElm.onclick = () => {
@@ -200,9 +205,6 @@ class Point {
 		this.updateNamePosition();
 		this.updateMarkerPosition();
 		this.updateShow(true);
-
-		app.setLoadingMessage("Done!")
-		app.hideLoadingMessage()
 
 		app.cameraController.posLerpTo(EOS_SIZE * 1.6, 100000, 100000)
 	}
@@ -263,8 +265,12 @@ class Point {
 			self.updateHoverSidebar(false);
 		};
 
-		sidebarElm.addEventListener("mouseover", function(){ app.arrowHoverEffectStart(this); })
-		sidebarElm.addEventListener("mouseleave", function(){ app.arrowHoverEffectEnd(this); })
+		sidebarElm.addEventListener("mouseover", function () {
+			app.arrowHoverEffectStart(this);
+		})
+		sidebarElm.addEventListener("mouseleave", function () {
+			app.arrowHoverEffectEnd(this);
+		})
 	}
 	//Updates the position of the name ontop of the point
 	updateNamePosition(scale) {
