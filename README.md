@@ -40,14 +40,14 @@
     <br>Additionally includes support for creating private maps
     <br />
     <br>
-    <a href="https://github.com/Collective-SB/Starmap/blob/master/public/isan.pdf"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Collective-SB/Starmap/blob/master/public/isan.pdf" target="_blank"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://isan.to">View Project</a>
+    <a href="https://isan.to" target="_blank">View Project</a>
     ·
-    <a href="https://discord.gg/VnU8apR">Report Bug</a>
+    <a href="https://discord.gg/VnU8apR" target="_blank">Report Bug</a>
     ·
-    <a href="#">Request Feature</a>
+    <a href="#" target="_blank">Request Feature</a>
   </p>
 </p>
 
@@ -93,7 +93,7 @@ _For a more descriptive explanation about the ISAN Starmap please read the:
 
 
 ### Built With
-<strong><a href="#">Starmap API</a> | <a href="https://expressjs.com/">Express</a> | <a href="https://www.w3schools.com/">HTML/CSS</a> | <a href="https://jquery.com">JQuerry</a> | <a href="https://threejs.org/">ThreeJS</a> | <a href="https://www.adobe.com/nz/products/xd.html">AdobeXD</a></strong>
+<strong><a href="#" target="_blank">Starmap API</a> | <a href="https://expressjs.com/" target="_blank">Express</a> | <a href="https://www.w3schools.com/" target="_blank">HTML/CSS</a> | <a href="https://jquery.com" target="_blank">JQuerry</a> | <a href="https://threejs.org/" target="_blank">ThreeJS</a> | <a href="https://www.adobe.com/nz/products/xd.html" target="_blank">AdobeXD</a></strong>
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -164,13 +164,13 @@ ISAN Starpmap Team Members:
   <summary><p style="display: inline-block">Thanks to the old Starmap team for the insparation:</p></summary>
   <ol>
     <li>
-    <strong>Peter Shepherd:</strong> JS Developer [<a href="https://www.linkedin.com/in/peter-shepherd-a912a8201/">Linkedin</a>]
+    <strong>Peter Shepherd:</strong> JS Developer [<a href="https://www.linkedin.com/in/peter-shepherd-a912a8201/" target="_blank">Linkedin</a>]
     </li>
     <li>
-    <strong>Maximilian Lambert:</strong> JS Developer [<a href="https://www.linkedin.com/in/maximilian-lambert-00423b192/">Linkedin</a>]
+    <strong>Maximilian Lambert:</strong> JS Developer [<a href="https://www.linkedin.com/in/maximilian-lambert-00423b192/" target="_blank">Linkedin</a>]
     </li>
     <li>
-    <strong>Timothy Howard:</strong> UI/UX Developer [<a href="https://www.linkedin.com/in/timhow20/">Linkedin</a> | <a href="https://github.com/timhow38">Github</a>]
+    <strong>Timothy Howard:</strong> UI/UX Developer [<a href="https://www.linkedin.com/in/timhow20/ " target="_blank">Linkedin</a> | <a href="https://github.com/timhow38" target="_blank">Github</a>]
     </li>
   </ol>
 </details>
