@@ -94,7 +94,8 @@ import {
 	EOS_QUALITY,
 	FPS_DROP_TIME,
 	LOW_FPS_VAL,
-	HIGH_FPS_VAL
+	HIGH_FPS_VAL,
+	HEATMAN_TOTAL_IMAGES
 } from "./config.js";
 
 import {
@@ -163,6 +164,12 @@ class App {
 		this.stats.dom.style.left = "85%";
 		this.frameInterval = 1000 / 60;
 		this.lastMouseMoved = Date.now();
+		this.heatmap = [];
+		this.heatmapAnim = {
+			active: false,
+			idx: 0,
+			speed: 1,
+		}
 		// document.body.appendChild(this.stats.dom);
 	}
 
@@ -740,7 +747,66 @@ class App {
 	arrowHoverEffectEnd(element) {
 		element.innerText = element.innerText.slice(2, -2)
 	}
+	showHeatLayers(name, opacity = 1) {
+		function fromGamePos(position) {
+			return {
+				x: position.y + pointOffset.x,
+				y: position.z + pointOffset.y,
+				z: -position.x + pointOffset.z,
+			};
+		}
 
+		function prefixZeros(num, len) {
+			let ret = num.toString();
+			while (ret.length < len) {
+				ret = "0" + ret;
+			}
+			return ret;
+		}
+
+		const mins = {
+			x: -1000000,
+			y: -1000000,
+			z: -1000000
+		}
+		const maxs = {
+			x: 1000000,
+			y: 1000000,
+			z: 1000000
+		}
+		const pos = fromGamePos(mins);
+		const imgWidth = 500;
+		const imgHeight = 500;
+		const planeWidth = (maxs.x - mins.x);
+		const planeHeight = (maxs.y - mins.y);
+		const scaleX = planeWidth / imgWidth;
+		const scaleY = planeHeight / imgHeight;
+		const ySteps = (maxs.z - mins.z) / HEATMAN_TOTAL_IMAGES; // Reeee ISAN why is "Z" up/down not "Y"
+		// Create the planes
+		let imgIdx = 0;
+		const loader = new THREE.TextureLoader();
+		// "frame_${imgIdx}_delay-0.1s.png"
+		for (let y = mins.z; y < maxs.z; y += ySteps) {
+			const texture = loader.load(`assets/heatmap/${name}/frame_${prefixZeros(imgIdx, 3)}_delay-0.1s.png`);
+			const alphaTexture = loader.load(`assets/heatmap/${name}/frame_${prefixZeros(imgIdx, 3)}_delay-0.1s.png-alpha.png`);
+			imgIdx++;
+			const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight, 8, 8);
+			const material = new THREE.MeshBasicMaterial({
+				// color: 0xffff00,
+				side: THREE.DoubleSide,
+				map: texture,
+				alphaMap: alphaTexture,
+				transparent: true,
+				opacity: opacity,
+				// wireframe: true
+			});
+			const plane = new THREE.Mesh(geometry, material);
+			plane.position.set(pos.x + planeWidth / 2, y, pos.z - planeHeight / 2);
+			plane.rotation.set(Math.PI / 2, 0, 0);
+			this.sceneObjs.scene.add(plane);
+			this.heatmap.push(plane);
+		}
+	}
 	//Fills out the info pannel whenever a point is clicked on
 	handleObjectClick(object) {
 		// console.log("Handling click");
@@ -895,6 +961,16 @@ class App {
 			this.setFpsTarget(HIGH_FPS_VAL);
 		} else {
 			this.setFpsTarget(LOW_FPS_VAL)
+		}
+		if (this.heatmapAnim.active) {
+			this.heatmap.forEach(plane => plane.visible = false);
+			this.heatmap[Math.floor(this.heatmapAnim.idx)].visible = true;
+			this.heatmapAnim.idx += this.heatmapAnim.speed;
+			if (this.heatmapAnim.idx >= this.heatmap.length || this.heatmapAnim.idx < 0) {
+				this.heatmapAnim.speed *= -1;
+				if (this.heatmapAnim.idx >= this.heatmap.length) this.heatmapAnim.idx--;
+				else this.heatmapAnim.idx++;
+			}
 		}
 		//Check hovers
 		const hovers = this.castRay(mouseX, mouseY);
@@ -1141,5 +1217,8 @@ function animate() {
 
 window.onload = function () {
 	app.init();
+	// setTimeout(() => {
+	// 	app.showHeatLayers()
+	// }, 1500);
 	animate();
 };
