@@ -52,6 +52,7 @@ export const ISAN_RANGE = 1000000;
 export const FPS_DROP_TIME = 1000 * 15; // 15 seconds of no mouse move
 export const HIGH_FPS_VAL = 60;
 export const LOW_FPS_VAL = 15;
+export const HEATMAN_TOTAL_IMAGES = 100;
 export const safePos = {
 	x: EOS_SIZE + DIST_TO_BELT - SOLONS_OFFSET,
 	y: 0,
