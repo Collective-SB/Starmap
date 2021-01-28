@@ -3,8 +3,8 @@ const fetch = require("node-fetch");
 const fs = require("fs");
 require("dotenv").config();
 const app = express();
-const POINT_INFO_API = "https://api-beta.isan.to/front/getPointInfo/";
-// const POINT_INFO_API = "http://localhost:8000/front/getPointInfo/"
+// const POINT_INFO_API = "https://api-beta.isan.to/front/getPointInfo/";
+const POINT_INFO_API = "http://localhost:8000/front/getPointInfo/"
 const IMGS = {
 	ship: "https://cdn.discordapp.com/attachments/762209257738207252/762209368925929472/ship.png",
 	ore: "https://cdn.discordapp.com/attachments/762209257738207252/762209362332090378/ore.png",
@@ -44,8 +44,11 @@ app.get(["/:pointId", "/"], async (req, res) => {
 		//For custom URL stuff
 		// const redir = getRedirect(req.params.pointId);
 		// if (redir) return res.redirect(redir);
-		const apiRes = await fetch(POINT_INFO_API + req.params.pointId, {
-			method: "GET",
+
+		//This API is being spammed, ratelimiting is being added on the backend to stop abuse
+		const ip = req.headers["cf-connecting-ip"] ? req.headers["cf-connecting-ip"] : req.ip;
+		const apiRes = await fetch(POINT_INFO_API + req.params.pointId + `?ip=${ip}`, {
+			method: "GET"
 		});
 		if (apiRes.status == 200) {
 			// 200 either means its a valid point, or a valid redirect, lets check
