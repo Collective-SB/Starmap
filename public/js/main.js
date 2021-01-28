@@ -91,7 +91,11 @@ import {
 	BELT_HEIGHT,
 	BELT_EDGE_RADIUS,
 	BELT_QUALITY,
-	EOS_QUALITY
+	EOS_QUALITY,
+	FPS_DROP_TIME,
+	LOW_FPS_VAL,
+	HIGH_FPS_VAL,
+	HEATMAN_TOTAL_IMAGES
 } from "./config.js";
 
 import {
@@ -158,7 +162,14 @@ class App {
 		this.stats.showPanel(0);
 		this.vertCamMove = 1;
 		this.stats.dom.style.left = "85%";
-		this.frameInterval = 1000/60
+		this.frameInterval = 1000 / 60;
+		this.lastMouseMoved = Date.now();
+		this.heatmap = [];
+		this.heatmapAnim = {
+			active: false,
+			idx: 0,
+			speed: 1,
+		}
 		// document.body.appendChild(this.stats.dom);
 	}
 
@@ -170,8 +181,7 @@ class App {
 		const el = document.getElementById("loading-screen");
 		el.style.opacity = 0;
 
-		el.addEventListener("transitionend", () =>
-		{
+		el.addEventListener("transitionend", () => {
 			el.remove()
 		})
 	}
@@ -314,15 +324,15 @@ class App {
 
 		if (ENABLE_SBOX) {
 			const skybox = new THREE.CubeTextureLoader()
-			 	.setPath("../assets/skybox/")
-			 	.load([
-			 		"left.jpg",
-			 		"right.jpg",
-			 		"top.jpg",
-			 		"bot.jpg",
-			 		"front.jpg",
-			 		"back.jpg",
-			 	]);
+				.setPath("../assets/skybox/")
+				.load([
+					"left.jpg",
+					"right.jpg",
+					"top.jpg",
+					"bot.jpg",
+					"front.jpg",
+					"back.jpg",
+				]);
 			/*
 			const loader = new THREE.CubeTextureLoader();
 
@@ -344,7 +354,7 @@ class App {
 			// ).load("../assets/cloud3.png");
 		).load("https://i.ibb.co/hf26qqm/cloud3.png");
 		const MESH_SIZE = 76;
-		const cloudGeom = new THREE.SphereGeometry(MESH_SIZE, EOS_QUALITY*2, EOS_QUALITY*2);
+		const cloudGeom = new THREE.SphereGeometry(MESH_SIZE, EOS_QUALITY * 2, EOS_QUALITY * 2);
 		const cloudMat = new THREE.MeshStandardMaterial({
 			color: 0xcdddfd,
 			transparent: true,
@@ -451,6 +461,7 @@ class App {
 	}
 	//Sets up a bunch of event handlers for the UI
 	UISetup() {
+		document.body.onmousemove = () => this.lastMouseMoved = Date.now();
 		$(".info-container").draggable({
 			containment: "document",
 			cancel: ".no-drag",
@@ -469,7 +480,7 @@ class App {
 		});
 		// Settings popup
 		this.settings.init();
-		
+
 		this.makeBelt()
 
 
@@ -522,7 +533,7 @@ class App {
 			$(this).parent().hide();
 			if (
 				group.isPublicRead &&
-				! await app.modalConfirm(
+				!await app.modalConfirm(
 					"This will create a point on a PUBLIC layer, make sure this is correct"
 				)
 			) {
@@ -674,7 +685,7 @@ class App {
 
 		let beltMat = new THREE.MeshBasicMaterial({
 			color: 0xffffff,
-			opacity: (BELT_TRANSPARENCY/BELT_RING_COUNT),
+			opacity: (BELT_TRANSPARENCY / BELT_RING_COUNT),
 			transparent: true,
 		});
 
@@ -684,7 +695,7 @@ class App {
 		if (BELT_RING_COUNT == 2) {
 			this.makeBeltLayer(0, -35000, 0, beltMat)
 		} else {
-			while (i < BELT_RING_COUNT-1) {
+			while (i < BELT_RING_COUNT - 1) {
 				i++
 
 				let height = startPos + ((BELT_HEIGHT / BELT_RING_COUNT) * i)
@@ -705,7 +716,7 @@ class App {
 				let x = Math.cbrt(distToEdge / BELT_RING_COUNT)
 				let offset = -x * BELT_EDGE_RADIUS
 
-				this.makeBeltLayer(height, offset, (-offset*25), beltMat)
+				this.makeBeltLayer(height, offset, (-offset * 25), beltMat)
 			}
 		}
 
@@ -736,9 +747,69 @@ class App {
 	arrowHoverEffectEnd(element) {
 		element.innerText = element.innerText.slice(2, -2)
 	}
+	showHeatLayers(name, opacity = 1) {
+		function fromGamePos(position) {
+			return {
+				x: position.y + pointOffset.x,
+				y: position.z + pointOffset.y,
+				z: -position.x + pointOffset.z,
+			};
+		}
 
+		function prefixZeros(num, len) {
+			let ret = num.toString();
+			while (ret.length < len) {
+				ret = "0" + ret;
+			}
+			return ret;
+		}
+
+		const mins = {
+			x: -1000000,
+			y: -1000000,
+			z: -1000000
+		}
+		const maxs = {
+			x: 1000000,
+			y: 1000000,
+			z: 1000000
+		}
+		const pos = fromGamePos(mins);
+		const imgWidth = 500;
+		const imgHeight = 500;
+		const planeWidth = (maxs.x - mins.x);
+		const planeHeight = (maxs.y - mins.y);
+		const scaleX = planeWidth / imgWidth;
+		const scaleY = planeHeight / imgHeight;
+		const ySteps = (maxs.z - mins.z) / HEATMAN_TOTAL_IMAGES; // Reeee ISAN why is "Z" up/down not "Y"
+		// Create the planes
+		let imgIdx = 0;
+		const loader = new THREE.TextureLoader();
+		// "frame_${imgIdx}_delay-0.1s.png"
+		for (let y = mins.z; y < maxs.z; y += ySteps) {
+			const texture = loader.load(`assets/heatmap/${name}/frame_${prefixZeros(imgIdx, 3)}_delay-0.1s.png`);
+			const alphaTexture = loader.load(`assets/heatmap/${name}/frame_${prefixZeros(imgIdx, 3)}_delay-0.1s.png-alpha.png`);
+			imgIdx++;
+			const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight, 8, 8);
+			const material = new THREE.MeshBasicMaterial({
+				// color: 0xffff00,
+				side: THREE.DoubleSide,
+				map: texture,
+				alphaMap: alphaTexture,
+				transparent: true,
+				opacity: opacity,
+				// wireframe: true
+			});
+			const plane = new THREE.Mesh(geometry, material);
+			plane.position.set(pos.x + planeWidth / 2, y, pos.z - planeHeight / 2);
+			plane.rotation.set(Math.PI / 2, 0, 0);
+			this.sceneObjs.scene.add(plane);
+			this.heatmap.push(plane);
+		}
+	}
 	//Fills out the info pannel whenever a point is clicked on
 	handleObjectClick(object) {
+		// console.log("Handling click");
 		//Creates the info in the top right window
 		const self = this;
 		//Allow threejs object OR my point data object
@@ -886,6 +957,21 @@ class App {
 		} else {
 			sidenav.style.width = "160px";
 		}
+		if (Date.now() - this.lastMouseMoved < FPS_DROP_TIME) {
+			this.setFpsTarget(HIGH_FPS_VAL);
+		} else {
+			this.setFpsTarget(LOW_FPS_VAL)
+		}
+		if (this.heatmapAnim.active) {
+			this.heatmap.forEach(plane => plane.visible = false);
+			this.heatmap[Math.floor(this.heatmapAnim.idx)].visible = true;
+			this.heatmapAnim.idx += this.heatmapAnim.speed;
+			if (this.heatmapAnim.idx >= this.heatmap.length || this.heatmapAnim.idx < 0) {
+				this.heatmapAnim.speed *= -1;
+				if (this.heatmapAnim.idx >= this.heatmap.length) this.heatmapAnim.idx--;
+				else this.heatmapAnim.idx++;
+			}
+		}
 		//Check hovers
 		const hovers = this.castRay(mouseX, mouseY);
 		this.pointManager.points.forEach((p) => p.updateHoverMain(false));
@@ -972,8 +1058,12 @@ class App {
 			header.id = `layer-header-${layer.id}`;
 			header.innerText = layer.name;
 
-			header.addEventListener("mouseover", function(){ app.arrowHoverEffectStart(this); })
-			header.addEventListener("mouseleave", function(){ app.arrowHoverEffectEnd(this); })
+			header.addEventListener("mouseover", function () {
+				app.arrowHoverEffectStart(this);
+			})
+			header.addEventListener("mouseleave", function () {
+				app.arrowHoverEffectEnd(this);
+			})
 
 			const div = document.createElement("div");
 			div.id = `sort-div-${layer.id}`;
@@ -1099,7 +1189,7 @@ class App {
 	}
 
 	async setFpsTarget(target) {
-		app.frameInterval = 1000/target
+		app.frameInterval = 1000 / target
 	}
 }
 
@@ -1110,7 +1200,7 @@ const sleep = (milliseconds) => {
 	return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
-let now,delta,then = Date.now();
+let now, delta, then = Date.now();
 
 function animate() {
 	requestAnimationFrame(animate);
@@ -1127,6 +1217,8 @@ function animate() {
 
 window.onload = function () {
 	app.init();
+	// setTimeout(() => {
+	// 	app.showHeatLayers()
+	// }, 1500);
 	animate();
 };
-

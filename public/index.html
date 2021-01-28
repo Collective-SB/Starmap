@@ -24,12 +24,12 @@
 	<script src="https://cdn.jsdelivr.net/npm/three@0.120.0/examples/js/controls/OrbitControls.min.js"></script>
 	<script src="js/packages/jwt-decode.js"></script>
 
-<!--
+	<!--
 	Image Hover
 	 <link href="/css/image-hover.css" rel="stylesheet" type="text/css" />
 	 <script src="/js/image-hover.js"></script>
 -->
- 
+
 
 	<script>
 		// Dont ask me why this is here, I dont know either   [I still want to ask? :) -Tim]
@@ -48,13 +48,23 @@
 		<div class="loading-elevated" id="loading-elevated">
 			<svg class="loading-text" xmlns="http://www.w3.org/2000/svg" width="299.5" height="64" viewBox="0 0 299.5 64">
 				<g id="Group_1" data-name="Group 1" transform="translate(-732 895)">
-				  <text id="ISAN" transform="translate(732 -843)" fill="#707070" font-size="60" font-family="SquadaOne-Regular, Squada One"><tspan x="0" y="0">ISAN</tspan></text>
-				  <text id="Integrated_System_" data-name="Integrated System " transform="translate(836 -867)" fill="#707070" font-size="21" font-family="SquadaOne-Regular, Squada One"><tspan x="0" y="0">Integrated System </tspan></text>
-				  <text id="Autonomous_Navigation" data-name="Autonomous Navigation" transform="translate(836 -843)" fill="#707070" font-size="21" font-family="SquadaOne-Regular, Squada One"><tspan x="0" y="0">Autonomous Navigation</tspan></text>
-				  <line id="Line_1" data-name="Line 1" x2="203" transform="translate(828.5 -861.5)" fill="none" stroke="#707070" stroke-width="1"/>
+					<text id="ISAN" transform="translate(732 -843)" fill="#707070" font-size="60"
+						font-family="SquadaOne-Regular, Squada One">
+						<tspan x="0" y="0">ISAN</tspan>
+					</text>
+					<text id="Integrated_System_" data-name="Integrated System " transform="translate(836 -867)"
+						fill="#707070" font-size="21" font-family="SquadaOne-Regular, Squada One">
+						<tspan x="0" y="0">Integrated System </tspan>
+					</text>
+					<text id="Autonomous_Navigation" data-name="Autonomous Navigation" transform="translate(836 -843)"
+						fill="#707070" font-size="21" font-family="SquadaOne-Regular, Squada One">
+						<tspan x="0" y="0">Autonomous Navigation</tspan>
+					</text>
+					<line id="Line_1" data-name="Line 1" x2="203" transform="translate(828.5 -861.5)" fill="none"
+						stroke="#707070" stroke-width="1" />
 				</g>
-			  </svg>
-			
+			</svg>
+
 
 			<!--<p class="loading-text">
 				<a href="https://https://github.com/Collective-SB/Starmap" style="color: white">Starmap</a>,
@@ -70,7 +80,7 @@
 	</div>
 
 
-	
+
 	<div class="sidenav">
 		<button id="login">
 			<img srcset="assets/Discord-Logo-White.svg" />
@@ -198,15 +208,16 @@
 					<div class="option-01-06 text-center">
 						<input id="zoomSpeed" type="range" min="0.5" max="5" step="0.01" name="zoomSpeed">
 					</div>
-				  </div>
-				  <p style="display: inline;">Belt Sample Count - <span id="beltSampleDisplay">16</span></p>
-				  <br>
-				  <input id="beltSamples" type="range" min="2" max="64" step="2" name="beltSamples" defaultValue="16">
-				  <br>
-				  <p style="display: inline;">Belt Transparency - <span id="beltTransparencyDisplay">32</span></p>
-				  <br>
-				  <input id="beltTransparency" type="range" min="0" max="1" step="0.05" name="beltTransparency" defaultValue="0.8">
-				  <br>
+				</div>
+				<p style="display: inline;">Belt Sample Count - <span id="beltSampleDisplay">16</span></p>
+				<br>
+				<input id="beltSamples" type="range" min="2" max="64" step="2" name="beltSamples" defaultValue="16">
+				<br>
+				<p style="display: inline;">Belt Transparency - <span id="beltTransparencyDisplay">32</span></p>
+				<br>
+				<input id="beltTransparency" type="range" min="0" max="1" step="0.05" name="beltTransparency"
+					defaultValue="0.8">
+				<br>
 				<!--
 				<br>
 				<div class="input-option">
@@ -255,10 +266,10 @@
 					</div>
 					<div class="option-02-07">
 
-				<div class="checkbox-option checkbox">
-					<input id="showLines" type="checkbox" name="nameOnHover">
-					<p style="display: inline;">Show marker line</p>
-				</div>
+						<div class="checkbox-option checkbox">
+							<input id="showLines" type="checkbox" name="nameOnHover">
+							<p style="display: inline;">Show marker line</p>
+						</div>
 					</div>
 					<div class="option-02-08">
 						<div class="checkbox-option checkbox">
@@ -278,7 +289,7 @@
 							<p style="display: inline;">Move infobox on click</p>
 						</div>
 					</div>
-				  </div>
+				</div>
 			</div>
 
 			<button class="accordion">Map Filter Select</button>
@@ -288,7 +299,7 @@
 					<div id="filterFormLayers"></div>
 				</form>
 			</div>
-			
+
 			<!--
 			<button class="accordion">Section 3</button>
 			<div class="panel">
@@ -299,17 +310,17 @@
 				var i;
 
 				for (i = 0; i < acc.length; i++) {
-				acc[i].addEventListener("click", function() {
-					this.classList.toggle("active");
-					var panel = this.nextElementSibling;
-					if (panel.style.maxHeight) {
-					panel.style.maxHeight = null;
-					} else {
-					panel.style.maxHeight = panel.scrollHeight + "px";
-					}
-				});
+					acc[i].addEventListener("click", function () {
+						this.classList.toggle("active");
+						var panel = this.nextElementSibling;
+						if (panel.style.maxHeight) {
+							panel.style.maxHeight = null;
+						} else {
+							panel.style.maxHeight = panel.scrollHeight + "px";
+						}
+					});
 				}
-				</script>
+			</script>
 		</div>
 
 
@@ -345,7 +356,7 @@
 			<form id="addPointForm">
 				<legend id="formLegend">Create Point</legend>
 				<input required type="text" name="point-name" placeholder="Name" id="formName" minlength="3"
-					maxlength="16" />
+					maxlength="32" />
 				<input type="text" name="point-description" placeholder="Description" id="formDesc" maxlength="512" />
 				<select class="dropdown-select" name="Type" id="type-select" form="addPointForm"></select>
 				<select class="dropdown-select" name="Layer" id="group-select" form="addPointForm"></select>
@@ -376,7 +387,8 @@
 						ISAN
 					</a> on your ship.
 					<br><br>
-					To give feedback or report bugs please create a support ticket <a href="https://discord.gg/VnU8apR">here</a>
+					To give feedback or report bugs please create a support ticket <a
+						href="https://discord.gg/VnU8apR">here</a>
 					<br>
 					Private layers are a premium feature. If you want to acquire one for your faction, please open a
 					diplomatic ticket in
@@ -394,7 +406,7 @@
 				</h2>
 
 				<button id="betterConfirm-yes">OK</button>
-				<button id="betterConfirm-no" >Cancel</button>
+				<button id="betterConfirm-no">Cancel</button>
 			</div>
 		</div>
 		<div id="topBanner" class="topPopupBanner" style="display: none;">
@@ -403,7 +415,7 @@
 	</div>
 
 
-<!--
+	<!--
 	<a href="isan.pdf" target="_blank" class="float">
 	</a>
 	<div class="label-container">
