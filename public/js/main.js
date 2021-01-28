@@ -713,7 +713,7 @@ class App {
 				let distToEdge = (BELT_RING_COUNT / 2) - distToCentre
 
 				//Thanks to g.w.a.c.a for the help with creating this
-				let x = Math.cbrt(distToEdge / BELT_RING_COUNT)
+				let x = Math.sqrt(distToEdge / BELT_RING_COUNT)
 				let offset = -x * BELT_EDGE_RADIUS
 
 				this.makeBeltLayer(height, offset, (-offset * 25), beltMat)
