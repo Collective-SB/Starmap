@@ -157,18 +157,17 @@ See the [open issues](https://github.com/Collective-SB/Starmap/issues) for a lis
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
-ISAN Starpmap Team Members:
+ISAN Starmap Team Members:
 * <strong>Strikeeaglechase:</strong> Lead JS Developer [[Github](https://github.com/Strikeeaglechase)]
 * <strong>VolcanoCookies:</strong> JS Developer [[Github](https://github.com/VolcanoCookies)]
-* <strong>AlexAndHisScripts:</strong>  Early Front End [[Github](https://github.com/AlexAndHisScripts)]
-* <strong>IHaveNoLife:</strong> JS Developer [[Github]()]
+* <strong>AlexAndHisScripts/IHave:</strong>  Early Front End/JS Developer [[Github](https://github.com/AlexAndHisScripts)]
 * <strong>Timothy Howard:</strong> UI/UX Developer [[Github](https://github.com/timhow38) | [Linkedin](https://www.linkedin.com/in/timhow20/)]
 * <strong>MuNk:</strong> Extensive API Testing [[Github]()]
 
 
 
 <details>
-  <summary><p style="display: inline-block">Thanks to the old Starmap team for the insparation</p></summary>
+  <summary><p style="display: inline-block">Thanks to the old Starmap team for the inspiration</p></summary>
   <ol>
     <li>
     <strong>Peter Shepherd:</strong> JS Developer [<a href="https://www.linkedin.com/in/peter-shepherd-a912a8201/">Linkedin</a>]
