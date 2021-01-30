@@ -38,6 +38,12 @@
     <img src="https://img.shields.io/github/license/Collective-SB/Starmap.svg?style=for-the-badge">
   </a>
 </p>
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+
 
 
 <!-- PROJECT LOGO -->
@@ -68,7 +74,7 @@
 
 
 <!-- TABLE OF CONTENTS -->
-<details>
+<details open="open">
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
   <ol>
     <li>
@@ -213,5 +219,15 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/Collective-SB/Starmap.svg?style=for-the-badge
+[contributors-url]: https://github.com/Collective-SB/Starmap/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Collective-SB/Starmap.svg?style=for-the-badge
+[forks-url]: https://github.com/Collective-SB/Starmap/network/members
+[stars-shield]: https://img.shields.io/github/stars/Collective-SB/Starmap.svg?style=for-the-badge
+[stars-url]: https://github.com/Collective-SB/Starmap/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Collective-SB/Starmap.svg?style=for-the-badge
+[issues-url]: https://github.com/Collective-SB/Starmap/issues
+[license-shield]: https://img.shields.io/github/license/Collective-SB/Starmap.svg?style=for-the-badge
+[license-url]: https://github.com/Collective-SB/Starmap/blob/master/LICENSE.txt
 [product-screenshot]: readme-assets/header-picture.png
 [product-screenshot02]: readme-assets/ISAN.svg
