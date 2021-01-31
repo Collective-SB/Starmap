@@ -53,6 +53,8 @@ export default class CamController {
 
 		this.camera.position.set(EOS_SIZE * 10, 1000000, 1000000);
 		//once points are loaded in point manager this will lerp to the starting point
+		app.sceneObjs.renderer.domElement.addEventListener("click", (e) => this.stopCurrentMove());
+		app.sceneObjs.renderer.domElement.addEventListener("wheel", (e) => this.stopCurrentMove());
 	}
 	//Called to move the camera to the target point
 	update() {
@@ -121,5 +123,16 @@ export default class CamController {
 	posLerpTo(x, y, z) {
 		this.lerpTarget = new THREE.Vector3(x, y, z)
 		this.posLerp = true;
+	}
+	stopCurrentMove() {
+		if (this.posLerp || this.rotLerp) {
+			this.orbitCtrl.target.set(
+				this.lerpTarget.x,
+				this.lerpTarget.y,
+				this.lerpTarget.z
+			);
+		}
+		this.posLerp = false;
+		this.rotLerp = false;
 	}
 }

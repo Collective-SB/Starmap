@@ -6,6 +6,7 @@ const HEATRBEAT = JSON.stringify({
 });
 import {
 	ENV,
+	EOS_SIZE,
 	URLS
 } from "./config.js";
 const API_URL = URLS.api[ENV];
@@ -123,8 +124,9 @@ export default class API {
 		} else if (res.status == 401) {
 			this.app.setLoggedIn(false);
 		}
-		app.setLoadingMessage("Done!")
-		app.hideLoadingMessage()
+		app.setLoadingMessage("Done!");
+		app.hideLoadingMessage();
+		this.app.cameraController.posLerpTo(EOS_SIZE * 1.6, 100000, 100000);
 	}
 	//Gets singular point from server
 	async getPoint(id) {

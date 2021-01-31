@@ -171,9 +171,10 @@ class App {
 			idx: 0,
 			speed: 1,
 		}
-		// document.body.appendChild(this.stats.dom);
 	}
-
+	enableStats() {
+		document.body.appendChild(this.stats.dom);
+	}
 	setLoadingMessage(message) {
 		document.getElementById("loading-text").innerText = message;
 	}
