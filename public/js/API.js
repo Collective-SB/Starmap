@@ -126,7 +126,6 @@ export default class API {
 		}
 		app.setLoadingMessage("Done!");
 		app.hideLoadingMessage();
-		this.app.cameraController.posLerpTo(EOS_SIZE * 1.6, 100000, 100000);
 	}
 	//Gets singular point from server
 	async getPoint(id) {

@@ -722,6 +722,7 @@ export default class PointManager {
 					newPoint.marker.position.y,
 					newPoint.marker.position.z
 				);
+				console.log(`Setting focus to ${this.initFocusOn}`);
 				this.hasInitFocus = true;
 				this.app.storage.removeItem("pointFocus");
 			}

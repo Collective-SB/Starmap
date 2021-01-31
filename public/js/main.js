@@ -1089,6 +1089,7 @@ class App {
 
 		app.setLoadingMessage("Setting up points...")
 		this.pointManager.updateLayers();
+		this.cameraController.posLerpTo(EOS_SIZE * 1.6, 100000, 100000);
 		this.api.getPoints();
 		this.api.authorizeWebsocket(this.storage.getItem("jwt"));
 		if (this.user.isPubToken) {

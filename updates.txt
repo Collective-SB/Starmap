@@ -48,7 +48,7 @@ API:
  - Improved URL parsing to allow .jpeg image format for image embeds
  - Fixed discord embed API always returning 400
 
-V1.1.2
+v1.1.2
 Client:
  - Added new, volumetric belt.
  - Changed the skybox.
@@ -64,3 +64,13 @@ Client:
 API:
  - Added more faction colors
  - Better DDoS protection
+
+v1.1.3
+Client
+ - Issue with camera motion fixed
+ - Better logic for FPS limiter
+ - FPS limiter no longer has "skipping" issue
+ - Fixed issue with going to point URL not propperly focusing camera
+API:
+ - Added new bot endpoint related to user permissions
+ - Updated API documentation
