@@ -206,7 +206,7 @@ class Point {
 		this.updateMarkerPosition();
 		this.updateShow(true);
 
-		app.cameraController.posLerpTo(EOS_SIZE * 1.6, 100000, 100000)
+		// app.cameraController.posLerpTo(EOS_SIZE * 1.6, 100000, 100000)
 	}
 	createNameMesh(data, color) {
 		const canv = createTextCanvas(data.name, {

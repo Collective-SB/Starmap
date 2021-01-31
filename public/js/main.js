@@ -163,6 +163,7 @@ class App {
 		this.vertCamMove = 1;
 		this.stats.dom.style.left = "85%";
 		this.frameInterval = 1000 / 60;
+		this.prevFrameTarget = 0;
 		this.lastMouseMoved = Date.now();
 		this.heatmap = [];
 		this.heatmapAnim = {
@@ -462,6 +463,7 @@ class App {
 	//Sets up a bunch of event handlers for the UI
 	UISetup() {
 		document.body.onmousemove = () => this.lastMouseMoved = Date.now();
+		// document.body.
 		$(".info-container").draggable({
 			containment: "document",
 			cancel: ".no-drag",
@@ -1189,16 +1191,16 @@ class App {
 	}
 
 	async setFpsTarget(target) {
-		app.frameInterval = 1000 / target
+		if (this.prevFrameTarget != target) {
+			console.log(`FPS target changed from ${this.prevFrameTarget} to ${target}`);
+			this.prevFrameTarget = target;
+		}
+		this.frameInterval = 1000 / target;
 	}
 }
 
 const app = new App();
 window.app = app;
-
-const sleep = (milliseconds) => {
-	return new Promise(resolve => setTimeout(resolve, milliseconds))
-}
 
 let now, delta, then = Date.now();
 

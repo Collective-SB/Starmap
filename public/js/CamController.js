@@ -24,6 +24,11 @@ export default class CamController {
 		this.rotLerp = false;
 		this.dist = 0;
 		this.app = app;
+		this.lastPos = {
+			x: 0,
+			y: 0,
+			z: 0
+		}
 		// this.samePosTime = 0
 		this.init();
 	}
@@ -45,11 +50,6 @@ export default class CamController {
 		);
 		this.orbitCtrl.enableDamping = true;
 		this.orbitCtrl.maxDistance = CAM_MAX_ZOOM;
-		this.lastPos = {
-			x: 0,
-			y: 0,
-			z: 0
-		}
 
 		this.camera.position.set(EOS_SIZE * 10, 1000000, 1000000);
 		//once points are loaded in point manager this will lerp to the starting point
@@ -89,6 +89,23 @@ export default class CamController {
 					this.lerpTarget.z
 				);
 				this.rotLerp = false;
+			}
+		}
+		const curPos = {
+			x: Math.round(this.camera.position.x),
+			y: Math.round(this.camera.position.y),
+			z: Math.round(this.camera.position.z),
+		}
+		if (
+			curPos.x != this.lastPos.x ||
+			curPos.y != this.lastPos.y ||
+			curPos.z != this.lastPos.z
+		) {
+			this.app.lastMouseMoved = Date.now();
+			this.lastPos = {
+				x: curPos.x,
+				y: curPos.y,
+				z: curPos.z
 			}
 		}
 		this.orbitCtrl.update();
