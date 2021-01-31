@@ -206,7 +206,7 @@ class Point {
 		this.updateMarkerPosition();
 		this.updateShow(true);
 
-		app.cameraController.posLerpTo(EOS_SIZE * 1.6, 100000, 100000)
+		// app.cameraController.posLerpTo(EOS_SIZE * 1.6, 100000, 100000)
 	}
 	createNameMesh(data, color) {
 		const canv = createTextCanvas(data.name, {
@@ -722,6 +722,7 @@ export default class PointManager {
 					newPoint.marker.position.y,
 					newPoint.marker.position.z
 				);
+				console.log(`Setting focus to ${this.initFocusOn}`);
 				this.hasInitFocus = true;
 				this.app.storage.removeItem("pointFocus");
 			}
