@@ -716,7 +716,7 @@ export default class PointManager {
 				pointData.urlID == this.initFocusOn ||
 				pointData.vanity == this.initFocusOn
 			) {
-				this.app.handleObjectClick(newPoint);
+				// this.app.handleObjectClick(newPoint);
 				this.app.cameraController.lerpCamTo(
 					newPoint.marker.position.x,
 					newPoint.marker.position.y,
