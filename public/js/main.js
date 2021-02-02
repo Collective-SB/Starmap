@@ -434,7 +434,7 @@ class App {
 		const widthHalf = width / 2;
 		const heightHalf = height / 2;
 
-		const pos = worldPos.clone();
+		const pos = worldPos instanceof THREE.Vector3 ? worldPos.clone() : new THREE.Vector3(worldPos.x, worldPos.y, worldPos.z);
 		pos.project(this.sceneObjs.camera);
 		pos.x = -pos.x * widthHalf + widthHalf;
 		pos.y = -(pos.y * heightHalf) + heightHalf;
@@ -886,6 +886,7 @@ class App {
 			const container = document.getElementsByClassName("info-container");
 			const infoContainer = container[0];
 			const screenPos = this.getScreenPos(object.position);
+			if (!screenPos) return; // Whats
 			infoContainer.style.right = `${
 				screenPos.x - infoContainer.clientWidth - 100
 			}px`;
