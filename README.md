@@ -20,11 +20,29 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors][contributors-shield]][contributors-url]
+
+<p align="center">
+  <a href="https://github.com/Collective-SB/Starmap/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/Collective-SB/Starmap.svg?style=for-the-badge">
+  </a>
+  <a href="https://github.com/Collective-SB/Starmap/network/members">
+    <img src="https://img.shields.io/github/forks/Collective-SB/Starmap.svg?style=for-the-badge">
+  </a>
+  <a href="https://github.com/Collective-SB/Starmap/stargazers">
+    <img src="https://img.shields.io/github/stars/Collective-SB/Starmap.svg?style=for-the-badge">
+  </a>
+  <a href="https://github.com/Collective-SB/Starmap/issues">
+    <img src="https://img.shields.io/github/issues/Collective-SB/Starmap.svg?style=for-the-badge">
+  </a>
+  <a href="https://github.com/Collective-SB/Starmap/blob/master/LICENSE.txt">
+    <img src="https://img.shields.io/github/license/Collective-SB/Starmap.svg?style=for-the-badge">
+  </a>
+</p>
+<!-- [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
+[![MIT License][license-shield]][license-url] -->
 
 
 
@@ -32,7 +50,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Collective-SB/Starmap">
-    <img src="readme-assets/isan.svg" alt="Logo" width="500" height="100">
+    <img src="readme-assets/ISAN.svg" alt="Logo" width="500" height="120">
   </a>
 
   <!--<h3 align="center">ISAN Starmap</h3>-->
@@ -42,14 +60,14 @@
     <br>Additionally includes support for creating private maps
     <br />
     <br>
-    <a href="https://github.com/Collective-SB/Starmap/blob/master/public/isan.pdf"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Collective-SB/Starmap/blob/master/public/isan.pdf" target="_blank"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://isan.to">View Project</a>
+    <a href="https://isan.to" target="_blank">View Project</a>
     ·
-    <a href="https://discord.gg/VnU8apR">Report Bug</a>
+    <a href="https://discord.gg/VnU8apR" target="_blank">Report Bug</a>
     ·
-    <a href="#">Request Feature</a>
+    <a href="#" target="_blank">Request Feature</a>
   </p>
 </p>
 
@@ -95,13 +113,8 @@ _For a more descriptive explanation about the ISAN Starmap please read the:
 
 
 ### Built With
+<strong><a href="#" target="_blank">Starmap API</a> | <a href="https://expressjs.com/" target="_blank">Express</a> | <a href="https://www.w3schools.com/" target="_blank">HTML/CSS</a> | <a href="https://jquery.com" target="_blank">JQuerry</a> | <a href="https://threejs.org/" target="_blank">ThreeJS</a> | <a href="https://www.adobe.com/nz/products/xd.html" target="_blank">AdobeXD</a></strong>
 
-* [Starmap API]()
-* [Express](https://expressjs.com/)
-* [HTML/CSS](https://www.w3schools.com/)
-* [JQuerry](https://jquery.com)
-* [ThreeJS](https://threejs.org/)
-* [AdobeXD](https://www.adobe.com/nz/products/xd.html)
 <!-- GETTING STARTED -->
 ## Getting Started
 
@@ -157,26 +170,27 @@ See the [open issues](https://github.com/Collective-SB/Starmap/issues) for a lis
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
-ISAN Starmap Team Members:
+ISAN Starpmap Team Members:
 * <strong>Strikeeaglechase:</strong> Lead JS Developer [[Github](https://github.com/Strikeeaglechase)]
 * <strong>VolcanoCookies:</strong> JS Developer [[Github](https://github.com/VolcanoCookies)]
-* <strong>AlexAndHisScripts/IHave:</strong>  Early Front End/JS Developer [[Github](https://github.com/AlexAndHisScripts)]
+* <strong>AlexAndHisScripts:</strong>  Early Front End [[Github](https://github.com/AlexAndHisScripts)]
+* <strong>IHaveNoLife:</strong> JS Developer [[Github]()]
 * <strong>Timothy Howard:</strong> UI/UX Developer [[Github](https://github.com/timhow38) | [Linkedin](https://www.linkedin.com/in/timhow20/)]
 * <strong>MuNk:</strong> Extensive API Testing [[Github]()]
 
 
 
 <details>
-  <summary><p style="display: inline-block">Thanks to the old Starmap team for the inspiration</p></summary>
+  <summary><p style="display: inline-block">Thanks to the old Starmap team for the insparation:</p></summary>
   <ol>
     <li>
-    <strong>Peter Shepherd:</strong> JS Developer [<a href="https://www.linkedin.com/in/peter-shepherd-a912a8201/">Linkedin</a>]
+    <strong>Peter Shepherd:</strong> JS Developer [<a href="https://www.linkedin.com/in/peter-shepherd-a912a8201/" target="_blank">Linkedin</a>]
     </li>
     <li>
-    <strong>Maximilian Lambert:</strong> JS Developer [<a href="https://www.linkedin.com/in/maximilian-lambert-00423b192/">Linkedin</a>]
+    <strong>Maximilian Lambert:</strong> JS Developer [<a href="https://www.linkedin.com/in/maximilian-lambert-00423b192/" target="_blank">Linkedin</a>]
     </li>
     <li>
-    <strong>Timothy Howard:</strong> UI/UX Developer [<a href="https://www.linkedin.com/in/timhow20/">Linkedin</a> | <a href="https://github.com/timhow38">Github</a>]
+    <strong>Timothy Howard:</strong> UI/UX Developer [<a href="https://www.linkedin.com/in/timhow20/ " target="_blank">Linkedin</a> | <a href="https://github.com/timhow38" target="_blank">Github</a>]
     </li>
   </ol>
 </details>
@@ -216,3 +230,4 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 [license-shield]: https://img.shields.io/github/license/Collective-SB/Starmap.svg?style=for-the-badge
 [license-url]: https://github.com/Collective-SB/Starmap/blob/master/LICENSE.txt
 [product-screenshot]: readme-assets/header-picture.png
+[product-screenshot02]: readme-assets/ISAN.svg

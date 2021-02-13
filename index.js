@@ -44,8 +44,11 @@ app.get(["/:pointId", "/"], async (req, res) => {
 		//For custom URL stuff
 		// const redir = getRedirect(req.params.pointId);
 		// if (redir) return res.redirect(redir);
-		const apiRes = await fetch(POINT_INFO_API + req.params.pointId, {
-			method: "GET",
+
+		//This API is being spammed, ratelimiting is being added on the backend to stop abuse
+		const ip = req.headers["cf-connecting-ip"] ? req.headers["cf-connecting-ip"] : req.ip;
+		const apiRes = await fetch(POINT_INFO_API + req.params.pointId + `?ip=${ip}`, {
+			method: "GET"
 		});
 		if (apiRes.status == 200) {
 			// 200 either means its a valid point, or a valid redirect, lets check

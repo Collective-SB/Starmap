@@ -31,7 +31,7 @@ const infoTemplate = `
 			<button id="focus">Focus</button>
 		</div>
 		<div class="infoDiv">
-			<img src=%TYPE_IMAGE% width="64" height="64">
+			<img src=%TYPE_IMAGE% width="64" height="64" alt="">
 		</div>
 	</div>
 	<p class="infoText" style="display: inline;">Creator: %CREATOR%</p>
@@ -40,7 +40,7 @@ const infoTemplate = `
 		<p class="infoText no-drag">%DESCRIPTION%</p>
 	</div>
 	<a href="%IMAGE_URL%" target="_blank">
-		<img src="%IMAGE_URL%" style="display:%IMAGE_DISPLAY%" class="infoImage">
+		<img src="%IMAGE_URL%" alt="" style="display:%IMAGE_DISPLAY%" class="infoImage">
 	</a>
 </div>
 `;
@@ -282,7 +282,7 @@ class App {
 		divElm.appendChild(this.sceneObjs.renderer.domElement);
 
 		//Eos
-		const tex = new THREE.TextureLoader().load("../assets/planetTex.png");
+		const tex = new THREE.TextureLoader().load("../assets/images/planetTex.webp");
 		const eosGem = new THREE.SphereGeometry(EOS_SIZE, EOS_QUALITY, EOS_QUALITY);
 		const eosMat = new THREE.MeshStandardMaterial({
 			// color: 0x2c3ca3,
@@ -324,14 +324,14 @@ class App {
 
 		if (ENABLE_SBOX) {
 			const skybox = new THREE.CubeTextureLoader()
-				.setPath("../assets/skybox/")
+				.setPath("../assets/images/skybox/")
 				.load([
-					"left.jpg",
-					"right.jpg",
-					"top.jpg",
-					"bot.jpg",
-					"front.jpg",
-					"back.jpg",
+					"left.webp",
+					"right.webp",
+					"top.webp",
+					"bot.webp",
+					"front.webp",
+					"back.webp",
 				]);
 			/*
 			const loader = new THREE.CubeTextureLoader();
@@ -351,8 +351,8 @@ class App {
 		//Add the clouds around Eos
 		const cloudText = new THREE.TextureLoader(
 			new THREE.LoadingManager(() => {})
-			// ).load("../assets/cloud3.png");
-		).load("https://i.ibb.co/hf26qqm/cloud3.png");
+			//).load("https://i.ibb.co/hf26qqm/cloud3.png");
+			).load("../assets/images/eos-cloud.webp");
 		const MESH_SIZE = 76;
 		const cloudGeom = new THREE.SphereGeometry(MESH_SIZE, EOS_QUALITY * 2, EOS_QUALITY * 2);
 		const cloudMat = new THREE.MeshStandardMaterial({
@@ -681,7 +681,7 @@ class App {
 
 		const startTime = Date.now()
 
-		const beltTexture = new THREE.TextureLoader().load("../assets/planetTex.png");
+		const beltTexture = new THREE.TextureLoader().load("../assets/images/planetTex.webp");
 
 		let beltMat = new THREE.MeshBasicMaterial({
 			color: 0xffffff,
