@@ -101,7 +101,8 @@ import {
 import {
 	constrain,
 	map,
-	copyToClipboard
+	copyToClipboard,
+	formatNumber
 } from "./functions.js";
 
 import PointManager from "./PointManager.js";
@@ -845,9 +846,9 @@ class App {
 		template = template.replace("%IMAGE_DISPLAY%", poiData.imageUrl ? "block" : "none");
 
 		const pos = poiData.info.gamePos;
-		template = template.replace("%POS_X%", pos.x);
-		template = template.replace("%POS_Y%", pos.y);
-		template = template.replace("%POS_Z%", pos.z);
+		template = template.replace("%POS_X%", formatNumber(pos.x));
+		template = template.replace("%POS_Y%", formatNumber(pos.y));
+		template = template.replace("%POS_Z%", formatNumber(pos.z));
 
 		var options = "";
 
