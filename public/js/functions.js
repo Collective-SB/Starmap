@@ -90,7 +90,7 @@ tubeLine.prototype.getObject3D = function () {
 	return object3d;
 };
 export function formatNumber(n) {
-	let str = n.toString();
+	let str = Math.abs(n).toString();
 	let newStr = "";
 	let p = 0;
 	for (var i = str.length - 1; i >= 0; i--) {
@@ -98,5 +98,6 @@ export function formatNumber(n) {
 		p++;
 		if (p % 3 == 0) newStr = " " + newStr;
 	}
-	return newStr.trim();
+	const ret = (Math.sign(n) == -1 ? "-" : "") + newStr.trim()
+	return ret;
 }
