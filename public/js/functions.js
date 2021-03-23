@@ -89,3 +89,14 @@ tubeLine.prototype.getObject3D = function () {
 	var object3d = new THREE.Mesh(geometryTube, material);
 	return object3d;
 };
+export function formatNumber(n) {
+	let str = n.toString();
+	let newStr = "";
+	let p = 0;
+	for (var i = str.length - 1; i >= 0; i--) {
+		newStr = str[i] + newStr;
+		p++;
+		if (p % 3 == 0) newStr = " " + newStr;
+	}
+	return newStr.trim();
+}
