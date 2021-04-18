@@ -12,11 +12,13 @@ export const URLS = {
 		local: "http://localhost:8000/",
 		prod: "https://api.isan.to/",
 		remoteDev: "https://api-beta.isan.to/",
+		lite: "https://api.isan.to/"
 	},
 	wss: {
 		local: "ws://localhost:8006/",
 		prod: "wss://ws.isan.to:443/",
 		remoteDev: "wss://ws-beta.isan.to:443/",
+		lite: "https://api.isan.to/",
 	},
 };
 export const EOS_SIZE = 11000000 / 2;
