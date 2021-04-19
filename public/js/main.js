@@ -194,13 +194,14 @@ class App {
 		this.UISetup();
 
 		this.setLoadingMessage("Loading assets...")
-
 		//See if we just completed OAuth2
 		if (window.location.search.includes("code")) {
 			try {
 				const code = window.location.search.substring("?code=".length);
 				const jwt = await this.api.getJWTFromCode(code);
-				if (jwt) this.storage.setItem("jwt", jwt);
+				if (jwt) {
+					this.storage.setItem("jwt", jwt);
+				}
 			} catch (e) {}
 		}
 		//Lets ensure the jwt is still valid (if we have one)
@@ -575,7 +576,7 @@ class App {
 			self.storage.removeItem("jwt"); // Remove old jwt
 
 			// setCookie("authRedirect", AUTH_REDIR, 1);
-			window.location.href = `${URLS.api[ENV]}auth/login?redir=${AUTH_REDIR}`;
+			window.location.href = URLS.login[ENV];
 		};
 		document.getElementById("logout").onclick = async function () {
 			if (app.user.isPubToken) {

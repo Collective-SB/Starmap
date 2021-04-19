@@ -7,16 +7,25 @@ export const ENV = ENV_FROM_ENVJS; //"remoteDev";
 export const AUTH_REDIR = AUTH_REDIR_FROM_ENVJS; //"beta";
 export const ENABLE_SBOX = true;
 
+export const SSO_URL = "https://sso.isan.to/login?service=";
 export const URLS = {
 	api: {
 		local: "http://localhost:8000/",
 		prod: "https://api.isan.to/",
+		lite: "https://api.isan.to/",
 		remoteDev: "https://api-beta.isan.to/",
 	},
 	wss: {
 		local: "ws://localhost:8006/",
 		prod: "wss://ws.isan.to:443/",
+		lite: "wss://ws.isan.to:443/",
 		remoteDev: "wss://ws-beta.isan.to:443/",
+	},
+	login: {
+		local: SSO_URL + "http://localhost/",
+		prod: SSO_URL + "https://isan.to/",
+		lite: SSO_URL + "http://lite.isan.to/",
+		remoteDev: SSO_URL + "http://localhost/",
 	},
 };
 export const EOS_SIZE = 11000000 / 2;
@@ -50,7 +59,7 @@ export const ZONE_OUTLINE_POINTS = 100;
 export const ZONE_INTERACTION_SIZE = 1000;
 export const ISAN_RANGE = 1000000;
 export const FPS_DROP_TIME = 1000 * 15; // 15 seconds of no mouse move
-export const HIGH_FPS_VAL = 120;
+export const HIGH_FPS_VAL = 60;
 export const LOW_FPS_VAL = 15;
 export const HEATMAN_TOTAL_IMAGES = 100;
 export const safePos = {
