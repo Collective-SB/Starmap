@@ -201,7 +201,6 @@ class App {
 				const jwt = await this.api.getJWTFromCode(code);
 				if (jwt) {
 					this.storage.setItem("jwt", jwt);
-					needPubToken = false;
 				}
 			} catch (e) {}
 		}
