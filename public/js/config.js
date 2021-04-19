@@ -7,18 +7,26 @@ export const ENV = ENV_FROM_ENVJS; //"remoteDev";
 export const AUTH_REDIR = AUTH_REDIR_FROM_ENVJS; //"beta";
 export const ENABLE_SBOX = true;
 
+export const SSO_URL = "https://sso.isan.to/login?service=";
 export const URLS = {
 	api: {
 		local: "http://localhost:8000/",
 		prod: "https://api.isan.to/",
+		lite: "https://api.isan.to/",
 		remoteDev: "https://api-beta.isan.to/",
 		lite: "https://api.isan.to/"
 	},
 	wss: {
 		local: "ws://localhost:8006/",
 		prod: "wss://ws.isan.to:443/",
+		lite: "wss://ws.isan.to:443/",
 		remoteDev: "wss://ws-beta.isan.to:443/",
-		lite: "https://api.isan.to/",
+	},
+	login: {
+		local: SSO_URL + "http://localhost/",
+		prod: SSO_URL + "https://isan.to/",
+		lite: SSO_URL + "http://lite.isan.to/",
+		remoteDev: SSO_URL + "http://localhost/",
 	},
 };
 export const EOS_SIZE = 11000000 / 2;
@@ -51,7 +59,6 @@ export const ZONE_WIRE_CUTOFF = 80000;
 export const ZONE_OUTLINE_POINTS = 100;
 export const ZONE_INTERACTION_SIZE = 1000;
 export const ISAN_RANGE = 1000000;
-
 export const safePos = {
 	x: EOS_SIZE + DIST_TO_BELT - SOLONS_OFFSET,
 	y: 0,
