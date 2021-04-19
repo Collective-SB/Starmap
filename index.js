@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 const fs = require("fs");
 require("dotenv").config();
 const app = express();
-const POINT_INFO_API = "https://api-beta.isan.to/front/getPointInfo/";
+const POINT_INFO_API = "https://api.isan.to/front/getPointInfo/";
 // const POINT_INFO_API = "http://localhost:8000/front/getPointInfo/"
 const IMGS = {
 	ship: "https://cdn.discordapp.com/attachments/762209257738207252/762209368925929472/ship.png",
