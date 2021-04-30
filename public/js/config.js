@@ -13,13 +13,13 @@ export const URLS = {
 		local: "http://localhost:8000/",
 		prod: "https://api.isan.to/",
 		lite: "https://api.isan.to/",
-		remoteDev: "https://api-beta.isan.to/",
+		remoteDev: "https://api.isan.to/",
 	},
 	wss: {
 		local: "ws://localhost:8006/",
 		prod: "wss://ws.isan.to:443/",
 		lite: "wss://ws.isan.to:443/",
-		remoteDev: "wss://ws-beta.isan.to:443/",
+		remoteDev: "wss://ws.isan.to:443/",
 	},
 	login: {
 		local: SSO_URL + "http://localhost/",
@@ -89,6 +89,8 @@ export const TYPES = {
 			name: "Default",
 			hex: "#f36a28",
 		}, ],
+		widthmult: 1,
+		heightmult: 1,
 	},
 	station: {
 		name: "station",
@@ -132,6 +134,8 @@ export const TYPES = {
 				hex: "#5794d5"
 			}
 		],
+		widthmult: 1,
+		heightmult: 1,
 	},
 	ore: {
 		name: "ore",
@@ -145,6 +149,53 @@ export const TYPES = {
 			name: "Default",
 			hex: "#8c63e8",
 		}, ],
+		widthmult: 1,
+		heightmult: 1,
+	},
+	"Military Capital Ship": {
+		name: "Military Capital Ship",
+		color: "#e62949",
+		info: "A Military Class Capital Ship",
+		icons: {
+			map: "../assets/icons/milcap-done.png",
+			info: "../assets/icons/milcap.png",
+		},
+		subtypes: [{
+			name: "Default",
+			hex: "#e62949",
+		}, ],
+		widthmult: 4.29801324503 * 0.5,
+		heightmult: 1 * 0.5,
+	},
+	"Civilian Capital Ship": {
+		name: "Civilian Capital Ship",
+		color: "#93f542",
+		info: "A Civilian Class Capital Ship",
+		icons: {
+			map: "../assets/icons/civcap-done.png",
+			info: "../assets/icons/civcap.png",
+		},
+		subtypes: [{
+			name: "Default",
+			hex: "#93f542",
+		}, ],
+		widthmult: 4.34343434343 * 0.5,
+		heightmult: 1 * 0.5,
+	},
+	"Warp Gate": {
+		name: "Warp Gate",
+		color: "#b642f5",
+		info: "A Warp Gate that can be used to go places quickly.",
+		icons: {
+			map: "../assets/icons/warpgate-done.png",
+			info: "../assets/icons/warpgate.png",
+		},
+		subtypes: [{
+			name: "Default",
+			hex: "#b642f5",
+		}, ],
+		widthmult: 1.3,
+		heightmult: 1.3,
 	},
 	other: {
 		name: "other",
@@ -158,5 +209,7 @@ export const TYPES = {
 			name: "Default",
 			hex: "#aaaaaa",
 		}, ],
+		widthmult: 1,
+		heightmult: 1,
 	},
 };
