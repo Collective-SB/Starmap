@@ -70,30 +70,14 @@ const viewFilterTemplate = `
 
 import {
 	EOS_SIZE,
-	DIST_TO_BELT,
-	BELT_THICK,
-	SAFE_LEN,
-	SAFE_RAD,
-	ENABLE_SBOX,
 	MARKER_SIZE_MIN,
 	MARKER_SIZE_MAX,
 	DIST_MIN,
 	DIST_MAX,
-	ISAN_RANGE,
-	safePos,
-	pointOffset,
 	TYPES,
 	AUTH_REDIR,
 	URLS,
 	ENV,
-	BELT_HEIGHT,
-	BELT_EDGE_RADIUS,
-	BELT_QUALITY,
-	EOS_QUALITY,
-	FPS_DROP_TIME,
-	LOW_FPS_VAL,
-	HIGH_FPS_VAL,
-	HEATMAN_TOTAL_IMAGES
 } from "./config.js";
 
 import {
@@ -130,11 +114,6 @@ class App {
 			camera: null,
 			scene: null,
 			renderer: null,
-			Eos: null,
-			Belt: null,
-			Safe: null,
-			EosClouds: null,
-			IsanSphere: null,
 		};
 		this.cameraController;
 		this.storage = localStorage;
@@ -164,12 +143,6 @@ class App {
 		this.frameInterval = 1000 / 60;
 		this.prevFrameTarget = 0;
 		this.lastMouseMoved = Date.now();
-		this.heatmap = [];
-		this.heatmapAnim = {
-			active: false,
-			idx: 0,
-			speed: 1,
-		}
 	}
 	enableStats() {
 		document.body.appendChild(this.stats.dom);
@@ -283,136 +256,14 @@ class App {
 		this.sceneObjs.renderer.setSize(window.innerWidth, window.innerHeight);
 		divElm.appendChild(this.sceneObjs.renderer.domElement);
 
-		//Eos
-		const tex = new THREE.TextureLoader().load("../assets/planetTex.png");
-		const eosGem = new THREE.SphereGeometry(EOS_SIZE, EOS_QUALITY, EOS_QUALITY);
-		const eosMat = new THREE.MeshStandardMaterial({
-			// color: 0x2c3ca3,
-			metalness: 0.8,
-			map: tex,
-			roughness: 1,
-			// wireframe: false,
-		});
-		this.sceneObjs.Eos = new THREE.Mesh(eosGem, eosMat);
-		this.sceneObjs.Eos.castShadow = true;
-		this.sceneObjs.scene.add(this.sceneObjs.Eos);
-
-		//Safe zone
-		var safeGem = new THREE.CylinderGeometry(
-			SAFE_RAD,
-			SAFE_RAD,
-			SAFE_LEN,
-			8,
-			4
-		);
-		var safeMat = new THREE.MeshBasicMaterial({
-			color: 0x009dd6, //0x009900,
-			wireframe: true,
-		});
-		const Safe = new THREE.Mesh(safeGem, safeMat);
-		Safe.position.set(safePos.x, safePos.y, safePos.z);
-		Safe.rotation.set(Math.PI / 2, 0, Math.PI / 2);
-		this.sceneObjs.Safe = Safe;
-		Safe.visible = false;
-		this.sceneObjs.scene.add(Safe);
-
-		//Creating some basic lighting
-		//This lighting dose not get saved, which may be a problem
-		var ambient = new THREE.AmbientLight(0xf0f0f0); // soft white light
-		this.sceneObjs.scene.add(ambient);
-		var light = new THREE.PointLight(0xffffff, 2);
-		light.position.set(EOS_SIZE * 4, EOS_SIZE * 4, EOS_SIZE);
-		this.sceneObjs.scene.add(light);
-
-		if (ENABLE_SBOX) {
-			const skybox = new THREE.CubeTextureLoader()
-				.setPath("../assets/skybox/")
-				.load([
-					"left.jpg",
-					"right.jpg",
-					"top.jpg",
-					"bot.jpg",
-					"front.jpg",
-					"back.jpg",
-				]);
-			/*
-			const loader = new THREE.CubeTextureLoader();
-
-			const skybox = loader.load([
-				"https://i.ibb.co/RBTc269/left.png",
-				"https://i.ibb.co/Qky4htz/right.png",
-				"https://i.ibb.co/bLczY5m/top.png",
-				"https://i.ibb.co/zrq0KLR/bot.png",
-				"https://i.ibb.co/TtpZB45/front.png",
-				"https://i.ibb.co/56d6cPp/back.png",
-			]);
-			*/
-			this.sceneObjs.scene.background = skybox;
-		}
-
-		//Add the clouds around Eos
-		const cloudText = new THREE.TextureLoader(
-			new THREE.LoadingManager(() => {})
-			// ).load("../assets/cloud3.png");
-		).load("https://i.ibb.co/hf26qqm/cloud3.png");
-		const MESH_SIZE = 76;
-		const cloudGeom = new THREE.SphereGeometry(MESH_SIZE, EOS_QUALITY * 2, EOS_QUALITY * 2);
-		const cloudMat = new THREE.MeshStandardMaterial({
-			color: 0xcdddfd,
-			transparent: true,
-			opacity: 0.3,
-			alphaMap: cloudText,
-		});
-		cloudMat.depthWrite = false;
-		this.sceneObjs.EosClouds = new THREE.Mesh(cloudGeom, cloudMat);
-		this.sceneObjs.EosClouds.scale.set(
-			EOS_SIZE / (MESH_SIZE - 0.1),
-			EOS_SIZE / (MESH_SIZE - 0.1),
-			EOS_SIZE / (MESH_SIZE - 0.1)
-		);
-		this.sceneObjs.scene.add(this.sceneObjs.EosClouds);
-
-		const isanGeom = new THREE.SphereGeometry(ISAN_RANGE, 32, 32);
-		const isanMat = new THREE.MeshStandardMaterial({
-			color: 0x00ff00,
-			transparent: true,
-			opacity: 0.3,
-			// side: THREE.DoubleSide,
-		});
-		this.sceneObjs.IsanSphere = new THREE.Mesh(isanGeom, isanMat);
-		this.sceneObjs.IsanSphere.position.set(
-			pointOffset.x,
-			pointOffset.y,
-			pointOffset.z
-		);
-		this.sceneObjs.scene.add(this.sceneObjs.IsanSphere);
-
+		// this.sceneObjs.scene.background = new THREE.Color("#05377a");
+		this.sceneObjs.scene.background = new THREE.Color("#002846");
 		//Create the cam controller
 		this.cameraController = new CamController(
 			this.sceneObjs.camera,
 			this.sceneObjs.renderer.domElement,
 			this
 		);
-	}
-
-	async makeBeltLayer(height, innerOverride, outerOverride, material) {
-		var beltGem = new THREE.RingGeometry(
-			EOS_SIZE + DIST_TO_BELT + innerOverride,
-			EOS_SIZE + DIST_TO_BELT + BELT_THICK + outerOverride,
-			BELT_QUALITY,
-			1,
-		);
-
-		const Belt = new THREE.Mesh(beltGem, material);
-		Belt.material.side = THREE.DoubleSide;
-		Belt.rotation.set(Math.PI / 2, 0, 0);
-		this.sceneObjs.Belt = Belt;
-
-		this.sceneObjs.Belt.position.set(0, height, 0)
-
-		//Belt.matrixAutoUpdate = false
-
-		this.sceneObjs.scene.add(Belt);
 	}
 
 	//Casts a ray and returns what points are hit
@@ -483,9 +334,6 @@ class App {
 		});
 		// Settings popup
 		this.settings.init();
-
-		this.makeBelt()
-
 
 		// Calculator popup
 		this.calculator.init();
@@ -672,62 +520,6 @@ class App {
 		};
 	}
 
-	async makeBelt() {
-		//Belt
-		const startPos = 0 - (BELT_HEIGHT / 2)
-		const endPos = 0 + (BELT_HEIGHT / 2)
-
-		const BELT_RING_COUNT = this.beltSamples
-		const BELT_TRANSPARENCY = this.beltTransparency
-
-		let i = 0;
-
-		const startTime = Date.now()
-
-		const beltTexture = new THREE.TextureLoader().load("../assets/planetTex.png");
-
-		let beltMat = new THREE.MeshBasicMaterial({
-			color: 0xffffff,
-			opacity: (BELT_TRANSPARENCY / BELT_RING_COUNT),
-			transparent: true,
-		});
-
-		beltMat.depthWrite = false;
-		beltMat.needsUpdate = true;
-
-		if (BELT_RING_COUNT == 2) {
-			this.makeBeltLayer(0, -35000, 0, beltMat)
-		} else {
-			while (i < BELT_RING_COUNT - 1) {
-				i++
-
-				let height = startPos + ((BELT_HEIGHT / BELT_RING_COUNT) * i)
-
-				let distToCentre;
-
-				if (height > 0) {
-					distToCentre = i - (BELT_RING_COUNT / 2)
-				} else if (height === 0) {
-					distToCentre = 0
-				} else {
-					distToCentre = (BELT_RING_COUNT / 2) - i
-				}
-
-				let distToEdge = (BELT_RING_COUNT / 2) - distToCentre
-
-				//Thanks to g.w.a.c.a for the help with creating this
-				let x = Math.sqrt(distToEdge / BELT_RING_COUNT)
-				let offset = -x * BELT_EDGE_RADIUS
-
-				this.makeBeltLayer(height, offset, (-offset * 25), beltMat)
-			}
-		}
-
-		const endTime = Date.now()
-
-		console.log(endTime - startTime + "ms to load the belt.")
-	}
-
 	updateSubtypes(newType, defaultTo) {
 		const dropDownSubtypes = document.getElementById("subtype-select");
 		dropDownSubtypes.innerHTML = "";
@@ -749,66 +541,6 @@ class App {
 
 	arrowHoverEffectEnd(element) {
 		element.innerText = element.innerText.slice(2, -2)
-	}
-	showHeatLayers(name, opacity = 1) {
-		function fromGamePos(position) {
-			return {
-				x: position.y + pointOffset.x,
-				y: position.z + pointOffset.y,
-				z: -position.x + pointOffset.z,
-			};
-		}
-
-		function prefixZeros(num, len) {
-			let ret = num.toString();
-			while (ret.length < len) {
-				ret = "0" + ret;
-			}
-			return ret;
-		}
-
-		const mins = {
-			x: -1000000,
-			y: -1000000,
-			z: -1000000
-		}
-		const maxs = {
-			x: 1000000,
-			y: 1000000,
-			z: 1000000
-		}
-		const pos = fromGamePos(mins);
-		const imgWidth = 500;
-		const imgHeight = 500;
-		const planeWidth = (maxs.x - mins.x);
-		const planeHeight = (maxs.y - mins.y);
-		const scaleX = planeWidth / imgWidth;
-		const scaleY = planeHeight / imgHeight;
-		const ySteps = (maxs.z - mins.z) / HEATMAN_TOTAL_IMAGES; // Reeee ISAN why is "Z" up/down not "Y"
-		// Create the planes
-		let imgIdx = 0;
-		const loader = new THREE.TextureLoader();
-		// "frame_${imgIdx}_delay-0.1s.png"
-		for (let y = mins.z; y < maxs.z; y += ySteps) {
-			const texture = loader.load(`assets/heatmap/${name}/frame_${prefixZeros(imgIdx, 3)}_delay-0.1s.png`);
-			const alphaTexture = loader.load(`assets/heatmap/${name}/frame_${prefixZeros(imgIdx, 3)}_delay-0.1s.png-alpha.png`);
-			imgIdx++;
-			const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight, 8, 8);
-			const material = new THREE.MeshBasicMaterial({
-				// color: 0xffff00,
-				side: THREE.DoubleSide,
-				map: texture,
-				alphaMap: alphaTexture,
-				transparent: true,
-				opacity: opacity,
-				// wireframe: true
-			});
-			const plane = new THREE.Mesh(geometry, material);
-			plane.position.set(pos.x + planeWidth / 2, y, pos.z - planeHeight / 2);
-			plane.rotation.set(Math.PI / 2, 0, 0);
-			this.sceneObjs.scene.add(plane);
-			this.heatmap.push(plane);
-		}
 	}
 	//Fills out the info pannel whenever a point is clicked on
 	handleObjectClick(object) {
@@ -949,7 +681,6 @@ class App {
 	}
 	//Main running loop, called ~60x per second
 	run() {
-		this.sceneObjs.EosClouds.rotation.y += 0.0001;
 		const dist = constrain(this.cameraController.dist, DIST_MIN, DIST_MAX);
 		const markerScale = map(
 			dist,
@@ -967,21 +698,6 @@ class App {
 			sidenav.style.width = "175px";
 		} else {
 			sidenav.style.width = "160px";
-		}
-		if (Date.now() - this.lastMouseMoved < FPS_DROP_TIME) {
-			this.setFpsTarget(HIGH_FPS_VAL);
-		} else {
-			this.setFpsTarget(LOW_FPS_VAL)
-		}
-		if (this.heatmapAnim.active) {
-			this.heatmap.forEach(plane => plane.visible = false);
-			this.heatmap[Math.floor(this.heatmapAnim.idx)].visible = true;
-			this.heatmapAnim.idx += this.heatmapAnim.speed;
-			if (this.heatmapAnim.idx >= this.heatmap.length || this.heatmapAnim.idx < 0) {
-				this.heatmapAnim.speed *= -1;
-				if (this.heatmapAnim.idx >= this.heatmap.length) this.heatmapAnim.idx--;
-				else this.heatmapAnim.idx++;
-			}
 		}
 		//Check hovers
 		const hovers = this.castRay(mouseX, mouseY);
@@ -1200,37 +916,20 @@ class App {
 		}, 4000);
 	}
 
-	async setFpsTarget(target) {
-		if (this.prevFrameTarget != target) {
-			console.log(`FPS target changed from ${this.prevFrameTarget} to ${target}`);
-			this.prevFrameTarget = target;
-		}
-		this.frameInterval = 1000 / target;
-	}
 }
 
 const app = new App();
 window.app = app;
 
-let now, delta, then = Date.now();
-
 function animate() {
 	requestAnimationFrame(animate);
-	now = Date.now();
-	delta = now - then;
-	//update time dependent animations here at 30 fps
-	if (delta > app.frameInterval) {
-		app.stats.begin();
-		app.run();
-		app.stats.end();
-		then = now - (delta % app.frameInterval);
-	}
+	app.stats.begin();
+	app.run();
+	app.stats.end();
+
 }
 
 window.onload = function () {
 	app.init();
-	// setTimeout(() => {
-	// 	app.showHeatLayers()
-	// }, 1500);
 	animate();
 };
