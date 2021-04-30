@@ -118,8 +118,8 @@ class Point {
 		this.app.sceneObjs.scene.add(line);
 
 		const markerGeometry = new THREE.PlaneGeometry(
-			MARKER_SIZE * TYPES[data.type].widthmult,
-			MARKER_SIZE * TYPES[data.type].heightmult,
+			MARKER_SIZE,
+			MARKER_SIZE,
 			3,
 			3
 		);
