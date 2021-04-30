@@ -321,6 +321,14 @@ class Point {
 		const color = TYPES[pointData.type].subtypes.find(
 			(stype) => stype.name == pointData.subtype
 		).hex;
+
+		this.marker.geometry = new THREE.PlaneGeometry(
+			MARKER_SIZE * TYPES[pointData.type].widthmult,
+			MARKER_SIZE * TYPES[pointData.type].heightmult,
+			3,
+			3
+		);
+
 		const noNameChange = this.info.name == pointData.name;
 		const noPosChange =
 			pointData.pos.x == this.info.gamePos.x &&
