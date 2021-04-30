@@ -28,11 +28,60 @@ const SETTINGS_DEF = [{
 	// 	},
 	// },
 	{
+		id: "eosDisp",
+		default: true,
+		prop: "checked",
+		set: function (val) {
+			this.sceneObjs.Eos.visible = val;
+		},
+	},
+	{
 		id: "dampFact",
 		default: 0.05,
 		prop: "value",
 		set: function (val) {
 			this.cameraController.orbitCtrl.dampingFactor = parseFloat(val);
+		},
+	},
+	{
+		id: "beltSamples",
+		default: 16,
+		prop: "value",
+		set: function (val) {
+			let newVal;
+
+			if (val == 2) {
+				newVal = 1
+			} else {
+				newVal = val
+			}
+			app.beltSamples = val
+			document.getElementById("beltSampleDisplay").innerText = newVal
+		},
+	},
+	{
+		id: "beltTransparency",
+		default: 0.8,
+		prop: "value",
+		set: function (val) {
+			app.beltTransparency = val
+			document.getElementById("beltTransparencyDisplay").innerText = val
+		},
+	},
+	{
+		id: "cloudDisp",
+		default: true,
+		prop: "checked",
+		set: function (val) {
+			this.sceneObjs.EosClouds.visible = val;
+		},
+	},
+	{
+		id: "isanRangeDisp",
+		default: false,
+		prop: "checked",
+		set: function (val) {
+			this.sceneObjs.IsanSphere.visible = val;
 		},
 	},
 	{

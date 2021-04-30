@@ -3,8 +3,7 @@
 import {
 	EOS_SIZE,
 	ZOOM_INTO_DIST,
-	CAM_MAX_ZOOM,
-	safePos
+	CAM_MAX_ZOOM
 } from "./config.js";
 export default class CamController {
 	constructor(camera, domElm, app) {
@@ -45,9 +44,9 @@ export default class CamController {
 		this.orbitCtrl.keys.DOWN = 0;
 
 		this.orbitCtrl.target.set(
-			safePos.x,
-			safePos.y,
-			safePos.z
+			this.app.sceneObjs.Safe.position.x,
+			this.app.sceneObjs.Safe.position.y,
+			this.app.sceneObjs.Safe.position.z
 		);
 		this.orbitCtrl.enableDamping = true;
 		this.orbitCtrl.maxDistance = CAM_MAX_ZOOM;
