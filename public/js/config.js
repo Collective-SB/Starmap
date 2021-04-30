@@ -14,7 +14,6 @@ export const URLS = {
 		prod: "https://api.isan.to/",
 		lite: "https://api.isan.to/",
 		remoteDev: "https://api.isan.to/",
-		lite: "https://api.isan.to/"
 	},
 	wss: {
 		local: "ws://localhost:8006/",
@@ -59,6 +58,10 @@ export const ZONE_WIRE_CUTOFF = 80000;
 export const ZONE_OUTLINE_POINTS = 100;
 export const ZONE_INTERACTION_SIZE = 1000;
 export const ISAN_RANGE = 1000000;
+export const FPS_DROP_TIME = 1000 * 15; // 15 seconds of no mouse move
+export const HIGH_FPS_VAL = 60;
+export const LOW_FPS_VAL = 15;
+export const HEATMAN_TOTAL_IMAGES = 100;
 export const safePos = {
 	x: EOS_SIZE + DIST_TO_BELT - SOLONS_OFFSET,
 	y: 0,
