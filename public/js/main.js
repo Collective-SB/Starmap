@@ -6,15 +6,13 @@ const infoTemplate = `
 	<div class="more-info">
 		<span class="material-icons" onmouseover="hoverHandler()">help</span>
 		<span class="more-info-tooltip">
-			Type: %TYPE%
-			<br>
 			Created: %CREATED_AT%
 			<br>
 			Edited: %EDITED_AT%
 		</span>
 	</div>
 
-	<h1 class="infoText no-drag">%POINT_NAME%</h1>
+	<h1 class="infoText no-drag" style="display: inline;">%POINT_NAME%</h1> %BRINJECT% <span class="infoText" style="display: inline;">(%TYPE%)</span>
 
 	<div class="infoMainBody">
 		<div class="isanDispalyDiv">
@@ -831,6 +829,13 @@ class App {
 		var template = infoTemplate;
 
 		template = template.replace("%POINT_NAME%", poiData.info.name);
+
+		if (((2 * poiData.info.name.length) + poiData.info.type.length) > 39) {
+			template = template.replace("%BRINJECT%", "</br>");
+		} else {
+			template = template.replace("%BRINJECT%", "");
+		}
+
 		template = template.replace("%CREATOR%", poiData.info.createdBy);
 		template = template.replace("%DESCRIPTION%", poiData.info.desc);
 		template = template.replace("%TYPE%", poiData.info.type);

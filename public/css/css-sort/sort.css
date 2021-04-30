@@ -269,6 +269,11 @@ button:hover {
   box-shadow: var(--box-boxshadow);
 }
 
+.layerheader:hover {
+  background-color: var(--user-style);
+  color: var(--user-style-02);
+}
+
 .sidenav-bottom {
   display: flex;
   flex-direction: column;
