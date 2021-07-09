@@ -38,12 +38,20 @@
 }
 
 .win-prop .win-prop-close {
-	position: absolute;
-	color: var(--red);
-	top: 3px;
-	right: 3px;
-	user-select: none;
-	z-index: 2;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 5px;
+    user-select: none;
+    position: absolute;
+    top: -1.3em;
+    right: 3%;
+    background-color: var(--user-style-02);
+    border: var(--user-style) 4px solid;
+    width: fit-content;
+    border-radius: 10px;
+    padding: 5px;
+    z-index: 2;
+    color: var(--user-style-03);
 }
 
 .win-prop .win-prop-close:hover {
