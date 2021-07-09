@@ -38,10 +38,10 @@ select:focus {
 
 button {
   font-family: var(--main-font-Squada);
-  background-color: transparent;
-  color: var(--user-style);
+  background-color: var(--user-style);
+  color: var(--user-style-03);
   border-width: 1px;
-  border-color: var(--user-style);
+  border-color: var(--user-style-02);
   padding-top: 2px;
   padding-bottom: 2px;
   transition: color 0.25s;
@@ -113,7 +113,7 @@ button:hover {
 .button-row button {
   display: inline-flex;
   justify-content: center;
-  color: var(--user-style);
+  color: var(--user-style-03);
   flex-grow: 1;
   cursor: var(--main-cursor-pointer);
   border-width: 0px 0px;
@@ -182,9 +182,10 @@ button:hover {
   margin-top: 0.5em;
   height: 100vh;
   overflow: auto;
-  -webkit-box-shadow: var(--webkit-boxshadow-blue);
+  /*-webkit-box-shadow: var(--webkit-boxshadow-blue);
   -moz-box-shadow: var(--moz-boxshadow-blue);
   box-shadow: var(--box-boxshadow-blue);
+  */
 }
 
 .sidenav {
@@ -220,7 +221,7 @@ button:hover {
 
 .sidenav a {
   text-align: center;
-  background-color: whitesmoke;
+  background-color: var(--user-style-03);
   color: #333;
 
   text-decoration: none;
@@ -235,12 +236,12 @@ button:hover {
 
 .sidenav a:hover {
   background-color: #333;
-  color: whitesmoke;
+  color: var(--user-style-03);
 }
 
 
 .sidenav p {
-
+  color: var(--user-style-03);
   padding: 0px 8px 6px 10px;
   margin: 0;
   text-decoration: none;
@@ -258,8 +259,8 @@ button:hover {
 
 .layerheader {
   cursor: var(--main-cursor-pointer);
-  background-color: #0872e2;
-  color: var(--user-style-02);
+  background-color: var(--user-style);
+  color: var(--user-style-03);
   
   text-align: center;
   border-radius: 5px;
@@ -309,7 +310,7 @@ button:hover {
   border: 2px dashed var(--user-style);
 
   outline: none;
-  background-color: #111;
+  background-color: var(--user-style);
   font-size: 16px;
 
   min-height: 48px;
@@ -317,7 +318,7 @@ button:hover {
   transition: color 0.25s;
   transition: background 0.25s;
 
-  color: var(--user-style);
+  color: var(--user-style-03);
 }
 
 #new-point span {
@@ -325,9 +326,7 @@ button:hover {
 }
 
 #new-point:hover {
-  border: 2px dashed var(--user-style);
-  background-color: var(--user-style);
-  color: #111;
+
 }
 
 .search-hide {
@@ -344,7 +343,7 @@ button:hover {
   min-height: 12px;
   padding: 10px;
   z-index: 2;
-  color: whitesmoke;
+  color: var(--user-style-03);
 }
 
 #dropdown-minimize {
@@ -414,7 +413,7 @@ button:hover {
 
 #login {
   background-color: var(--user-style);
-  color: #111111;
+  color: var(--user-style-03);
   width: 100%;
   border: none;
   text-align: center;
@@ -434,7 +433,7 @@ button:hover {
 
 #login:hover {
   background-color: var(--user-style);
-  color: #111;
+  color: var(--user-style-03);
   transform: scale(1.1);
 }
 
@@ -536,7 +535,7 @@ button:hover {
   border: solid 3px var(--user-style);
   
   border-radius: 100px;
-  background-color: var(--user-style-02);
+  background-color: var(--user-style-03);
 }
 
 .info-container {
@@ -622,7 +621,7 @@ button:hover {
 .info #delete-point {
   margin: 5px 0;
   background-color: var(--red);
-  color: whitesmoke;
+  color: var(--user-style-03);
   outline: none;
   border: solid 1px whitesmoke;
   width: 100%;
@@ -632,7 +631,7 @@ button:hover {
 
 .info #delete-point:hover {
   background-color: var(--red-hover);
-  color: whitesmoke;
+  color: var(--user-style-03);
 }
 
 /* Update point Button */
@@ -642,7 +641,7 @@ button:hover {
   margin: 5px 0;
   /* CSS has variables??? W H A T */
   background-color: var(--red);
-  color: whitesmoke;
+  color: var(--user-style-03);
   outline: none;
   border: solid 1px whitesmoke;
   width: 100%;
@@ -652,21 +651,21 @@ button:hover {
 
 .info #update-point:hover {
   background-color: var(--red-hover);
-  color: whitesmoke;
+  color: var(--user-style-03);
 }
 
 /* Groups page */
 
 h1 {
-  color: whitesmoke;
+  color: var(--user-style-03);
 }
 
 p {
-  color: whitesmoke;
+  color: var(--user-style-03);
 }
 
 .back-index {
-  background-color: whitesmoke;
+  background-color: var(--user-style-03);
   color: #333;
 
   text-decoration: none;
@@ -676,7 +675,7 @@ p {
 
 .back-index:hover {
   background-color: #333;
-  color: whitesmoke;
+  color: var(--user-style-03);
 }
 
 .back-index span {
@@ -723,7 +722,7 @@ input {
   background-color: #111;
   border: var(--user-style) 2px solid;
   overflow: visible;
-  color: #fff;
+  color: var(--user-style-03);
   text-align: center;
   padding: 5px 0;
   border-radius: 6px;
@@ -855,7 +854,7 @@ input {
 .accordion {
   background-color: var(--user-style);
     border: 4px solid var(--user-style);
-    color: #fff;
+    color: var(--user-style-03);
     cursor: pointer;
     
     width: 100%;
@@ -1088,7 +1087,7 @@ content
  padding-bottom: 2px;
  border-bottom: 1px solid #fc0;
  background: rgba( 0, 0, 0, 0.8 );
- color: #fff;
+ color: var(--user-style-03);
  font-family: 'Orbitron';
  text-transform: uppercase;
  text-shadow: 0 0 2px #000;

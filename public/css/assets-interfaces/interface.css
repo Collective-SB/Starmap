@@ -30,7 +30,7 @@
 	padding: 1em;
     padding-top: 2em;
 	z-index: 1;
-	color: whitesmoke;
+	color: var(--user-style-03);
 }
 
 .win-prop:hover {
@@ -67,19 +67,27 @@
 	padding: 1em;
     padding-top: 2em;
 	z-index: 1;
-	color: whitesmoke;
+	color: var(--user-style-03);
 }
 .settings:hover {
 	opacity: 1;
 }
 
 .settings .settings-close {
-	position: absolute;
-	color: var(--red);
-	top: 3px;
-	right: 3px;
-	user-select: none;
-	z-index: 2;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 5px;
+    user-select: none;
+    position: absolute;
+    top: -1.3em;
+    right: 3%;
+    background-color: var(--user-style-02);
+    border: var(--user-style) 4px solid;
+    width: fit-content;
+    border-radius: 10px;
+    padding: 5px;
+    z-index: 2;
+	color: var(--user-style-03);
 }
 
 .settings .settings-close:hover {
