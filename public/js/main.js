@@ -494,7 +494,7 @@ class App {
 		$(".add-point").draggable({
 			containment: "document",
 		});
-		$(".add-point .close").click(function () {
+		$(".win-prop-close").click(function () {
 			$(this).parent().hide();
 		});
 		// New point button

@@ -240,11 +240,11 @@ button:hover {
 
 
 .sidenav p {
+
   padding: 0px 8px 6px 10px;
   margin: 0;
   text-decoration: none;
   font-size: 15px;
-  color: var(--user-style);
   display: block;
   cursor: var(--main-cursor-pointer);
   text-align: center;
@@ -252,13 +252,15 @@ button:hover {
 }
 
 .sidenav-point:hover {
-  color: #111;
+  color: var(--user-style-02);
   background-color: var(--user-style);
 }
 
 .layerheader {
   cursor: var(--main-cursor-pointer);
-  color: var(--user-style);
+  background-color: #0872e2;
+  color: var(--user-style-02);
+  
   text-align: center;
   border-radius: 5px;
   margin: 5px !important;
@@ -864,12 +866,13 @@ input {
   }
 
 .accordion:hover {
+  color: #fff;
   }
 
   .accordion:after {
     width: 10px;
 	content: '\002B';
-	color: var(--user-style-02);
+	color: #fff;
 	font-weight: bold;
 	float: right;
 	margin-left: 5px;
@@ -877,7 +880,7 @@ input {
 
   .active:after {
 	content: "\2212";
-	color: #111;
+	color: #fff;
   }
 
   .panel {

@@ -150,7 +150,9 @@
 	"desc-01-03 option-01-03"
 	"desc-01-04 option-01-04"
 	"desc-01-05 option-01-05"
-	"desc-01-06 option-01-06";
+	"desc-01-06 option-01-06"
+	"desc-01-07 option-01-07"
+	"desc-01-08 option-01-08";
 }
 .desc-01-01 { grid-area: desc-01-01; }
 .desc-01-02 { grid-area: desc-01-02; }
@@ -158,12 +160,16 @@
 .desc-01-04 { grid-area: desc-01-04; }
 .desc-01-05 { grid-area: desc-01-05; }
 .desc-01-06 { grid-area: desc-01-06; }
+.desc-01-07 { grid-area: desc-01-07; }
+.desc-01-08 { grid-area: desc-01-08; }
 .option01 { grid-area: option-01-01; }
 .option02 { grid-area: option-01-02; }
 .option03 { grid-area: option-01-03; }
 .option04 { grid-area: option-01-04; }
 .option05 { grid-area: option-01-05; }
 .option06 { grid-area: option-01-06; }
+.option07 { grid-area: option-01-07; }
+.option08 { grid-area: option-01-08; }
 .text-center {
   text-align: center;
 }
@@ -193,4 +199,47 @@
 .option-02-05 { grid-area: option-02-05; }
 .text-center {
   text-align: center;
+}
+
+
+
+/*Chrome*/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    input[type='range'] {
+		overflow: hidden;
+		width: 100%;
+		-webkit-appearance: none;
+		background-color: #ffffff;
+		border: 4px solid var(--user-style);
+    }
+    
+    input[type='range']::-webkit-slider-runnable-track {
+      height: 10px;
+      -webkit-appearance: none;
+      color: var(--user-style);
+      margin-top: -1px;
+    }
+    
+    input[type='range']::-webkit-slider-thumb {
+      width: 10px;
+      -webkit-appearance: none;
+      height: 10px;
+      cursor: ew-resize;
+      background: var(--user-style);
+    }
+
+}
+/** FF*/
+input[type="range"]::-moz-range-progress {
+  background-color: var(--user-style);
+}
+input[type="range"]::-moz-range-track {  
+  background-color: #fff;
+}
+/* IE*/
+input[type="range"]::-ms-fill-lower {
+  background-color: var(--user-style);
+}
+input[type="range"]::-ms-fill-upper {  
+  background-color: #fff;
 }
