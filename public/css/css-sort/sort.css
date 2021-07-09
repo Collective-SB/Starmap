@@ -12,6 +12,7 @@ html {
   margin: 0;
   background-color: var(--background-color-01);
   font-family: var(--main-font-Squada);
+ 
 }
 
 input,
@@ -269,11 +270,6 @@ button:hover {
   box-shadow: var(--box-boxshadow);
 }
 
-.layerheader:hover {
-  background-color: var(--user-style);
-  color: var(--user-style-02);
-}
-
 .sidenav-bottom {
   display: flex;
   flex-direction: column;
@@ -342,7 +338,6 @@ button:hover {
   position: absolute;
   right: 10px;
   top: 10px;
-  max-height: 300px;
   min-width: 12px;
   min-height: 12px;
   padding: 10px;
@@ -392,8 +387,7 @@ button:hover {
 
 .infoImage {
   border: dashed 2px var(--user-style);
-  /*transform: rotate(7deg); */
-  max-width: 270px;
+  max-width: 20em;
   max-height: 270px;
   margin-top: 10px;
   transition: all 0.2s ease-in-out;
@@ -553,34 +547,45 @@ button:hover {
 
 .more-info {
   width: fit-content;
-  right: 30px;
+  left: -1em;
   position: absolute;
-  top: 4px;
+  bottom: -1em;
 }
+
+.more-info .material-icons {
+  border: solid 3px var(--user-style);
+  
+  border-radius: 100px;
+  background-color: var(--user-style-02);
+}
+
+.info-container {
+  color: var(--user-style);
+}
+
+
 
 .more-info .more-info-tooltip {
   visibility: hidden;
   width: max-content;
-  background-color: #111;
+  background-color: var(--user-style-02);
   border: var(--user-style) 2px solid;
   overflow: visible;
   color: #fff;
   text-align: center;
-  padding: 5px 0;
+  padding: 5px 10px;
   border-radius: 6px;
-
   position: absolute;
   z-index: 2;
-  bottom: 100%;
+  top: 100%;
 }
 
 .more-info .more-info-tooltip::after {
   content: " ";
   position: absolute;
-  top: 100%;
+  bottom: 100%;
   /* At the bottom of the tooltip */
   left: 50%;
-  margin-left: -5px;
   background-color: #111;
   border: var(--user-style) 2px solid;
 }
@@ -591,8 +596,9 @@ button:hover {
 
 .infoMainBody {
   display: flex;
+  justify-content: space-between;
   flex-direction: row;
-  margin-bottom: 0.5em;
+  margin: 0.5em;
 }
 
 .isanDispalyDiv {
@@ -604,13 +610,14 @@ button:hover {
 .desc {
   border: 1px solid gray;
   margin-top: 10px;
-  max-width: min-content;
-  min-width: 100%;
+  
+  max-width: 20em;
+
   word-break: break-word;
 }
 
 .infoDiv {
-  margin-left: 10px;
+  
 }
 
 .infoDiv button {
@@ -906,6 +913,7 @@ input {
 	max-height: 0;
 	overflow: hidden;
 	transition: max-height 0.2s ease-out;
+  border-radius: 0px 0px 10px 10px;
   }
 
 
@@ -985,6 +993,7 @@ input {
 
 .loader-svg {
 	font-family: var(--main-font-Squada);
+  
 }
 
 #loading-elevated > svg > g > text {
@@ -1108,7 +1117,7 @@ content
 {
  margin-top: 10px;
  font-family: 'Orbitron';
- font-size: 12px;
+ font-size: 13px;
  letter-spacing: 2px;
 }
 #blog-content .my-post p:not(last-child)

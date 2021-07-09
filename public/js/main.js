@@ -501,7 +501,7 @@ class App {
 		const self = this;
 		$("#new-point").click(function () {
 			if (app.user.isPubToken) {
-				app.modalConfirm("You need to login to do that.")
+				app.modalConfirm("Login Required")
 				return;
 			}
 			self.updateFormMode.call(self, "create");
@@ -1136,6 +1136,8 @@ class App {
 			this.lastLoginState = true;
 		} else {
 			loginBtn.style.display = "block";
+			logout.style.display = "none";
+			document.getElementById("new-point").style.display = "none";
 			// logoutBtn.style.display = "none";
 			if (this.lastLoginState) {
 				this.onLogout();
