@@ -10,11 +10,45 @@
 	-moz-box-shadow: var(--moz-boxshadow);
 	box-shadow: var(--box-boxshadow);
 	background-color: var(--user-style-02);
-	border: solid 2px var(--user-style);
+	border: solid 5px var(--user-style);
 
 }
 
 .ui-draggable:hover {
+}
+
+.win-prop {
+	min-width: 25em;
+    min-height: 20em;
+	max-width: 25em;
+    max-height: 20em;
+	display: none;
+	opacity: 0.5;
+	position: absolute;
+	left: 20%;
+	top: 10%;
+	padding: 1em;
+    padding-top: 2em;
+	z-index: 1;
+	color: whitesmoke;
+}
+
+.win-prop:hover {
+	opacity: 1;
+}
+
+.win-prop .win-prop-close {
+	position: absolute;
+	color: var(--red);
+	top: 3px;
+	right: 3px;
+	user-select: none;
+	z-index: 2;
+}
+
+.win-prop .win-prop-close:hover {
+	cursor: pointer;
+	transform: scale(1.2);
 }
 /*
 |*************************************************************************;
@@ -23,16 +57,15 @@
 */
 
 .settings {
-
-	min-width: 12px;
-	min-height: 12px;
+	min-width: 25em;
+    min-height: 20em;
 	display: none;
 	opacity: 0.5;
 	position: absolute;
 	left: 20%;
 	top: 10%;
-
-	padding: 5px;
+	padding: 1em;
+    padding-top: 2em;
 	z-index: 1;
 	color: whitesmoke;
 }
@@ -61,15 +94,6 @@
 */
 
 .add-point {
-	display: none;
-	position: absolute;
-	left: 20%;
-	top: 10%;
-	min-width: 12px;
-	min-height: 12px;
-	padding: 5px;
-	z-index: 1;
-	color: whitesmoke;
 }
 
 .add-point form {
@@ -104,7 +128,7 @@
 
 	background-color: var(--user-style-02);
 	color: var(--user-style);
-	border: 2px var(--user-style) solid;
+	border: 4px var(--user-style) solid;
 
 	transition: color 0.25s;
 }
@@ -123,19 +147,19 @@
 
 input[type="text"] {
 	background-color: var(--user-style-02);
-	border: 2px var(--user-style) solid;
+	border: 4px var(--user-style) solid;
 	color: var(--user-style);
 }
 
 input[type="number"] {
 	background-color: var(--user-style-02);
-	border: 2px var(--user-style) solid;
+	border: 4px var(--user-style) solid;
 	color: var(--user-style);
 }
 
 .genericbutton {
 	background-color: var(--user-style-02);
-	border: 2px var(--user-style) solid;
+	border: 4px var(--user-style) solid;
 	color: var(--user-style);
 
 	transition: color 0.25s;
@@ -143,7 +167,7 @@ input[type="number"] {
 
 .genericbutton:hover {
 	background-color: var(--user-style);
-	border: 2px var(--user-style) solid;
+	border: 4px var(--user-style) solid;
 	color: var(--user-style-02);
 
 	transition: color 0.25s;
@@ -170,3 +194,26 @@ input[type="number"] {
 	margin: 5px;
 	user-select: none;
 }
+
+
+/*
+|*************************************************************************;
+* Win -Calculator
+|*************************************************************************;
+*/
+
+
+/* Calculator panel */
+.calculator {
+
+  }
+  
+  .calculator:hover {
+
+  }
+  
+  .calculator .calc-close {
+  }
+  
+  .calculator .calc-close:hover {
+  }

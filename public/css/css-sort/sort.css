@@ -188,7 +188,7 @@ button:hover {
 }
 
 .sidenav {
-  border-right: 2px solid var(--user-style);
+  border-right: 4px solid var(--user-style);
   background-color: var(--user-style-02);
   background-image: var(--svg-ui-background);
   -webkit-box-shadow: var(--webkit-boxshadow);
@@ -464,7 +464,7 @@ button:hover {
 }
 
 .popup-content {
-  background-color: var(--user-style-02);;
+  background-color: var(--user-style-02);
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
@@ -477,7 +477,7 @@ button:hover {
   padding: 20px;
   color: var(--user-style);
   background-image: var(--svg-ui-background);
-  border: 2px solid var(--user-style);
+  border: 4px solid var(--user-style);
   background-color: var(--user-style-02);
 }
 
@@ -505,44 +505,22 @@ button:hover {
   text-align: center;
 }
 
-/* Calculator panel */
-.calculator {
-  display: none;
-  opacity: 0.5;
-  position: absolute;
-  left: 20%;
-  top: 10%;
-  min-width: 12px;
-  min-height: 12px;
-  padding: 5px;
-  z-index: 2;
-  color: whitesmoke;
-}
 
-.calculator:hover {
-  opacity: 1;
-}
-
-.calculator .calc-close {
-  position: absolute;
-  color: var(--red);
-  top: 3px;
-  right: 3px;
-  user-select: none;
-  z-index: 2;
-}
-
-.calculator .calc-close:hover {
-  cursor: var(--main-cursor-pointer);
-  transform: scale(1.2);
-}
 
 .calc-title {
   font-weight: bold;
   font-size: 20px;
-  text-align: center;
+  /* text-align: center; */
   margin: 5px;
   user-select: none;
+  position: absolute;
+  top: -1.3em;
+  left: 3%;
+  background-color: var(--user-style-02);
+  border: var(--user-style) 4px solid;
+  width: fit-content;
+  border-radius: 10px;
+  padding: 5px;
 }
 
 .more-info {
@@ -705,7 +683,8 @@ p {
 }
 
 .filter-view-option {
-  width: 100%;
+  width: 50%;
+  float: left;
   position: relative;
   margin: 0;
   text-decoration: none;
@@ -719,6 +698,7 @@ p {
   transition: color 0.4s;
   transition: background-color 0.4s;
 }
+
 
 .filter-view-option label,
 input {
@@ -829,7 +809,7 @@ input {
   -moz-appearance: none;
   -o-appearance: none;
   appearance: none;
-  border: 2px solid var(--user-style);
+  border: 4px solid var(--user-style);
   background-color: rgba(17, 17, 17, 0.295);
   border-radius: 4px;
   outline: none;
@@ -859,7 +839,7 @@ input {
 }
 
 .checkbox > input:active {
-  border: 2px solid #34495e;
+  border: 4px solid #34495e;
 }
 
 
@@ -871,31 +851,29 @@ input {
 
 
 .accordion {
-    background-color: transparent;
-    border: 2px solid var(--user-style);
+  background-color: var(--user-style);
+    border: 4px solid var(--user-style);
     color: #fff;
     cursor: pointer;
-	width: 101%;
+    
+    width: 100%;
     text-align: left;
     outline: none;
     font-size: 15px;
     transition: 0.4s;
   }
 
-  .active, .accordion:hover {
-	background-color: var(--user-style);
-	color: #111;
+.accordion:hover {
   }
 
   .accordion:after {
+    width: 10px;
 	content: '\002B';
-	color: var(--user-style);
+	color: var(--user-style-02);
 	font-weight: bold;
 	float: right;
 	margin-left: 5px;
   }
-
-
 
   .active:after {
 	content: "\2212";
@@ -903,13 +881,13 @@ input {
   }
 
   .panel {
-	border-left: 2px solid var(--user-style);
-    border-right: 2px solid var(--user-style);
-	border-bottom: 2px solid var(--user-style);
+	border-left: 4px solid var(--user-style);
+    border-right: 4px solid var(--user-style);
+	border-bottom: 4px solid var(--user-style);
 	margin-bottom: 10px;
-	padding: 0px;
-	width: 100%;
-	background-color: transparent;
+  padding-left: 10px;
+  padding-right: 10px;
+	background-color: rgba(0, 0, 0, 0.541);
 	max-height: 0;
 	overflow: hidden;
 	transition: max-height 0.2s ease-out;
@@ -987,7 +965,7 @@ input {
 	-moz-box-shadow: 0px 0px 43px 1px var(--user-style);
   background-image: var(--svg-ui-background);
 	background-color: var(--user-style-02);
-	border: solid 2px var(--user-style);
+	border: solid 4px var(--user-style);
 }
 
 
