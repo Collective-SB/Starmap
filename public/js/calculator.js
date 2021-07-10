@@ -114,8 +114,10 @@ export default class Calculator {
 		);
 		var geometry = new THREE.BufferGeometry().setFromPoints(points);
 		var material = new THREE.LineBasicMaterial({
-			color: 0xff0000,
+			color: 0x0000ff,
 		});
+	
+		
 		var line = new THREE.Line(geometry, material);
 		line.position.set(
 			this.points[1].position.x,

@@ -37,6 +37,7 @@ select:focus {
 }
 
 button {
+  font-weight: bold;
   font-family: var(--main-font-Squada);
   background-color: var(--user-style);
   color: var(--user-style-03);
@@ -117,20 +118,10 @@ button:hover {
   flex-grow: 1;
   cursor: var(--main-cursor-pointer);
   border-width: 0px 0px;
+
 }
 
-.button-row button:nth-child(1) {
-  border-right-width: 2px;
-}
-.button-row button:nth-child(2) {
-  border-right-width: 2px;
-}
-.button-row button:nth-child(3) {
-  border-right-width: 2px;
-}
-.button-row button:nth-child(4) {
-  border-right-width: 0px;
-}
+
 
 .button-row button:hover {
   background-color: var(--user-style);
@@ -150,7 +141,7 @@ button:hover {
   font-size: 15px;
   text-decoration: underline;
   text-align: center;
-  color: var(--user-style);
+  color: var(--user-style-03);
   border-bottom: 1px solid var(--user-style);
   border-top: 0px solid var(--user-style);
   border-left: 0px solid var(--user-style);
@@ -158,7 +149,7 @@ button:hover {
   background-color: transparent;
 }
 #find::placeholder {
-  color: var(--user-style);
+  color: var(--user-style-03);
 }
 
 #find:hover {
@@ -249,6 +240,7 @@ button:hover {
   margin: 0;
   text-decoration: none;
   font-size: 15px;
+  font-weight: 100;
   display: block;
   cursor: var(--main-cursor-pointer);
   text-align: center;
@@ -256,7 +248,7 @@ button:hover {
 }
 
 .sidenav-point:hover {
-  color: var(--user-style-02);
+  color: var(--user-style-03);
   background-color: var(--user-style);
 }
 
@@ -269,7 +261,7 @@ button:hover {
   border-radius: 5px;
   margin: 5px !important;
   font-size: 17px !important;
-  font-weight: 100;
+  font-weight: bold!important;
   border: solid 2px var(--user-style);
   -webkit-box-shadow: var(--webkit-boxshadow);
   -moz-box-shadow: var(--moz-boxshadow);
@@ -379,6 +371,7 @@ button:hover {
   height: 100%;
 
   height: auto;
+  
 }
 
 .infoText {
@@ -862,6 +855,7 @@ input {
 
 
 .accordion {
+  font-weight: bold;
   background-color: var(--user-style);
     border: 4px solid var(--user-style);
     color: var(--user-style-03);
@@ -904,6 +898,7 @@ input {
 	overflow: hidden;
 	transition: max-height 0.2s ease-out;
   border-radius: 0px 0px 10px 10px;
+  filter: brightness(0.8);
   }
 
 
@@ -955,6 +950,7 @@ input {
 }
 
 .loading-text {
+  font-weight: bold;
 	color: var(--user-style-03);
 	text-align: center;
 	width: 100%;
@@ -974,7 +970,7 @@ input {
 
 	box-shadow: 0px 0px 43px 1px var(--user-style);
 	-webkit-box-shadow: 0px 0px 43px 1px var(--user-style);
-	-moz-box-shadow: 0px 0px 43px 1px var(--user-style);
+	-moz-box-shadow: 0px 0px 43px 1px var(--user-style-);
   background-image: var(--svg-ui-background);
 	background-color: var(--user-style-02);
 	border: solid 4px var(--user-style);
@@ -989,6 +985,7 @@ input {
 #loading-elevated > svg > g > text {
   fill: var(--user-style);
 }
+
 #loading-elevated > svg > g > #Line_1 {
   stroke: var(--user-style);
 }

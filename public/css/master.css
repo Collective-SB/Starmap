@@ -8,7 +8,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;900&display=swap');
 
 @import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Squada+One&amp;display=swap");
@@ -33,7 +33,7 @@
 :root {
 	/* Font Imports */
 	--main-font-VT323: "VT323", monospace;
-	--main-font-Squada: "Squada One", sans-serif;
+	--main-font-Squada: 'Source Sans Pro', sans-serif;
 
 	/* Cursor Setting */
 	--main-cursor-default: default;
@@ -218,7 +218,7 @@
 		overflow: hidden;
 		width: 100%;
 		-webkit-appearance: none;
-		background-color: #ffffff;
+		background-color: var(--user-style-04);
 		border: 4px solid var(--user-style);
     }
     
@@ -251,4 +251,32 @@ input[type="range"]::-ms-fill-lower {
 }
 input[type="range"]::-ms-fill-upper {  
   background-color: #fff;
+}
+
+
+#settingsWindow > div.accordion-space > div > div > div.option-01-01.text-center > img, 
+#settingsWindow > div.accordion-space > div > div > div.option-01-02.text-center > img,
+#settingsWindow > div.accordion-space > div > div > div.option-01-03.text-center > img,
+#settingsWindow > div.accordion-space > div > div > div.option-01-04.text-center > img
+ {
+	display: none;
+}
+
+input[type=color]{
+	width: 40px;
+	height: 40px;
+	border: none;
+	border-radius: 10px;
+	background: none;
+
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: solid 1px #000; /*change color of the swatch border here*/
+	border-radius: 10px;
+	-webkit-box-shadow: var(--webkit-boxshadow);
+    -moz-box-shadow: var(--moz-boxshadow);
+    box-shadow: var(--box-boxshadow);
 }
