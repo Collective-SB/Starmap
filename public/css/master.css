@@ -6,6 +6,7 @@
 */
 
 
+@import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap');
 
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 
@@ -45,9 +46,10 @@
 	--main-text-shadow: 0px 0px 4px rgb(0, 0, 0);
 
 	/* Style config settings */
-	--user-style: #1e71b4;
+	--user-style: #c50d0d;
 	--user-style-02: #000a0f;
 	--user-style-03: #fff;
+	--user-style-04: #fff;
 	/* Default Box Shadow */
 	--webkit-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 	--moz-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
@@ -154,7 +156,8 @@
 	"desc-01-06 option-01-06"
 	"desc-01-07 option-01-07"
 	"desc-01-08 option-01-08"
-	"desc-01-09 option-01-09";
+	"desc-01-09 option-01-09"
+	"desc-01-10 option-01-10";
 }
 .desc-01-01 { grid-area: desc-01-01; }
 .desc-01-02 { grid-area: desc-01-02; }
@@ -165,6 +168,7 @@
 .desc-01-07 { grid-area: desc-01-07; }
 .desc-01-08 { grid-area: desc-01-08; }
 .desc-01-09 { grid-area: desc-01-09; }
+.desc-01-10 { grid-area: desc-01-10; }
 .option01 { grid-area: option-01-01; }
 .option02 { grid-area: option-01-02; }
 .option03 { grid-area: option-01-03; }
@@ -174,6 +178,7 @@
 .option07 { grid-area: option-01-07; }
 .option08 { grid-area: option-01-08; }
 .option09 { grid-area: option-01-09; }
+.option10 { grid-area: option-01-10; }
 .text-center {
   text-align: center;
 }

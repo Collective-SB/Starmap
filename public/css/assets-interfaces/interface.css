@@ -90,12 +90,12 @@
     top: -1.3em;
     right: 3%;
     background-color: var(--user-style-02);
+	color: var(--user-style-04);
     border: var(--user-style) 4px solid;
     width: fit-content;
     border-radius: 10px;
     padding: 5px;
     z-index: 2;
-	color: var(--user-style-03);
 }
 
 .settings .settings-close:hover {

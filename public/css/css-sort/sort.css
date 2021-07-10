@@ -238,10 +238,13 @@ button:hover {
   background-color: #333;
   color: var(--user-style-03);
 }
+.grid-container-options-01 p{
+  color: var(--user-style-04);
+}
 
 
 .sidenav p {
-  color: var(--user-style-03);
+  color: var(--user-style-04);
   padding: 0px 8px 6px 10px;
   margin: 0;
   text-decoration: none;
@@ -260,7 +263,7 @@ button:hover {
 .layerheader {
   cursor: var(--main-cursor-pointer);
   background-color: var(--user-style);
-  color: var(--user-style-03);
+  color: var(--user-style-03)!important;
   
   text-align: center;
   border-radius: 5px;
@@ -379,6 +382,7 @@ button:hover {
 }
 
 .infoText {
+  color: var(--user-style-04);
   padding-left: 5px;
   margin: 0;
   margin-bottom: 5px;
@@ -410,6 +414,11 @@ button:hover {
 }
 
 /* Login Button */
+.discord-svg {
+  width: 6em;
+	height: 2em;
+}
+
 
 #login {
   background-color: var(--user-style);
@@ -470,13 +479,13 @@ button:hover {
   padding: 20px;
   border: 1px solid #888;
   width: 50%;
-  color: var(--user-style);
+  color: var(--user-style-04);
   background-image: var(--svg-ui-background);
 }
 .popup-content {
 
   padding: 20px;
-  color: var(--user-style);
+  color: var(--user-style-04);
   background-image: var(--svg-ui-background);
   border: 4px solid var(--user-style);
   background-color: var(--user-style-02);
@@ -518,6 +527,7 @@ button:hover {
   top: -1.3em;
   left: 3%;
   background-color: var(--user-style-02);
+  color: var(--user-style-03);
   border: var(--user-style) 4px solid;
   width: fit-content;
   border-radius: 10px;
@@ -550,7 +560,7 @@ button:hover {
   background-color: var(--user-style-02);
   border: var(--user-style) 2px solid;
   overflow: visible;
-  color: #fff;
+  color: var(--user-style-03);
   text-align: center;
   padding: 5px 10px;
   border-radius: 6px;
@@ -708,7 +718,7 @@ input {
 }
 
 .filter-view-option:hover {
-  color: #fff;
+  color: var(--user-style-03);
   background-color: #333;
 
   transition: color 0.4s;
@@ -780,7 +790,7 @@ input {
   margin: 0;
   text-decoration: none;
   font-size: 15px;
-  color: #fff;
+  color: var(--user-style-03);
   display: block;
   cursor: var(--main-cursor-pointer);
   user-select: none;
@@ -865,13 +875,13 @@ input {
   }
 
 .accordion:hover {
-  color: #fff;
+  color: var(--user-style-03);
   }
 
   .accordion:after {
     width: 10px;
 	content: '\002B';
-	color: #fff;
+	color: var(--user-style-03);
 	font-weight: bold;
 	float: right;
 	margin-left: 5px;
@@ -879,7 +889,7 @@ input {
 
   .active:after {
 	content: "\2212";
-	color: #fff;
+	color: var(--user-style-03);
   }
 
   .panel {
@@ -889,7 +899,7 @@ input {
 	margin-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
-	background-color: rgba(0, 0, 0, 0.541);
+	background-color: var(--user-style-02);
 	max-height: 0;
 	overflow: hidden;
 	transition: max-height 0.2s ease-out;
@@ -909,7 +919,7 @@ input {
 	background-image: var(--png-background-profile);
 	background-repeat: no-repeat;
 	background-size: contain;
-	color: #fff;
+	color: var(--user-style-03);
 	text-align: center;
   }
   .my-float {
@@ -945,7 +955,7 @@ input {
 }
 
 .loading-text {
-	color: var(--user-style);
+	color: var(--user-style-03);
 	text-align: center;
 	width: 100%;
 	vertical-align: middle;
@@ -993,7 +1003,7 @@ input {
   position: relative;
 }
 .loading-container-sub > .loading-text {
-  color: var(--user-style-02);
+  color: var(--user-style-03);
 } 
 
 

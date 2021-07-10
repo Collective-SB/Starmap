@@ -212,6 +212,30 @@ const SETTINGS_DEF = [{
 			}
 		},
 	},
+	{
+		id: "customColorTheme-04",
+		default: "#000a0f",
+		prop: "value",
+		set: function (val) {
+			const code = val.split(" ").join("")
+
+			document.getElementById("color_val-04").innerHTML = val
+			document.getElementById("color_val-04").style.color = val
+
+			//checks if it is valid hex
+			const validHex = /^#[0-9A-F]{6}$/i.test(code)
+			if (validHex) {
+				app.updateTheme04(val);
+			} else {
+				//check if it just hasn't been set
+				if (code === "") {
+					return;
+				} else {
+					alert("That color code is invalid.")
+				}
+			}
+		},
+	},
 ];
 //This actually "enacts" the settings on the app, making the changes
 export default class SettingsManager {

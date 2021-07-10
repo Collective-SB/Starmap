@@ -1012,6 +1012,9 @@ class App {
 	updateTheme03(newColor03) {
 		document.documentElement.style.setProperty("--user-style-03", newColor03);
 	}
+	updateTheme04(newColor04) {
+		document.documentElement.style.setProperty("--user-style-04", newColor04);
+	}
 
 	modalConfirm(text) {
 		return new Promise(resolve => {
