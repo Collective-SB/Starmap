@@ -34,6 +34,7 @@
 	/* Font Imports */
 	--main-font-VT323: "VT323", monospace;
 	--main-font-Squada: 'Source Sans Pro', sans-serif;
+	--main-map-icon: 'Squada One', cursive;
 
 	/* Cursor Setting */
 	--main-cursor-default: default;

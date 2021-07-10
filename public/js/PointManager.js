@@ -814,7 +814,7 @@ function createTextCanvas(string, parameters = {}) {
 
 	// ctx.font = `${fontSize}px Roboto`;
 	const fontName = getComputedStyle(document.documentElement).getPropertyValue(
-		"--main-font-Squada"
+		"--main-map-icon"
 	);
 	ctx.font = `${fontSize}px ${fontName}`;
 	ctx.textAlign = parameters.align || "center";

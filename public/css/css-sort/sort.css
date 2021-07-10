@@ -497,7 +497,7 @@ button:hover {
   z-index: 2;
   width: 40%;
   left: 30%;
-  border: solid 2px rgba(0, 197, 0, 0.8);
+  border: solid 5px rgba(0, 197, 0, 0.8);
   background-color: #111 !important;
   background-image: var(--svg-ui-background);
   border-radius: 5px;
