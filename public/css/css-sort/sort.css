@@ -51,7 +51,8 @@ button {
 
 button:hover {
   background-color: var(--user-style);
-  color: #111111;
+  -webkit-box-shadow: inset 0px 0px 6px 5px rgba(0,0,0,0.3); 
+box-shadow: inset 0px 0px 6px 5px rgba(0,0,0,0.3);
 
   transition: color 0.25s;
 }
@@ -125,8 +126,8 @@ button:hover {
 
 .button-row button:hover {
   background-color: var(--user-style);
-  color: #111111;
   transition: color 0.25s;
+  
 }
 
 .button-row span {
@@ -147,9 +148,13 @@ button:hover {
   border-left: 0px solid var(--user-style);
   border-right: 0px solid var(--user-style);
   background-color: transparent;
+  font-weight: bold;
 }
 #find::placeholder {
   color: var(--user-style-03);
+}
+input:focus::-webkit-input-placeholder {
+  opacity: 0;
 }
 
 #find:hover {
@@ -338,7 +343,8 @@ button:hover {
   min-height: 12px;
   padding: 10px;
   z-index: 2;
-  color: var(--user-style-03);
+  color: var(--user-style);
+  border: 4px solid var(--user-style);
 }
 
 #dropdown-minimize {
@@ -471,19 +477,19 @@ button:hover {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 50%;
+  width: 25%;
+  border-radius: 10px;
   color: var(--user-style-04);
   background-image: var(--svg-ui-background);
 }
 .popup-content {
-
+  text-align: center;
   padding: 20px;
   color: var(--user-style-04);
   background-image: var(--svg-ui-background);
-  border: 4px solid var(--user-style);
+  border: 5px solid var(--user-style);
   background-color: var(--user-style-02);
 }
-
 
 .popup-content h1 {
   text-align: center;
@@ -541,9 +547,7 @@ button:hover {
   background-color: var(--user-style-03);
 }
 
-.info-container {
-  color: var(--user-style);
-}
+
 
 
 

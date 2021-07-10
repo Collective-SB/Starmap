@@ -118,8 +118,13 @@
 }
 
 .add-point form input {
+	height: 2em;
 	margin: 5px 0;
 	filter: brightness(0.8);
+}
+
+.add-point form input a{
+left: 2em;
 }
 
 .add-point form input:focus {
@@ -163,8 +168,10 @@
 
 input[type="text"] {
 	background-color: var(--user-style-02);
+	filter: brightness(0.8);
 	border: 4px var(--user-style) solid;
 	color: var(--user-style);
+
 }
 
 input[type="number"] {

@@ -6,9 +6,9 @@ const infoTemplate = `
 	<div class="more-info">
 		<span class="material-icons" onmouseover="hoverHandler()">help</span>
 		<span class="more-info-tooltip">
-			Created: %CREATED_AT%
+			<strong>Created:</strong> %CREATED_AT%
 			<br>
-			Edited: %EDITED_AT%
+			<strong>Edited:</strong> %EDITED_AT%
 		</span>
 	</div>
 
@@ -32,8 +32,8 @@ const infoTemplate = `
 			<img src=%TYPE_IMAGE% width="64" height="64">
 		</div>
 	</div>
-	<p class="infoText" style="display: inline;">Creator: %CREATOR%</p>
-	<p class="infoText" style="display: inline;">Layer: %LAYER%</p>
+	<p class="infoText" style="display: inline;"><strong>Creator:</strong> %CREATOR%</p>
+	<p class="infoText" style="display: inline;"><strong>Layer:</strong> %LAYER%</p>
 	<div class="desc">
 		<p class="infoText no-drag">%DESCRIPTION%</p>
 	</div>
@@ -354,7 +354,7 @@ class App {
 		const cloudText = new THREE.TextureLoader(
 			new THREE.LoadingManager(() => {})
 			// ).load("../assets/cloud3.png");
-		).load("https://i.ibb.co/hf26qqm/cloud3.png");
+		).load("../assets/cloud3.png");
 		const MESH_SIZE = 76;
 		const cloudGeom = new THREE.SphereGeometry(MESH_SIZE, EOS_QUALITY * 2, EOS_QUALITY * 2);
 		const cloudMat = new THREE.MeshStandardMaterial({
