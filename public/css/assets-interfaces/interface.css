@@ -8,7 +8,7 @@
 
 
 .ui-draggable {
-	background-image: var(--svg-ui-background-02);
+	background-image: var(--svg-ui-background);
 	border-radius: 5px;
 	-webkit-box-shadow: var(--webkit-boxshadow);
 	-moz-box-shadow: var(--moz-boxshadow);

@@ -187,7 +187,7 @@ input:focus::-webkit-input-placeholder {
 .sidenav {
   border-right: 4px solid var(--user-style);
   background-color: var(--user-style-02);
-  background-image: var(--svg-ui-background-02);
+  background-image: var(--svg-ui-background);
   -webkit-box-shadow: var(--webkit-boxshadow);
   -moz-box-shadow: var(--moz-boxshadow);
   box-shadow: var(--box-boxshadow);
