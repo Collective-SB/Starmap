@@ -12,34 +12,59 @@ const infoTemplate = `
 		</span>
 	</div>
 
-	<h1 class="infoText no-drag" style="display: inline;">%POINT_NAME%</h1> %BRINJECT% <span class="infoText" style="display: inline;">(%TYPE%)</span>
+	<div class="info-grid">
 
-	<div class="infoMainBody">
-		<div class="isanDispalyDiv">
-			<p class="infoText no-drag isanDispalyVal">X: %POS_X%</p>
-			<p class="infoText no-drag isanDispalyVal">Y: %POS_Y%</p>
-			<p class="infoText no-drag isanDispalyVal">Z: %POS_Z%</p>
+		<div class="info-title-grid">
+			<h1 class="infoText no-drag" style="display: inline;">%POINT_NAME%</h1> %BRINJECT% <span class="infoText" style="display: inline;">(%TYPE%)</span>
 		</div>
-		
-		<div class="infoDiv">
-			<button id="linksharable">Copy link </button>
-			<br>
-			<button id="epivals">Copy cords</button>
-			<br>
-			<button id="focus">Focus</button>
+
+		<div class="info-coord-grid">
+			<div class="isanDispalyDiv">
+				<p class="infoText no-drag isanDispalyVal">X: %POS_X%</p>
+				<p class="infoText no-drag isanDispalyVal">Y: %POS_Y%</p>
+				<p class="infoText no-drag isanDispalyVal">Z: %POS_Z%</p>
+			</div>
 		</div>
-		<div class="infoDiv">
-			<img src=%TYPE_IMAGE% width="64" height="64">
+
+		<div class="info-option-grid">
+			<div class="infoDiv">
+				<button id="linksharable">Copy link </button>
+				<br>
+				<button id="epivals">Copy cords</button>
+				<br>
+				<button id="focus">Focus</button>
+			</div>
+		</div>
+		<div class="info-icon-grid">
+			<div class="infoDiv">
+				<img src=%TYPE_IMAGE% width="64" height="64">
+			</div>
+		</div>
+		<div class="info-creator-grid">
+			<p class="infoText-02" style="display: inline;"><strong>Creator:</strong> <b>%CREATOR%</b></p>
+		</div>
+		<div class="info-layer-grid">
+			<p class="infoText-02" style="display: inline;"><strong>Layer:</strong> <b>%LAYER%</b></p>
+		</div>
+		<div class="info-desc-grid">
+			<div class="desc">
+				<p class="infoText no-drag">%DESCRIPTION%</p>
+			</div>
+		</div>
+		<div class="info-pic-grid">
+			<a href="%IMAGE_URL%" target="_blank">
+			<img src="%IMAGE_URL%" style="display:%IMAGE_DISPLAY%" class="infoImage">
+			</a>
 		</div>
 	</div>
-	<p class="infoText" style="display: inline;"><strong>Creator:</strong> <b>%CREATOR%</b></p>
-	<p class="infoText" style="display: inline;"><strong>Layer:</strong> <b>%LAYER%</b></p>
-	<div class="desc">
-		<p class="infoText no-drag">%DESCRIPTION%</p>
-	</div>
-	<a href="%IMAGE_URL%" target="_blank">
-		<img src="%IMAGE_URL%" style="display:%IMAGE_DISPLAY%" class="infoImage">
-	</a>
+
+	
+
+
+	
+	
+	
+
 </div>
 `;
 

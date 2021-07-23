@@ -381,6 +381,8 @@ input:focus::-webkit-input-placeholder {
 }
 
 .infoText {
+  pointer-events: none;
+  cursor: grab;
   color: var(--user-style-04);
   padding-left: 5px;
   margin: 0;
@@ -388,6 +390,16 @@ input:focus::-webkit-input-placeholder {
   margin-top: 5px;
   width: fit-content;
 }
+.infoText-02 {
+  pointer-events: none;
+  cursor: grab;
+  color: var(--user-style-04);
+  margin: 0;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  width: fit-content;
+}
+
 
 .infoImage {
   border: dashed 2px var(--user-style);
@@ -588,18 +600,26 @@ input:focus::-webkit-input-placeholder {
 }
 
 .isanDispalyDiv {
+  pointer-events: none;
   background-color: rgb(0, 10, 15);
-  width: fit-content;
-  display: inline-block;
+  width: -webkit-fill-available;
+  display: table;
+  border: 3px #1eafb4 solid;
+  border-radius: 2px;
+  height: 100%;
 }
 
 .desc {
-  border: 1px solid gray;
+  font-weight: normal;
+    background-color: var(--user-style-02);
+    border: 4px var(--user-style) solid;
+    border-radius: 2px;
+    color: var(--user-style-03);
+    font-size: medium;
+    padding: 1px 10px 1px 10px;
   margin-top: 10px;
-  
-  max-width: 20em;
-
   word-break: break-word;
+  width: -webkit-fill-available;
 }
 
 .infoDiv {
@@ -1148,4 +1168,11 @@ b {
     color: var(--user-style-03);
     font-size: medium;
     padding: 1px 10px 1px 10px;
+    margin: 5px;
+    border-radius: 2px;
+}
+
+
+input, select {
+  cursor: pointer;
 }

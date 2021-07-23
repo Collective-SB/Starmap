@@ -51,7 +51,7 @@ export default class Calculator {
 		});
 		const speedInputDirect = document.getElementById("shipSpeedDirect");
 		const speedInputSlider = document.getElementById("shipSpeedSlider");
-		speedInputSlider.value = 150;
+		speedInputSlider.value = 40;
 		speedInputDirect.value = 150;
 		speedInputSlider.onmousemove = function (e) {
 			speedInputDirect.value = speedInputSlider.value;

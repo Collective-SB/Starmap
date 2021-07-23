@@ -47,7 +47,7 @@
 	--main-text-shadow: 0px 0px 4px rgb(0, 0, 0);
 
 	/* Style config settings */
-	--user-style: #c50d0d;
+	--user-style: #1267ce;
 	--user-style-02: #000a0f;
 	--user-style-03: #fff;
 	--user-style-04: #fff;
@@ -56,9 +56,8 @@
 	--moz-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 	--box-boxshadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 
-	--background-color-01: #333;
-	--red: #f44336;
-	--red-hover: #b72015;
+	--red: #c50d0d;
+
 /*
 |*************************************************************************;
 * SVG Global
@@ -241,10 +240,13 @@
 	.dis-slider-grid { grid-area: 1 / 1 / 2 / 3; }
 	.dis-speed-grid { grid-area: 2 / 1 / 3 / 3; }
 	.dis-start-grid { grid-area: 3 / 1 / 4 / 2; }
-	.dis-start-sel-grid { grid-area: 4 / 1 / 5 / 2; }
+	.dis-start-sel-grid { grid-area: 4 / 1 / 5 / 2;
+		pointer-events: none; }
 	.dis-end-grid { grid-area: 3 / 2 / 4 / 3; }
-	.dis-end-sel-grid { grid-area: 4 / 2 / 5 / 3; }
-	.dis-info-grid { grid-area: 5 / 1 / 6 / 3; }
+	.dis-end-sel-grid { grid-area: 4 / 2 / 5 / 3;
+		pointer-events: none; }
+	.dis-info-grid { grid-area: 5 / 1 / 6 / 3;
+		pointer-events: none; }
 
 /* Add Point */
 	.point-create-grid {
@@ -268,6 +270,35 @@
 		.row-pos-y { grid-area: 4 / 2 / 5 / 3; }
 		.row-pos-z { grid-area: 4 / 3 / 5 / 4; }
 		.pc-create-grid { grid-area: 5 / 1 / 6 / 4; }
+
+
+
+
+		/* Info Window */
+		.info-grid {
+			display: grid;
+			grid-template-columns: 5em 5em 6em 5em;
+			grid-template-rows: repeat(5, 1fr);
+			grid-column-gap: 10px;
+			grid-row-gap: 10px;
+			text-align: center;
+			justify-items: stretch;
+			grid-template-rows: 4em;
+			}
+			
+			.info-title-grid { grid-area: 1 / 1 / 2 / 5; }
+			.info-coord-grid { grid-area: 2 / 1 / 3 / 3; }
+			.info-option-grid { grid-area: 2 / 3 / 3 / 4; }
+			.info-icon-grid { grid-area: 2 / 4 / 3 / 5; }
+			.info-creator-grid { grid-area: 3 / 1 / 4 / 3; }
+			.info-layer-grid { grid-area: 3 / 3 / 4 / 5; }
+			.info-desc-grid { grid-area: 4 / 1 / 5 / 5;
+				display: flex;
+				justify-content: center; }
+			.info-pic-grid { grid-area: 5 / 1 / 6 / 5;
+				display: flex;
+				justify-content: center; }
+
 
 /*Chrome*/
 @media screen and (-webkit-min-device-pixel-ratio:0) {
