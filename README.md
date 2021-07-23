@@ -28,14 +28,10 @@
 
 
 
-<!-- PROJECT LOGO -->
-<br />
-<p align="center">
-  <a href="https://github.com/Collective-SB/Starmap">
-    <img src="readme-assets/isan.png" alt="Logo" width="500" height="100">
-  </a>
 
-  <!--<h3 align="center">ISAN Starmap</h3>-->
+<!-- ABOUT THE PROJECT -->
+## Project Overview
+[![Product Name Screen Shot][product-screenshot]](https://isan.to)
 
   <p align="center">
     A 3D public map for the game Starbase. 
@@ -53,7 +49,11 @@
   </p>
 </p>
 
+ISAN Starmap is a navigation system developed for the purpose storing and calculating system coordinates around the Starbase solar system.
+<br>
 
+_For a more descriptive explanation about the ISAN Starmap please read the: 
+[ISAN Documentation](https://github.com/Collective-SB/Starmap/blob/master/public/isan.pdf)_
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
@@ -80,19 +80,6 @@
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
-
-
-
-<!-- ABOUT THE PROJECT -->
-## Project Overview
-[![Product Name Screen Shot][product-screenshot]](https://isan.to)
-
-ISAN Starmap is a navigation system developed for the purpose storing and calculating system coordinates around the Starbase solar system.
-<br>
-
-_For a more descriptive explanation about the ISAN Starmap please read the: 
-[ISAN Documentation](https://github.com/Collective-SB/Starmap/blob/master/public/isan.pdf)_
-
 
 ### Built With
 
