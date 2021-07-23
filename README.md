@@ -30,7 +30,6 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## Project Overview
 [![Product Name Screen Shot][product-screenshot]](https://isan.to)
 
   <p align="center">
