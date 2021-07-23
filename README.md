@@ -32,7 +32,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Collective-SB/Starmap">
-    <img src="readme-assets/isan.svg" alt="Logo" width="500" height="100">
+    <img src="readme-assets/isan.png" alt="Logo" width="500" height="100">
   </a>
 
   <!--<h3 align="center">ISAN Starmap</h3>-->
@@ -215,4 +215,4 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 [issues-url]: https://github.com/Collective-SB/Starmap/issues
 [license-shield]: https://img.shields.io/github/license/Collective-SB/Starmap.svg?style=for-the-badge
 [license-url]: https://github.com/Collective-SB/Starmap/blob/master/LICENSE.txt
-[product-screenshot]: readme-assets/header-picture.png
+[product-screenshot]: readme-assets/isan-logo.png
