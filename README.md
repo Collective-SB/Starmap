@@ -47,8 +47,9 @@
     <a href="#">Request Feature</a>
   </p>
 </p>
-
+<p align="center">
 ISAN Starmap is a navigation system developed for the purpose storing and calculating system coordinates around the Starbase solar system.
+</p>
 <br>
 
 _For a more descriptive explanation about the ISAN Starmap please read the: 
