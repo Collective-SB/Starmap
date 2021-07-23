@@ -142,7 +142,7 @@ const SETTINGS_DEF = [{
 	},
 	{
 		id: "customColorTheme-01",
-		default: "#1eafb4",
+		default: "#1267ce",
 		prop: "value",
 		set: function (val) {
 			const code = val.split(" ").join("")
@@ -166,7 +166,7 @@ const SETTINGS_DEF = [{
 	},
 	{
 		id: "customColorTheme-02",
-		default: "#000a0f",
+		default: "#272525",
 		prop: "value",
 		set: function (val) {
 			const code = val.split(" ").join("")
@@ -190,7 +190,7 @@ const SETTINGS_DEF = [{
 	},
 	{
 		id: "customColorTheme-03",
-		default: "#000a0f",
+		default: "#ffffff",
 		prop: "value",
 		set: function (val) {
 			const code = val.split(" ").join("")
@@ -214,7 +214,7 @@ const SETTINGS_DEF = [{
 	},
 	{
 		id: "customColorTheme-04",
-		default: "#000a0f",
+		default: "#ffffff",
 		prop: "value",
 		set: function (val) {
 			const code = val.split(" ").join("")

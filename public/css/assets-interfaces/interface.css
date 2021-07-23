@@ -4,7 +4,7 @@
 |*************************************************************************;
 */
 .ui-draggable {
-	background-image: var(--svg-ui-background);
+	background-image: var(--svg-ui-background-02);
 	border-radius: 5px;
 	-webkit-box-shadow: var(--webkit-boxshadow);
 	-moz-box-shadow: var(--moz-boxshadow);
@@ -118,13 +118,12 @@
 }
 
 .add-point form input {
+	width: -webkit-fill-available;
 	height: 2em;
-	margin: 5px 0;
-	filter: brightness(0.8);
 }
 
 .add-point form input a{
-left: 2em;
+
 }
 
 .add-point form input:focus {
@@ -134,65 +133,90 @@ left: 2em;
 
 .add-point .coordinates {
 	border: none;
-	margin: 0;
-	padding: 0;
+	display: contents;
 }
 
 .add-point input[type="number"] {
-	max-width: 80px;
+	text-align: center;
 }
 
 .dropdown-select {
+	width: -webkit-fill-available;
+	height: 2.5em;
+	font-size: medium;
+
 	border: none;
 	margin-top: 1px;
 	margin-bottom: 1px;
 
-	background-color: var(--user-style-02);
-	color: var(--user-style);
+	background-color: var(--user-style-02)!important;
+	color: var(--user-style-03);
 	border: 4px var(--user-style) solid;
 
 	transition: color 0.25s;
 }
 
 .dropdown-select:hover {
-	background-color: var(--user-style);
-	color: var(--user-style-02);
+	background-color: var(--user-style)!important;
+	color: var(--user-style-03);
 
 	transition: color 0.25s;
 }
 
 .dropdown-select:focus {
-	background-color: var(--user-style-02);
-	color: var(--user-style);
+	background-color: var(--user-style-02)!important;
+	color: var(--user-style-03);
 }
 
 input[type="text"] {
-	background-color: var(--user-style-02);
-	filter: brightness(0.8);
+	text-transform: capitalize;
+	background-color: var(--user-style-02)!important;
 	border: 4px var(--user-style) solid;
-	color: var(--user-style);
+	color: var(--user-style-03);
+	font-size: medium;
 
 }
+
+::-webkit-input-placeholder { /* Edge */
+	color: var(--user-style-03);
+	filter: brightness(0.8);
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+	color: var(--user-style-03);
+	filter: brightness(0.8);
+  }
+  
+  ::placeholder {
+	color: var(--user-style-03);
+	filter: brightness(0.8);
+  }
 
 input[type="number"] {
 	background-color: var(--user-style-02);
 	border: 4px var(--user-style) solid;
-	color: var(--user-style);
+	color: var(--user-style-03);
+	font-size: medium;
 }
 
 .genericbutton {
-	background-color: var(--user-style-02);
-	border: 4px var(--user-style) solid;
-	color: var(--user-style);
-
-	transition: color 0.25s;
+    font-weight: bold;
+    font-family: var(--main-font-Squada);
+    background-color: var(--user-style);
+    color: var(--user-style-03);
+    border-width: 1px;
+    border-color: var(--user-style-02);
+    padding-top: 2px;
+    padding-bottom: 2px;
+    transition: color 0.25s;
+    font-size: 1em;
 }
 
 .genericbutton:hover {
 	background-color: var(--user-style);
-	border: 4px var(--user-style) solid;
-	color: var(--user-style-02);
-
+	-webkit-box-shadow: inset 0px 0px 6px 5px rgba(0,0,0,0.3); 
+  box-shadow: inset 0px 0px 6px 5px rgba(0,0,0,0.3);
+  
 	transition: color 0.25s;
 }
 

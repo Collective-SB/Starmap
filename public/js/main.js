@@ -32,8 +32,8 @@ const infoTemplate = `
 			<img src=%TYPE_IMAGE% width="64" height="64">
 		</div>
 	</div>
-	<p class="infoText" style="display: inline;"><strong>Creator:</strong> %CREATOR%</p>
-	<p class="infoText" style="display: inline;"><strong>Layer:</strong> %LAYER%</p>
+	<p class="infoText" style="display: inline;"><strong>Creator:</strong> <b>%CREATOR%</b></p>
+	<p class="infoText" style="display: inline;"><strong>Layer:</strong> <b>%LAYER%</b></p>
 	<div class="desc">
 		<p class="infoText no-drag">%DESCRIPTION%</p>
 	</div>
