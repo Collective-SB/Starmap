@@ -20,11 +20,14 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
+<a align="center">
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
+</a>
+
 
 
 
@@ -57,7 +60,7 @@ _For a more descriptive explanation about the ISAN Starmap please read the:
 
 </p>
 
-<!-- TABLE OF CONTENTS -->
+<!-- TABLE OF CONTENTS 
 <details open="open">
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
   <ol>
@@ -81,16 +84,9 @@ _For a more descriptive explanation about the ISAN Starmap please read the:
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
-</details>
+</details>-->
 
-### Built With
 
-* [Starmap API]()
-* [Express](https://expressjs.com/)
-* [HTML/CSS](https://www.w3schools.com/)
-* [JQuerry](https://jquery.com)
-* [ThreeJS](https://threejs.org/)
-* [AdobeXD](https://www.adobe.com/nz/products/xd.html)
 <!-- GETTING STARTED -->
 ## Getting Started
 
@@ -169,6 +165,15 @@ ISAN Starmap Team Members:
     </li>
   </ol>
 </details>
+
+### Built With
+
+* [Starmap API]()
+* [Express](https://expressjs.com/)
+* [HTML/CSS](https://www.w3schools.com/)
+* [JQuerry](https://jquery.com)
+* [ThreeJS](https://threejs.org/)
+* [AdobeXD](https://www.adobe.com/nz/products/xd.html)
 
 <!-- LICENSE -->
 ## License
