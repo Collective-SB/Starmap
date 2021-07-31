@@ -6,40 +6,65 @@ const infoTemplate = `
 	<div class="more-info">
 		<span class="material-icons" onmouseover="hoverHandler()">help</span>
 		<span class="more-info-tooltip">
-			Created: %CREATED_AT%
+			<strong>Created:</strong> %CREATED_AT%
 			<br>
-			Edited: %EDITED_AT%
+			<strong>Edited:</strong> %EDITED_AT%
 		</span>
 	</div>
 
-	<h1 class="infoText no-drag" style="display: inline;">%POINT_NAME%</h1> %BRINJECT% <span class="infoText" style="display: inline;">(%TYPE%)</span>
+	<div class="info-grid">
 
-	<div class="infoMainBody">
-		<div class="isanDispalyDiv">
-			<p class="infoText no-drag isanDispalyVal">X: %POS_X%</p>
-			<p class="infoText no-drag isanDispalyVal">Y: %POS_Y%</p>
-			<p class="infoText no-drag isanDispalyVal">Z: %POS_Z%</p>
+		<div class="info-title-grid">
+			<h1 class="infoText no-drag" style="display: inline;">%POINT_NAME%</h1> %BRINJECT% <span class="infoText" style="display: inline;">(%TYPE%)</span>
 		</div>
-		
-		<div class="infoDiv">
-			<button id="linksharable">Copy link </button>
-			<br>
-			<button id="epivals">Copy cords</button>
-			<br>
-			<button id="focus">Focus</button>
+
+		<div class="info-coord-grid">
+			<div class="isanDispalyDiv">
+				<p class="infoText no-drag isanDispalyVal">X: %POS_X%</p>
+				<p class="infoText no-drag isanDispalyVal">Y: %POS_Y%</p>
+				<p class="infoText no-drag isanDispalyVal">Z: %POS_Z%</p>
+			</div>
 		</div>
-		<div class="infoDiv">
-			<img src=%TYPE_IMAGE% width="64" height="64">
+
+		<div class="info-option-grid">
+			<div class="infoDiv">
+				<button id="linksharable">Copy link </button>
+				<br>
+				<button id="epivals">Copy cords</button>
+				<br>
+				<button id="focus">Focus</button>
+			</div>
+		</div>
+		<div class="info-icon-grid">
+			<div class="infoDiv">
+				<img src=%TYPE_IMAGE% width="64" height="64">
+			</div>
+		</div>
+		<div class="info-creator-grid">
+			<p class="infoText-02" style="display: inline;"><strong>Creator:</strong> <b>%CREATOR%</b></p>
+		</div>
+		<div class="info-layer-grid">
+			<p class="infoText-02" style="display: inline;"><strong>Layer:</strong> <b>%LAYER%</b></p>
+		</div>
+		<div class="info-desc-grid">
+			<div class="desc">
+				<p class="infoText no-drag">%DESCRIPTION%</p>
+			</div>
+		</div>
+		<div class="info-pic-grid">
+			<a href="%IMAGE_URL%" target="_blank">
+			<img src="%IMAGE_URL%" style="display:%IMAGE_DISPLAY%" class="infoImage">
+			</a>
 		</div>
 	</div>
-	<p class="infoText" style="display: inline;">Creator: %CREATOR%</p>
-	<p class="infoText" style="display: inline;">Layer: %LAYER%</p>
-	<div class="desc">
-		<p class="infoText no-drag">%DESCRIPTION%</p>
-	</div>
-	<a href="%IMAGE_URL%" target="_blank">
-		<img src="%IMAGE_URL%" style="display:%IMAGE_DISPLAY%" class="infoImage">
-	</a>
+
+	
+
+
+	
+	
+	
+
 </div>
 `;
 
@@ -358,7 +383,7 @@ class App {
 		const cloudText = new THREE.TextureLoader(
 			new THREE.LoadingManager(() => {})
 			// ).load("../assets/cloud3.png");
-		).load("https://i.ibb.co/hf26qqm/cloud3.png");
+		).load("../assets/cloud3.png");
 		const MESH_SIZE = 76;
 		const cloudGeom = new THREE.SphereGeometry(MESH_SIZE, EOS_QUALITY * 2, EOS_QUALITY * 2);
 		const cloudMat = new THREE.MeshStandardMaterial({
@@ -498,14 +523,14 @@ class App {
 		$(".add-point").draggable({
 			containment: "document",
 		});
-		$(".add-point .close").click(function () {
+		$(".win-prop-close").click(function () {
 			$(this).parent().hide();
 		});
 		// New point button
 		const self = this;
 		$("#new-point").click(function () {
 			if (app.user.isPubToken) {
-				app.modalConfirm("You need to login to do that.")
+				app.modalConfirm("Login Required")
 				return;
 			}
 			self.updateFormMode.call(self, "create");
@@ -1013,6 +1038,12 @@ class App {
 	updateTheme02(newColor02) {
 		document.documentElement.style.setProperty("--user-style-02", newColor02);
 	}
+	updateTheme03(newColor03) {
+		document.documentElement.style.setProperty("--user-style-03", newColor03);
+	}
+	updateTheme04(newColor04) {
+		document.documentElement.style.setProperty("--user-style-04", newColor04);
+	}
 
 	modalConfirm(text) {
 		return new Promise(resolve => {
@@ -1140,6 +1171,8 @@ class App {
 			this.lastLoginState = true;
 		} else {
 			loginBtn.style.display = "block";
+			logout.style.display = "none";
+			document.getElementById("new-point").style.display = "none";
 			// logoutBtn.style.display = "none";
 			if (this.lastLoginState) {
 				this.onLogout();

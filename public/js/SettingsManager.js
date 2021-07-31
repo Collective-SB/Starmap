@@ -154,7 +154,7 @@ const SETTINGS_DEF = [{
 	},
 	{
 		id: "customColorTheme-01",
-		default: "#1eafb4",
+		default: "#1267ce",
 		prop: "value",
 		set: function (val) {
 			const code = val.split(" ").join("")
@@ -178,7 +178,7 @@ const SETTINGS_DEF = [{
 	},
 	{
 		id: "customColorTheme-02",
-		default: "#000a0f",
+		default: "#272525",
 		prop: "value",
 		set: function (val) {
 			const code = val.split(" ").join("")
@@ -190,6 +190,54 @@ const SETTINGS_DEF = [{
 			const validHex = /^#[0-9A-F]{6}$/i.test(code)
 			if (validHex) {
 				app.updateTheme02(val);
+			} else {
+				//check if it just hasn't been set
+				if (code === "") {
+					return;
+				} else {
+					alert("That color code is invalid.")
+				}
+			}
+		},
+	},
+	{
+		id: "customColorTheme-03",
+		default: "#ffffff",
+		prop: "value",
+		set: function (val) {
+			const code = val.split(" ").join("")
+
+			document.getElementById("color_val-03").innerHTML = val
+			document.getElementById("color_val-03").style.color = val
+
+			//checks if it is valid hex
+			const validHex = /^#[0-9A-F]{6}$/i.test(code)
+			if (validHex) {
+				app.updateTheme03(val);
+			} else {
+				//check if it just hasn't been set
+				if (code === "") {
+					return;
+				} else {
+					alert("That color code is invalid.")
+				}
+			}
+		},
+	},
+	{
+		id: "customColorTheme-04",
+		default: "#ffffff",
+		prop: "value",
+		set: function (val) {
+			const code = val.split(" ").join("")
+
+			document.getElementById("color_val-04").innerHTML = val
+			document.getElementById("color_val-04").style.color = val
+
+			//checks if it is valid hex
+			const validHex = /^#[0-9A-F]{6}$/i.test(code)
+			if (validHex) {
+				app.updateTheme04(val);
 			} else {
 				//check if it just hasn't been set
 				if (code === "") {

@@ -849,8 +849,8 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		if ( state !== STATE.NONE ) {
 
-			document.addEventListener( 'mousemove', onMouseMove, false );
-			document.addEventListener( 'mouseup', onMouseUp, false );
+			document.addEventListener( 'mousemove', onMouseMove, false);
+			document.addEventListener( 'mouseup', onMouseUp, false);
 
 			scope.dispatchEvent( startEvent );
 
@@ -1097,16 +1097,16 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	//
 
-	scope.domElement.addEventListener( 'contextmenu', onContextMenu, false );
+	scope.domElement.addEventListener( 'contextmenu', onContextMenu, false);
 
-	scope.domElement.addEventListener( 'mousedown', onMouseDown, false );
-	scope.domElement.addEventListener( 'wheel', onMouseWheel, false );
+	scope.domElement.addEventListener( 'mousedown', onMouseDown, false);
+	scope.domElement.addEventListener( 'wheel', onMouseWheel, false);
 
-	scope.domElement.addEventListener( 'touchstart', onTouchStart, false );
-	scope.domElement.addEventListener( 'touchend', onTouchEnd, false );
-	scope.domElement.addEventListener( 'touchmove', onTouchMove, false );
+	scope.domElement.addEventListener( 'touchstart', onTouchStart, false);
+	scope.domElement.addEventListener( 'touchend', onTouchEnd, false);
+	scope.domElement.addEventListener( 'touchmove', onTouchMove, false);
 
-	scope.domElement.addEventListener( 'keydown', onKeyDown, false );
+	scope.domElement.addEventListener( 'keydown', onKeyDown, false);
 
 	// make sure element can receive keys.
 

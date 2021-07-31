@@ -51,7 +51,7 @@ export default class Calculator {
 		});
 		const speedInputDirect = document.getElementById("shipSpeedDirect");
 		const speedInputSlider = document.getElementById("shipSpeedSlider");
-		speedInputSlider.value = 150;
+		speedInputSlider.value = 40;
 		speedInputDirect.value = 150;
 		speedInputSlider.onmousemove = function (e) {
 			speedInputDirect.value = speedInputSlider.value;
@@ -114,8 +114,10 @@ export default class Calculator {
 		);
 		var geometry = new THREE.BufferGeometry().setFromPoints(points);
 		var material = new THREE.LineBasicMaterial({
-			color: 0xff0000,
+			color: 0xc50d0d,
 		});
+	
+		
 		var line = new THREE.Line(geometry, material);
 		line.position.set(
 			this.points[1].position.x,

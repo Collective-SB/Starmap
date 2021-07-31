@@ -20,6 +20,7 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -28,14 +29,9 @@
 
 
 
-<!-- PROJECT LOGO -->
-<br />
-<p align="center">
-  <a href="https://github.com/Collective-SB/Starmap">
-    <img src="readme-assets/isan.svg" alt="Logo" width="500" height="100">
-  </a>
 
-  <!--<h3 align="center">ISAN Starmap</h3>-->
+<!-- ABOUT THE PROJECT -->
+[![Product Name Screen Shot][product-screenshot]](https://isan.to)
 
   <p align="center">
     A 3D public map for the game Starbase. 
@@ -52,10 +48,17 @@
     <a href="#">Request Feature</a>
   </p>
 </p>
+<p align="center">
+ISAN Starmap is a navigation system developed for the purpose storing and calculating system coordinates around the Starbase solar system.
 
+<br>
 
+_For a more descriptive explanation about the ISAN Starmap please read the: 
+[ISAN Documentation](https://github.com/Collective-SB/Starmap/blob/master/public/isan.pdf)_
 
-<!-- TABLE OF CONTENTS -->
+</p>
+
+<!-- TABLE OF CONTENTS 
 <details open="open">
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
   <ol>
@@ -79,29 +82,9 @@
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
-</details>
+</details>-->
 
 
-
-<!-- ABOUT THE PROJECT -->
-## Project Overview
-[![Product Name Screen Shot][product-screenshot]](https://isan.to)
-
-ISAN Starmap is a navigation system developed for the purpose storing and calculating system coordinates around the Starbase solar system.
-<br>
-
-_For a more descriptive explanation about the ISAN Starmap please read the: 
-[ISAN Documentation](https://github.com/Collective-SB/Starmap/blob/master/public/isan.pdf)_
-
-
-### Built With
-
-* [Starmap API]()
-* [Express](https://expressjs.com/)
-* [HTML/CSS](https://www.w3schools.com/)
-* [JQuerry](https://jquery.com)
-* [ThreeJS](https://threejs.org/)
-* [AdobeXD](https://www.adobe.com/nz/products/xd.html)
 <!-- GETTING STARTED -->
 ## Getting Started
 
@@ -181,6 +164,15 @@ ISAN Starmap Team Members:
   </ol>
 </details>
 
+### Built With
+
+* [Starmap API]()
+* [Express](https://expressjs.com/)
+* [HTML/CSS](https://www.w3schools.com/)
+* [JQuerry](https://jquery.com)
+* [ThreeJS](https://threejs.org/)
+* [AdobeXD](https://www.adobe.com/nz/products/xd.html)
+
 <!-- LICENSE -->
 ## License
 
@@ -215,4 +207,4 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 [issues-url]: https://github.com/Collective-SB/Starmap/issues
 [license-shield]: https://img.shields.io/github/license/Collective-SB/Starmap.svg?style=for-the-badge
 [license-url]: https://github.com/Collective-SB/Starmap/blob/master/LICENSE.txt
-[product-screenshot]: readme-assets/header-picture.png
+[product-screenshot]: readme-assets/isan-logo.png

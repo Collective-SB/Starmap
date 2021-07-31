@@ -82,23 +82,23 @@ export const TYPES = {
 		color: "#f36a28",
 		info: "All marked ship locations",
 		icons: {
-			map: "../assets/icons/ship-done.png",
-			info: "../assets/icons/ship.png",
+			map: "../assets/icons/ship.svg",
+			info: "../assets/icons/ship.svg",
 		},
 		subtypes: [{
 			name: "Default",
 			hex: "#f36a28",
 		}, ],
-		widthmult: 1,
-		heightmult: 1,
+		widthmult: 1.5,
+		heightmult: 1.5,
 	},
 	station: {
 		name: "station",
 		color: "#3bbd4f",
 		info: "All marked station locations",
 		icons: {
-			map: "../assets/icons/station-done.png",
-			info: "../assets/icons/station.png",
+			map: "../assets/icons/station.svg",
+			info: "../assets/icons/station.svg",
 		},
 		subtypes: [{
 				name: "Default",
@@ -134,16 +134,16 @@ export const TYPES = {
 				hex: "#5794d5"
 			}
 		],
-		widthmult: 1,
-		heightmult: 1,
+		widthmult: 1.5,
+		heightmult: 1.5,
 	},
 	ore: {
 		name: "ore",
 		color: "#8c63e8",
 		info: "Any ore that has been found",
 		icons: {
-			map: "../assets/icons/ore-done.png",
-			info: "../assets/icons/ore.png",
+			map: "../assets/icons/ore.svg",
+			info: "../assets/icons/ore.svg",
 		},
 		subtypes: [{
 			name: "Default",
@@ -157,8 +157,8 @@ export const TYPES = {
 		color: "#e62949",
 		info: "A Military Class Capital Ship",
 		icons: {
-			map: "../assets/icons/milcap-done.png",
-			info: "../assets/icons/milcap.png",
+			map: "../assets/icons/milcap.svg",
+			info: "../assets/icons/milcap.svg",
 		},
 		subtypes: [{
 			name: "Default",
@@ -172,8 +172,8 @@ export const TYPES = {
 		color: "#93f542",
 		info: "A Civilian Class Capital Ship",
 		icons: {
-			map: "../assets/icons/civcap-done.png",
-			info: "../assets/icons/civcap.png",
+			map: "../assets/icons/civcap.svg",
+			info: "../assets/icons/civcap.svg",
 		},
 		subtypes: [{
 			name: "Default",
@@ -187,29 +187,29 @@ export const TYPES = {
 		color: "#b642f5",
 		info: "A Warp Gate that can be used to go places quickly.",
 		icons: {
-			map: "../assets/icons/warpgate-done.png",
-			info: "../assets/icons/warpgate.png",
+			map: "../assets/icons/warpgate.svg",
+			info: "../assets/icons/warpgate.svg",
 		},
 		subtypes: [{
 			name: "Default",
 			hex: "#b642f5",
 		}, ],
-		widthmult: 1.3,
-		heightmult: 1.3,
+		widthmult: 1.5,
+		heightmult: 1.5,
 	},
 	other: {
 		name: "other",
 		color: "#aaaaaa",
 		info: "Misc POI's that dont fit into the other categories",
 		icons: {
-			map: "../assets/icons/random-done.png",
-			info: "../assets/icons/random.png",
+			map: "../assets/icons/random.svg",
+			info: "../assets/icons/random.svg",
 		},
 		subtypes: [{
 			name: "Default",
 			hex: "#aaaaaa",
 		}, ],
-		widthmult: 1,
-		heightmult: 1,
+		widthmult: 1.5,
+		heightmult: 1.5,
 	},
 };
