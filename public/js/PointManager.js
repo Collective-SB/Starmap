@@ -83,6 +83,7 @@ class Point {
 		this.ring;
 		this.groupID;
 		this.imageUrl;
+		this.isCa;
 		this.hoverEffect = 0;
 		this.isHovered = false;
 		this.isHoveredSide = false;
@@ -192,6 +193,7 @@ class Point {
 		this.groupID = data.groupID;
 		this.vanity = data.vanity;
 		this.imageUrl = data.imageEmbed;
+		this.isCa = data.isCa;
 		this.info = {
 			name: data.name,
 			gamePos: data.pos,
@@ -430,8 +432,14 @@ class Point {
 	}
 	//Shows or hides the point
 	updateShow(show) {
-		// console.log(this.id, show);
 		this.shown = show;
+		if (show && !this.app.pointManager.shows.caPoints && this.isCa) {
+			this.shown = false;
+			show = false;
+			console.log(`Updating show to false due to ca point`);
+		} else {
+			console.log(`Dont care about ca points, showing: ${show}`);
+		}
 		this.marker.visible = show && this.app.pointManager.shows.marker;
 		this.linePart.visible = show && this.app.pointManager.shows.line;
 		this.nameText.visible = show && this.app.pointManager.shows.nameText;
@@ -667,6 +675,7 @@ export default class PointManager {
 			line: true,
 			nameText: true,
 			ring: true,
+			caPoints: false
 		};
 		this.focusedPOI;
 		this.initFocusOn = this.app.storage.getItem("pointFocus");

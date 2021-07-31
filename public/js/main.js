@@ -121,6 +121,10 @@ String.prototype.reverse = function () {
 	return this.split("").reverse().join("");
 };
 
+function parseTypeName(name) {
+	return name.split(" ").join("-");
+}
+
 //Honestly I feel this should be broken into two classes, the main App and some form of "UI manager" class, perhaps a project for another day
 //Main map application
 class App {
@@ -220,8 +224,8 @@ class App {
 		const filters = JSON.parse(filtersJSON);
 		for (var t in TYPES) {
 			const type = TYPES[t];
-			document.getElementById(`type-filter-${type.name}`).checked =
-				filters.types[type.name];
+			document.getElementById(`type-filter-${parseTypeName(type.name)}`).checked =
+				filters.types[parseTypeName(type.name)];
 		}
 		this.user.g.forEach((group) => {
 			document.getElementById(`group-filter-${group.id}`).checked =
@@ -234,8 +238,8 @@ class App {
 	updateFilters() {
 		for (var t in TYPES) {
 			const type = TYPES[t];
-			this.viewFilters.types[type.name] = document.getElementById(
-				`type-filter-${type.name}`
+			this.viewFilters.types[parseTypeName(type.name)] = document.getElementById(
+				`type-filter-${parseTypeName(type.name)}`
 			).checked;
 		}
 		this.user.g.forEach((group) => {
@@ -597,7 +601,7 @@ class App {
 			template = template.replace("%NAME%", type.name);
 			template = template.replace("%NAME%", type.name);
 			template = template.replace("%NAME%", type.name);
-			template = template.replace("%ID%", `type-filter-${type.name}`);
+			template = template.replace("%ID%", `type-filter-${parseTypeName(type.name)}`);
 			template = template.replace("%INFO%", type.info);
 			form.innerHTML += template;
 		}
@@ -621,10 +625,10 @@ class App {
 		const popup = document.getElementById("popup");
 		// const popupContent = document.getElementById("popup-content");
 		acceptBtn.onclick = function () {
-			self.storage.setItem("shown", "yes");
+			self.storage.setItem("shown-new", "yes");
 			popup.style.display = "none";
 		};
-		const hasBeenShown = self.storage.getItem("shown") == "yes";
+		const hasBeenShown = self.storage.getItem("shown-new") == "yes";
 		if (!hasBeenShown) {
 			popup.style.display = "block";
 		}
@@ -1173,8 +1177,8 @@ class App {
 		for (var t in TYPES) {
 			const type = TYPES[t];
 			const option = document.createElement("option");
-			option.value = type.name;
-			option.innerText = type.name;
+			option.value = parseTypeName(type.name);
+			option.innerText = parseTypeName(type.name);
 			dropDownTypes.appendChild(option);
 		}
 		if (mode == "update") {
