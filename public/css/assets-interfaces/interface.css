@@ -18,28 +18,27 @@
 
 }
 
-.ui-draggable:hover {
-}
+.ui-draggable:hover {}
 
 .win-prop {
 	cursor: var(--main-cursor-grab);
 	min-width: 25em;
-    min-height: 20em;
+	min-height: 20em;
 	max-width: 25em;
-    max-height: 20em;
+	max-height: 20em;
 	display: none;
 	opacity: 0.5;
 	position: absolute;
 	left: 20%;
 	top: 10%;
 	padding: 1em;
-    padding-top: 2em;
+	padding-top: 2em;
 	z-index: 1;
 	color: var(--user-style-03);
 }
 
 .win-prop:active {
-  cursor: var(--main-cursor-grabbing);
+	cursor: var(--main-cursor-grabbing);
 }
 
 .win-prop:hover {
@@ -47,26 +46,27 @@
 }
 
 .win-prop .win-prop-close {
-    font-weight: bold;
-    font-size: 20px;
-    margin: 5px;
-    user-select: none;
-    position: absolute;
-    top: -1.3em;
-    right: 3%;
-    background-color: var(--user-style-02);
-    border: var(--user-style) 4px solid;
-    width: fit-content;
-    border-radius: 10px;
-    padding: 5px;
-    z-index: 2;
-    color: var(--user-style-03);
+	font-weight: bold;
+	font-size: 20px;
+	margin: 5px;
+	user-select: none;
+	position: absolute;
+	top: -1.3em;
+	right: 3%;
+	background-color: var(--user-style-02);
+	border: var(--user-style) 2px solid;
+	width: fit-content;
+	border-radius: 10px;
+	padding: 5px;
+	z-index: 2;
+	color: var(--user-style-03);
 }
 
 .win-prop .win-prop-close:hover {
 	cursor: pointer;
 	transform: scale(1.2);
 }
+
 /*
 |*************************************************************************;
 * Win -Settings Panel
@@ -76,21 +76,21 @@
 .settings {
 	cursor: var(--main-cursor-grab);
 	min-width: 25em;
-    min-height: 20em;
+	min-height: 20em;
 	display: none;
 	opacity: 0.5;
 	position: absolute;
 	left: 20%;
 	top: 10%;
 	padding: 1em;
-    padding-top: 2em;
+	padding-top: 2em;
 	z-index: 1;
 	color: var(--user-style-03);
 }
 
 .settings:active {
 	cursor: var(--main-cursor-grabbing);
-  }
+}
 
 
 .settings:hover {
@@ -98,20 +98,20 @@
 }
 
 .settings .settings-close {
-    font-weight: bold;
-    font-size: 20px;
-    margin: 5px;
-    user-select: none;
-    position: absolute;
-    top: -1.3em;
-    right: 3%;
-    background-color: var(--user-style-02);
+	font-weight: bold;
+	font-size: 20px;
+	margin: 5px;
+	user-select: none;
+	position: absolute;
+	top: -1.3em;
+	right: 3%;
+	background-color: var(--user-style-02);
 	color: var(--user-style-04);
-    border: var(--user-style) 4px solid;
-    width: fit-content;
-    border-radius: 10px;
-    padding: 5px;
-    z-index: 2;
+	border: var(--user-style) 2px solid;
+	width: fit-content;
+	border-radius: 10px;
+	padding: 5px;
+	z-index: 2;
 }
 
 .settings .settings-close:hover {
@@ -125,8 +125,7 @@
 |*************************************************************************;
 */
 
-.add-point {
-}
+.add-point {}
 
 .add-point form {
 	display: flex;
@@ -138,9 +137,7 @@
 	height: 2em;
 }
 
-.add-point form input a{
-
-}
+.add-point form input a {}
 
 .add-point form input:focus {
 	filter: brightness(1);
@@ -166,75 +163,77 @@
 	margin-top: 1px;
 	margin-bottom: 1px;
 
-	background-color: var(--user-style-02)!important;
+	background-color: var(--user-style-02) !important;
 	color: var(--user-style-03);
-	border: 4px var(--user-style) solid;
+	border: 2px var(--user-style) solid;
 
 	transition: color 0.25s;
 }
 
 .dropdown-select:hover {
-	background-color: var(--user-style)!important;
+	background-color: var(--user-style) !important;
 	color: var(--user-style-03);
 
 	transition: color 0.25s;
 }
 
 .dropdown-select:focus {
-	background-color: var(--user-style-02)!important;
+	background-color: var(--user-style-02) !important;
 	color: var(--user-style-03);
 }
 
 input[type="text"] {
 	cursor: text;
 	text-transform: capitalize;
-	background-color: var(--user-style-02)!important;
-	border: 4px var(--user-style) solid;
+	background-color: var(--user-style-02) !important;
+	border: 2px var(--user-style) solid;
 	color: var(--user-style-03);
 	font-size: medium;
 
 }
 
-::-webkit-input-placeholder { /* Edge */
+::-webkit-input-placeholder {
+	/* Edge */
 	color: var(--user-style-03);
 	filter: brightness(0.8);
-  }
-  
-  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+}
+
+:-ms-input-placeholder {
+	/* Internet Explorer 10-11 */
 	color: var(--user-style-03);
 	filter: brightness(0.8);
-  }
-  
-  ::placeholder {
+}
+
+::placeholder {
 	color: var(--user-style-03);
 	filter: brightness(0.8);
-  }
+}
 
 input[type="number"] {
 	background-color: var(--user-style-02);
-	border: 4px var(--user-style) solid;
+	border: 2px var(--user-style) solid;
 	color: var(--user-style-03);
 	font-size: medium;
 }
 
 .genericbutton {
-    font-weight: bold;
-    font-family: var(--main-font-Squada);
-    background-color: var(--user-style);
-    color: var(--user-style-03);
-    border-width: 1px;
-    border-color: var(--user-style-02);
-    padding-top: 2px;
-    padding-bottom: 2px;
-    transition: color 0.25s;
-    font-size: 1em;
+	font-weight: bold;
+	font-family: var(--main-font-Squada);
+	background-color: var(--user-style);
+	color: var(--user-style-03);
+	border-width: 1px;
+	border-color: var(--user-style-02);
+	padding-top: 2px;
+	padding-bottom: 2px;
+	transition: color 0.25s;
+	font-size: 1em;
 }
 
 .genericbutton:hover {
 	background-color: var(--user-style);
-	-webkit-box-shadow: inset 0px 0px 6px 5px rgba(0,0,0,0.3); 
-  box-shadow: inset 0px 0px 6px 5px rgba(0,0,0,0.3);
-  
+	-webkit-box-shadow: inset 0px 0px 6px 5px rgba(0, 0, 0, 0.3);
+	box-shadow: inset 0px 0px 6px 5px rgba(0, 0, 0, 0.3);
+
 	transition: color 0.25s;
 }
 
@@ -269,16 +268,10 @@ input[type="number"] {
 
 
 /* Calculator panel */
-.calculator {
+.calculator {}
 
-  }
-  
-  .calculator:hover {
+.calculator:hover {}
 
-  }
-  
-  .calculator .calc-close {
-  }
-  
-  .calculator .calc-close:hover {
-  }
+.calculator .calc-close {}
+
+.calculator .calc-close:hover {}

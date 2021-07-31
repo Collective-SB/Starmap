@@ -82,7 +82,7 @@ export const TYPES = {
 		color: "#f36a28",
 		info: "All marked ship locations",
 		icons: {
-			map: "../assets/icons/ship-done.svg",
+			map: "../assets/icons/ship.svg",
 			info: "../assets/icons/ship.svg",
 		},
 		subtypes: [{
@@ -97,7 +97,7 @@ export const TYPES = {
 		color: "#3bbd4f",
 		info: "All marked station locations",
 		icons: {
-			map: "../assets/icons/station-done.svg",
+			map: "../assets/icons/station.svg",
 			info: "../assets/icons/station.svg",
 		},
 		subtypes: [{
@@ -142,7 +142,7 @@ export const TYPES = {
 		color: "#8c63e8",
 		info: "Any ore that has been found",
 		icons: {
-			map: "../assets/icons/ore-done.svg",
+			map: "../assets/icons/ore.svg",
 			info: "../assets/icons/ore.svg",
 		},
 		subtypes: [{
@@ -157,7 +157,7 @@ export const TYPES = {
 		color: "#e62949",
 		info: "A Military Class Capital Ship",
 		icons: {
-			map: "../assets/icons/milcap-done.svg",
+			map: "../assets/icons/milcap.svg",
 			info: "../assets/icons/milcap.svg",
 		},
 		subtypes: [{
@@ -172,7 +172,7 @@ export const TYPES = {
 		color: "#93f542",
 		info: "A Civilian Class Capital Ship",
 		icons: {
-			map: "../assets/icons/civcap-done.svg",
+			map: "../assets/icons/civcap.svg",
 			info: "../assets/icons/civcap.svg",
 		},
 		subtypes: [{
@@ -187,7 +187,7 @@ export const TYPES = {
 		color: "#b642f5",
 		info: "A Warp Gate that can be used to go places quickly.",
 		icons: {
-			map: "../assets/icons/warpgate-done.svg",
+			map: "../assets/icons/warpgate.svg",
 			info: "../assets/icons/warpgate.svg",
 		},
 		subtypes: [{
@@ -202,7 +202,7 @@ export const TYPES = {
 		color: "#aaaaaa",
 		info: "Misc POI's that dont fit into the other categories",
 		icons: {
-			map: "../assets/icons/random-done.svg",
+			map: "../assets/icons/random.svg",
 			info: "../assets/icons/random.svg",
 		},
 		subtypes: [{
