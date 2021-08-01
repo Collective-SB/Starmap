@@ -128,7 +128,9 @@ import {
 	formatNumber
 } from "./functions.js";
 
-import PointManager from "./PointManager.js";
+import PointManager, {
+	fromGamePos
+} from "./PointManager.js";
 import API from "./API.js";
 import CamController from "./CamController.js";
 import SettingsManager from "./SettingsManager.js";
@@ -159,6 +161,7 @@ class App {
 			camera: null,
 			scene: null,
 			renderer: null,
+			axis: null,
 			Eos: null,
 			Belt: null,
 			Safe: null,
@@ -422,6 +425,24 @@ class App {
 			this.sceneObjs.renderer.domElement,
 			this
 		);
+
+		const originCords = fromGamePos({
+			x: 0,
+			y: 0,
+			z: 0
+		});
+		const holder = new THREE.Object3D();
+		holder.position.set(originCords.x, originCords.y, originCords.z);
+		const arrowHelperX = new THREE.ArrowHelper(new THREE.Vector3(1, 0, 0), new THREE.Vector3(0, 0, 0), 500000, "#ff0000", 50000, 10000);
+		const arrowHelperY = new THREE.ArrowHelper(new THREE.Vector3(0, 1, 0), new THREE.Vector3(0, 0, 0), 500000, "#00ff00", 50000, 10000);
+		const arrowHelperZ = new THREE.ArrowHelper(new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, 0), 500000, "#0000ff", 50000, 10000);
+		holder.add(arrowHelperX);
+		holder.add(arrowHelperY);
+		holder.add(arrowHelperZ);
+
+		this.sceneObjs.scene.add(holder);
+		this.sceneObjs.axis = holder;
+
 	}
 
 	async makeBeltLayer(height, innerOverride, outerOverride, material) {

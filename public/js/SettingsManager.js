@@ -153,6 +153,14 @@ const SETTINGS_DEF = [{
 		}
 	},
 	{
+		id: "showIsanAxis",
+		default: false,
+		prop: "checked",
+		set: function (val) {
+			this.sceneObjs.axis.visible = val;
+		}
+	},
+	{
 		id: "customColorTheme-01",
 		default: "#1267ce",
 		prop: "value",
