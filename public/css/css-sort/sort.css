@@ -612,7 +612,7 @@ input:focus::-webkit-input-placeholder {
 	display: table;
 	border: 3px #1eafb4 solid;
 	border-radius: 2px;
-	height: 100%;
+	height: 92%;
 }
 
 .desc {
