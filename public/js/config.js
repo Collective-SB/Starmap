@@ -31,13 +31,13 @@ export const URLS = {
 export const EOS_SIZE = 11000000 / 2;
 export const SOLONS_OFFSET = 50000;
 export const DIST_TO_BELT = 3000000 + SOLONS_OFFSET;
-export const BELT_HEIGHT = 170000;
+export const BELT_HEIGHT = 600000;
 export const BELT_EDGE_RADIUS = 60000;
 
 export const EOS_QUALITY = 32;
 export const BELT_QUALITY = 96;
 
-export const BELT_THICK = 2200000;
+export const BELT_THICK = 2250000;
 export const SAFE_LEN = 1000000;
 export const SAFE_RAD = 100000 / 2;
 export const CAM_MAX_ZOOM = EOS_SIZE * 10;
