@@ -128,7 +128,9 @@ import {
 	formatNumber
 } from "./functions.js";
 
-import PointManager from "./PointManager.js";
+import PointManager, {
+	fromGamePos
+} from "./PointManager.js";
 import API from "./API.js";
 import CamController from "./CamController.js";
 import SettingsManager from "./SettingsManager.js";
@@ -146,6 +148,10 @@ String.prototype.reverse = function () {
 	return this.split("").reverse().join("");
 };
 
+function parseTypeName(name) {
+	return name.split(" ").join("-");
+}
+
 //Honestly I feel this should be broken into two classes, the main App and some form of "UI manager" class, perhaps a project for another day
 //Main map application
 class App {
@@ -155,6 +161,7 @@ class App {
 			camera: null,
 			scene: null,
 			renderer: null,
+			axis: null,
 			Eos: null,
 			Belt: null,
 			Safe: null,
@@ -245,8 +252,8 @@ class App {
 		const filters = JSON.parse(filtersJSON);
 		for (var t in TYPES) {
 			const type = TYPES[t];
-			document.getElementById(`type-filter-${type.name}`).checked =
-				filters.types[type.name];
+			document.getElementById(`type-filter-${parseTypeName(type.name)}`).checked =
+				filters.types[parseTypeName(type.name)];
 		}
 		this.user.g.forEach((group) => {
 			document.getElementById(`group-filter-${group.id}`).checked =
@@ -259,8 +266,8 @@ class App {
 	updateFilters() {
 		for (var t in TYPES) {
 			const type = TYPES[t];
-			this.viewFilters.types[type.name] = document.getElementById(
-				`type-filter-${type.name}`
+			this.viewFilters.types[parseTypeName(type.name)] = document.getElementById(
+				`type-filter-${parseTypeName(type.name)}`
 			).checked;
 		}
 		this.user.g.forEach((group) => {
@@ -418,6 +425,24 @@ class App {
 			this.sceneObjs.renderer.domElement,
 			this
 		);
+
+		const originCords = fromGamePos({
+			x: 0,
+			y: 0,
+			z: 0
+		});
+		const holder = new THREE.Object3D();
+		holder.position.set(originCords.x, originCords.y, originCords.z);
+		const arrowHelperX = new THREE.ArrowHelper(new THREE.Vector3(1, 0, 0), new THREE.Vector3(0, 0, 0), 500000, "#ff0000", 50000, 10000);
+		const arrowHelperY = new THREE.ArrowHelper(new THREE.Vector3(0, 1, 0), new THREE.Vector3(0, 0, 0), 500000, "#00ff00", 50000, 10000);
+		const arrowHelperZ = new THREE.ArrowHelper(new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, 0), 500000, "#0000ff", 50000, 10000);
+		holder.add(arrowHelperX);
+		holder.add(arrowHelperY);
+		holder.add(arrowHelperZ);
+
+		this.sceneObjs.scene.add(holder);
+		this.sceneObjs.axis = holder;
+
 	}
 
 	async makeBeltLayer(height, innerOverride, outerOverride, material) {
@@ -622,7 +647,7 @@ class App {
 			template = template.replace("%NAME%", type.name);
 			template = template.replace("%NAME%", type.name);
 			template = template.replace("%NAME%", type.name);
-			template = template.replace("%ID%", `type-filter-${type.name}`);
+			template = template.replace("%ID%", `type-filter-${parseTypeName(type.name)}`);
 			template = template.replace("%INFO%", type.info);
 			form.innerHTML += template;
 		}
@@ -646,10 +671,10 @@ class App {
 		const popup = document.getElementById("popup");
 		// const popupContent = document.getElementById("popup-content");
 		acceptBtn.onclick = function () {
-			self.storage.setItem("shown", "yes");
+			self.storage.setItem("shown-new", "yes");
 			popup.style.display = "none";
 		};
-		const hasBeenShown = self.storage.getItem("shown") == "yes";
+		const hasBeenShown = self.storage.getItem("shown-new") == "yes";
 		if (!hasBeenShown) {
 			popup.style.display = "block";
 		}
@@ -1206,8 +1231,8 @@ class App {
 		for (var t in TYPES) {
 			const type = TYPES[t];
 			const option = document.createElement("option");
-			option.value = type.name;
-			option.innerText = type.name;
+			option.value = parseTypeName(type.name);
+			option.innerText = parseTypeName(type.name);
 			dropDownTypes.appendChild(option);
 		}
 		if (mode == "update") {

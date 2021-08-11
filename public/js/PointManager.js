@@ -59,10 +59,17 @@ function unhide(elm) {
 	elm.style.visibility = "";
 }
 
-function fromGamePos(position) {
+export function fromGamePosOld(position) {
 	return {
 		x: position.y + pointOffset.x,
 		y: position.z + pointOffset.y,
+		z: -position.x + pointOffset.z,
+	};
+}
+export function fromGamePos(position) {
+	return {
+		x: position.z + pointOffset.x,
+		y: position.y + pointOffset.y,
 		z: -position.x + pointOffset.z,
 	};
 }
@@ -83,6 +90,7 @@ class Point {
 		this.ring;
 		this.groupID;
 		this.imageUrl;
+		this.isCa;
 		this.hoverEffect = 0;
 		this.isHovered = false;
 		this.isHoveredSide = false;
@@ -103,7 +111,7 @@ class Point {
 		const color = TYPES[data.type].subtypes.find(
 			(stype) => stype.name == data.subtype
 		).hex;
-		const position = fromGamePos(data.pos);
+		const position = data.isCa ? fromGamePosOld(data.pos) : fromGamePos(data.pos);
 		//Line from the astroid belt up
 		var points = [];
 		points.push(new THREE.Vector3(0, 0, 0));
@@ -192,6 +200,7 @@ class Point {
 		this.groupID = data.groupID;
 		this.vanity = data.vanity;
 		this.imageUrl = data.imageEmbed;
+		this.isCa = data.isCa;
 		this.info = {
 			name: data.name,
 			gamePos: data.pos,
@@ -317,7 +326,7 @@ class Point {
 		if (isIdentical) {
 			return;
 		}
-		const position = fromGamePos(pointData.pos);
+		const position = pointData.isCa ? fromGamePosOld(pointData.pos) : fromGamePos(pointData.pos);;
 		const color = TYPES[pointData.type].subtypes.find(
 			(stype) => stype.name == pointData.subtype
 		).hex;
@@ -430,8 +439,11 @@ class Point {
 	}
 	//Shows or hides the point
 	updateShow(show) {
-		// console.log(this.id, show);
 		this.shown = show;
+		if (show && !this.app.pointManager.shows.caPoints && this.isCa) {
+			this.shown = false;
+			show = false;
+		}
 		this.marker.visible = show && this.app.pointManager.shows.marker;
 		this.linePart.visible = show && this.app.pointManager.shows.line;
 		this.nameText.visible = show && this.app.pointManager.shows.nameText;
@@ -637,7 +649,7 @@ class Zone {
 	}
 	//Copys data from API to the correct format in this object
 	setAttrs(data) {
-		const position = fromGamePos(data.pos);
+		const position = data.isCa ? fromGamePosOld(data.pos) : fromGamePos(data.pos);;
 		this.position.x = position.x;
 		this.position.y = position.y;
 		this.position.z = position.z;
@@ -667,6 +679,7 @@ export default class PointManager {
 			line: true,
 			nameText: true,
 			ring: true,
+			caPoints: false
 		};
 		this.focusedPOI;
 		this.initFocusOn = this.app.storage.getItem("pointFocus");

@@ -141,6 +141,26 @@ const SETTINGS_DEF = [{
 		},
 	},
 	{
+		id: "showCaPoints",
+		default: false,
+		prop: "checked",
+		set: function (val) {
+			this.pointManager.points.forEach(point => point.shown = val);
+			this.pointManager.setVis("caPoints", val);
+			try {
+				this.updateFilters();
+			} catch (e) {}
+		}
+	},
+	{
+		id: "showIsanAxis",
+		default: false,
+		prop: "checked",
+		set: function (val) {
+			this.sceneObjs.axis.visible = val;
+		}
+	},
+	{
 		id: "customColorTheme-01",
 		default: "#1267ce",
 		prop: "value",

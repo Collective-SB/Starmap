@@ -277,6 +277,11 @@ input:focus::-webkit-input-placeholder {
 	box-shadow: var(--box-boxshadow);
 }
 
+.layerheader:hover {
+  background-color: var(--user-style);
+  color: var(--user-style-02);
+}
+
 .sidenav-bottom {
 	display: flex;
 	flex-direction: column;
@@ -612,7 +617,7 @@ input:focus::-webkit-input-placeholder {
 	display: table;
 	border: 3px #1eafb4 solid;
 	border-radius: 2px;
-	height: 92%;
+	height: 100%;
 }
 
 .desc {

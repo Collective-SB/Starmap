@@ -14,7 +14,7 @@
 	-moz-box-shadow: var(--moz-boxshadow);
 	box-shadow: var(--box-boxshadow);
 	background-color: var(--user-style-02);
-	border: solid 2px var(--user-style);
+	border: solid 5px var(--user-style);
 
 }
 
