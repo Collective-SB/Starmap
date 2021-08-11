@@ -271,7 +271,7 @@ input:focus::-webkit-input-placeholder {
 	margin: 5px !important;
 	font-size: 17px !important;
 	font-weight: bold !important;
-	border: solid 2px var(--user-style);
+	border: solid 4px var(--user-style);
 	-webkit-box-shadow: var(--webkit-boxshadow);
 	-moz-box-shadow: var(--moz-boxshadow);
 	box-shadow: var(--box-boxshadow);
@@ -550,7 +550,7 @@ input:focus::-webkit-input-placeholder {
 	left: 3%;
 	background-color: var(--user-style-02);
 	color: var(--user-style-03);
-	border: var(--user-style) 2px solid;
+	border: solid 4px var(--user-style);
 	width: fit-content;
 	border-radius: 10px;
 	padding: 5px 10px 5px 10px;
@@ -564,7 +564,7 @@ input:focus::-webkit-input-placeholder {
 }
 
 .more-info .material-icons {
-	border: solid 3px var(--user-style);
+	border: solid 4px var(--user-style);
 
 	border-radius: 100px;
 	background-color: var(--user-style-03);
@@ -578,7 +578,7 @@ input:focus::-webkit-input-placeholder {
 	visibility: hidden;
 	width: max-content;
 	background-color: var(--user-style-02);
-	border: var(--user-style) 2px solid;
+	border: solid 4px var(--user-style);
 	overflow: visible;
 	color: var(--user-style-03);
 	text-align: center;
@@ -596,7 +596,7 @@ input:focus::-webkit-input-placeholder {
 	/* At the bottom of the tooltip */
 	left: 50%;
 	background-color: #111;
-	border: var(--user-style) 2px solid;
+	border: solid 4px var(--user-style);
 }
 
 .more-info:hover .more-info-tooltip {
@@ -765,7 +765,7 @@ input {
 	visibility: hidden;
 	width: 120px;
 	background-color: #111;
-	border: var(--user-style) 2px solid;
+	border: solid 4px var(--user-style);
 	overflow: visible;
 	color: var(--user-style-03);
 	text-align: center;
@@ -788,7 +788,7 @@ input {
 	left: 50%;
 	margin-left: -5px;
 	background-color: #111;
-	border: var(--user-style) 2px solid;
+	border: solid 4px var(--user-style);
 }
 
 .filter-view-option:hover .filter-view-option-tooltip {
@@ -976,6 +976,7 @@ input {
 	text-align: center;
 }
 
+
 .my-float {
 	font-size: 24px;
 	margin-top: 18px;
@@ -1034,7 +1035,7 @@ a.float:hover+div.label-container {
 	-moz-box-shadow: 0px 0px 43px 1px var(--user-style-);
 	background-image: var(--svg-ui-background);
 	background-color: var(--user-style-02);
-	border: solid 2px var(--user-style);
+	border: solid 4px var(--user-style);
 }
 
 

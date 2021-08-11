@@ -14,7 +14,7 @@
 	-moz-box-shadow: var(--moz-boxshadow);
 	box-shadow: var(--box-boxshadow);
 	background-color: var(--user-style-02);
-	border: solid 5px var(--user-style);
+	border: solid 4px var(--user-style);
 
 }
 
@@ -54,7 +54,7 @@
 	top: -1.3em;
 	right: 3%;
 	background-color: var(--user-style-02);
-	border: var(--user-style) 2px solid;
+	border: solid 4px var(--user-style);
 	width: fit-content;
 	border-radius: 10px;
 	padding: 5px;
@@ -107,7 +107,7 @@
 	right: 3%;
 	background-color: var(--user-style-02);
 	color: var(--user-style-04);
-	border: var(--user-style) 2px solid;
+	border: solid 4px var(--user-style);
 	width: fit-content;
 	border-radius: 10px;
 	padding: 5px;
