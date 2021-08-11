@@ -90,7 +90,7 @@ const viewFilterTemplate = `
 	</label>
 	<span class="filter-view-option-tooltip">%INFO%</span>
 </div>
-<br>
+
 `;
 
 import {

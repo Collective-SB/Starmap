@@ -720,8 +720,11 @@ p {
 	vertical-align: middle;
 	padding-bottom: 3px;
 }
-
+#filterForm {
+	width: 25em;
+}
 .filter-view-option {
+
 	width: 50%;
 	float: left;
 	position: relative;
@@ -739,9 +742,13 @@ p {
 }
 
 
+
+
+
 .filter-view-option label,
 input {
 	cursor: var(--main-cursor-pointer);
+	padding-left: 5px;
 
 }
 
@@ -817,11 +824,12 @@ input {
 }
 
 .checkbox-option {
+	display: flex;
+    align-items: center;
 	margin: 0;
 	text-decoration: none;
 	font-size: 15px;
 	color: var(--user-style-03);
-	display: block;
 	cursor: var(--main-cursor-pointer);
 	user-select: none;
 }
@@ -945,11 +953,23 @@ input {
 
 .float {
 	position: fixed;
-	width: 60px;
-	height: 60px;
+	width: 150px;
+	height: 70px;
 	bottom: 40px;
-	right: 40px;
+	right: 6em;
 	background-image: var(--png-background-profile);
+	background-repeat: no-repeat;
+	background-size: contain;
+	color: var(--user-style-03);
+	text-align: center;
+}
+.float-02 {
+	position: fixed;
+	width: 100px;
+	height: 70px;
+	bottom: 40px;
+	right: 0em;
+	background-image: var(--png-background-profile-02);
 	background-repeat: no-repeat;
 	background-size: contain;
 	color: var(--user-style-03);
