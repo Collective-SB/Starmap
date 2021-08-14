@@ -498,6 +498,7 @@
 
 .info-title-grid {
 	grid-area: 1 / 1 / 2 / 5;
+	text-transform: capitalize;
 }
 
 .info-coord-grid {
