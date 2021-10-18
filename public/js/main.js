@@ -141,8 +141,8 @@ import Stats from "./packages/Stats.js";
 let mouseX = 0;
 let mouseY = 0;
 
-const ERROR = 0;
-const SUCCESS = 1;
+export const ERROR = 0;
+export const SUCCESS = 1;
 
 String.prototype.reverse = function () {
 	return this.split("").reverse().join("");

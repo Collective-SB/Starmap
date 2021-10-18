@@ -9,6 +9,9 @@ import {
 	EOS_SIZE,
 	URLS
 } from "./config.js";
+import {
+	SUCCESS
+} from "./main.js";
 const API_URL = URLS.api[ENV];
 const WSS_URL = URLS.wss[ENV];
 
@@ -32,6 +35,9 @@ export default class API {
 				this.pointManager.addPoint(point);
 			} else {
 				this.pointManager.updatePoint(point);
+			}
+			if (this.pointBuffer.length == 0) {
+				this.app.banner("All points loaded", SUCCESS)
 			}
 		}
 	}
