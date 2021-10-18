@@ -157,8 +157,8 @@ export const TYPES = {
 		color: "#e62949",
 		info: "A Military Class Capital Ship",
 		icons: {
-			map: "../assets/icons/milcap.svg",
-			info: "../assets/icons/milcap.svg",
+			map: "../assets/icons/milcap-done.png",
+			info: "../assets/icons/milcap.png",
 		},
 		subtypes: [{
 			name: "Default",
@@ -172,8 +172,8 @@ export const TYPES = {
 		color: "#93f542",
 		info: "A Civilian Class Capital Ship",
 		icons: {
-			map: "../assets/icons/civcap.svg",
-			info: "../assets/icons/civcap.svg",
+			map: "../assets/icons/civcap-done.png",
+			info: "../assets/icons/civcap.png",
 		},
 		subtypes: [{
 			name: "Default",
