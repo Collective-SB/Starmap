@@ -22,6 +22,18 @@ export default class API {
 		this.socket;
 		this.connectWS();
 		this.serverId;
+		this.pointBuffer = [];
+		setInterval(() => this.checkPointBuffer(), 16)
+	}
+	checkPointBuffer() {
+		const point = this.pointBuffer.shift()
+		if (point) {
+			if (!this.pointManager.getById(point._id)) {
+				this.pointManager.addPoint(point);
+			} else {
+				this.pointManager.updatePoint(point);
+			}
+		}
 	}
 	connectWS() {
 		this.socket = new WebSocket(WSS_URL);
@@ -109,11 +121,7 @@ export default class API {
 			//Add new
 			data.points.forEach((point) => {
 				point.id = point._id;
-				if (!this.pointManager.getById(point._id)) {
-					this.pointManager.addPoint(point);
-				} else {
-					this.pointManager.updatePoint(point);
-				}
+				this.pointBuffer.push(point)
 			});
 			//Remove deleted
 			this.pointManager.points.forEach((point) => {
