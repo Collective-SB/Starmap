@@ -125,13 +125,6 @@ export default class CamController {
 		this.posLerp = true;
 	}
 	stopCurrentMove() {
-		if (this.posLerp || this.rotLerp) {
-			this.orbitCtrl.target.set(
-				this.lerpTarget.x,
-				this.lerpTarget.y,
-				this.lerpTarget.z
-			);
-		}
 		this.posLerp = false;
 		this.rotLerp = false;
 	}
