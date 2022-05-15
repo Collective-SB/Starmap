@@ -23,6 +23,8 @@ app.get("/isan.pdf", (req, res) => {
 		root: __dirname,
 	});
 });
+app.get("/healthcheck", (req, res) => res.sendStatus(200));
+
 app.get(["/:pointId", "/"], async (req, res) => {
 	const URL = req.protocol + "://" + req.get("host") + req.originalUrl;
 	console.log(URL);
